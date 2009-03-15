@@ -1,6 +1,0 @@
-C:\Dev\OGNL.Net\OGNL\bin\Debug\OGNL.dll
-C:\Dev\OGNL.Net\OGNL\bin\Debug\OGNL.pdb
-C:\Dev\OGNL.Net\OGNL\bin\Debug\ognl.xml
-C:\Dev\OGNL.Net\OGNL\obj\Debug\ResolveAssemblyReference.cache
-C:\Dev\OGNL.Net\OGNL\obj\Debug\OGNL.dll
-C:\Dev\OGNL.Net\OGNL\obj\Debug\OGNL.pdb
