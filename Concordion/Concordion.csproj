@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Concordion</RootNamespace>
+    <AssemblyName>Concordion</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Element.cs" />
+    <Compile Include="Api\ICommand.cs" />
+    <Compile Include="Api\ICommandFactory.cs" />
+    <Compile Include="Api\IContext.cs" />
+    <Compile Include="Api\IEvaluator.cs" />
+    <Compile Include="Api\IEvaluatorFactory.cs" />
+    <Compile Include="Api\IResultRecorder.cs" />
+    <Compile Include="Api\IResultSummary.cs" />
+    <Compile Include="Api\ISource.cs" />
+    <Compile Include="Api\ISpecification.cs" />
+    <Compile Include="Api\ISpecificationLocator.cs" />
+    <Compile Include="Api\ISpecificationReader.cs" />
+    <Compile Include="Api\ITarget.cs" />
+    <Compile Include="Api\Resource.cs" />
+    <Compile Include="Api\Result.cs" />
+    <Compile Include="Concordion.cs" />
+    <Compile Include="HtmlFramework.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HtmlFramework.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Integration\ConcordionTestCase.cs" />
+    <Compile Include="Integration\HtmlResourceAttribute.cs" />
+    <Compile Include="Internal\BannedWordsValidator.cs" />
+    <Compile Include="Internal\BrowserStyleWhitespaceComparer.cs" />
+    <Compile Include="Internal\ClassNameBasedSpecificationLocator.cs" />
+    <Compile Include="Internal\ClassPathSource.cs" />
+    <Compile Include="Internal\CommandCall.cs" />
+    <Compile Include="Internal\CommandCallList.cs" />
+    <Compile Include="Internal\CommandRegistry.cs" />
+    <Compile Include="Internal\Commands\AbstractCommand.cs" />
+    <Compile Include="Internal\Commands\AbstractCommandDecorator.cs" />
+    <Compile Include="Internal\Commands\AssertEqualsCommand.cs" />
+    <Compile Include="Internal\Commands\AssertFalseCommand.cs" />
+    <Compile Include="Internal\Commands\AssertTrueCommand.cs" />
+    <Compile Include="Internal\Commands\BooleanCommand.cs" />
+    <Compile Include="Internal\Commands\DefaultExecuteStrategy.cs" />
+    <Compile Include="Internal\Commands\EchoCommand.cs" />
+    <Compile Include="Internal\Commands\ExceptionCaughtEventArgs.cs" />
+    <Compile Include="Internal\Commands\ExecuteCommand.cs" />
+    <Compile Include="Internal\Commands\FailureReportedEventArgs.cs" />
+    <Compile Include="Internal\Commands\IExecuteStrategy.cs" />
+    <Compile Include="Internal\Commands\IResultReporter.cs" />
+    <Compile Include="Internal\Commands\LocalTextDecorator.cs" />
+    <Compile Include="Internal\Commands\MissingRowEventArgs.cs" />
+    <Compile Include="Internal\Commands\RunCommand.cs" />
+    <Compile Include="Internal\Commands\SetCommand.cs" />
+    <Compile Include="Internal\Commands\SpecificationCommand.cs" />
+    <Compile Include="Internal\Commands\SpecificationEventArgs.cs" />
+    <Compile Include="Internal\Commands\SuccessReportedEventArgs.cs" />
+    <Compile Include="Internal\Commands\SurplusRowEventArgs.cs" />
+    <Compile Include="Internal\Commands\TableExecuteStrategy.cs" />
+    <Compile Include="Internal\Commands\ExceptionCatchingDecorator.cs" />
+    <Compile Include="Internal\Commands\VerifyRowsCommand.cs" />
+    <Compile Include="Internal\ConcordionAssertionException.cs" />
+    <Compile Include="Internal\ConcordionBuilder.cs" />
+    <Compile Include="Internal\DocumentParser.cs" />
+    <Compile Include="Internal\IExpressionValidator.cs" />
+    <Compile Include="Internal\OgnlEvaluator.cs" />
+    <Compile Include="Internal\ParsingEventArgs.cs" />
+    <Compile Include="Internal\Renderer\BreadCrumbRenderer.cs" />
+    <Compile Include="Internal\Row.cs" />
+    <Compile Include="Internal\SimpleEvaluator.cs" />
+    <Compile Include="Internal\SimpleEvaluatorFactory.cs" />
+    <Compile Include="Internal\SummarizingResultRecorder.cs" />
+    <Compile Include="Internal\Table.cs" />
+    <Compile Include="Internal\TableSupport.cs" />
+    <Compile Include="Internal\Util\Announcer.cs" />
+    <Compile Include="Internal\Util\Check.cs" />
+    <Compile Include="Internal\XmlSpecification.cs" />
+    <Compile Include="Internal\XmlSpecificationReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HtmlFramework.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>HtmlFramework.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OGNL\OGNL.csproj">
+      <Project>{02F01FD5-3F40-41BA-900E-EDA004BF43E1}</Project>
+      <Name>OGNL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Internal\Runner\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
