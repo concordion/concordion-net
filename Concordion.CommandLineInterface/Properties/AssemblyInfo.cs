@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Concordion.CommandLineInterface")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Concordion")]
+[assembly: AssemblyDescription("An acceptance testing framework")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Concordion.CommandLineInterface")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyProduct("Concordion")]
+[assembly: AssemblyCopyright("Copyright Jeffrey Cameron  ©  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

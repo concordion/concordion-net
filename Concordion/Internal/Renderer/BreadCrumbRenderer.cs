@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Concordion.Internal.Renderer
 {
-    public class BreadCrumbRenderer
+    public class BreadCrumbRenderer : ISpecificationRenderer
     {
         #region Properties
 
@@ -31,28 +31,6 @@ namespace Concordion.Internal.Renderer
         #endregion
 
         #region Methods
-
-        public void SpecificationProcessingEventHandler(object sender, SpecificationEventArgs eventArgs)
-        {
-        }
-
-        public void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs)
-        {
-            try 
-            {
-                Element span = new Element("span").AddStyleClass("breadcrumbs");
-                AppendBreadcrumbsTo(span, eventArgs.Resource);
-        
-                if (span.HasChildren) 
-                {
-                    GetDocumentBody(eventArgs.Element).PrependChild(span);
-                }
-            } 
-            catch (Exception e) 
-            {
-                Console.WriteLine(e.ToString());
-            }
-        }
 
         private Element GetDocumentBody(Element rootElement)
         {
@@ -139,6 +117,32 @@ namespace Concordion.Internal.Renderer
         private static bool IsBlank(string s)
         {
             return String.IsNullOrEmpty(s.Replace("[^a-zA-Z0-9]", ""));
+        }
+
+        #endregion
+
+        #region ISpecificationRenderer Members
+
+        public void SpecificationProcessingEventHandler(object sender, SpecificationEventArgs eventArgs)
+        {
+        }
+
+        public void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs)
+        {
+            try
+            {
+                Element span = new Element("span").AddStyleClass("breadcrumbs");
+                AppendBreadcrumbsTo(span, eventArgs.Resource);
+
+                if (span.HasChildren)
+                {
+                    GetDocumentBody(eventArgs.Element).PrependChild(span);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
         }
 
         #endregion

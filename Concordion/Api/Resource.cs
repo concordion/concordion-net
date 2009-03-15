@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Internal.Util;
+using System.IO;
 
 namespace Concordion.Api
 {
     public class Resource
     {
-        #region MyRegion
+        #region Fields
 
         private static readonly char pathSeparator = '\\';
         
@@ -22,10 +23,10 @@ namespace Concordion.Api
             private set;
         }
         
-        private Uri ResourceUri
+        public Uri ResourceUri
         {
             get;
-            set;
+            private set;
         }
 
         public string Path
@@ -38,8 +39,10 @@ namespace Concordion.Api
 
         private string[] Parts
         {
-            get;
-            set;
+            get
+            {
+                return ResourceUri.Segments;
+            }
         }
 
         public Resource Parent
@@ -50,12 +53,11 @@ namespace Concordion.Api
                 {
                     return null;
                 }
-                StringBuilder parentPath = new StringBuilder("/");
-                string[] parts = Path.Split(new char[] { '\\', '/' });
 
-                for (int i = 1; i < parts.Length - 1; i++)
+                StringBuilder parentPath = new StringBuilder("/");
+                for (int i = 1; i < Parts.Length - 1; i++)
                 {
-                    parentPath.Append(parts[i] + "/");
+                    parentPath.Append(Parts[i] + "/");
                 }
                 return new Resource(parentPath.ToString());
             }
@@ -85,21 +87,21 @@ namespace Concordion.Api
         
         public Resource(string path)
         {
-            ResourceUri = new Uri(path);
+            ResourceUri = new Uri(Uri.UriSchemeFile + ":///" + path, UriKind.Absolute);
 
-            if (path.EndsWith(@"\"))
+            if (ResourceUri.LocalPath.EndsWith(@"\"))
             {
                 IsPackage = true;
             }
 
-            Parts = path.Split(new char[] { '/' });
-            if (Parts.Length == 0)
+            var parts = path.Split('/');
+            if (parts.Length == 0)
             {
                 Name = "";
             }
             else
             {
-                Name = Parts[Parts.Length - 1];
+                Name = parts[parts.Length - 1];
             }
         } 
 

@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Concordion.Integration
 {
-    public class ConcordionTestCase
+    public class ConcordionTestCase : IConcordionTestCase
     {
         public ConcordionTestCase()  
         {

@@ -7,9 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Concordion.Spec
 {
-    [TestClass]
-    [HtmlResource("Demo")]
-    public class DemoTest : ConcordionTestCase
+    public class DemoTest
     {
         public string GreetingFor(string firstName)
         {

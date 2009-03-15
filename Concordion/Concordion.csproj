@@ -36,6 +36,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -68,7 +69,10 @@
       <DependentUpon>HtmlFramework.resx</DependentUpon>
     </Compile>
     <Compile Include="Integration\ConcordionTestCase.cs" />
+    <Compile Include="Integration\FixtureDiscoverer.cs" />
     <Compile Include="Integration\HtmlResourceAttribute.cs" />
+    <Compile Include="Integration\IConcordionTestCase.cs" />
+    <Compile Include="Integration\ResourceCrawler.cs" />
     <Compile Include="Internal\BannedWordsValidator.cs" />
     <Compile Include="Internal\BrowserStyleWhitespaceComparer.cs" />
     <Compile Include="Internal\ClassNameBasedSpecificationLocator.cs" />
@@ -103,10 +107,15 @@
     <Compile Include="Internal\ConcordionAssertionException.cs" />
     <Compile Include="Internal\ConcordionBuilder.cs" />
     <Compile Include="Internal\DocumentParser.cs" />
+    <Compile Include="Internal\FileTarget.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />
     <Compile Include="Internal\ParsingEventArgs.cs" />
     <Compile Include="Internal\Renderer\BreadCrumbRenderer.cs" />
+    <Compile Include="Internal\Renderer\ExceptionRenderer.cs" />
+    <Compile Include="Internal\Renderer\ISpecificationRenderer.cs" />
+    <Compile Include="Internal\Renderer\PageFooterRenderer.cs" />
+    <Compile Include="Internal\Renderer\SpecificationRenderer.cs" />
     <Compile Include="Internal\Row.cs" />
     <Compile Include="Internal\SimpleEvaluator.cs" />
     <Compile Include="Internal\SimpleEvaluatorFactory.cs" />
@@ -130,6 +139,15 @@
       <Project>{02F01FD5-3F40-41BA-900E-EDA004BF43E1}</Project>
       <Name>OGNL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\visibility-toggler.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\embedded.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Internal\Runner\" />

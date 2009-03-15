@@ -5,6 +5,7 @@ using System.Text;
 using Concordion.Internal.Commands;
 using Concordion.Api;
 using Concordion.Internal.Util;
+using Concordion.Internal.Renderer;
 using System.IO;
 
 namespace Concordion.Internal
@@ -31,6 +32,7 @@ namespace Concordion.Internal
         private VerifyRowsCommand verifyRowsCommand;
         private EchoCommand echoCommand;
         private string baseOutputDir;
+        private ExceptionRenderer exceptionRenderer;
     
         public ConcordionBuilder()
         {
@@ -48,6 +50,7 @@ namespace Concordion.Internal
             runCommand = new RunCommand();
             verifyRowsCommand = new VerifyRowsCommand();
             echoCommand = new EchoCommand();
+            exceptionRenderer = new ExceptionRenderer();
 
             //throwableListenerPublisher.addThrowableListener(new ThrowableRenderer());
             
@@ -89,12 +92,12 @@ namespace Concordion.Internal
             this.evaluatorFactory = evaluatorFactory;
             return this;
         }
-        
-        //public ConcordionBuilder withThrowableListener(ThrowableCaughtListener throwableListener) 
-        //{
-        //    throwableListenerPublisher.addThrowableListener(throwableListener);
-        //    return this;
-        //}
+
+        public ConcordionBuilder WithExceptionRenderer(ExceptionRenderer exceptionRendererToAttach)
+        {
+            //throwableListenerPublisher.addThrowableListener(exceptionRendererToAttach);
+            return this;
+        }
 
         //public ConcordionBuilder withAssertEqualsListener(AssertEqualsListener listener) 
         //{
@@ -104,9 +107,9 @@ namespace Concordion.Internal
 
         private ConcordionBuilder WithApprovedCommand(string namespaceURI, string commandName, ICommand command) 
         {
-            ExceptionCatchingDecorator throwableCatchingDecorator = new ExceptionCatchingDecorator(new LocalTextDecorator(command));
-            //throwableCatchingDecorator.addThrowableListener(throwableListenerPublisher);
-            ICommand decoratedCommand = throwableCatchingDecorator;
+            ExceptionCatchingDecorator ExceptionCatchingDecorator = new ExceptionCatchingDecorator(new LocalTextDecorator(command));
+            ExceptionCatchingDecorator.ExceptionCaught += exceptionRenderer.ExceptionCaughtEventHandler;
+            ICommand decoratedCommand = ExceptionCatchingDecorator;
             commandRegistry.Register(namespaceURI, commandName, decoratedCommand);
             return this;
         }
@@ -124,14 +127,17 @@ namespace Concordion.Internal
         
         public Concordion Build() 
         {
-            //if (target == null) 
-            //{
-            //    target = new FileTarget(BaseOutputDir);
-            //}
-            
-            //specificationCommand.addSpecificationListener(new BreadcrumbRenderer(source, xmlParser));
-            //specificationCommand.addSpecificationListener(new PageFooterRenderer(target));
-            //specificationCommand.addSpecificationListener(new SpecificationExporter(target));
+            var breadCrumbRenderer = new BreadCrumbRenderer(source);
+            specificationCommand.SpecificationCommandProcessing += breadCrumbRenderer.SpecificationProcessingEventHandler;
+            specificationCommand.SpecificationCommandProcessed += breadCrumbRenderer.SpecificationProcessedEventHandler;
+
+            var pageFooterRenderer = new PageFooterRenderer(target);
+            specificationCommand.SpecificationCommandProcessing += pageFooterRenderer.SpecificationProcessingEventHandler;
+            specificationCommand.SpecificationCommandProcessed += pageFooterRenderer.SpecificationProcessedEventHandler;
+
+            var specificationRenderer = new SpecificationRenderer(target);
+            specificationCommand.SpecificationCommandProcessing += specificationRenderer.SpecificationProcessingEventHandler;
+            specificationCommand.SpecificationCommandProcessed += specificationRenderer.SpecificationProcessedEventHandler;
 
             specificationReader = new XmlSpecificationReader(source, documentParser);        
 

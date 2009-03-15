@@ -47,7 +47,7 @@ namespace Concordion.Internal
 
         public ISpecification ReadSpecification(Resource resource)
         {
-            XDocument document = XDocument.Load(XmlReader.Create(resource.Path));
+            XDocument document = XDocument.Load(XmlReader.Create(resource.ResourceUri.AbsoluteUri));
             return DocumentParser.Parse(document, resource);
         }
 

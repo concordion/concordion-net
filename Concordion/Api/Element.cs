@@ -33,6 +33,14 @@ namespace Concordion.Api
             }
         }
 
+        private bool IsBlank
+        {
+            get
+            {
+                return String.IsNullOrEmpty(Text.Trim());
+            }
+        }
+
         #endregion
 
         #region Constructors
@@ -141,6 +149,50 @@ namespace Concordion.Api
             }
 
             return null;
+        }
+
+        public void MoveChildrenTo(Element element)
+        {
+            foreach (XElement childNode in GetChildNodes()) 
+            {
+                childNode.Remove();
+                element.m_element.Add(childNode);
+            }
+        }
+
+        private IEnumerable<XElement> GetChildNodes()
+        {
+            return m_element.Elements();
+        }
+
+        public Element AppendNonBreakingSpaceIfBlank()
+        {
+            if (IsBlank)
+            {
+                AppendNonBreakingSpace();
+            }
+            return this;
+        }
+
+        public Element AppendNonBreakingSpace()
+        {
+            return AppendText("\u00A0");
+        }
+
+        public Element SetId(string id)
+        {
+            AddAttribute("id", id);
+            return this;
+        }
+
+        public Element GetRootElement()
+        {
+            return new Element(m_element.Document.Root);
+        }
+
+        public string ToXml()
+        {
+            return m_element.ToString();
         }
 
         #endregion

@@ -43,10 +43,16 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit, Version=1.1.0.1323, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\xunit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Resource_Fixture.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Integration\FixtureDiscoverer_Fixture.cs" />
+    <Compile Include="TestObject\DemoTest.cs" />
+    <Compile Include="Integration\ResourceCrawler_Fixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

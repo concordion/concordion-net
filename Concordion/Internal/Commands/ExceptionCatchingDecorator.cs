@@ -78,7 +78,5 @@ namespace Concordion.Internal.Commands
         public event EventHandler<ExceptionCaughtEventArgs> ExceptionCaught; 
 
         #endregion
-
-
     }
 }
