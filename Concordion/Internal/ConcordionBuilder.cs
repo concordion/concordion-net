@@ -12,105 +12,204 @@ namespace Concordion.Internal
 {
     public class ConcordionBuilder
     {
-        private static readonly string NAMESPACE_CONCORDION_2007 = "http://www.concordion.org/2007/concordion";
-        private static readonly string PROPERTY_OUTPUT_DIR = "concordion.output.dir";
-        private static readonly string EMBEDDED_STYLESHEET_RESOURCE = "/org/concordion/internal/resource/embedded.css";
+        #region Properties
 
-        private ISpecificationLocator specificationLocator;
-        private ISource source;
-        private ITarget target;
-        private CommandRegistry commandRegistry;
-        private DocumentParser documentParser;
-        private ISpecificationReader specificationReader;
-        private IEvaluatorFactory evaluatorFactory;
-        private SpecificationCommand specificationCommand;
-        private AssertEqualsCommand assertEqualsCommand;
-        private AssertTrueCommand assertTrueCommand;
-        private AssertFalseCommand assertFalseCommand;
-        private ExecuteCommand executeCommand;
-        private RunCommand runCommand;
-        private VerifyRowsCommand verifyRowsCommand;
-        private EchoCommand echoCommand;
-        private string baseOutputDir;
-        private ExceptionRenderer exceptionRenderer;
+        private ExceptionRenderer ExceptionRenderer
+        {
+            get;
+            set;
+        }
+
+        private string BaseOutputDir
+        {
+            get;
+            set;
+        }
+
+        private ISource Source
+        {
+            get;
+            set;
+        }
+
+        private ITarget Target
+        {
+            get;
+            set;
+        }
+
+        private ISpecificationLocator SpecificationLocator
+        {
+            get;
+            set;
+        }
+
+        private CommandRegistry CommandRegistry
+        {
+            get;
+            set;
+        }
+
+        private DocumentParser DocumentParser
+        {
+            get;
+            set;
+        }
+
+        private ISpecificationReader SpecificationReader
+        {
+            get;
+            set;
+        }
+
+        private IEvaluatorFactory EvaluatorFactory
+        {
+            get;
+            set;
+        }
+
+        private SpecificationCommand SpecificationCommand
+        {
+            get;
+            set;
+        }
+
+        private AssertEqualsCommand AssertEqualsCommand
+        {
+            get;
+            set;
+        }
+
+        private AssertTrueCommand AssertTrueCommand
+        {
+            get;
+            set;
+        }
+
+        private AssertFalseCommand AssertFalseCommand
+        {
+            get;
+            set;
+        }
+
+        private ExecuteCommand ExecuteCommand
+        {
+            get;
+            set;
+        }
+
+        private RunCommand RunCommand
+        {
+            get;
+            set;
+        }
+
+        private VerifyRowsCommand VerifyRowsCommand
+        {
+            get;
+            set;
+        }
+
+        private EchoCommand EchoCommand
+        {
+            get;
+            set;
+        }
+
+        #endregion
     
         public ConcordionBuilder()
         {
-            specificationLocator = new ClassNameBasedSpecificationLocator();
-            source = new ClassPathSource();
-            target = null;
-            commandRegistry = new CommandRegistry();
-            documentParser = new DocumentParser(commandRegistry);
-            evaluatorFactory = new SimpleEvaluatorFactory();
-            specificationCommand = new SpecificationCommand();
-            assertEqualsCommand = new AssertEqualsCommand();
-            assertTrueCommand = new AssertTrueCommand();
-            assertFalseCommand = new AssertFalseCommand();
-            executeCommand = new ExecuteCommand();
-            runCommand = new RunCommand();
-            verifyRowsCommand = new VerifyRowsCommand();
-            echoCommand = new EchoCommand();
-            exceptionRenderer = new ExceptionRenderer();
+            SpecificationLocator = new ClassNameBasedSpecificationLocator();
+            Source = new ClassPathSource();
+            Target = null;
+            CommandRegistry = new CommandRegistry();
+            DocumentParser = new DocumentParser(CommandRegistry);
+            EvaluatorFactory = new SimpleEvaluatorFactory();
+            SpecificationCommand = new SpecificationCommand();
+            AssertEqualsCommand = new AssertEqualsCommand();
+            AssertTrueCommand = new AssertTrueCommand();
+            AssertFalseCommand = new AssertFalseCommand();
+            ExecuteCommand = new ExecuteCommand();
+            RunCommand = new RunCommand();
+            VerifyRowsCommand = new VerifyRowsCommand();
+            EchoCommand = new EchoCommand();
+            ExceptionRenderer = new ExceptionRenderer();
 
-            //throwableListenerPublisher.addThrowableListener(new ThrowableRenderer());
+            // Set up the commands
             
-            commandRegistry.Register("", "specification", specificationCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "run", runCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "execute", executeCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "set", new SetCommand());
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "assertEquals", assertEqualsCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "assertTrue", assertTrueCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "assertFalse", assertFalseCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "verifyRows", verifyRowsCommand);
-            WithApprovedCommand(NAMESPACE_CONCORDION_2007, "echo", echoCommand);
+            CommandRegistry.Register("", "specification", SpecificationCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "run", RunCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "execute", ExecuteCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "set", new SetCommand());
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertEquals", AssertEqualsCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertTrue", AssertTrueCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertFalse", AssertFalseCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "verifyRows", VerifyRowsCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "echo", EchoCommand);
 
-            string stylesheetContent = HtmlFramework.EMBEDDED_STYLESHEET_RESOURCE;
+            // Wire up the command listeners
             
-            //assertEqualsCommand.addAssertEqualsListener(new AssertEqualsResultRenderer());
-            //assertTrueCommand.addAssertEqualsListener(new AssertEqualsResultRenderer());
-            //assertFalseCommand.addAssertEqualsListener(new AssertEqualsResultRenderer());
-            //verifyRowsCommand.addVerifyRowsListener(new VerifyRowsResultRenderer());
+            var assertEqualsResultRenderer = new AssertEqualsResultRenderer();
+            AssertEqualsCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
+            AssertEqualsCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
+            AssertTrueCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
+            AssertTrueCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
+            AssertFalseCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
+            AssertFalseCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
+
+            var verifyRowsCommandRenderer = new VerifyRowResultRenderer();
+            VerifyRowsCommand.MissingRowFound += verifyRowsCommandRenderer.MissingRowFoundEventHandler;
+            VerifyRowsCommand.SurplusRowFound += verifyRowsCommandRenderer.SurplusRowFoundEventHandler;
+
             //runCommand.addRunListener(new RunResultRenderer());
-            //documentParser.addDocumentParsingListener(new DocumentStructureImprover());
-            //documentParser.addDocumentParsingListener(new StylesheetEmbedder(stylesheetContent));
+            var runResultRenderer = new RunResultRenderer();
+            // TODO - wire up the run result renderer to the run command's events
+
+            var documentStructureImprovementRenderer = new DocumentStructureImprovementRenderer();
+            DocumentParser.DocumentParsing += documentStructureImprovementRenderer.DocumentParsingEventHandler;
+
+            var stylesheetEmbeddingRenderer = new StylesheetEmbeddingRenderer(HtmlFramework.EMBEDDED_STYLESHEET_RESOURCE);
+            DocumentParser.DocumentParsing += stylesheetEmbeddingRenderer.DocumentParsingEventHandler;
         }
     
         public ConcordionBuilder WithSource(ISource source) 
         {
-            this.source = source;
+            this.Source = source;
             return this;
         }
 
         public ConcordionBuilder WithTarget(ITarget target) 
         {
-            this.target = target;
+            this.Target = target;
             return this;
         }
 
         public ConcordionBuilder WithEvaluatorFactory(IEvaluatorFactory evaluatorFactory) 
         {
-            this.evaluatorFactory = evaluatorFactory;
+            this.EvaluatorFactory = evaluatorFactory;
             return this;
         }
 
         public ConcordionBuilder WithExceptionRenderer(ExceptionRenderer exceptionRendererToAttach)
         {
-            //throwableListenerPublisher.addThrowableListener(exceptionRendererToAttach);
+            ExceptionRenderer = exceptionRendererToAttach;
             return this;
         }
 
-        //public ConcordionBuilder withAssertEqualsListener(AssertEqualsListener listener) 
-        //{
-        //    assertEqualsCommand.addAssertEqualsListener(listener);
-        //    return this;
-        //}
+        public ConcordionBuilder WithAssertEqualsListener(AssertEqualsResultRenderer renderer)
+        {
+            AssertEqualsCommand.SuccessReported += renderer.SuccessReportedEventHandler;
+            AssertEqualsCommand.FailureReported += renderer.FailureReportedEventHandler;
+            return this;
+        }
 
         private ConcordionBuilder WithApprovedCommand(string namespaceURI, string commandName, ICommand command) 
         {
             ExceptionCatchingDecorator ExceptionCatchingDecorator = new ExceptionCatchingDecorator(new LocalTextDecorator(command));
-            ExceptionCatchingDecorator.ExceptionCaught += exceptionRenderer.ExceptionCaughtEventHandler;
+            ExceptionCatchingDecorator.ExceptionCaught += ExceptionRenderer.ExceptionCaughtEventHandler;
             ICommand decoratedCommand = ExceptionCatchingDecorator;
-            commandRegistry.Register(namespaceURI, commandName, decoratedCommand);
+            CommandRegistry.Register(namespaceURI, commandName, decoratedCommand);
             return this;
         }
 
@@ -124,47 +223,35 @@ namespace Concordion.Internal
                   + "must not contain 'concordion.org'. Use your own domain name instead.");
             return WithApprovedCommand(namespaceURI, commandName, command);
         }
+
+        public ConcordionBuilder SendOutputTo(string directory)
+        {
+
+            return this;
+        }
         
         public Concordion Build() 
         {
-            var breadCrumbRenderer = new BreadCrumbRenderer(source);
-            specificationCommand.SpecificationCommandProcessing += breadCrumbRenderer.SpecificationProcessingEventHandler;
-            specificationCommand.SpecificationCommandProcessed += breadCrumbRenderer.SpecificationProcessedEventHandler;
-
-            var pageFooterRenderer = new PageFooterRenderer(target);
-            specificationCommand.SpecificationCommandProcessing += pageFooterRenderer.SpecificationProcessingEventHandler;
-            specificationCommand.SpecificationCommandProcessed += pageFooterRenderer.SpecificationProcessedEventHandler;
-
-            var specificationRenderer = new SpecificationRenderer(target);
-            specificationCommand.SpecificationCommandProcessing += specificationRenderer.SpecificationProcessingEventHandler;
-            specificationCommand.SpecificationCommandProcessed += specificationRenderer.SpecificationProcessedEventHandler;
-
-            specificationReader = new XmlSpecificationReader(source, documentParser);        
-
-            return new Concordion(specificationLocator, specificationReader, evaluatorFactory);
-        }
-
-        private string BaseOutputDir
-        {
-            get
+            if (Target == null)
             {
-                if (baseOutputDir != null)
-                {
-                    return baseOutputDir;
-                }
-
-                // TODO - should parse values from the app.config file here to determine directories to output to
-                //string outputPath = System.getProperty(PROPERTY_OUTPUT_DIR);
-                string outputPath = @"C:\temp";
-
-                if (String.IsNullOrEmpty(outputPath))
-                {
-                    //return new File(System.getProperty("java.io.tmpdir"), "concordion");
-                    return Path.GetFullPath(outputPath);
-                }
-
-                return Path.GetFullPath(outputPath);
+                Target = new FileTarget(BaseOutputDir ?? Directory.GetCurrentDirectory());
             }
+
+            var breadCrumbRenderer = new BreadCrumbRenderer(Source);
+            SpecificationCommand.SpecificationCommandProcessing += breadCrumbRenderer.SpecificationProcessingEventHandler;
+            SpecificationCommand.SpecificationCommandProcessed += breadCrumbRenderer.SpecificationProcessedEventHandler;
+
+            var pageFooterRenderer = new PageFooterRenderer(Target);
+            SpecificationCommand.SpecificationCommandProcessing += pageFooterRenderer.SpecificationProcessingEventHandler;
+            SpecificationCommand.SpecificationCommandProcessed += pageFooterRenderer.SpecificationProcessedEventHandler;
+
+            var specificationRenderer = new SpecificationRenderer(Target);
+            SpecificationCommand.SpecificationCommandProcessing += specificationRenderer.SpecificationProcessingEventHandler;
+            SpecificationCommand.SpecificationCommandProcessed += specificationRenderer.SpecificationProcessedEventHandler;
+
+            SpecificationReader = new XmlSpecificationReader(Source, DocumentParser);        
+
+            return new Concordion(SpecificationLocator, SpecificationReader, EvaluatorFactory);
         }
     }
 }

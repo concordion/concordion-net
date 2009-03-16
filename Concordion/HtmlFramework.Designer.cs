@@ -102,6 +102,15 @@ namespace Concordion {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to http://www.concordion.org/2007/concordion.
+        /// </summary>
+        internal static string NAMESPACE_CONCORDION_2007 {
+            get {
+                return ResourceManager.GetString("NAMESPACE_CONCORDION_2007", resourceCulture);
+            }
+        }
+        
         internal static System.Drawing.Bitmap SOURCE_LOGO_RESOURCE_PATH {
             get {
                 object obj = ResourceManager.GetObject("SOURCE_LOGO_RESOURCE_PATH", resourceCulture);

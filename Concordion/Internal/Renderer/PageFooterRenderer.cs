@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Concordion.Internal.Renderer
 {
-    public class PageFooterRenderer : ISpecificationRenderer
+    public class PageFooterRenderer : ISpecificationListener
     {
         #region Fields
         

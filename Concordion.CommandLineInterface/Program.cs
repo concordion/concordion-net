@@ -25,7 +25,7 @@ namespace Concordion.CommandLineInterface
             {
                 var resource = new Resource(resourcePath);
                 var fixture = fixtureDiscoverer.GetFixture(resource);
-                IResultSummary resultSummary = new ConcordionBuilder().Build().Process(resource, fixture);
+                IResultSummary resultSummary = new ConcordionBuilder().SendOutputTo(baseDirectory + "Results").Build().Process(resource, fixture);
                 resultSummary.Print(System.Console.Out, fixture);
                 resultSummary.AssertIsSatisfied(fixture);
             }

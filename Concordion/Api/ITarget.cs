@@ -8,8 +8,8 @@ namespace Concordion.Api
 {
     public interface ITarget
     {
-        void Write(Resource resource, String s);
-        void CopyTo(Resource resource, Stream inputStream);
+        void Write(Resource resource, string s);
+        void CopyTo(Resource resource, string destination);
         void Delete(Resource resource);
     }
 }

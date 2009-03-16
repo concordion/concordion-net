@@ -9,7 +9,7 @@ using System.IO;
 
 namespace Concordion.Internal.Renderer
 {
-    public class BreadCrumbRenderer : ISpecificationRenderer
+    public class BreadCrumbRenderer : ISpecificationListener
     {
         #region Properties
 

@@ -7,7 +7,7 @@ using Concordion.Internal.Commands;
 
 namespace Concordion.Internal.Renderer
 {
-    public class SpecificationRenderer : ISpecificationRenderer
+    public class SpecificationRenderer : ISpecificationListener
     {
         #region Fields
 		        
