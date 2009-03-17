@@ -11,7 +11,7 @@ namespace Concordion.Api
     {
         #region Fields
 
-        private static readonly char pathSeparator = '\\';
+        private static readonly char PATH_SEPARATOR = '\\';
         
         #endregion
 
@@ -39,25 +39,23 @@ namespace Concordion.Api
 
         private string[] Parts
         {
-            get
-            {
-                return ResourceUri.Segments;
-            }
+            get;
+            set;
         }
 
         public Resource Parent
         {
             get
             {
-                if (Path.Equals("/"))
+                if (Path.Equals(System.IO.Path.GetPathRoot(Path)))
                 {
                     return null;
                 }
 
-                StringBuilder parentPath = new StringBuilder("/");
-                for (int i = 1; i < Parts.Length - 1; i++)
+                StringBuilder parentPath = new StringBuilder();
+                for (int i = 0; i < Parts.Length - 1; i++)
                 {
-                    parentPath.Append(Parts[i] + "/");
+                    parentPath.Append(Parts[i] + PATH_SEPARATOR);
                 }
                 return new Resource(parentPath.ToString());
             }
@@ -89,19 +87,20 @@ namespace Concordion.Api
         {
             ResourceUri = new Uri(Uri.UriSchemeFile + ":///" + path, UriKind.Absolute);
 
-            if (ResourceUri.LocalPath.EndsWith(@"\"))
+            if (path.EndsWith(PATH_SEPARATOR.ToString()))
             {
                 IsPackage = true;
             }
 
-            var parts = path.Split('/');
-            if (parts.Length == 0)
+            Parts = path.Split(new string[] {PATH_SEPARATOR.ToString()}, StringSplitOptions.RemoveEmptyEntries);
+            if (Parts.Length == 0)
             {
                 Name = "";
             }
             else
             {
-                Name = parts[parts.Length - 1];
+                Name = Parts[Parts.Length - 1];
+                //Name = Name.Replace(".html", String.Empty);
             }
         } 
 
