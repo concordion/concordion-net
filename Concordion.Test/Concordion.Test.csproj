@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Api\Resource_Fixture.cs" />
     <Compile Include="Integration\FixtureDiscoverer_Fixture.cs" />
+    <Compile Include="StringExtensions_Fixture.cs" />
     <Compile Include="TestObject\DemoTest.cs" />
     <Compile Include="Integration\ResourceCrawler_Fixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

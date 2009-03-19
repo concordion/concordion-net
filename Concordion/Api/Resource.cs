@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Internal.Util;
+using Concordion.Internal;
 using System.IO;
 
 namespace Concordion.Api
@@ -12,6 +13,7 @@ namespace Concordion.Api
         #region Fields
 
         private static readonly char PATH_SEPARATOR = '\\';
+        private static readonly string RELATIVE_PATH_INDICATOR = ".." + PATH_SEPARATOR;
         
         #endregion
 
@@ -31,10 +33,8 @@ namespace Concordion.Api
 
         public string Path
         {
-            get
-            {
-                return ResourceUri.LocalPath;
-            }
+            get;
+            set;
         }
 
         private string[] Parts
@@ -52,7 +52,7 @@ namespace Concordion.Api
                     return null;
                 }
 
-                StringBuilder parentPath = new StringBuilder();
+                StringBuilder parentPath = new StringBuilder("\\");
                 for (int i = 0; i < Parts.Length - 1; i++)
                 {
                     parentPath.Append(Parts[i] + PATH_SEPARATOR);
@@ -85,14 +85,20 @@ namespace Concordion.Api
         
         public Resource(string path)
         {
-            ResourceUri = new Uri(Uri.UriSchemeFile + ":///" + path, UriKind.Absolute);
+            Path = path.Replace('/', PATH_SEPARATOR);
+            ResourceUri = new Uri(Uri.UriSchemeFile + ":///" + Path, UriKind.Absolute);
 
-            if (path.EndsWith(PATH_SEPARATOR.ToString()))
+            if (System.IO.Path.IsPathRooted(path))
+            {
+                Path = Path.Replace(System.IO.Path.GetPathRoot(path), @"\");
+            }
+
+            if (Path.EndsWith(PATH_SEPARATOR.ToString()))
             {
                 IsPackage = true;
             }
 
-            Parts = path.Split(new string[] {PATH_SEPARATOR.ToString()}, StringSplitOptions.RemoveEmptyEntries);
+            Parts = Path.Split(new string[] { PATH_SEPARATOR.ToString() }, StringSplitOptions.RemoveEmptyEntries);
             if (Parts.Length == 0)
             {
                 Name = "";
@@ -110,13 +116,13 @@ namespace Concordion.Api
         
         public Resource GetRelativeResource(string relativePath)
         {
-            Check.IsFalse(relativePath.StartsWith("/"), "Relative path should not start with a slash");
+            Check.IsFalse(relativePath.StartsWith(PATH_SEPARATOR.ToString()), "Relative path should not start with a slash");
 
-            String subPath = relativePath;
+            string subPath = relativePath;
 
             Resource p = Package;
 
-            while (subPath.StartsWith("../"))
+            while (subPath.StartsWith(RELATIVE_PATH_INDICATOR))
             {
                 p = p.Parent;
                 if (p == null)
@@ -124,10 +130,10 @@ namespace Concordion.Api
                     throw new Exception("Path '" + relativePath + "' relative to '" + Path + "' " +
                     "evaluates above the root package.");
                 }
-                subPath = subPath.Replace("../", "");
+                subPath = subPath.RemoveFirst(RELATIVE_PATH_INDICATOR);
             }
 
-            Check.IsFalse(subPath.Contains("../"), "The ../ operator is currently only supported at the start of expressions");
+            Check.IsFalse(subPath.Contains("relativeDirectoryMask"), String.Format("The {0} operator is currently only supported at the start of expressions", RELATIVE_PATH_INDICATOR));
 
             return new Resource(p.Path + subPath);
         } 
@@ -143,8 +149,8 @@ namespace Concordion.Api
             // Use ../ to move up the path from here to common stem
             // Append the rest of the path from resource
 
-            string[] therePieces = resource.Package.Path.Split('/');
-            string[] herePieces = Package.Path.Split('/');
+            string[] therePieces = resource.Package.Path.Split(new string[] {PATH_SEPARATOR.ToString()}, StringSplitOptions.RemoveEmptyEntries);
+            string[] herePieces = Package.Path.Split(new string[] {PATH_SEPARATOR.ToString()}, StringSplitOptions.RemoveEmptyEntries);
 
             int sharedPiecesCount = 0;
             for (int i = 0; i < herePieces.Length; i++)
@@ -163,23 +169,24 @@ namespace Concordion.Api
                 }
             }
 
-            string r = "";
+            StringBuilder r = new StringBuilder();
 
             for (int i = sharedPiecesCount; i < herePieces.Length; i++)
             {
-                r += "../";
+                r.Append(RELATIVE_PATH_INDICATOR);
             }
 
             for (int i = sharedPiecesCount; i < therePieces.Length; i++)
             {
-                r += therePieces[i] + "/";
+                r.Append(therePieces[i]);
+                r.Append(PATH_SEPARATOR);
             }
 
             if (resource.IsPackage)
             {
-                return r;
+                return r.ToString();
             }
-            return r + resource.Name;
+            return r.ToString() + resource.Name;
         }
 
         #endregion

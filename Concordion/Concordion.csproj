@@ -128,6 +128,7 @@
     <Compile Include="Internal\Row.cs" />
     <Compile Include="Internal\SimpleEvaluator.cs" />
     <Compile Include="Internal\SimpleEvaluatorFactory.cs" />
+    <Compile Include="Internal\StringExtensionMethods.cs" />
     <Compile Include="Internal\SummarizingResultRecorder.cs" />
     <Compile Include="Internal\Table.cs" />
     <Compile Include="Internal\TableSupport.cs" />
