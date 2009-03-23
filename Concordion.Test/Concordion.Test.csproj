@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq, Version=2.6.1121.2, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -50,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Resource_Fixture.cs" />
+    <Compile Include="Integration\FileTarget_Fixture.cs" />
     <Compile Include="Integration\FixtureDiscoverer_Fixture.cs" />
     <Compile Include="StringExtensions_Fixture.cs" />
     <Compile Include="TestObject\DemoTest.cs" />

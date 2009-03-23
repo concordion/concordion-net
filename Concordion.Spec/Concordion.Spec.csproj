@@ -46,14 +46,55 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DemoTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\AssertEqualsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\ExceptionsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\LineContinuationsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NestedActionsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NestedElementsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NonStringTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NoResultTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NormalizationTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\SupportedElementsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\VoidResultTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\WhitespaceTest.cs" />
+    <Compile Include="Concordion\Command\AssertFalse\AssertFalseTest.cs" />
+    <Compile Include="Concordion\Command\AssertTrue\AssertTrueTest.cs" />
+    <Compile Include="Concordion\Command\CommandTest.cs" />
+    <Compile Include="Concordion\Command\Echo\DisplayingNullsTest.cs" />
+    <Compile Include="Concordion\Command\Echo\EchoTest.cs" />
+    <Compile Include="Concordion\Command\Echo\EscapingHtmlCharactersTest.cs" />
+    <Compile Include="Concordion\Command\Execute\AccessToLinkHrefTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecuteTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecutingTablesTest.cs" />
+    <Compile Include="Concordion\Command\Run\RunTest.cs" />
+    <Compile Include="Concordion\Command\Run\RunTestRunner.cs" />
+    <Compile Include="Concordion\Command\Set\SetTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\MissingRowsTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\SurplusRowsTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\TableBodySupportTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
+    <Compile Include="Concordion\ConcordionTest.cs" />
+    <Compile Include="Concordion\ExampleTest.cs" />
+    <Compile Include="Concordion\Results\ResultsTest.cs" />
+    <Compile Include="Examples\DemoTest.cs" />
+    <Compile Include="Examples\PartialMatchesTest.cs" />
+    <Compile Include="Examples\SpikeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\EventRecorder.cs" />
+    <Compile Include="Support\ProcessingResult.cs" />
+    <Compile Include="Support\StubEvaluator.cs" />
+    <Compile Include="Support\StubSource.cs" />
+    <Compile Include="Support\StubTarget.cs" />
+    <Compile Include="Support\TestRig.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Concordion\Concordion.csproj">
       <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
       <Name>Concordion</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Concordion\Command\Results\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

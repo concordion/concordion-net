@@ -98,22 +98,30 @@ namespace Concordion.Internal.Renderer
                     .AddStyleClass("stackTraceExceptionMessage")
                     .AppendText(exception.GetType().Name + ": " + exception.Message);
             stackTrace.AppendChild(stackTraceExceptionMessage);
+            stackTrace.AppendChild(StackTraceElement(exception.StackTrace));
 
-            stackTrace.AppendChild(new Element(exception.StackTrace));
-
-            if (exception is OgnlException) 
-            {
-                Exception reason = ((OgnlException) exception).getReason();
-                if (reason != null) 
-                {
-                    RecursivelyAppendStackTrace(reason, stackTrace);
-                }
-            }
+            // TODO - Figure out if this is needed any longer
+            //if (exception is OgnlException) 
+            //{
+            //    Exception reason = ((OgnlException) exception).getReason();
+            //    if (reason != null) 
+            //    {
+            //        RecursivelyAppendStackTrace(reason, stackTrace);
+            //    }
+            //}
 
             if (exception.InnerException != null) 
             {
                 RecursivelyAppendStackTrace(exception.InnerException, stackTrace);
             }
+        }
+
+        private Element StackTraceElement(string stackTraceText)
+        {
+            Element entry = new Element("span")
+                    .AddStyleClass("stackTraceEntry")
+                    .AppendText("at " + stackTraceText);
+            return entry;
         }
 
         private void EnsureDocumentHasTogglingScript(Element element)

@@ -226,7 +226,7 @@ namespace Concordion.Internal
 
         public ConcordionBuilder SendOutputTo(string directory)
         {
-
+            Target = new FileTarget(directory);
             return this;
         }
         

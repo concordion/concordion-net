@@ -7,18 +7,18 @@
 <body>
 <h1>Spike</h1>
 
-<p concordion:execute="#greeting = getGreetingFor(#name)">
+<p concordion:execute="#greeting = GetGreetingFor(#name)">
 The greeting <b concordion:assertEquals="#greeting">Hello David!</b>
 should be displayed for <b concordion:set="#name">David</b>
 when he logs in. 
 </p>
 
-<p concordion:execute="doSomething()"/>
+<p concordion:execute="DoSomething()"/>
 
-<table concordion:verifyRows="#person : getPeople()">
+<table concordion:verifyRows="#person : GetPeople()">
     <tr>
-        <th concordion:assertEquals="#person.firstName">First Name</th>
-        <th concordion:assertEquals="#person.lastName">Last Name</th>
+        <th concordion:assertEquals="#person.FirstName">First Name</th>
+        <th concordion:assertEquals="#person.LastName">Last Name</th>
     </tr>
     <tr>
         <td>John</td>

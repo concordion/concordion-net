@@ -48,7 +48,8 @@ namespace Concordion.Internal.Renderer
                 if (Target is FileTarget) 
                 {
                     // TODO - Replace this with something meaningful
-                    //Console.WriteLine(((FileTarget) target).GetFile(eventArgs.Resource).getAbsolutePath());
+
+                    Console.WriteLine("Processed specifications : " + ((FileTarget)Target).GetTargetPath(eventArgs.Resource));
                 }
             } 
             catch (Exception e) 

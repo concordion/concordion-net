@@ -20,7 +20,11 @@ namespace Concordion.Internal
         {
             get
             {
-                return false;
+                foreach (Element cell in RowElement.GetChildElements())
+                {
+                    if (cell.IsNamed("td")) return false;
+                }
+                return true;
             }
         }
 
@@ -52,7 +56,17 @@ namespace Concordion.Internal
 
         public int GetIndexOfCell(Element element)
         {
-            throw new NotImplementedException();
+            int index = 0;
+            foreach (Element cell in RowElement.GetChildElements())
+            {
+                if (element.Text == cell.Text)
+                {
+                    return index;
+                }
+                index++;
+            }
+
+            return -1;
         }
 
         #endregion

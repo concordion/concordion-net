@@ -62,14 +62,13 @@ namespace Concordion.Integration
                         }
                         else
                         {
-                            // TODO - type does not have a constructor with no parameters, cannot instantiate it
-                            throw new InvalidOperationException(String.Format("", fixtureName));
+                            return null;
                         }
                     }
                 }
             }
 
-            throw new InvalidOperationException("Searched all assemblies and cannot find an appropriate type for the fixture " + fixtureName);
+            return null;
         }
 
 

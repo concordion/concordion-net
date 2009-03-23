@@ -47,7 +47,14 @@ namespace Concordion.Internal
 
         public ISpecification ReadSpecification(Resource resource)
         {
-            XDocument document = XDocument.Load(XmlReader.Create(resource.ResourceUri.AbsoluteUri));
+            XDocument document = XDocument.Load(Source.CreateReader(resource));
+            return DocumentParser.Parse(document, resource);
+        }
+
+        public ISpecification ReadSpecification(Resource resource, string baseDirectory)
+        {
+            var pathUri = new Uri(baseDirectory + resource.Path);
+            XDocument document = XDocument.Load(XmlReader.Create(pathUri.AbsoluteUri));
             return DocumentParser.Parse(document, resource);
         }
 

@@ -8,5 +8,6 @@ namespace Concordion.Api
     public interface ISpecificationReader
     {
         ISpecification ReadSpecification(Resource resource);
+        ISpecification ReadSpecification(Resource resource, string baseDirectory);
     }
 }

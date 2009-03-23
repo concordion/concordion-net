@@ -45,7 +45,6 @@ namespace Concordion.Internal.Renderer
 
         private void AppendBreadcrumbsTo(Element breadcrumbSpan, Resource documentResource)
         {
-
             Resource packageResource = documentResource.Parent;
 
             while (packageResource != null)
@@ -75,7 +74,7 @@ namespace Concordion.Internal.Renderer
         private Element CreateBreadcrumbElement(Resource documentResource, Resource indexPageResource)
         {
 
-            XDocument document = XDocument.Load(new StreamReader(Source.CreateInputStream(indexPageResource)));
+            XDocument document = XDocument.Load(Source.CreateReader(indexPageResource));
 
             String breadcrumbWording = GetBreadcrumbWording(new Element(document.Root), indexPageResource);
             Element a = new Element("a");

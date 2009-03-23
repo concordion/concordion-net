@@ -40,7 +40,8 @@ namespace Concordion.Internal
         private void MakeDirectories(Resource resource)
         {
             // TODO - make the output directories here
-            throw new NotImplementedException();
+            string path = BaseDirectory + resource.Parent.Path;
+            Directory.CreateDirectory(path);
         }
 
         private StreamWriter CreateWriter(Resource resource)
@@ -49,11 +50,15 @@ namespace Concordion.Internal
             return new StreamWriter(path, false, Encoding.UTF8);
         }
 
-
         private bool IsFreshEnough(string source)
         {
             TimeSpan ageInMillis = DateTime.Now.Subtract(File.GetLastWriteTime(source));
             return ageInMillis.TotalMilliseconds < FRESH_ENOUGH_MILLIS;
+        }
+
+        public string GetTargetPath(Resource resource)
+        {
+            return BaseDirectory + resource.Path;
         }
 
         #endregion

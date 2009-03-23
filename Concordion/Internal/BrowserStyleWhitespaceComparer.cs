@@ -10,7 +10,7 @@ namespace Concordion.Internal
     {
         #region Methods
 
-        private static string Normalize(object obj)
+        public static string Normalize(object obj)
         {
             string s = ConvertObjectToString(obj);
             s = ProcessLineContinuations(s);

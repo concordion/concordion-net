@@ -16,6 +16,11 @@ namespace Concordion.Internal
             return new FileStream(resource.Path, FileMode.Open);
         }
 
+        public TextReader CreateReader(Resource resource)
+        {
+            return new StreamReader(new FileStream(resource.Path, FileMode.Open));
+        }
+
         public bool CanFind(Resource resource)
         {
             return File.Exists(resource.Path) ? true : false;

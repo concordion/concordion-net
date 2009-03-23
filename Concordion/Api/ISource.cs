@@ -8,7 +8,7 @@ namespace Concordion.Api
 {
     public interface ISource
     {
-        Stream CreateInputStream(Resource resource);
+        TextReader CreateReader(Resource resource);
         bool CanFind(Resource resource);
     }
 }

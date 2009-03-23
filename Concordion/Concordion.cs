@@ -57,6 +57,14 @@ namespace Concordion
             return resultRecorder;
         }
 
+        public IResultSummary Process(Resource resource, string baseDirectory, object fixture)
+        {
+            var specification = SpecificationReader.ReadSpecification(resource, baseDirectory);
+            var resultRecorder = new SummarizingResultRecorder();
+            specification.Process(EvaluatorFactory.CreateEvaluator(fixture), resultRecorder);
+            return resultRecorder;
+        }
+
         #endregion
     }
 }

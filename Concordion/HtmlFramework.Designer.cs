@@ -22,7 +22,7 @@ namespace Concordion {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "2.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class HtmlFramework {
+    public class HtmlFramework {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Concordion {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Concordion.HtmlFramework", typeof(HtmlFramework).Assembly);
@@ -51,7 +51,7 @@ namespace Concordion {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -96,7 +96,7 @@ namespace Concordion {
         ///td {
         ///  background- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string EMBEDDED_STYLESHEET_RESOURCE {
+        public static string EMBEDDED_STYLESHEET_RESOURCE {
             get {
                 return ResourceManager.GetString("EMBEDDED_STYLESHEET_RESOURCE", resourceCulture);
             }
@@ -105,13 +105,13 @@ namespace Concordion {
         /// <summary>
         ///   Looks up a localized string similar to http://www.concordion.org/2007/concordion.
         /// </summary>
-        internal static string NAMESPACE_CONCORDION_2007 {
+        public static string NAMESPACE_CONCORDION_2007 {
             get {
                 return ResourceManager.GetString("NAMESPACE_CONCORDION_2007", resourceCulture);
             }
         }
         
-        internal static System.Drawing.Bitmap SOURCE_LOGO_RESOURCE_PATH {
+        public static System.Drawing.Bitmap SOURCE_LOGO_RESOURCE_PATH {
             get {
                 object obj = ResourceManager.GetObject("SOURCE_LOGO_RESOURCE_PATH", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -141,7 +141,7 @@ namespace Concordion {
         ///function makeVisible(element) {
         ///  element [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string TOGGLING_SCRIPT_RESOURCE {
+        public static string TOGGLING_SCRIPT_RESOURCE {
             get {
                 return ResourceManager.GetString("TOGGLING_SCRIPT_RESOURCE", resourceCulture);
             }

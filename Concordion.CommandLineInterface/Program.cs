@@ -13,11 +13,12 @@ namespace Concordion.CommandLineInterface
     {
         static void Main(string[] args)
         {
-            string baseDirectory = args[0];
+            string baseInputDirectory = args[0];
             string assemblyDirectory = args[1];
+            string baseOutputDirectory = args[2];
             var assemblies = new List<string> { assemblyDirectory };
 
-            var resourcePaths = new ResourceCrawler(baseDirectory);
+            var resourcePaths = new ResourceCrawler(baseInputDirectory);
             var fixtureDiscoverer = new FixtureDiscoverer();
             fixtureDiscoverer.LoadAssemblies(assemblies);
 
@@ -25,9 +26,26 @@ namespace Concordion.CommandLineInterface
             {
                 var resource = new Resource(resourcePath);
                 var fixture = fixtureDiscoverer.GetFixture(resource);
-                IResultSummary resultSummary = new ConcordionBuilder().SendOutputTo(baseDirectory + "Results").Build().Process(resource, fixture);
-                resultSummary.Print(System.Console.Out, fixture);
-                resultSummary.AssertIsSatisfied(fixture);
+                if (fixture != null)
+                {
+                    IResultSummary resultSummary = new ConcordionBuilder()
+                                                                .SendOutputTo(baseOutputDirectory)
+                                                                .Build()
+                                                                .Process(resource, baseInputDirectory, fixture);
+                    resultSummary.Print(System.Console.Out, fixture);
+                    try
+                    {
+                        resultSummary.AssertIsSatisfied(fixture);
+                    }
+                    catch (ConcordionAssertionException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ignoring Specification " + resource.Name + " because no fixture for specification found");
+                }
             }
         }
     }

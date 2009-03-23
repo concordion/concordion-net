@@ -24,14 +24,16 @@ namespace Concordion.Api
             get;
             private set;
         }
-        
-        public Uri ResourceUri
+
+        public string UriPath
         {
-            get;
-            private set;
+            get
+            {
+                return new Uri(Uri.UriSchemeFile + ":///" + Path, UriKind.Absolute).AbsoluteUri;
+            }
         }
 
-        public string Path
+        public virtual string Path
         {
             get;
             set;
@@ -86,7 +88,6 @@ namespace Concordion.Api
         public Resource(string path)
         {
             Path = path.Replace('/', PATH_SEPARATOR);
-            ResourceUri = new Uri(Uri.UriSchemeFile + ":///" + Path, UriKind.Absolute);
 
             if (System.IO.Path.IsPathRooted(path))
             {
@@ -116,7 +117,7 @@ namespace Concordion.Api
         
         public Resource GetRelativeResource(string relativePath)
         {
-            Check.IsFalse(relativePath.StartsWith(PATH_SEPARATOR.ToString()), "Relative path should not start with a slash");
+            //Check.IsFalse(relativePath.StartsWith(PATH_SEPARATOR.ToString()), "Relative path should not start with a slash");
 
             string subPath = relativePath;
 
@@ -133,7 +134,7 @@ namespace Concordion.Api
                 subPath = subPath.RemoveFirst(RELATIVE_PATH_INDICATOR);
             }
 
-            Check.IsFalse(subPath.Contains("relativeDirectoryMask"), String.Format("The {0} operator is currently only supported at the start of expressions", RELATIVE_PATH_INDICATOR));
+            Check.IsFalse(subPath.Contains(RELATIVE_PATH_INDICATOR), String.Format("The {0} operator is currently only supported at the start of expressions", RELATIVE_PATH_INDICATOR));
 
             return new Resource(p.Path + subPath);
         } 
