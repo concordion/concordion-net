@@ -59,7 +59,7 @@ namespace Concordion.Integration
             var relativeResources = new List<string>();
             foreach (string resource in resources)
             {
-                relativeResources.Add(resource.Replace(BaseDirectory, String.Empty));
+                relativeResources.Add(resource.Replace(Path.GetPathRoot(resource), "\\"));
             }
 
             return relativeResources;

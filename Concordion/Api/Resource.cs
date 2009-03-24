@@ -192,5 +192,27 @@ namespace Concordion.Api
 
         #endregion
 
+        #region Override Methods
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (!(obj is Resource)) return false;
+
+            Resource other = obj as Resource;
+            if (other.Path != this.Path)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return Path.GetHashCode();
+        }
+
+        #endregion
     }
 }

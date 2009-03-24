@@ -72,7 +72,7 @@ namespace Concordion.Api
 
         public Element PrependChild(Element child)
         {
-            m_element.AddFirst(child);
+            m_element.AddFirst(child.m_element);
             return this;
         }
 
@@ -195,6 +195,11 @@ namespace Concordion.Api
             return m_element.ToString();
         }
 
+        public void PrependText(string text)
+        {
+            m_element.AddFirst(new XText(text));
+        }
+
         #endregion
 
         #region Override Methods
@@ -231,5 +236,6 @@ namespace Concordion.Api
         }
 
         #endregion
+
     }
 }

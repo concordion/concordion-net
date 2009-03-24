@@ -31,7 +31,7 @@ namespace Concordion.CommandLineInterface
                     IResultSummary resultSummary = new ConcordionBuilder()
                                                                 .SendOutputTo(baseOutputDirectory)
                                                                 .Build()
-                                                                .Process(resource, baseInputDirectory, fixture);
+                                                                .Process(resource, fixture);
                     resultSummary.Print(System.Console.Out, fixture);
                     try
                     {
