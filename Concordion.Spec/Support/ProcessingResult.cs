@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using System.Xml.Linq;
 
 namespace Concordion.Spec
 {
@@ -10,7 +11,7 @@ namespace Concordion.Spec
     {
         private readonly IResultSummary resultSummary;
         private readonly EventRecorder eventRecorder;
-        private readonly String documentXML;
+        private readonly string documentXML;
 
         public long SuccessCount
         {
@@ -64,9 +65,19 @@ namespace Concordion.Spec
             return HasFailures ? "FAILURE" : "SUCCESS";
         }
 
-        internal string GetOutputFragmentXML()
+        public XElement GetOutputFragment()
         {
-            throw new NotImplementedException();
+            return GetXDocument().Root.Element("fragment");
+        }
+
+        public string GetOutputFragmentXML()
+        {
+            return GetOutputFragment().ToString().Replace("</?fragment>", "").Replace("\u00A0", "&#160;");
+        }
+
+        public XDocument GetXDocument()
+        {
+            return XDocument.Parse(documentXML);
         }
     }
 }

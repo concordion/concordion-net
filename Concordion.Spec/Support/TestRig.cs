@@ -39,7 +39,7 @@ namespace Concordion.Spec
             return this;
         }
 
-        private ProcessingResult Process(Resource resource)
+        public ProcessingResult Process(Resource resource)
         {
             var eventRecorder = new EventRecorder();
             var stubTarget = new StubTarget();
@@ -71,7 +71,7 @@ namespace Concordion.Spec
             return Process(resource);
         }
 
-        private TestRig WithResource(Resource resource, string html)
+        public TestRig WithResource(Resource resource, string html)
         {
             Source.AddResource(resource, html);
             return this;

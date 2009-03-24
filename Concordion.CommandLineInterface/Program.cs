@@ -46,6 +46,8 @@ namespace Concordion.CommandLineInterface
                 {
                     Console.WriteLine("Ignoring Specification " + resource.Name + " because no fixture for specification found");
                 }
+
+                Console.WriteLine();
             }
         }
     }

@@ -5,7 +5,11 @@ using System.Text;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
-    class SurplusRowsTest
+    class SurplusRowsTest : MissingRowsTest
     {
+        public void addPerson(string firstName, string lastName)
+        {
+            base.addPerson(firstName, lastName, 1973);
+        }
     }
 }

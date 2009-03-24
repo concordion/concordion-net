@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
@@ -16,13 +17,20 @@ namespace Concordion.Spec.Concordion.Command.VerifyRows
 
         public string getOutputFragment(string inputFragment)
         {
-            return new TestRig()
-                .WithFixture(this)
-                .ProcessFragment(inputFragment).SuccessOrFailureInWords();
-                //.GetXOMDocument()
-                //.Query("//table").get(0)
-                //.ToXML()
-                //.Replace("\u00A0", "&#160;");
+            var document = new TestRig()
+                                .WithFixture(this)
+                                .ProcessFragment(inputFragment)
+                                .GetXDocument();
+
+            var tables = document.Descendants("table");
+
+            foreach (var table in tables)
+            {
+                // stops loop after first entry, simulating the java code.
+                return table.ToString().Replace("\u00A0", "&#160;");
+            }
+
+            return String.Empty;
         }
 
         public ICollection<Person> getPeople()
