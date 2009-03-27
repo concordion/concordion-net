@@ -22,6 +22,8 @@ namespace Concordion.CommandLineInterface
             var fixtureDiscoverer = new FixtureDiscoverer();
             fixtureDiscoverer.LoadAssemblies(assemblies);
 
+            var results = new Results();
+
             foreach (string resourcePath in resourcePaths)
             {
                 var resource = new Resource(resourcePath);
@@ -33,6 +35,7 @@ namespace Concordion.CommandLineInterface
                                                                 .Build()
                                                                 .Process(resource, fixture);
                     resultSummary.Print(System.Console.Out, fixture);
+                    SumResults(results, resultSummary);
                     try
                     {
                         resultSummary.AssertIsSatisfied(fixture);
@@ -42,13 +45,25 @@ namespace Concordion.CommandLineInterface
                         Console.WriteLine(e.Message);
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Ignoring Specification " + resource.Name + " because no fixture for specification found");
-                }
 
                 Console.WriteLine();
             }
+
+            Console.WriteLine("Concordion says ... Successes: {0}, Failures: {1}, Exceptions {2}", results.Success, results.Failure, results.Exception);
+        }
+
+        private static void SumResults(Results results, IResultSummary resultSummary)
+        {
+            results.Success += resultSummary.SuccessCount;
+            results.Failure += resultSummary.FailureCount;
+            results.Exception += resultSummary.ExceptionCount;
+        }
+
+        private class Results
+        {
+            public long Success;
+            public long Failure;
+            public long Exception;
         }
     }
 }

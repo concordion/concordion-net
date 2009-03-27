@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Concordion.Spec.Concordion.Results.AssertTrue.Failure
+namespace Concordion.Spec.Concordion.Results.AssertTrue
 {
-    class FailureTest
+    class OnFailureTest
     {
         public bool isPalindrome(string s) 
         {

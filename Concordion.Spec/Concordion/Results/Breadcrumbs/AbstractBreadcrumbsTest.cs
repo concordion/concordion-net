@@ -10,12 +10,12 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
     {
         private TestRig testRig = new TestRig();
 
-        protected virtual void setUpResource(string resourceName, string content) 
+        public virtual void setUpResource(string resourceName, string content) 
         {
             testRig.WithResource(new Resource(resourceName), content);
         }
 
-        protected virtual Result getBreadcrumbsFor(string resourceName) 
+        public virtual Result getBreadcrumbsFor(string resourceName) 
         {
             var spanElements = testRig
                 .Process(new Resource(resourceName))
@@ -26,7 +26,7 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
             Result result = new Result();
             foreach (var span in spanElements) 
             {
-                if ("breadcrumbs".Equals(span.Attribute("class"))) 
+                if ("breadcrumbs" == span.Attribute("class").Value) 
                 {
                     result.html = span.ToString();
                     result.text = span.Value;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Concordion.Spec.Concordion.Results.AssertEquals.Failure
 {
-    class EmptyTest : FailureTest
+    class EmptyFailureTest : FailureTest
     {
     }
 }

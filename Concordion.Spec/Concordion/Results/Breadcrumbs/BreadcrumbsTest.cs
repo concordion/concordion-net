@@ -7,12 +7,12 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {
     class BreadcrumbsTest : AbstractBreadcrumbsTest
     {
-        protected override void setUpResource(string resourceName, string content) 
+        public override void setUpResource(string resourceName, string content) 
         {
             base.setUpResource(resourceName, content);
         }
 
-        protected override Result getBreadcrumbsFor(string resourceName)
+        public override Result getBreadcrumbsFor(string resourceName)
         {
             return base.getBreadcrumbsFor(resourceName);
         }

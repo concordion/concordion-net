@@ -9,7 +9,7 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
     {
         public string getBreadcrumbWordingFor(string resourceName, string content) 
         {
-            string packageName = "/" + resourceName.Replace("\\.html$", "") + "/";
+            string packageName = "/" + resourceName.Replace(".html", String.Empty) + "/";
             string otherResourceName = "Demo.html";
             setUpResource(packageName + resourceName, content);
             setUpResource(packageName + otherResourceName, "<html />");

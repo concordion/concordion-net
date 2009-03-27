@@ -7,12 +7,12 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {
     class DeterminingBreadcrumbsTest : AbstractBreadcrumbsTest
     {
-        protected string getBreadcrumbTextFor(string resourceName)
+        public string getBreadcrumbTextFor(string resourceName)
         {
             return base.getBreadcrumbsFor(resourceName).text;
         }
 
-        protected void setUpResource(string resourceName)
+        public void setUpResource(string resourceName)
         {
             base.setUpResource(resourceName, "<html />");
         }

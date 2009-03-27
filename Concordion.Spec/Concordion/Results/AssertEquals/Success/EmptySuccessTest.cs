@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Concordion.Spec.Concordion.Results.AssertEquals.Success
 {
-    class EmptyTest : SuccessTest
+    class EmptySuccessTest : SuccessTest
     {
-        public EmptyTest()
+        public EmptySuccessTest()
         {
             username = String.Empty;
         }

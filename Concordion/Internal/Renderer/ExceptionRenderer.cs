@@ -87,7 +87,14 @@ namespace Concordion.Internal.Renderer
             p.AppendChild(new Element("code").AppendText(expression));
             stackTrace.AppendChild(p);
 
-            RecursivelyAppendStackTrace(exception, stackTrace);
+            var stackTraceElements = exception.ToString().Split(new char[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+
+            foreach (var stackTraceElement in stackTraceElements)
+            {
+                stackTrace.AppendChild(StackTraceElement(stackTraceElement));
+            }
+
+            //RecursivelyAppendStackTrace(exception, stackTrace);
 
             return stackTrace;
         }

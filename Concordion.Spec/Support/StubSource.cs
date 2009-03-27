@@ -19,7 +19,15 @@ namespace Concordion.Spec
 
         public void AddResource(Resource resource, string content) 
         {
-            resources.Add(resource, content);
+            if (!resources.ContainsKey(resource))
+            {
+                resources.Add(resource, content);
+            }
+            else
+            {
+                resources.Remove(resource);
+                resources.Add(resource, content);
+            }
         }
 
         #region ISource Members

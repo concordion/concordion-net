@@ -67,12 +67,23 @@ namespace Concordion.Spec
 
         public XElement GetOutputFragment()
         {
-            return GetXDocument().Root.Element("fragment");
+            foreach (var descendant in GetXDocument().Root.Descendants("fragment"))
+            {
+                return descendant;
+            }
+            return null;
         }
 
         public string GetOutputFragmentXML()
         {
-            return GetOutputFragment().ToString().Replace("</?fragment>", "").Replace("\u00A0", "&#160;");
+            var fragment = GetOutputFragment();
+            if (fragment != null)
+            {
+                var fragmentString = fragment.ToString();
+                return fragmentString.Replace("<fragment>", String.Empty).Replace("</fragment>", String.Empty).Replace("\u00A0", "&#160;");
+            }
+
+            throw new InvalidOperationException("Cannot find the fragment");
         }
 
         public XDocument GetXDocument()
