@@ -118,6 +118,7 @@
     <Compile Include="Internal\Renderer\ExceptionRenderer.cs" />
     <Compile Include="Internal\Renderer\IAssertEqualsListener.cs" />
     <Compile Include="Internal\Renderer\IDocumentParsingListener.cs" />
+    <Compile Include="Internal\Renderer\IExceptionListener.cs" />
     <Compile Include="Internal\Renderer\ISpecificationListener.cs" />
     <Compile Include="Internal\Renderer\IVerifyRowResultListener.cs" />
     <Compile Include="Internal\Renderer\PageFooterRenderer.cs" />

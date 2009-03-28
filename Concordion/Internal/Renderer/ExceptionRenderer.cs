@@ -9,7 +9,7 @@ using Concordion.Internal.Util;
 
 namespace Concordion.Internal.Renderer
 {
-    public class ExceptionRenderer
+    public class ExceptionRenderer : IExceptionListener
     {
         #region Fields
 

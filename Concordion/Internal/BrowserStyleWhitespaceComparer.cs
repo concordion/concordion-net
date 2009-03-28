@@ -14,13 +14,14 @@ namespace Concordion.Internal
         {
             string s = ConvertObjectToString(obj);
             s = ProcessLineContinuations(s);
+            s = StripNewlines(s);
             s = ReplaceMultipleWhitespaceWithOneSpace(s);
             return s.Trim();
         }
 
         private static string ReplaceMultipleWhitespaceWithOneSpace(string s)
         {
-            var lineContinuationRegex = new Regex(@"[\s\n\r]+");
+            var lineContinuationRegex = new Regex(@"[\s]+");
             var processedString = lineContinuationRegex.Replace(s, " ");
 
             return processedString;
@@ -28,8 +29,16 @@ namespace Concordion.Internal
 
         private static string ProcessLineContinuations(string s)
         {
-            var lineContinuationRegex = new Regex(@" _[\n\r+]");
-            var processedString = lineContinuationRegex.Replace(s, "");
+            var lineContinuationRegex = new Regex(@" _");
+            var processedString = lineContinuationRegex.Replace(s, String.Empty);
+
+            return processedString;
+        }
+
+        private static string StripNewlines(string s)
+        {
+            var newlineRegex = new Regex(@"\r?\n");
+            var processedString = newlineRegex.Replace(s, String.Empty);
 
             return processedString;
         }
@@ -46,6 +55,7 @@ namespace Concordion.Internal
 
         public int Compare(object x, object y)
         {
+            
             return Normalize(x).CompareTo(Normalize(y));
         }
 

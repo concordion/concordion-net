@@ -7,7 +7,7 @@ using Concordion.Internal.Commands;
 
 namespace Concordion.Spec
 {
-    class EventRecorder : IAssertEqualsListener
+    class EventRecorder : IAssertEqualsListener, IExceptionListener
     {
         private List<EventArgs> events;
 

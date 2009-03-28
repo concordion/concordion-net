@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Concordion.Spec
 {
@@ -77,13 +78,13 @@ namespace Concordion.Spec
         public string GetOutputFragmentXML()
         {
             var fragment = GetOutputFragment();
-            if (fragment != null)
+            var xmlFragmentBuilder = new StringBuilder();
+            foreach (var child in fragment.Elements())
             {
-                var fragmentString = fragment.ToString();
-                return fragmentString.Replace("<fragment>", String.Empty).Replace("</fragment>", String.Empty).Replace("\u00A0", "&#160;");
+                xmlFragmentBuilder.Append(child.ToString(SaveOptions.DisableFormatting).Replace(" xmlns:concordion=\"http://www.concordion.org/2007/concordion\"", String.Empty));
             }
 
-            throw new InvalidOperationException("Cannot find the fragment");
+            return xmlFragmentBuilder.ToString();
         }
 
         public XDocument GetXDocument()

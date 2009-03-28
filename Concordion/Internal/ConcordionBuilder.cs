@@ -253,5 +253,22 @@ namespace Concordion.Internal
 
             return new Concordion(SpecificationLocator, SpecificationReader, EvaluatorFactory);
         }
+
+        public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener eventRecorder)
+        {
+            AssertEqualsCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
+            AssertEqualsCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
+            AssertTrueCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
+            AssertTrueCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
+            AssertFalseCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
+            AssertFalseCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
+            return this;
+        }
+
+        public ConcordionBuilder WithExceptionListener(IExceptionListener eventRecorder)
+        {
+            // TODO - add code here for processing
+            return this;
+        }
     }
 }

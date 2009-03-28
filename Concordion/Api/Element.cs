@@ -153,16 +153,16 @@ namespace Concordion.Api
 
         public void MoveChildrenTo(Element element)
         {
-            foreach (XElement childNode in GetChildNodes()) 
+            foreach (var childNode in GetChildNodes()) 
             {
                 childNode.Remove();
                 element.m_element.Add(childNode);
             }
         }
 
-        private IEnumerable<XElement> GetChildNodes()
+        private IEnumerable<XNode> GetChildNodes()
         {
-            return m_element.Elements();
+            return m_element.Nodes();
         }
 
         public Element AppendNonBreakingSpaceIfBlank()

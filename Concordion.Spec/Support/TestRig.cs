@@ -45,8 +45,8 @@ namespace Concordion.Spec
             var stubTarget = new StubTarget();
 
             var concordion = new ConcordionBuilder()
-                //.WithAssertEqualsListener(eventRecorder)
-                //.WithThrowableListener(eventRecorder)
+                .WithAssertEqualsListener(eventRecorder)
+                .WithExceptionListener(eventRecorder)
                 .WithSource(Source)
                 .WithEvaluatorFactory(EvaluatorFactory)
                 .WithTarget(stubTarget)
