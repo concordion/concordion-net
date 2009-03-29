@@ -19,12 +19,12 @@ namespace Concordion.Spec.Concordion.Command.Execute
             result.exceptionCount = r.ExceptionCount;
             
             // TODO - repair this
-            //var lastEvent = r.getLastAssertEqualsFailureEvent();
-            //if (lastEvent != null) 
-            //{
-            //    result.lastActualValue = lastEvent.getActual();
-            //    result.lastExpectedValue = lastEvent.getExpected();
-            //}
+            var lastEvent = r.GetLastAssertEqualsFailureEvent();
+            if (lastEvent != null)
+            {
+                result.lastActualValue = lastEvent.Actual;
+                result.lastExpectedValue = lastEvent.Expected;
+            }
             
             return result;
         }

@@ -44,7 +44,7 @@ namespace Concordion.Spec.Concordion.Command.Results.Stylesheet
 
         public bool elementTextContains(string elementName, string s1, string s2)
         {
-            var element = outputDocument.Document.Root.Element(elementName);
+            var element = outputDocument.Document.Root.Descendants(elementName).ToArray()[0];
             string text = element.Value;
             return text.Contains(s1) && text.Contains(s2);
         }

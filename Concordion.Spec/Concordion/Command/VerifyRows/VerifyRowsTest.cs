@@ -10,40 +10,45 @@ namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
     class VerifyRowsTest
     {
-        public ICollection<string> usernames;
+        public ICollection<string> usernames = new List<string>();
 
-        // TODO - repair this
-        //public string processFragment(string fragment, string csv)
-        //{
-        //    usernames = csvToCollection(csv);
-        //    XDocument document = new TestRig()
-        //        .WithFixture(this)
-        //        .ProcessFragment(fragment)
-        //        .GetXOMDocument();
+        public string processFragment(string fragment, string csv)
+        {
+            usernames = csvToCollection(csv);
+            XDocument document = new TestRig()
+                .WithFixture(this)
+                .ProcessFragment(fragment)
+                .GetXDocument();
 
-        //    String result = "";
-        //    XElement table = document.query("//table").get(0);
-        //    XNode rows = table.Query(".//tr");
-        //    for (int i = 1; i < rows.size(); i++) {
-        //        if (!result.Equals("")) {
-        //            result += ", ";
-        //        }
-        //        result += categorize((Element)rows.get(i));
-        //    }
+            var result = String.Empty;
 
-        //    return result;
-        //}
+            var table = document.Descendants("table").ToList()[0];
+            var rows = table.Elements("tr");
 
-        //private string categorize(Element row) 
-        //{
-        //    string cssClass = row.getAttributeValue("class");
-        //    if (cssClass == null) {
-        //        Element cell = (Element) row.query("td").get(0);
-        //        cssClass = cell.getAttributeValue("class");
-        //    }
-        //    Check.NotNull(cssClass, "cssClass is null");
-        //    return cssClass.ToUpper();
-        //}
+            for (int index = 1; index < rows.Count(); index++)
+            {
+                var row = rows.ToArray()[index];
+                if (!String.IsNullOrEmpty(result))
+                {
+                    result += ", ";
+                }
+                result += categorize(row);
+            }
+
+            return result;
+        }
+
+        private string categorize(XElement row)
+        {
+            var cssClass = row.Attribute("class");
+            if (cssClass == null)
+            {
+                var cell = row.Element("td");
+                cssClass = cell.Attribute("class");
+            }
+            Check.NotNull(cssClass, "cssClass is null");
+            return cssClass.Value.ToUpper();
+        }
 
         private static ICollection<string> csvToCollection(string csv) 
         {

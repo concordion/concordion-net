@@ -50,7 +50,7 @@
     <Compile Include="Concordion\Command\AssertEquals\ExceptionsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\LineContinuationsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NestedActionsTest.cs" />
-    <Compile Include="Concordion\Command\AssertEquals\NestedElementsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NestedHtmlElementsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NonStringTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NoResultTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NormalizationTest.cs" />
@@ -99,6 +99,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\EventRecorder.cs" />
     <Compile Include="Support\ProcessingResult.cs" />
+    <Compile Include="Support\StackTraceSettingException.cs" />
     <Compile Include="Support\StubEvaluator.cs" />
     <Compile Include="Support\StubSource.cs" />
     <Compile Include="Support\StubTarget.cs" />

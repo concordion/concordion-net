@@ -41,6 +41,7 @@ namespace Concordion.Internal.Renderer
 
         public void ExceptionCaughtEventHandler(object sender, ExceptionCaughtEventArgs e)
         {
+            buttonId++;
             Element element = e.Element;
             element.AppendChild(ExpectedSpan(element));
             element.AppendChild(ExceptionMessage(e.Exception.Message));
@@ -127,7 +128,7 @@ namespace Concordion.Internal.Renderer
         {
             Element entry = new Element("span")
                     .AddStyleClass("stackTraceEntry")
-                    .AppendText("at " + stackTraceText);
+                    .AppendText(stackTraceText);
             return entry;
         }
 

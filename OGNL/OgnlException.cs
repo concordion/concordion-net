@@ -73,7 +73,7 @@ namespace ognl
 		///<param name="msg"> the exception's detail message</param>    
 		///<param name="reason">the encapsulated exception</param>  
 		///
-		public OgnlException (string msg, Exception reason) : base (msg)
+		public OgnlException (string msg, Exception reason) : base (msg, reason)
 		{
 			this.reason = reason ;
 		}

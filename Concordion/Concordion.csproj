@@ -62,6 +62,7 @@
     <Compile Include="Api\ITarget.cs" />
     <Compile Include="Api\Resource.cs" />
     <Compile Include="Api\Result.cs" />
+    <Compile Include="Api\RunnerResult.cs" />
     <Compile Include="Concordion.cs" />
     <Compile Include="HtmlFramework.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -16,7 +16,7 @@ namespace Concordion.Spec
             events = new List<EventArgs>();
 	    }
 
-        public EventArgs GetLast<T>() where T : EventArgs
+        public T GetLast<T>() where T : EventArgs
         {
             T lastMatch = default(T);
             foreach (EventArgs theEvent in events)

@@ -5,6 +5,7 @@ using System.Text;
 using Concordion.Api;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using Concordion.Internal.Commands;
 
 namespace Concordion.Spec
 {
@@ -90,6 +91,11 @@ namespace Concordion.Spec
         public XDocument GetXDocument()
         {
             return XDocument.Parse(documentXML);
+        }
+
+        public FailureReportedEventArgs GetLastAssertEqualsFailureEvent()
+        {
+            return eventRecorder.GetLast<FailureReportedEventArgs>();
         }
     }
 }
