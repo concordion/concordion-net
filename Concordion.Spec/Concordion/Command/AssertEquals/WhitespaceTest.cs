@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Internal;
+using System.Text.RegularExpressions;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals
 {
-    class WhitespaceTest
+    [ConcordionTest]
+    public class WhitespaceTest
     {
         public string whichSnippetsSucceed(string snippet1, string snippet2, string evaluationResult) 
         {
@@ -52,10 +55,10 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals
 
         private static string replaceNamedWhitespaceWithRealWhitespaceCharacters(string s) 
         {
-            return s.Replace("\\[SPACE\\]", " ")
-                    .Replace("\\[TAB\\]", "\t")
-                    .Replace("\\[LF\\]", "\n")
-                    .Replace("\\[CR\\]", "\r");
+            var spacesRemoved = Regex.Replace(s, "\\[SPACE\\]", " ");
+            var tabsRemoved = Regex.Replace(spacesRemoved, "\\[TAB\\]", "\t");
+            var lfRemoved = Regex.Replace(tabsRemoved, "\\[LF\\]", "\n");
+            return Regex.Replace(lfRemoved, "\\[CR\\]", "\r");
         }
 
         private static string replaceRealWhitespaceCharactersWithNames(string s) 

@@ -8,10 +8,12 @@ using Concordion.Spec.Support;
 using System.Diagnostics;
 using Concordion.Internal.Commands;
 using Concordion.Api;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Results.Exception
 {
-    class ExceptionTest
+    [ConcordionTest]
+    public class ExceptionTest
     {
         private List<string> stackTraceElements = new List<string>();
 

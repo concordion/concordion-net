@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals
 {
-    class VoidResultTest
+    [ConcordionTest]
+    public class VoidResultTest
     {
         public string process(string snippet)
         {

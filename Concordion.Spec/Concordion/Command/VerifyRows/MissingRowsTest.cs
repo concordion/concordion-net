@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
-    class MissingRowsTest
+    [ConcordionTest]
+    public class MissingRowsTest
     {
         private List<Person> people = new List<Person>();
 

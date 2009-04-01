@@ -8,7 +8,7 @@
     <ProjectGuid>{56F38030-7A94-4E5C-AE67-F5E8E94056D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Concordion.Spec</RootNamespace>
+    <RootNamespace>Spec.Concordion</RootNamespace>
     <AssemblyName>Concordion.Spec</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

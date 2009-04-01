@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {
-    class WordingTest : AbstractBreadcrumbsTest
+    [ConcordionTest]
+    public class WordingTest : AbstractBreadcrumbsTest
     {
         public string getBreadcrumbWordingFor(string resourceName, string content) 
         {
@@ -13,7 +16,8 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
             string otherResourceName = "Demo.html";
             setUpResource(packageName + resourceName, content);
             setUpResource(packageName + otherResourceName, "<html />");
-            return getBreadcrumbsFor(packageName + otherResourceName).text.Replace(" *> *", "");
+            var breadcrumbs = getBreadcrumbsFor(packageName + otherResourceName).text;
+            return Regex.Replace(breadcrumbs, " *> *", String.Empty);
         }
     }
 }

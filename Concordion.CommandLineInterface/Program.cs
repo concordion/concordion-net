@@ -13,6 +13,7 @@ namespace Concordion.CommandLineInterface
     {
         static void Main(string[] args)
         {
+            Console.Title = "Concordion.Net";
             string baseInputDirectory = args[0];
             string assemblyDirectory = args[1];
             string baseOutputDirectory = args[2];

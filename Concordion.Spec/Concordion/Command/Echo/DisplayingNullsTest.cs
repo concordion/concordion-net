@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Internal;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.Echo
 {
-    class DisplayingNullsTest
+    [ConcordionTest]
+    public class DisplayingNullsTest
     {
         public string render(string fragment)
         {

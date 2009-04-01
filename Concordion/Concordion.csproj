@@ -69,10 +69,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HtmlFramework.resx</DependentUpon>
     </Compile>
-    <Compile Include="Integration\ConcordionTestCase.cs" />
+    <Compile Include="Integration\ConcordionAssemblyAttribute.cs" />
     <Compile Include="Integration\FixtureDiscoverer.cs" />
-    <Compile Include="Integration\HtmlResourceAttribute.cs" />
-    <Compile Include="Integration\IConcordionTestCase.cs" />
+    <Compile Include="Integration\ConcordionTestAttribute.cs" />
     <Compile Include="Integration\ResourceCrawler.cs" />
     <Compile Include="Internal\BannedWordsValidator.cs" />
     <Compile Include="Internal\BrowserStyleWhitespaceComparer.cs" />

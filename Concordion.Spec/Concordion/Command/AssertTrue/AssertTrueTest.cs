@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertTrue
 {
-    class AssertTrueTest
+    [ConcordionTest]
+    public class AssertTrueTest
     {
         public string successOrFailure(string fragment, string evaluationResult)
         {

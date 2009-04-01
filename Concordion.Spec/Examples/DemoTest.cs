@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Concordion.Spec
 {
+    [ConcordionTest]
     public class DemoTest
     {
         public string GreetingFor(string firstName)

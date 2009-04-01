@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.Set
 {
-    class SetTest
+    [ConcordionTest]
+    public class SetTest
     {
         private string param;
 

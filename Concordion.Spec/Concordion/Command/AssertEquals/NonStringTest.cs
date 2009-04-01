@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals
 {
-    class NonStringTest
+    [ConcordionTest]
+    public class NonStringTest
     {
         public string outcomeOfPerformingAssertEquals(string fragment, string expectedString, string result, string resultType)
         {
@@ -27,7 +30,8 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals
                 throw new Exception("Unsupported result-type '" + resultType + "'.");
             }
 
-            fragment = fragment.Replace("\\(some expectation\\)", expectedString);
+            fragment = Regex.Replace(fragment, "\\(some expectation\\)", expectedString);
+            //fragment = fragment.Replace("\\(some expectation\\)", expectedString);
 
             return new TestRig()
                 .WithStubbedEvaluationResult(simulatedResult)

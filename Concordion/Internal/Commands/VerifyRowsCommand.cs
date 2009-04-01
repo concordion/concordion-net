@@ -43,29 +43,29 @@ namespace Concordion.Internal.Commands
 
         public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
-            Regex pattern = new Regex("(#.+?) *: *(.+)");
-            Match matcher = pattern.Match(commandCall.Expression);
+            var pattern = new Regex("(#.+?) *: *(.+)");
+            var matcher = pattern.Match(commandCall.Expression);
             if (!matcher.Success) 
             {
                 throw new InvalidOperationException("The expression for a \"verifyRows\" should be of the form: #var : collectionExpr");
             }
 
-            string loopVariableName = matcher.Groups[1].Value;
-            string iterableExpression = matcher.Groups[2].Value;
+            var loopVariableName = matcher.Groups[1].Value;
+            var iterableExpression = matcher.Groups[2].Value;
 
-            object obj = evaluator.Evaluate(iterableExpression);
+            var obj = evaluator.Evaluate(iterableExpression);
 
             Check.NotNull(obj, "Expression returned null (should be an IEnumerable).");
             Check.IsTrue(obj is IEnumerable, obj.GetType() + " is not IEnumerable");
             Check.IsTrue(!(obj is IDictionary), obj.GetType() + " does not have a predictable iteration order");
 
-            IEnumerable iterable = (IEnumerable) obj;
-            
-            TableSupport tableSupport = new TableSupport(commandCall);
-            IList<Row> detailRows = tableSupport.GetDetailRows();
+            var iterable = (IEnumerable)obj;
+
+            var tableSupport = new TableSupport(commandCall);
+            var detailRows = tableSupport.GetDetailRows();
 
             int index = 0;
-            foreach (object loopVar in iterable) 
+            foreach (var loopVar in iterable) 
             {
                 evaluator.SetVariable(loopVariableName, loopVar);
                 Row detailRow;

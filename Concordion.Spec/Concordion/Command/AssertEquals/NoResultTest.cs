@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals
 {
-    class NoResultTest
+    [ConcordionTest]
+    public class NoResultTest
     {
         public string outcomeOfPerformingAssertEquals(string snippet, string expectedString, string result)
         {

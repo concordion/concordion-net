@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Examples
 {
+    [ConcordionTest]
     public class SpikeTest
     {
         public string GetGreetingFor(string name) 

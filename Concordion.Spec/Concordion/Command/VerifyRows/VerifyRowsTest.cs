@@ -5,10 +5,12 @@ using System.Text;
 using Concordion.Internal.Util;
 using Concordion.Api;
 using System.Xml.Linq;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
-    class VerifyRowsTest
+    [ConcordionTest]
+    public class VerifyRowsTest
     {
         public ICollection<string> usernames = new List<string>();
 
@@ -53,7 +55,8 @@ namespace Concordion.Spec.Concordion.Command.VerifyRows
         private static ICollection<string> csvToCollection(string csv) 
         {
             ICollection<string> c = new List<string>();
-            foreach (string s in csv.Split(',', ' ')) {
+            foreach (string s in csv.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)) 
+            {
                 c.Add(s);
             }
             return c;

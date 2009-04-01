@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.Execute
 {
-    class AccessToLinkHrefTest
+    [ConcordionTest]
+    public class AccessToLinkHrefTest
     {
         public bool fragmentSucceeds(string fragment) 
         {

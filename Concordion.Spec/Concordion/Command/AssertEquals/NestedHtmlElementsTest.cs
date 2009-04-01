@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals
 {
-    class NestedHtmlElementsTest
+    [ConcordionTest]
+    public class NestedHtmlElementsTest
     {
         public string matchOrNotMatch(string snippet, string evaluationResult)
         {

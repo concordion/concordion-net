@@ -6,6 +6,7 @@ using Concordion.Internal.Commands;
 using Concordion.Api;
 using System.Xml.Linq;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Concordion.Internal.Renderer
 {
@@ -142,17 +143,17 @@ namespace Concordion.Internal.Renderer
 
         private string StripExtension(string s)
         {
-            return s.Replace("\\.[a-z]+", "");
+            return Regex.Replace(s, "\\.[a-z]+", String.Empty);
         }
 
         private static string DeCamelCase(string s)
         {
-            return s.Replace("([0-9a-z])([A-Z])", "$1 $2");
+            return Regex.Replace(s, "([0-9a-z])([A-Z])", "$1 $2");
         }
 
         private static bool IsBlank(string s)
         {
-            return String.IsNullOrEmpty(s.Replace("[^a-zA-Z0-9]", ""));
+            return String.IsNullOrEmpty(Regex.Replace(s, "[^a-zA-Z0-9]", String.Empty));
         }
 
         #endregion

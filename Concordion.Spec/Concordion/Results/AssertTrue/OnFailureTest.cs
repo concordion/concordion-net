@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Results.AssertTrue
 {
-    class OnFailureTest
+    [ConcordionTest]
+    public class OnFailureTest
     {
         public bool isPalindrome(string s) 
         {

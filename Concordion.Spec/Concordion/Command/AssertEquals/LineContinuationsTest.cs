@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals
 {
-    class LineContinuationsTest
+    [ConcordionTest]
+    public class LineContinuationsTest
     {
         private List<string> snippets = new List<string>();
 
@@ -34,8 +37,8 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals
                 }
                 i++;
             }
-            result.failures = result.failures.Replace(", $", "");
-            result.successes = result.successes.Replace(", $", "");
+            result.failures = Regex.Replace(result.failures, ", $", "");
+            result.successes = Regex.Replace(result.successes, ", $", "");
             
             return result;
         }

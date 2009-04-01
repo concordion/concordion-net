@@ -6,7 +6,7 @@ using Concordion.Api;
 
 namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {
-    abstract class AbstractBreadcrumbsTest
+    public abstract class AbstractBreadcrumbsTest
     {
         private TestRig testRig = new TestRig();
 

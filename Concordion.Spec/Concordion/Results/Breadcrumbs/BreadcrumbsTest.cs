@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {
-    class BreadcrumbsTest : AbstractBreadcrumbsTest
+    [ConcordionTest]
+    public class BreadcrumbsTest : AbstractBreadcrumbsTest
     {
         public override void setUpResource(string resourceName, string content) 
         {

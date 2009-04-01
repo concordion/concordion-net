@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
-    class TableBodySupportTest
+    [ConcordionTest]
+    public class TableBodySupportTest
     {
         private List<string> names = new List<string>();
 

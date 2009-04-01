@@ -13,13 +13,13 @@ namespace Concordion.Internal.Renderer
         public void SurplusRowFoundEventHandler(object sender, global::Concordion.Internal.Commands.SurplusRowEventArgs e)
         {
             Element element = e.RowElement;
-            element.AddStyleClass("missing");
+            element.AddStyleClass("surplus");
         }
 
         public void MissingRowFoundEventHandler(object sender, global::Concordion.Internal.Commands.MissingRowEventArgs e)
         {
             Element element = e.RowElement;
-            element.AddStyleClass("surplus");
+            element.AddStyleClass("missing");
         }
 
         #endregion

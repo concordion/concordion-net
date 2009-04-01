@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Results.AssertEquals.Success
 {
-    class EmptySuccessTest : SuccessTest
+    [ConcordionTest]
+    public class EmptySuccessTest : SuccessTest
     {
         public EmptySuccessTest()
         {

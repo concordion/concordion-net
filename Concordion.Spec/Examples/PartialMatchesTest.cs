@@ -6,6 +6,7 @@ using Concordion.Integration;
 
 namespace Concordion.Spec.Examples
 {
+    [ConcordionTest]
     public class PartialMatchesTest
     {
         private List<string> usernamesInSystem = new List<string>();

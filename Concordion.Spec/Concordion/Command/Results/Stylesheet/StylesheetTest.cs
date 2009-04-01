@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Linq;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.Results.Stylesheet
 {
-    class StylesheetTest
+    [ConcordionTest]
+    public class StylesheetTest
     {
         private XElement outputDocument;
 

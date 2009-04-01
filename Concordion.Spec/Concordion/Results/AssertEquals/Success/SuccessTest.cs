@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Results.AssertEquals.Success
 {
-    class SuccessTest
+    [ConcordionTest]
+    public class SuccessTest
     {
         public string username = "fred";
     
