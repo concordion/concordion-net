@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Concordion.Integration
+namespace Gallio.ConcordionAdapter.Model
 {
-    public interface IConcordionTestCase
+    public class ConcordionMethodInfoAdapter
     {
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using Concordion.Integration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Concordion.Spec
+namespace Concordion.Spec.Examples
 {
     [ConcordionTest]
     public class DemoTest

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Command.VerifyRows
+namespace Concordion.Spec.Concordion.Command.VerifyRows.Results
 {
     [ConcordionTest]
     public class SurplusRowsTest : MissingRowsTest

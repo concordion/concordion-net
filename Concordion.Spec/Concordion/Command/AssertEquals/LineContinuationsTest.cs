@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Command.AssertEquals
+namespace Concordion.Spec.Concordion.Command.AssertEquals.Whitespace
 {
     [ConcordionTest]
     public class LineContinuationsTest

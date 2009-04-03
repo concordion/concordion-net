@@ -270,5 +270,12 @@ namespace Concordion.Internal
             // TODO - add code here for processing
             return this;
         }
+
+        public ConcordionBuilder WithSpecificationListener(ISpecificationListener listener)
+        {
+            SpecificationCommand.SpecificationCommandProcessing += listener.SpecificationProcessingEventHandler;
+            SpecificationCommand.SpecificationCommandProcessed += listener.SpecificationProcessedEventHandler;
+            return this;
+        }
     }
 }

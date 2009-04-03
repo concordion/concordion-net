@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Command.AssertEquals
+namespace Concordion.Spec.Concordion.Command.AssertEquals.NonString
 {
     [ConcordionTest]
     public class VoidResultTest

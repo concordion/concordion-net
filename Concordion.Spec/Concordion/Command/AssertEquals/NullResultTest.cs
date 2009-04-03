@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Command.AssertEquals
+namespace Concordion.Spec.Concordion.Command.AssertEquals.NonString
 {
     [ConcordionTest]
-    public class NoResultTest
+    public class NullResultTest
     {
         public string outcomeOfPerformingAssertEquals(string snippet, string expectedString, string result)
         {
