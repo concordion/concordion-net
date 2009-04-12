@@ -31,7 +31,6 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals.NonString
             }
 
             fragment = Regex.Replace(fragment, "\\(some expectation\\)", expectedString);
-            //fragment = fragment.Replace("\\(some expectation\\)", expectedString);
 
             return new TestRig()
                 .WithStubbedEvaluationResult(simulatedResult)
