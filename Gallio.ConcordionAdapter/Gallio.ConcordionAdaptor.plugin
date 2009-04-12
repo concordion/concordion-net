@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <gallio>
+    <assemblies>
+      <assembly file="Gallio.ConcordionAdapter.dll" />
+      <assembly file="Concordion.dll" />
+    </assemblies>
+    <runtime>
+      <components>
+        <component id="ConcordionAdapter.TestFramework"
+                   service="Gallio.Model.ITestFramework, Gallio"
+                   type="Gallio.ConcordionAdapter.Model.ConcordionTestFramework, Gallio.ConcordionAdapter" />
+      </components>
+    </runtime>
+  </gallio>
+</configuration>

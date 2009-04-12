@@ -104,7 +104,7 @@ namespace Gallio.ConcordionAdapter.Model
         private ITest CreateFrameworkTest(Version frameworkVersion)
         {
             BaseTest frameworkTest = new BaseTest(String.Format(Resources.ConcordionTestExplorer_FrameworkNameWithVersionFormat, frameworkVersion), null);
-            frameworkTest.LocalIdHint = Resources.ConcordionTestFramework_ConcordionFrameworkName;
+            frameworkTest.BaselineLocalId = Resources.ConcordionTestFramework_ConcordionFrameworkName;
             frameworkTest.Kind = TestKinds.Framework;
 
             return frameworkTest;
@@ -248,6 +248,7 @@ namespace Gallio.ConcordionAdapter.Model
             var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
             typeTest.Target = new FileTarget(BaseOutputDirectory.FullName);
             typeTest.Kind = TestKinds.Fixture;
+            typeTest.IsTestCase = true;
 
             // Add XML documentation.
             var xmlDocumentation = typeInfo.Target.GetXmlDocumentation();
