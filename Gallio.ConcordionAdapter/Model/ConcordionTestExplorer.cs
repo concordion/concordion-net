@@ -44,7 +44,7 @@ namespace Gallio.ConcordionAdapter.Model
             typeTests = new Dictionary<ITypeInfo, ITest>();
 
             BaseInputDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-            BaseOutputDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            BaseOutputDirectory = new DirectoryInfo(Environment.GetEnvironmentVariable("TEMP"));
         }
 
         public override void ExploreAssembly(Gallio.Reflection.IAssemblyInfo assembly, Action<ITest> consumer)
@@ -178,7 +178,6 @@ namespace Gallio.ConcordionAdapter.Model
             {
                 try
                 {
-                    // TODO - try to set typeTest up to be equal to the specification
                     foreach (var attribute in type.GetAttributes(null, false))
                     {
                         if (attribute is ConcordionTestAttribute)
