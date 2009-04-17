@@ -9,6 +9,8 @@ namespace Concordion.Spec.Concordion
     [ConcordionTest]
     public class ExampleTest
     {
+        public string greeting = "Hello World!";
+
         public string process(string html)
         {
             return new TestRig()
@@ -16,11 +18,6 @@ namespace Concordion.Spec.Concordion
                 .Process(html)
                 .SuccessOrFailureInWords()
                 .ToLower();
-        }
-
-        public string getGreeting()
-        {
-            return "Hello World!";
         }
     }
 }

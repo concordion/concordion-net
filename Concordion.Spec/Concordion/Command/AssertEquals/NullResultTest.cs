@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Integration;
+using System.Text.RegularExpressions;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals.NonString
 {
@@ -15,7 +16,8 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals.NonString
             {
                 result = null;
             }
-            snippet = snippet.Replace("\\(some expectation\\)", expectedString);
+
+            snippet = Regex.Replace(snippet, "\\(some expectation\\)", expectedString);
 
             return new TestRig()
                 .WithStubbedEvaluationResult(result)

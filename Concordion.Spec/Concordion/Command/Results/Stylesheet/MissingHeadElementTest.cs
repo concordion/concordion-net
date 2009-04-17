@@ -17,7 +17,7 @@ namespace Concordion.Spec.Concordion.Command.Results.Stylesheet
                                     .GetXDocument()
                                     .Root;
             removeIrrelevantElements(rootElement);
-            return rootElement.ToString();
+            return rootElement.ToString(SaveOptions.DisableFormatting);
         }
 
         private void removeIrrelevantElements(XElement rootElement)
@@ -36,8 +36,8 @@ namespace Concordion.Spec.Concordion.Command.Results.Stylesheet
         private void removeIrrelevantFooter(XElement rootElement)
         {
             var body = rootElement.Element("body");
-            // TODO - need to repair this
-            //body.Remove(rootElement.query("//div[@class='footer']").get(0));
+            var footer = body.Element("div");
+            footer.Remove();
         }
     }
 }

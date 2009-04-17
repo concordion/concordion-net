@@ -34,7 +34,7 @@ namespace Concordion.Internal
         {
             get
             {
-                return GetLastHeaderRow().GetCells().Count;
+                return GetFirstHeaderRow().GetCells().Count;
             }
         }
 
@@ -105,6 +105,20 @@ namespace Concordion.Internal
             else
             {
                 return headerRows[headerRows.Count - 1];
+            }
+        }
+
+        public Row GetFirstHeaderRow()
+        {
+            IList<Row> headerRows = GetHeaderRows();
+
+            if (headerRows.Count == 0)
+            {
+                throw new Exception("Table has no header row (i.e. no row containing only <th> elements)");
+            }
+            else
+            {
+                return headerRows[0];
             }
         }
 

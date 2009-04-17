@@ -36,4 +36,4 @@ using Concordion.Integration;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: ConcordionAssembly(@"C:\Dev\concordion-net-trunk\HtmlSpecifications", @"C:\Dev\concordion-net-trunk\Results")]
+[assembly: ConcordionAssembly(@"C:\Dev\concordion-net-trunk\Specifications", @"C:\Dev\concordion-net-trunk\Results")]

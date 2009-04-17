@@ -17,11 +17,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Concordion Acceptance Testing Framework")]
 [assembly: AssemblyCompany("http://code.google.com/p/concordion-net/")]
 [assembly: AssemblyProduct("Concordion")]
-[assembly: AssemblyCopyright("Copyright © Jeffrey Cameron 2009")]
+[assembly: AssemblyCopyright("Copyright2 © Jeffrey Cameron 2009")]
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
 [assembly: Guid("923eb1d8-0d6a-4a05-896c-16f127f2944f")]
-[assembly: AssemblyVersion("0.1.1.37")]
-[assembly: AssemblyFileVersion("0.1.1.37")]
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Integration;
+using System.Xml.Linq;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {
@@ -26,13 +27,14 @@ namespace Concordion.Spec.Concordion.Command.VerifyRows
 
         public string process(string inputFragment)
         {
-            return new TestRig()
-                .WithFixture(this)
-                .ProcessFragment(inputFragment).SuccessOrFailureInWords();
-                //TODO - repair this .GetXOMDocument()
-                //.Query("//table").get(0)
-                //.ToXML()
-                //.Replace("\u00A0", "&#160;");
+            var document = new TestRig()
+                                .WithFixture(this)
+                                .ProcessFragment(inputFragment)
+                                .GetXDocument();
+
+            var table = document.Element("html").Element("body").Element("fragment").Element("table");
+
+            return table.ToString(SaveOptions.DisableFormatting).Replace("\u00A0", "&#160;");
         }
     }
 }

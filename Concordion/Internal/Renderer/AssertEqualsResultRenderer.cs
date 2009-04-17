@@ -44,7 +44,14 @@ namespace Concordion.Internal.Renderer
             
             Element spanActual = new Element("ins");
             spanActual.AddStyleClass("actual");
-            spanActual.AppendText(e.Actual.ToString());
+            if (e.Actual != null)
+            {
+                spanActual.AppendText(e.Actual.ToString());
+            }
+            else
+            {
+                spanActual.AppendText("(null)");
+            }
             spanActual.AppendNonBreakingSpaceIfBlank();
             
             element.AppendText("\n");

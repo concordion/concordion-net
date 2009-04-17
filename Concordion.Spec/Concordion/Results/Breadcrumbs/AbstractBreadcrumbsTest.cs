@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using System.Xml.Linq;
 
 namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {
@@ -28,7 +29,7 @@ namespace Concordion.Spec.Concordion.Results.Breadcrumbs
             {
                 if ("breadcrumbs" == span.Attribute("class").Value) 
                 {
-                    result.html = span.ToString();
+                    result.html = span.ToString(SaveOptions.DisableFormatting);
                     result.text = span.Value;
                 }
             }

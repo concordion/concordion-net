@@ -69,7 +69,6 @@ namespace Concordion.Internal
 
         public int Compare(object x, object y)
         {
-            
             return Normalize(x).CompareTo(Normalize(y));
         }
 

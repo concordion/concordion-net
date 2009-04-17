@@ -16,7 +16,8 @@ namespace Concordion.Spec.Concordion.Results.AssertEquals.Success
             return new TestRig()
                 .WithFixture(this)
                 .ProcessFragment(fragment)
-                .GetOutputFragmentXML();
+                .GetOutputFragmentXML()
+                .Replace("\u00A0", "&#160;");
         }
     }
 }

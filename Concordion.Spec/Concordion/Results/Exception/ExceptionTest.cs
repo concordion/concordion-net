@@ -36,7 +36,8 @@ namespace Concordion.Spec.Concordion.Results.Exception
             var eventArgs = new ExceptionCaughtEventArgs { Exception = exception, Expression = expression, Element = new Element(element) };
             new ExceptionRenderer().ExceptionCaughtEventHandler(this, eventArgs);
 
-            return element.ToString(SaveOptions.DisableFormatting);
+            //return element.ToString(SaveOptions.DisableFormatting);
+            return element.ToString();
         }
     }
 }

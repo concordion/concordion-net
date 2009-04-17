@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.Test", "Concordi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.Spec", "Concordion.Spec\Concordion.Spec.csproj", "{56F38030-7A94-4E5C-AE67-F5E8E94056D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.CommandLineInterface", "Concordion.CommandLineInterface\Concordion.CommandLineInterface.csproj", "{ADB03F72-4651-4291-A19B-068CF7E7112A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OGNL", "OGNL\OGNL.csproj", "{02F01FD5-3F40-41BA-900E-EDA004BF43E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallio.ConcordionAdapter", "Gallio.ConcordionAdapter\Gallio.ConcordionAdapter.csproj", "{57D6B2E4-69A8-42A6-8220-AAE6EDFB902D}"
@@ -31,10 +29,6 @@ Global
 		{56F38030-7A94-4E5C-AE67-F5E8E94056D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56F38030-7A94-4E5C-AE67-F5E8E94056D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56F38030-7A94-4E5C-AE67-F5E8E94056D6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ADB03F72-4651-4291-A19B-068CF7E7112A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADB03F72-4651-4291-A19B-068CF7E7112A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADB03F72-4651-4291-A19B-068CF7E7112A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADB03F72-4651-4291-A19B-068CF7E7112A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02F01FD5-3F40-41BA-900E-EDA004BF43E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02F01FD5-3F40-41BA-900E-EDA004BF43E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02F01FD5-3F40-41BA-900E-EDA004BF43E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
