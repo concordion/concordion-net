@@ -45,7 +45,7 @@
 
   <Target Name="Version">
     <PropertyGroup>
-      <Version>$(BUILD_NUMBER)</Version>
+      <Version>$(ENV_BUILD_NUMBER)</Version>
     </PropertyGroup>
 
     <Message Text="Version: $(Major).$(Minor).$(Build).$(Revision)"/>
@@ -56,7 +56,7 @@
       AssemblyDescription="Concordion Acceptance Testing Framework"
       AssemblyCompany="http://code.google.com/p/concordion-net/"
       AssemblyProduct="Concordion"
-      AssemblyCopyright="Copyright2 © Jeffrey Cameron 2009"     
+      AssemblyCopyright="Copyright © Jeffrey Cameron 2009"     
       ComVisible="false"
       CLSCompliant="true"
       Guid="923eb1d8-0d6a-4a05-896c-16f127f2944f"
