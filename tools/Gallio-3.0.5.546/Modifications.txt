@@ -1,0 +1,1 @@
+This directory is modified form the original distribution by removing the doc, samples and extra folders to preserve space.
