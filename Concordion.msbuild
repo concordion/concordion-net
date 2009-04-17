@@ -45,7 +45,7 @@
 
   <Target Name="Version">
     <PropertyGroup>
-      <Version>$(build.number)</Version>
+      <Version>$(build_number)</Version>
     </PropertyGroup>
 
     <Message Text="Version: $(Major).$(Minor).$(Build).$(Revision)"/>
