@@ -8,7 +8,7 @@
     <Major>0</Major>
     <Minor>1</Minor>
     <Build>1</Build>
-    <Revision>0</Revision>
+    <Revision>9999</Revision>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,9 +44,9 @@
 
 
   <Target Name="Version">
-    <SvnVersion LocalPath=".">
-      <Output TaskParameter="Revision" PropertyName="Revision" />
-    </SvnVersion>
+    <PropertyGroup>
+      <Version>$(build.number)</Version>
+    </PropertyGroup>
 
     <Message Text="Version: $(Major).$(Minor).$(Build).$(Revision)"/>
 
@@ -56,12 +56,12 @@
       AssemblyDescription="Concordion Acceptance Testing Framework"
       AssemblyCompany="http://code.google.com/p/concordion-net/"
       AssemblyProduct="Concordion"
-      AssemblyCopyright="Copyright © Jeffrey Cameron 2009"     
+      AssemblyCopyright="Copyright2 © Jeffrey Cameron 2009"     
       ComVisible="false"
       CLSCompliant="true"
       Guid="923eb1d8-0d6a-4a05-896c-16f127f2944f"
-      AssemblyVersion="$(Major).$(Minor).$(Build).$(Revision)"
-      AssemblyFileVersion="$(Major).$(Minor).$(Build).$(Revision)"
+      AssemblyVersion="$(Version)"
+      AssemblyFileVersion="$(Version)"
       Condition="$(Revision) != '0' "/>
 	  
   </Target>
