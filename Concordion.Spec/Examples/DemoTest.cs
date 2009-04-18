@@ -9,7 +9,7 @@ namespace Concordion.Spec.Examples
     [ConcordionTest]
     public class DemoTest
     {
-        public string GreetingFor(string firstName)
+        public string greetingFor(string firstName)
         {
             return string.Format("Hello {0}!", firstName);
         }

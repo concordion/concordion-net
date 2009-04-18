@@ -32,7 +32,7 @@ namespace Concordion.Spec
 
         public void Write(Resource resource, Bitmap image)
         {
-            // Do nothing with the image
+            // Do nothing
         }
 
         public void CopyTo(Resource resource, string destination)

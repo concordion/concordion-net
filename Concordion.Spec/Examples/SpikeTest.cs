@@ -9,16 +9,16 @@ namespace Concordion.Spec.Examples
     [ConcordionTest]
     public class SpikeTest
     {
-        public string GetGreetingFor(string name) 
+        public string getGreetingFor(string name) 
         {
             return "Hello " + name + "!";
         }
         
-        public void DoSomething() 
+        public void doSomething() 
         {
         }
         
-        public ICollection<Person> GetPeople() 
+        public ICollection<Person> getPeople() 
         {
             return new List<Person> { new Person("John", "Travolta") };
         }

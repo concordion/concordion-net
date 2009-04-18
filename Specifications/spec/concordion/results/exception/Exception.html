@@ -61,20 +61,19 @@
         <p>We expect this output:</p>
 
 <pre class="html" concordion:assertEquals="markAsException(#snippet, #expr, #errorMessage)">
-&lt;p&gt; _
-&lt;span class="failure"&gt; _
-&lt;del class="expected"&gt;some text&lt;/del&gt; _
-&lt;/span&gt; _
-&lt;span class="exceptionMessage"&gt;My error message&lt;/span&gt; _
-&lt;input class="stackTraceButton" id="stackTraceButton1" type="button" _
- onclick="javascript:toggleStackTrace('1')" value="View Stack" /&gt; _
-&lt;span class="stackTrace" id="stackTrace1"&gt; _
-&lt;p&gt;While evaluating expression: &lt;code&gt;myMethod()&lt;/code&gt;&lt;/p&gt; _
-&lt;span class="stackTraceExceptionMessage"&gt;java.lang.Throwable: My error message&lt;/span&gt; _
-&lt;span class="stackTraceEntry"&gt;at com.mycompany.MyClass.myMethod (MyClass.java:4)&lt;/span&gt; _
-&lt;span class="stackTraceEntry"&gt;at sun.reflect.NativeMethodAccessorImpl.invoke0 (Unknown Source)&lt;/span&gt; _
-&lt;span class="stackTraceEntry"&gt;at junit.framework.TestCase.runTest (TestCase.java:164)&lt;/span&gt; _
-&lt;/span&gt; _
+&lt;p&gt;
+&lt;span class="failure"&gt;
+&lt;del class="expected"&gt;some text&lt;/del&gt;
+&lt;/span&gt;
+&lt;span class="exceptionMessage"&gt;My error message&lt;/span&gt;
+&lt;input class="stackTraceButton" id="stackTraceButton1" type="button" onclick="javascript:toggleStackTrace('1')" value="View Stack" /&gt;
+&lt;span class="stackTrace" id="stackTrace1"&gt;
+&lt;p&gt;While evaluating expression: &lt;code&gt;myMethod()&lt;/code&gt;&lt;/p&gt;
+&lt;span class="stackTraceExceptionMessage"&gt;Concordion.Spec.Support.StackTraceSettingException: My error message&lt;/span&gt;
+&lt;span class="stackTraceEntry"&gt;at com.mycompany.MyClass.myMethod in MyClass.java:line 4&lt;/span&gt;
+&lt;span class="stackTraceEntry"&gt;at sun.reflect.NativeMethodAccessorImpl.invoke0 in null:line 1&lt;/span&gt;
+&lt;span class="stackTraceEntry"&gt;at junit.framework.TestCase.runTest in TestCase.java:line 164&lt;/span&gt;
+&lt;/span&gt;
 &lt;/p&gt;
 </pre>
 

@@ -11,12 +11,12 @@ namespace Concordion.Spec.Examples
     {
         private List<string> usernamesInSystem = new List<string>();
 
-        public void SetUpUser(string username)
+        public void setUpUser(string username)
         {
             usernamesInSystem.Add(username);
         }
 
-        public List<string> GetSearchResultsFor(string searchString) 
+        public List<string> getSearchResultsFor(string searchString) 
         {
             var matchSet = new List<string>();
 
