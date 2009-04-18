@@ -39,14 +39,6 @@ namespace Concordion.Api
             private set;
         }
 
-        public string UriPath
-        {
-            get
-            {
-                return new Uri(Uri.UriSchemeFile + ":///" + Path, UriKind.Absolute).AbsoluteUri;
-            }
-        }
-
         public virtual string Path
         {
             get;
@@ -68,7 +60,8 @@ namespace Concordion.Api
                     return null;
                 }
 
-                StringBuilder parentPath = new StringBuilder("\\");
+                //StringBuilder parentPath = new StringBuilder("\\");
+                StringBuilder parentPath = new StringBuilder();
                 for (int i = 0; i < Parts.Length - 1; i++)
                 {
                     parentPath.Append(Parts[i] + PATH_SEPARATOR);
@@ -121,9 +114,8 @@ namespace Concordion.Api
             else
             {
                 Name = Parts[Parts.Length - 1];
-                //Name = Name.Replace(".html", String.Empty);
             }
-        } 
+        }
 
         #endregion
 

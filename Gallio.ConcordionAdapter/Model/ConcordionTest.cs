@@ -29,6 +29,12 @@ namespace Gallio.ConcordionAdapter.Model
             private set;
         }
 
+        public ISource Source
+        {
+            get;
+            set;
+        }
+
         public ITarget Target
         {
             get;

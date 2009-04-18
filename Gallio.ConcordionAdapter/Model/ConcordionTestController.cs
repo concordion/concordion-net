@@ -62,6 +62,7 @@ namespace Gallio.ConcordionAdapter.Model
             
             // The magic happens here!
             var concordion = new ConcordionBuilder()
+                                    .WithSource(concordionTest.Source)
                                     .WithTarget(concordionTest.Target)
                                     .WithSpecificationListener(new GallioResultRenderer(testContext.LogWriter))
                                     .Build();

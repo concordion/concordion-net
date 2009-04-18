@@ -48,7 +48,7 @@
       <Version>$(build_number)</Version>
     </PropertyGroup>
 
-    <Message Text="Version: $(Major).$(Minor).$(Build).$(Revision)"/>
+    <Message Text="Version: $(Version)"/>
 
     <AssemblyInfo CodeLanguage="CS" 
       OutputFile="Concordion\Properties\AssemblyInfo.cs"
@@ -84,8 +84,9 @@
   -->
 
   <Target Name="Zip" DependsOnTargets="Compile">
+    <MakeDir Directories="deploy"/>
     <Zip Files="@(ZipFiles)" Flatten="true"
-         ZipFileName="Concordion-$(Version).zip" />
+         ZipFileName="deploy\Concordion-$(Version).zip" />
   </Target>
 
   <Target Name="Build" DependsOnTargets="Zip">

@@ -69,13 +69,10 @@
       <DependentUpon>HtmlFramework.resx</DependentUpon>
     </Compile>
     <Compile Include="Integration\ConcordionAssemblyAttribute.cs" />
-    <Compile Include="Integration\FixtureDiscoverer.cs" />
     <Compile Include="Integration\ConcordionTestAttribute.cs" />
-    <Compile Include="Integration\ResourceCrawler.cs" />
     <Compile Include="Internal\BannedWordsValidator.cs" />
     <Compile Include="Internal\BrowserStyleWhitespaceComparer.cs" />
     <Compile Include="Internal\ClassNameBasedSpecificationLocator.cs" />
-    <Compile Include="Internal\ClassPathSource.cs" />
     <Compile Include="Internal\CommandCall.cs" />
     <Compile Include="Internal\CommandCallList.cs" />
     <Compile Include="Internal\CommandRegistry.cs" />
@@ -107,6 +104,7 @@
     <Compile Include="Internal\ConcordionAssertionException.cs" />
     <Compile Include="Internal\ConcordionBuilder.cs" />
     <Compile Include="Internal\DocumentParser.cs" />
+    <Compile Include="Internal\FileSource.cs" />
     <Compile Include="Internal\FileTarget.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />

@@ -155,7 +155,7 @@ namespace Gallio.ConcordionAdapter.Model
                     }
                     else
                     {
-                        TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, "The Base Output Directory of the Concordion Assembly does not exist, reverting to default"));
+                        Directory.CreateDirectory(concordionAssemblyAttribute.BaseOutputDirectory.FullName);
                     }
                 }
             }
@@ -236,7 +236,7 @@ namespace Gallio.ConcordionAdapter.Model
 
         private Resource CreateResource(string path)
         {
-            return new Resource(Path.Combine(BaseInputDirectory.FullName, path));
+            return new Resource(path);
         }
 
         private ConcordionTest CreateTypeTest(ConcordionTypeInfoAdapter typeInfo)
@@ -245,6 +245,7 @@ namespace Gallio.ConcordionAdapter.Model
             var resource = CreateResource(ExtrapolateResourcePath(fixture.GetType()));
 
             var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
+            typeTest.Source = new FileSource(BaseInputDirectory.FullName);
             typeTest.Target = new FileTarget(BaseOutputDirectory.FullName);
             typeTest.Kind = TestKinds.Fixture;
             typeTest.IsTestCase = true;

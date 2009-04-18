@@ -27,8 +27,7 @@ namespace Concordion.Internal.Renderer
         #region Fields
         
         private static readonly string CONCORDION_WEBSITE_URL = "http://www.concordion.org";
-        private static readonly string SOURCE_LOGO_RESOURCE_PATH = "/org/concordion/internal/resource/logo.png";
-        private static readonly Resource TARGET_LOGO_RESOURCE = new Resource("/image/concordion-logo.png");
+        private static readonly Resource TARGET_LOGO_RESOURCE = new Resource("image/concordion-logo.png");
         private DateTime start; 
 
         #endregion
@@ -56,9 +55,7 @@ namespace Concordion.Internal.Renderer
 
         private void CopyLogoToTarget()
         {
-            // TODO - write the Concordion image to file in the appropriate location
-            Bitmap logo = HtmlFramework.SOURCE_LOGO_RESOURCE_PATH;
-            logo.Save("logo.png"); // HACK - just to see if this would work, should be removed
+            Target.Write(TARGET_LOGO_RESOURCE, HtmlFramework.SOURCE_LOGO_RESOURCE_PATH);
         }
 
         private void AddFooterToDocument(Element rootElement, Resource resource, long timeTaken)

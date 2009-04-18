@@ -135,7 +135,7 @@ namespace Concordion.Internal
         public ConcordionBuilder()
         {
             SpecificationLocator = new ClassNameBasedSpecificationLocator();
-            Source = new ClassPathSource();
+            Source = null;
             Target = null;
             CommandRegistry = new CommandRegistry();
             DocumentParser = new DocumentParser(CommandRegistry);

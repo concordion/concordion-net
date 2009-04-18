@@ -19,6 +19,8 @@ using System.Text;
 using Concordion.Api;
 using System.IO;
 using Concordion.Internal.Util;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Concordion.Internal
 {
@@ -44,7 +46,14 @@ namespace Concordion.Internal
 
         public FileTarget(string baseDirectory)
         {
-            BaseDirectory = baseDirectory;
+            if (baseDirectory.EndsWith("\\"))
+            {
+                BaseDirectory = baseDirectory;
+            }
+            else
+            {
+                BaseDirectory = baseDirectory + "\\";
+            }
         }
         
         #endregion
@@ -53,14 +62,13 @@ namespace Concordion.Internal
 
         private void MakeDirectories(Resource resource)
         {
-            // TODO - make the output directories here
-            string path = BaseDirectory + resource.Parent.Path;
+            string path = Path.Combine(BaseDirectory, resource.Parent.Path);
             Directory.CreateDirectory(path);
         }
 
         private StreamWriter CreateWriter(Resource resource)
         {
-            string path = BaseDirectory + resource.Path;
+            string path = Path.Combine(BaseDirectory, resource.Path);
             return new StreamWriter(path, false, Encoding.UTF8);
         }
 
@@ -72,7 +80,7 @@ namespace Concordion.Internal
 
         public string GetTargetPath(Resource resource)
         {
-            return BaseDirectory + resource.Path;
+            return Path.Combine(BaseDirectory, resource.Path);
         }
 
         #endregion
@@ -91,6 +99,13 @@ namespace Concordion.Internal
                 }
                 finally { }
             }
+        }
+
+        public void Write(Resource resource, Bitmap image)
+        {
+            Check.NotNull(resource, "resource is null");
+            MakeDirectories(resource);
+            image.Save(Path.Combine(BaseDirectory, resource.Path), ImageFormat.Png);
         }
 
         public void CopyTo(Resource resource, string destination)

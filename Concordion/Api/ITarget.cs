@@ -23,6 +23,7 @@ namespace Concordion.Api
     public interface ITarget
     {
         void Write(Resource resource, string s);
+        void Write(Resource resource, System.Drawing.Bitmap image);
         void CopyTo(Resource resource, string destination);
         void Delete(Resource resource);
     }
