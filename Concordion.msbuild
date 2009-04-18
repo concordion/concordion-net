@@ -42,6 +42,10 @@
 	<ZipFiles Include="Gallio.ConcordionAdapter\Gallio.ConcordionAdaptor.plugin" />
   </ItemGroup>
 
+  <ItemGroup>
+    <TestAssemblies Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
+	<Plugins Include="Gallio.ConcordionAdapter\bin\Debug" />
+  </ItemGroup>
 
   <Target Name="Version">
     <PropertyGroup>
@@ -71,19 +75,18 @@
              Properties="Configuration=Release" />
   </Target>
 
- 
-  <!-- 
-  <Target Name="Documentation" DependsOnTargets="Compile">
-    <NDoc Documenter="MSDN"
-          ProjectFilePath="Documentation\MSBuild.Community.Tasks.ndoc" />
-
-    <Copy SourceFiles="doc\MSBuild Community Tasks.chm"
-          DestinationFiles="Documentation\MSBuild.Community.Tasks.chm" />
-    <RemoveDir Directories="doc" />
+  <Target Name="Test-Specs" DependsOnTargets="Compile">
+    <Gallio Assemblies="@(TestAssemblies)"
+            PluginDirectories="@(Plugins)"
+            ReportDirectory="Reports"
+            ReportTypes="XHtml"
+            ShowReports="true"
+            IgnoreFailures="true"
+            RunnerType="Local"
+            RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration" />
   </Target>
-  -->
 
-  <Target Name="Zip" DependsOnTargets="Compile">
+  <Target Name="Zip" DependsOnTargets="Test-Specs">
     <MakeDir Directories="deploy"/>
     <Zip Files="@(ZipFiles)" Flatten="true"
          ZipFileName="deploy\Concordion-$(Version).zip" />

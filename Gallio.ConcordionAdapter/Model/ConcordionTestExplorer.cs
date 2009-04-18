@@ -148,17 +148,17 @@ namespace Gallio.ConcordionAdapter.Model
                     {
                         TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, "The Base Input Directory of the Concordion Assembly does not exist, reverting to default"));
                     }
+                        
+                    BaseOutputDirectory = concordionAssemblyAttribute.BaseOutputDirectory;
 
-                    if (concordionAssemblyAttribute.BaseOutputDirectory.Exists)
-                    {
-                        BaseOutputDirectory = concordionAssemblyAttribute.BaseOutputDirectory;
-                    }
-                    else
+                    if (!concordionAssemblyAttribute.BaseOutputDirectory.Exists)
                     {
                         Directory.CreateDirectory(concordionAssemblyAttribute.BaseOutputDirectory.FullName);
                     }
                 }
             }
+
+
         }
 
         private ITest CreateAssemblyTest(IAssemblyInfo assembly)
