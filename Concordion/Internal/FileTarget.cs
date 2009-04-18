@@ -62,8 +62,18 @@ namespace Concordion.Internal
 
         private void MakeDirectories(Resource resource)
         {
-            string path = Path.Combine(BaseDirectory, resource.Parent.Path);
+            string path = Path.Combine(BaseDirectory, StripLeadingBackslash(resource.Parent.Path));
             Directory.CreateDirectory(path);
+        }
+
+        private static string StripLeadingBackslash(string path)
+        {
+            var strippedPath = path;
+            if (strippedPath.StartsWith("\\"))
+            {
+                strippedPath = strippedPath.Remove(0, 1);
+            }
+            return strippedPath;
         }
 
         private StreamWriter CreateWriter(Resource resource)

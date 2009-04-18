@@ -60,8 +60,8 @@ namespace Concordion.Api
                     return null;
                 }
 
-                //StringBuilder parentPath = new StringBuilder("\\");
-                StringBuilder parentPath = new StringBuilder();
+                StringBuilder parentPath = new StringBuilder("\\");
+                //StringBuilder parentPath = new StringBuilder();
                 for (int i = 0; i < Parts.Length - 1; i++)
                 {
                     parentPath.Append(Parts[i] + PATH_SEPARATOR);

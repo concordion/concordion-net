@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Results.AssertTrue
+namespace Concordion.Spec.Concordion.Results.AssertTrue.Failure
 {
     [ConcordionTest]
     public class OnFailureTest

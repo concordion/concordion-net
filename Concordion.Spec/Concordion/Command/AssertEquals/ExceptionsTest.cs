@@ -9,6 +9,8 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals
     [ConcordionTest]
     public class ExceptionsTest
     {
+        string successCount;
+
         public object countsFromExecutingSnippetWithSimulatedEvaluationResult(string snippet, string simulatedResult)
         {
             TestRig harness = new TestRig();
