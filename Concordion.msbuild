@@ -83,7 +83,8 @@
             ShowReports="true"
             IgnoreFailures="true"
             RunnerType="Local"
-            RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration" />
+            RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration"
+            ApplicationBaseDirectory="tools\Gallio-3.0.5.546\bin" />
   </Target>
 
   <Target Name="Zip" DependsOnTargets="Test-Specs">
