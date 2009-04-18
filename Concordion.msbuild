@@ -85,7 +85,7 @@
 
   <Target Name="Zip" DependsOnTargets="Compile">
     <Zip Files="@(ZipFiles)" Flatten="true"
-         ZipFileName="Concordion-$(Major).$(Minor).$(Build).$(Revision).zip" />
+         ZipFileName="Concordion-$(Version).zip" />
   </Target>
 
   <Target Name="Build" DependsOnTargets="Zip">
