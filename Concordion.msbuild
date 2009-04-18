@@ -80,12 +80,10 @@
             PluginDirectories="@(Plugins)"
             ReportDirectory="Reports"
             ReportTypes="XHtml"
-            ShowReports="true"
+            ShowReports="false"
             IgnoreFailures="true"
             RunnerType="Local"
-            RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration"
-            ApplicationBaseDirectory="tools\Gallio-3.0.5.546\bin"
-            WorkingDirectory="tools\Gallio-3.0.5.546\bin" />
+            RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration" />
   </Target>
 
   <Target Name="Zip" DependsOnTargets="Test-Specs">
