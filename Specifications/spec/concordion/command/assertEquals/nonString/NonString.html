@@ -9,6 +9,11 @@
        calling the object's <code>toString()</code> method.
     </p>
     
+    <p>
+       <span class="javanetdiff">Java/.NET Difference - The default output of a double that has no decimal 
+       places is to output the number without decimals.</span>
+    </p>
+    
     <div class="example">        
     
         <h3>Example</h3>
@@ -46,13 +51,19 @@
                 <td>1234</td>
                 <td>Double</td>
                 <td>1234</td>
-                <td>FAILURE</td>
+                <td>SUCCESS</td>
+            </tr>
+            <tr>
+                <td>1234.1</td>
+                <td>Double</td>
+                <td>1234.1</td>
+                <td>SUCCESS</td>
             </tr>
             <tr>
                 <td>1234</td>
                 <td>Double</td>
                 <td>1234.0</td>
-                <td>SUCCESS</td>
+                <td>FAILURE</td>
             </tr>
         </table>
     </div>

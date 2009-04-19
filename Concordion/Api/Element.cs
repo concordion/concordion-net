@@ -167,11 +167,8 @@ namespace Concordion.Api
 
         public void MoveChildrenTo(Element element)
         {
-            foreach (var childNode in GetChildNodes()) 
-            {
-                childNode.Remove();
-                element.m_element.Add(childNode);
-            }
+            element.m_element.Add(GetChildNodes());
+            m_element.RemoveNodes();
         }
 
         private IEnumerable<XNode> GetChildNodes()

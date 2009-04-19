@@ -14,7 +14,7 @@ namespace Concordion.Spec.Concordion.Command.VerifyRows
 
         public void setUpNames(string namesAsCSV) 
         {
-            foreach (string name in namesAsCSV.Split(',', ' '))
+            foreach (string name in namesAsCSV.Split(new char[]{',', ' '}, StringSplitOptions.RemoveEmptyEntries))
             {
                 names.Add(name);
             }
@@ -34,7 +34,7 @@ namespace Concordion.Spec.Concordion.Command.VerifyRows
 
             var table = document.Element("html").Element("body").Element("fragment").Element("table");
 
-            return table.ToString(SaveOptions.DisableFormatting).Replace("\u00A0", "&#160;");
+            return table.ToString().Replace("\u00A0", "&#160;");
         }
     }
 }

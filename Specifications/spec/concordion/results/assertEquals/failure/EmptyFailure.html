@@ -21,9 +21,9 @@
         </p>
 
 <pre class="html" concordion:assertEquals="renderAsFailure(#snippet, #actualValue)">
-&lt;div concordion:assertEquals="acronym" class="failure"&gt; _
-&lt;del class="expected"&gt;&amp;#160;&lt;/del&gt;
-&lt;ins class="actual"&gt;XYZ&lt;/ins&gt; _
+&lt;div concordion:assertEquals="acronym" class="failure"&gt;
+  &lt;del class="expected"&gt;&amp;#160;&lt;/del&gt;
+  &lt;ins class="actual"&gt;XYZ&lt;/ins&gt;
 &lt;/div&gt;
 </pre>
     </div>
@@ -37,9 +37,9 @@
         <p>When marked as a failure, with a <span concordion:set="#actualValue" /> blank actual value, it becomes:</p>
 
 <pre class="html" concordion:assertEquals="renderAsFailure(#snippet, #actualValue)">
-&lt;div concordion:assertEquals="acronym" class="failure"&gt; _
-&lt;del class="expected"&gt;ABC&lt;/del&gt;
-&lt;ins class="actual"&gt;&amp;#160;&lt;/ins&gt; _
+&lt;div concordion:assertEquals="acronym" class="failure"&gt;
+  &lt;del class="expected"&gt;ABC&lt;/del&gt;
+  &lt;ins class="actual"&gt;&amp;#160;&lt;/ins&gt;
 &lt;/div&gt;
 </pre>
     </div>

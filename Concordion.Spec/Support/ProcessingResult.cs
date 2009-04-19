@@ -82,7 +82,8 @@ namespace Concordion.Spec
             var xmlFragmentBuilder = new StringBuilder();
             foreach (var child in fragment.Elements())
             {
-                xmlFragmentBuilder.Append(child.ToString(SaveOptions.DisableFormatting).Replace(" xmlns:concordion=\"http://www.concordion.org/2007/concordion\"", String.Empty));
+                //xmlFragmentBuilder.Append(child.ToString(SaveOptions.DisableFormatting).Replace(" xmlns:concordion=\"http://www.concordion.org/2007/concordion\"", String.Empty));
+                xmlFragmentBuilder.Append(child.ToString().Replace(" xmlns:concordion=\"http://www.concordion.org/2007/concordion\"", String.Empty));
             }
 
             return xmlFragmentBuilder.ToString();
