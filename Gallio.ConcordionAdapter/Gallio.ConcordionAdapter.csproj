@@ -82,10 +82,6 @@
       <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
       <Name>Concordion</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OGNL\OGNL.csproj">
-      <Project>{02F01FD5-3F40-41BA-900E-EDA004BF43E1}</Project>
-      <Name>OGNL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

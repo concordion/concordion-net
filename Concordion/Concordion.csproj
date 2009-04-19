@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="OGNL, Version=1.0.3396.12987, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\tools\OGNL.NET\OGNL.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -141,12 +145,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HtmlFramework.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OGNL\OGNL.csproj">
-      <Project>{02F01FD5-3F40-41BA-900E-EDA004BF43E1}</Project>
-      <Name>OGNL</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.png" />

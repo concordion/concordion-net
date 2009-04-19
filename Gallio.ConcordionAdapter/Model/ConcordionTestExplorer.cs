@@ -79,11 +79,29 @@ namespace Gallio.ConcordionAdapter.Model
             }
         }
 
+        private static bool IsConcordionAttributePresent(IAssemblyInfo assembly)
+        {
+            foreach (var assemblyAttribute in assembly.GetAttributes(null, false))
+            {
+                if (assemblyAttribute is ConcordionAssemblyAttribute)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 
         private static Version GetFrameworkVersion(IAssemblyInfo assembly)
         {
-            AssemblyName frameworkAssemblyName = ReflectionUtils.FindAssemblyReference(assembly, CONCORDION_ASSEMBLY_DISPLAY_NAME);
-            return frameworkAssemblyName != null ? frameworkAssemblyName.Version : null;
+            if (IsConcordionAttributePresent(assembly))
+            {
+                AssemblyName frameworkAssemblyName = ReflectionUtils.FindAssemblyReference(assembly, CONCORDION_ASSEMBLY_DISPLAY_NAME);
+                return frameworkAssemblyName != null ? frameworkAssemblyName.Version : null;
+            }
+
+            return null;
         }
 
 
