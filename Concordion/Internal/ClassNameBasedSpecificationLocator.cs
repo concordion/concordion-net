@@ -26,7 +26,15 @@ namespace Concordion.Internal
 
         public Resource LocateSpecification(object fixture)
         {
-            throw new NotImplementedException();
+            var config = new ConcordionConfig();
+            config.Load();
+
+            var fixtureName = fixture.GetType().ToString();
+            fixtureName = fixtureName.Replace(".", "\\");
+
+            var path = config.BaseInputDirectory + "\\" + fixtureName + ".html";
+
+            return new Resource(path);
         }
 
         #endregion

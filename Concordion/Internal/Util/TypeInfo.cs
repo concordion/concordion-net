@@ -17,13 +17,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Concordion.Api
+namespace Concordion.Internal.Util
 {
-    public enum Result
+    public static class TypeInfo
     {
-        Success,
-        Failure,
-        Exception,
-        Ignored
+        public static T CreateInstance<T>(string assemblyQualifiedName)
+        {
+            var concordionRunnerType = Type.GetType(assemblyQualifiedName);
+            var concordionRunnerTypeConstructor = concordionRunnerType.GetConstructor(System.Type.EmptyTypes);
+            var concordionRunnerImpl = (T)concordionRunnerTypeConstructor.Invoke(null);
+
+            return concordionRunnerImpl;
+        }
     }
 }

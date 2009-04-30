@@ -20,27 +20,23 @@ using Concordion.Internal.Commands;
 
 namespace Concordion.Internal.Renderer
 {
-    public class RunResultRenderer : IAssertEqualsListener
+    public class RunResultRenderer : IRunListener
     {
-        #region Methods
+        #region IRunListener Members
 
-        public void IgnoredReportedEventHandler(object sender, FailureReportedEventArgs e)
-        {
-            e.Element.AddStyleClass("ignored").AppendNonBreakingSpaceIfBlank();
-        }
-
-        #endregion
-
-        #region IAssertEqualsListener Members
-
-        public void SuccessReportedEventHandler(object sender, SuccessReportedEventArgs e)
+        public void SuccessfulRunReportedEventHandler(object sender, RunResultEventArgs e)
         {
             e.Element.AddStyleClass("success").AppendNonBreakingSpaceIfBlank();
         }
 
-        public void FailureReportedEventHandler(object sender, FailureReportedEventArgs e)
+        public void FailedRunReportedEventHandler(object sender, RunResultEventArgs e)
         {
             e.Element.AddStyleClass("failure").AppendNonBreakingSpaceIfBlank();
+        }
+
+        public void IgnoredRunReportedEventHandler(object sender, RunResultEventArgs e)
+        {
+            e.Element.AddStyleClass("ignored").AppendNonBreakingSpaceIfBlank();
         }
 
         #endregion

@@ -18,11 +18,51 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using Concordion.Internal.Util;
+using Concordion.Internal.Runner;
+using System.Reflection;
 
 namespace Concordion.Internal.Commands
 {
-    public class RunCommand : ICommand
+    public class RunCommand : ICommand, IRunReporter
     {
+        #region Properties
+
+        public Dictionary<string, IRunner> Runners
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void OnSuccessfulRunReported(Element element)
+        {
+            if (SuccessfulRunReported != null)
+            {
+                SuccessfulRunReported(this, new RunResultEventArgs { Element = element });
+            }
+        }
+
+        private void OnFailedRunReported(Element element)
+        {
+            if (FailedRunReported != null)
+            {
+                FailedRunReported(this, new RunResultEventArgs { Element = element });
+            }
+        }
+
+        private void OnIgnoredRunReported(Element element)
+        {
+            if (IgnoredRunReported != null)
+            {
+                IgnoredRunReported(this, new RunResultEventArgs { Element = element });
+            }
+        }
+
+        #endregion
+
         #region ICommand Members
 
         public void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
@@ -33,93 +73,65 @@ namespace Concordion.Internal.Commands
         {
             Check.IsFalse(commandCall.HasChildCommands, "Nesting commands inside a 'run' is not supported");
 
-            Element element = commandCall.Element;
+            var element = commandCall.Element;
 
-            String href = element.GetAttributeValue("href");
+            var href = element.GetAttributeValue("href");
             Check.NotNull(href, "The 'href' attribute must be set for an element containing concordion:run");
 
-            String runnerType = commandCall.Expression;
-            String expression = element.GetAttributeValue("concordion:params");
+            var runnerType = commandCall.Expression;
+            var expression = element.GetAttributeValue("params", "concordion");
 
             if (expression != null)
             {
                 evaluator.Evaluate(expression);
             }
 
-            String concordionRunner = null;
+            try
+            {
+                IRunner concordionRunner;
+                Runners.TryGetValue(runnerType, out concordionRunner);
 
-            // TODO - determine the appropriate concordion runner here and use it
-            //concordionRunner = System.getProperty("concordion.runner." + runnerType);
+                // TODO - re-check this.
+                Check.NotNull(concordionRunner, "The runner '" + runnerType + "' cannot be found. "
+                        + "Choices: (1) Use 'concordion' as your runner (2) Ensure that the 'concordion.runner." + runnerType
+                        + "' System property is set to a name of an IRunner implementation "
+                        + "(3) Specify an assembly fully qualified class name of an IRunner implementation");
 
-            //if (concordionRunner == null && "concordion".equals(runnerType)) 
-            //{
-            //    concordionRunner = DefaultConcordionRunner.class.getName();
-            //}
+                var result = concordionRunner.Execute(commandCall.Resource, href).Result;
 
-            //if (concordionRunner == null) 
-            //{
-            //    try 
-            //    {
-            //        Class.forName(runnerType);
-            //        concordionRunner = runnerType;
-            //    } 
-            //    catch (ClassNotFoundException e1) 
-            //    {
-            //        // OK, we're reporting this in a second.
-            //    }
-            //}
+                if (result == Result.Success)
+                {
+                    OnSuccessfulRunReported(element);
+                }
+                else if (result == Result.Ignored)
+                {
+                    OnIgnoredRunReported(element);
+                }
+                else
+                {
+                    OnFailedRunReported(element);
+                }
 
-            Check.NotNull(concordionRunner, "The runner '" + runnerType + "' cannot be found. "
-                    + "Choices: (1) Use 'concordion' as your runner (2) Ensure that the 'concordion.runner." + runnerType
-                    + "' System property is set to a name of an org.concordion.Runner implementation "
-                    + "(3) Specify a full class name of an org.concordion.Runner implementation");
-            //try 
-            //{
-            //    Class<?> clazz = Class.forName(concordionRunner);
-            //    Runner runner = (Runner) clazz.newInstance();
-            //    for (Method method : runner.getClass().getMethods()) {
-            //        String methodName = method.getName();
-            //        if (methodName.startsWith("set") && methodName.length() > 3 && method.getParameterTypes().length == 1) {
-            //            String variableName = methodName.substring(3, 4).toLowerCase() + method.getName().substring(4);
-            //            Object variableValue = evaluator.evaluate(variableName);
-            //            if (variableValue == null) {
-            //                try {
-            //                    variableValue = evaluator.getVariable(variableName);
-            //                } catch (Exception e) {
-            //                }
-            //            }
-            //            if (variableValue != null) {
-            //                try {
-            //                    method.invoke(runner, variableValue);
-            //                } catch (Exception e) {
-            //                }
-            //            }
-            //        }
-            //    }
-            //    try {
-            //        Result result = runner.execute(commandCall.getResource(), href).getResult();
-
-            //        if (result == Result.SUCCESS) {
-            //            announceSuccess(element);
-            //        } else if (result == Result.IGNORED) {
-            //            announceIgnored(element);
-            //        } else {
-            //            announceFailure(element);
-            //        }
-            //        resultRecorder.record(result);
-            //    } catch (Throwable e) {
-            //        announceFailure(e, element, runnerType);
-            //        resultRecorder.record(Result.FAILURE);
-            //    }
-            //} catch (Exception e) {
-            //    announceFailure(e, element, runnerType);
-            //    resultRecorder.record(Result.FAILURE);
-            //}
+                resultRecorder.Record(result);
+            }
+            catch (Exception e)
+            {
+                OnFailedRunReported(element);
+                resultRecorder.Record(Result.Failure);
+            }
         }
 
         public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
         }
+
+        #endregion
+
+        #region IRunReporter Members
+
+        public event EventHandler<RunResultEventArgs> SuccessfulRunReported;
+        public event EventHandler<RunResultEventArgs> FailedRunReported;
+        public event EventHandler<RunResultEventArgs> IgnoredRunReported;
 
         #endregion
     }

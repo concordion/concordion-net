@@ -21,6 +21,7 @@ using Concordion.Api;
 using Concordion.Internal.Util;
 using Concordion.Internal.Renderer;
 using System.IO;
+using Concordion.Internal.Runner;
 
 namespace Concordion.Internal
 {
@@ -176,9 +177,10 @@ namespace Concordion.Internal
             VerifyRowsCommand.MissingRowFound += verifyRowsCommandRenderer.MissingRowFoundEventHandler;
             VerifyRowsCommand.SurplusRowFound += verifyRowsCommandRenderer.SurplusRowFoundEventHandler;
 
-            //runCommand.addRunListener(new RunResultRenderer());
             var runResultRenderer = new RunResultRenderer();
-            // TODO - wire up the run result renderer to the run command's events
+            RunCommand.SuccessfulRunReported += runResultRenderer.SuccessfulRunReportedEventHandler;
+            RunCommand.FailedRunReported += runResultRenderer.FailedRunReportedEventHandler;
+            RunCommand.IgnoredRunReported += runResultRenderer.IgnoredRunReportedEventHandler;
 
             var documentStructureImprovementRenderer = new DocumentStructureImprovementRenderer();
             DocumentParser.DocumentParsing += documentStructureImprovementRenderer.DocumentParsingEventHandler;
@@ -251,6 +253,8 @@ namespace Concordion.Internal
                 Target = new FileTarget(BaseOutputDir ?? Directory.GetCurrentDirectory());
             }
 
+            RunCommand.Runners = GetAllRunners();
+
             var breadCrumbRenderer = new BreadCrumbRenderer(Source);
             SpecificationCommand.SpecificationCommandProcessing += breadCrumbRenderer.SpecificationProcessingEventHandler;
             SpecificationCommand.SpecificationCommandProcessed += breadCrumbRenderer.SpecificationProcessedEventHandler;
@@ -266,6 +270,13 @@ namespace Concordion.Internal
             SpecificationReader = new XmlSpecificationReader(Source, DocumentParser);        
 
             return new Concordion(SpecificationLocator, SpecificationReader, EvaluatorFactory);
+        }
+
+        private Dictionary<string, IRunner> GetAllRunners()
+        {
+            var runners = new Dictionary<string, IRunner>();
+            runners.Add("concordion", new DefaultConcordionRunner(Source, Target));
+            return runners;
         }
 
         public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener eventRecorder)

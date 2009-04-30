@@ -16,14 +16,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Internal.Commands;
 
-namespace Concordion.Api
+namespace Concordion.Internal.Renderer
 {
-    public enum Result
+    public interface IRunListener
     {
-        Success,
-        Failure,
-        Exception,
-        Ignored
+        void SuccessfulRunReportedEventHandler(object sender, RunResultEventArgs e);
+        void FailedRunReportedEventHandler(object sender, RunResultEventArgs e);
+        void IgnoredRunReportedEventHandler(object sender, RunResultEventArgs e);
     }
 }

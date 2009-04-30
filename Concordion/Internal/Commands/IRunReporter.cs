@@ -17,13 +17,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Concordion.Api
+namespace Concordion.Internal.Commands
 {
-    public enum Result
+    public interface IRunReporter
     {
-        Success,
-        Failure,
-        Exception,
-        Ignored
+        event EventHandler<RunResultEventArgs> SuccessfulRunReported;
+        event EventHandler<RunResultEventArgs> FailedRunReported;
+        event EventHandler<RunResultEventArgs> IgnoredRunReported;
     }
 }

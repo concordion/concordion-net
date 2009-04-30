@@ -152,31 +152,26 @@ namespace Gallio.ConcordionAdapter.Model
 
         private void GetInputOutputDirectories(IAssemblyInfo assembly)
         {
-            foreach (var assemblyAttribute in assembly.GetAttributes(null, false))
+            var config = new ConcordionConfig();
+            config.Load();
+
+            var baseInputDirectory = new DirectoryInfo(config.BaseInputDirectory);
+            if (baseInputDirectory.Exists)
             {
-                if (assemblyAttribute is ConcordionAssemblyAttribute)
-                {
-                    var concordionAssemblyAttribute = assemblyAttribute as ConcordionAssemblyAttribute;
-
-                    if (concordionAssemblyAttribute.BaseInputDirectory.Exists)
-                    {
-                        BaseInputDirectory = concordionAssemblyAttribute.BaseInputDirectory;
-                    }
-                    else
-                    {
-                        TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, "The Base Input Directory of the Concordion Assembly does not exist, reverting to default"));
-                    }
-                        
-                    BaseOutputDirectory = concordionAssemblyAttribute.BaseOutputDirectory;
-
-                    if (!concordionAssemblyAttribute.BaseOutputDirectory.Exists)
-                    {
-                        Directory.CreateDirectory(concordionAssemblyAttribute.BaseOutputDirectory.FullName);
-                    }
-                }
+                BaseInputDirectory = baseInputDirectory;
+            }
+            else
+            {
+                TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, "The Base Input Directory of the Concordion Assembly does not exist, reverting to default"));
             }
 
+            var baseOutputDirectory = new DirectoryInfo(config.BaseOutputDirectory);
+            BaseOutputDirectory = baseOutputDirectory;
 
+            if (!baseOutputDirectory.Exists)
+            {
+                Directory.CreateDirectory(baseOutputDirectory.FullName);
+            }
         }
 
         private ITest CreateAssemblyTest(IAssemblyInfo assembly)

@@ -137,6 +137,12 @@ namespace Concordion.Api
             return (attribute != null) ? attribute.Value : null;
         }
 
+        public string GetAttributeValue(string attributeName, string namespaceName)
+        {
+            XAttribute attribute = m_element.Attribute(XName.Get(attributeName, namespaceName));
+            return (attribute != null) ? attribute.Value : null;
+        }
+
         public Element AddStyleClass(string style)
         {
             string currentClass = GetAttributeValue("class");

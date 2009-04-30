@@ -19,11 +19,8 @@ using System.Text;
 
 namespace Concordion.Api
 {
-    public enum Result
+    public interface IRunner
     {
-        Success,
-        Failure,
-        Exception,
-        Ignored
+        RunnerResult Execute(Resource resource, string href);
     }
 }
