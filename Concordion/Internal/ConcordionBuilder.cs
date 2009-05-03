@@ -253,7 +253,7 @@ namespace Concordion.Internal
                 Target = new FileTarget(BaseOutputDir ?? Directory.GetCurrentDirectory());
             }
 
-            RunCommand.Runners = GetAllRunners();
+            SetAllRunners();
 
             var breadCrumbRenderer = new BreadCrumbRenderer(Source);
             SpecificationCommand.SpecificationCommandProcessing += breadCrumbRenderer.SpecificationProcessingEventHandler;
@@ -272,11 +272,17 @@ namespace Concordion.Internal
             return new Concordion(SpecificationLocator, SpecificationReader, EvaluatorFactory);
         }
 
-        private Dictionary<string, IRunner> GetAllRunners()
+        private void SetAllRunners()
         {
-            var runners = new Dictionary<string, IRunner>();
-            runners.Add("concordion", new DefaultConcordionRunner(Source, Target));
-            return runners;
+            RunCommand.Runners.Add("concordion", new DefaultConcordionRunner(Source, Target));
+
+            var config = new ConcordionConfig();
+            config.Load();
+
+            foreach (var runner in config.Runners)
+            {
+                RunCommand.Runners.Add(runner.Key, runner.Value);
+            }
         }
 
         public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener eventRecorder)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using Concordion.Internal;
+using Concordion.Internal.Runner;
 
 namespace Concordion.Spec
 {

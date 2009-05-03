@@ -63,6 +63,15 @@ namespace Concordion.Internal.Commands
 
         #endregion
 
+        #region Constructors
+
+        public RunCommand()
+        {
+            Runners = new Dictionary<string, IRunner>();
+        }
+
+        #endregion
+
         #region ICommand Members
 
         public void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)

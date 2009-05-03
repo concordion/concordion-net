@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml.Linq;
+using Concordion.Api;
 
 namespace Concordion.Internal
 {
@@ -35,6 +36,35 @@ namespace Concordion.Internal
                 LoadBaseInputDirectory(configElement);
                 LoadBaseOutputDirectory(configElement);
                 LoadSpecificationAssemblies(configElement);
+                LoadRunners(configElement);
+            }
+        }
+
+        private void LoadRunners(XElement element)
+        {
+            var runners = element.Element("Runners");
+
+            if (runners != null)
+            {
+                foreach (var runner in runners.Elements("Runner"))
+                {
+                    var alias = runner.Attribute("alias");
+                    var runnerTypeText = runner.Attribute("type");
+
+                    if (alias != null && runnerTypeText != null)
+                    {
+                        var runnerType = Type.GetType(runnerTypeText.Value);
+
+                        if (runnerType != null)
+                        {
+                            var runnerObject = Activator.CreateInstance(runnerType);
+                            if (runnerObject != null && runnerObject is IRunner)
+                            {
+                                Config.Runners.Add(alias.Value, runnerObject as IRunner);
+                            }
+                        }
+                    }
+                }
             }
         }
 

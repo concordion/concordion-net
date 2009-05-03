@@ -235,12 +235,6 @@ namespace Gallio.ConcordionAdapter.Model
         private string ExtrapolateResourcePath(Type type)
         {
             var typeNamespace = type.Namespace;
-
-            if (typeNamespace.StartsWith("Concordion."))
-            {
-                typeNamespace = typeNamespace.Remove(0, 11);
-            }
-
             typeNamespace = typeNamespace.Replace(".", "\\");
             var fileName = type.Name.Remove(type.Name.Length - 4);
 

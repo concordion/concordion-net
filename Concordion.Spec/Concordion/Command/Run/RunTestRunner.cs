@@ -7,22 +7,13 @@ using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Command.Run
 {
-    class RunTestRunner
+    class RunTestRunner : IRunner
     {
-        public static Result result;
-	    private string param = String.Empty;
-    	
-	    public void setTestParam(string param){
-		    this.param  = param;
-	    }
+        public static Result Result;
 
-        public RunnerResult execute(Resource resource, string href)
+        public RunnerResult Execute(Resource resource, string href)
         {
-		    if (param != href)
-            {
-			    throw new Exception("testParam not set");
-		    }
-		    return new RunnerResult(result);
+		    return new RunnerResult(Result);
 	    }
     }
 }

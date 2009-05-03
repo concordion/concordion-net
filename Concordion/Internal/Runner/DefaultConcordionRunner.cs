@@ -123,25 +123,6 @@ namespace Concordion.Internal.Runner
                         }
                     }
                 }
-                else
-                {
-                    fixtureName = "Concordion." + fixtureName;
-
-                    fixtureType = specificationAssembly.GetType(fixtureName, false, true);
-
-                    if (fixtureType != null)
-                    {
-                        if (fixtureType.IsClass)
-                        {
-                            var constructor = fixtureType.GetConstructor(Type.EmptyTypes);
-
-                            if (constructor != null)
-                            {
-                                return constructor.Invoke(new Object[] { });
-                            }
-                        }
-                    }
-                }
             }
 
             return null;

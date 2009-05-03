@@ -12,7 +12,7 @@ namespace Concordion.Spec.Concordion.Command.Run
     {
     	public String successOrFailure(String fragment, String hardCodedTestResult, String evaluationResult) 
         {
-            RunTestRunner.result = (Result)Enum.Parse(typeof(Result), hardCodedTestResult, true);
+            RunTestRunner.Result = (Result)Enum.Parse(typeof(Result), hardCodedTestResult, true);
             return new TestRig()
                 .WithStubbedEvaluationResult(evaluationResult)
                 .ProcessFragment(fragment)

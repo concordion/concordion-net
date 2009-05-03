@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.IO;
+using Concordion.Api;
 
 namespace Concordion.Internal
 {
@@ -28,9 +29,16 @@ namespace Concordion.Internal
             set;
         }
 
+        public Dictionary<string, IRunner> Runners
+        {
+            get;
+            set;
+        }
+
         public ConcordionConfig()
         {
             SpecificationAssemblies = new List<string>();
+            Runners = new Dictionary<string, IRunner>();
         }
 
         public void Load()
