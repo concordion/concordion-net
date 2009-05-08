@@ -27,10 +27,10 @@ namespace Concordion.Internal
     {
         #region Properties
 
-        private object RootObject
+        public object Fixture
         {
             get;
-            set;
+            private set;
         }
 
         private OgnlContext OgnlContext
@@ -43,10 +43,10 @@ namespace Concordion.Internal
 
         #region Constructors
 
-        public OgnlEvaluator(object rootObject)
+        public OgnlEvaluator(object fixture)
         {
-            RootObject = rootObject;
-            OgnlContext = new OgnlContext();
+            this.Fixture = fixture;
+            this.OgnlContext = new OgnlContext();
         }
 
         #endregion
@@ -96,9 +96,9 @@ namespace Concordion.Internal
 
         public virtual object Evaluate(string expression)
         {
-            Check.NotNull(RootObject, "Root object is null");
+            Check.NotNull(Fixture, "Root object is null");
             Check.NotNull(expression, "Expression to evaluate cannot be null");
-            return Ognl.getValue(expression, OgnlContext, RootObject);
+            return Ognl.getValue(expression, OgnlContext, Fixture);
         }
 
         #endregion

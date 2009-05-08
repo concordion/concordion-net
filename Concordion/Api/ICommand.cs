@@ -20,10 +20,33 @@ using Concordion.Internal;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// Represents a concordion command from the specification
+    /// </summary>
     public interface ICommand
     {
-        void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
+        /// <summary>
+        /// Setups the specified command call.
+        /// </summary>
+        /// <param name="commandCall">The command call.</param>
+        /// <param name="evaluator">The evaluator.</param>
+        /// <param name="resultRecorder">The result recorder.</param>
+        void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
+
+        /// <summary>
+        /// Executes the specified command call.
+        /// </summary>
+        /// <param name="commandCall">The command call.</param>
+        /// <param name="evaluator">The evaluator.</param>
+        /// <param name="resultRecorder">The result recorder.</param>
         void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
+
+        /// <summary>
+        /// Verifies the specified command call.
+        /// </summary>
+        /// <param name="commandCall">The command call.</param>
+        /// <param name="evaluator">The evaluator.</param>
+        /// <param name="resultRecorder">The result recorder.</param>
         void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
     }
 }

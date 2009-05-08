@@ -19,8 +19,17 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// Runs concordion on a particular specification
+    /// </summary>
     public interface IRunner
     {
-        RunnerResult Execute(Resource resource, string href);
+        /// <summary>
+        /// Executes the specified resource.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <param name="href">The href.</param>
+        /// <returns>A result indicating how the specification ran.</returns>
+        RunnerResult Execute(object fixture, Resource resource, string href);
     }
 }

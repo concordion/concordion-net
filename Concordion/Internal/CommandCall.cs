@@ -79,7 +79,7 @@ namespace Concordion.Internal
 
         public void SetUp(IEvaluator evaluator, IResultRecorder resultRecorder)
         {
-            Command.SetUp(this, evaluator, resultRecorder);
+            Command.Setup(this, evaluator, resultRecorder);
         }
 
         public void Execute(IEvaluator evaluator, IResultRecorder resultRecorder)

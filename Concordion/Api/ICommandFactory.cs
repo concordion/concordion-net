@@ -19,8 +19,17 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// A factory to create command objects
+    /// </summary>
     public interface ICommandFactory
     {
+        /// <summary>
+        /// Creates the command.
+        /// </summary>
+        /// <param name="namespaceUri">The namespace URI.</param>
+        /// <param name="commandName">Name of the command.</param>
+        /// <returns></returns>
         ICommand CreateCommand(string namespaceUri, string commandName);
     }
 }

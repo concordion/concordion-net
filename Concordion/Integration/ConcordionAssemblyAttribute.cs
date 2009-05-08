@@ -21,7 +21,7 @@ using System.IO;
 namespace Concordion.Integration
 {
     [AttributeUsage(AttributeTargets.Assembly)]
-    public class ConcordionAssemblyAttribute : Attribute
+    public sealed class ConcordionAssemblyAttribute : Attribute
     {
         public DirectoryInfo BaseInputDirectory
         {

@@ -34,7 +34,7 @@ namespace Concordion.Internal
         {
             get
             {
-                foreach (Element cell in RowElement.GetChildElements())
+                foreach (var cell in RowElement.GetChildElements())
                 {
                     if (cell.IsNamed("td")) return false;
                 }
@@ -57,8 +57,8 @@ namespace Concordion.Internal
 
         public IList<Element> GetCells()
         {
-            IList<Element> cells = new List<Element>();
-            foreach (Element childElement in RowElement.GetChildElements())
+            var cells = new List<Element>();
+            foreach (var childElement in RowElement.GetChildElements())
             {
                 if (childElement.IsNamed("td") || childElement.IsNamed("th")) 
                 {
@@ -71,7 +71,7 @@ namespace Concordion.Internal
         public int GetIndexOfCell(Element element)
         {
             int index = 0;
-            foreach (Element cell in RowElement.GetChildElements())
+            foreach (var cell in RowElement.GetChildElements())
             {
                 if (element.Text == cell.Text)
                 {

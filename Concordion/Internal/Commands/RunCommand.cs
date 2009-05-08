@@ -74,7 +74,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
         }
 
@@ -106,7 +106,7 @@ namespace Concordion.Internal.Commands
                         + "' System property is set to a name of an IRunner implementation "
                         + "(3) Specify an assembly fully qualified class name of an IRunner implementation");
 
-                var result = concordionRunner.Execute(commandCall.Resource, href).Result;
+                var result = concordionRunner.Execute(evaluator.Fixture, commandCall.Resource, href).Result;
 
                 if (result == Result.Success)
                 {

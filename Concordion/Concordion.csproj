@@ -72,6 +72,7 @@
     <Compile Include="Api\Result.cs" />
     <Compile Include="Api\RunnerResult.cs" />
     <Compile Include="Concordion.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HtmlFramework.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -141,6 +142,8 @@
     <Compile Include="Internal\Runner\DefaultConcordionRunner.cs" />
     <Compile Include="Internal\SimpleEvaluator.cs" />
     <Compile Include="Internal\SimpleEvaluatorFactory.cs" />
+    <Compile Include="Internal\SpecificationConfig.cs" />
+    <Compile Include="Internal\SpecificationConfigParser.cs" />
     <Compile Include="Internal\StringExtensionMethods.cs" />
     <Compile Include="Internal\SummarizingResultRecorder.cs" />
     <Compile Include="Internal\Table.cs" />
@@ -165,6 +168,9 @@
     <None Include="Resources\visibility-toggler.js" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Concordion.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\embedded.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

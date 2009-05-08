@@ -46,7 +46,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public abstract void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
+        public abstract void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
         public abstract void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
         public abstract void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder);
 

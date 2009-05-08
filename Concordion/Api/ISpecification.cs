@@ -19,8 +19,16 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// An HTML specification that is input into Concordion
+    /// </summary>
     public interface ISpecification
     {
+        /// <summary>
+        /// Processes the specification using the expression evaluator and writing the results to the result recorder
+        /// </summary>
+        /// <param name="evaluator">The evaluator.</param>
+        /// <param name="resultRecorder">The result recorder.</param>
         void Process(IEvaluator evaluator, IResultRecorder resultRecorder);
     }
 }

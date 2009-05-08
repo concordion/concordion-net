@@ -44,7 +44,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             throw new InvalidOperationException("Unexpected call to SpecificationCommand's SetUp() method. Only the Execute() method should be called.");
         }

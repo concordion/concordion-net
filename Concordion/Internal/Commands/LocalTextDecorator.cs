@@ -31,7 +31,7 @@ namespace Concordion.Internal.Commands
         {
         }
 
-        public override void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             object savedTextValue = evaluator.GetVariable(TEXT_VARIABLE);
             object savedHrefValue = evaluator.GetVariable(HREF_VARIABLE);
@@ -39,7 +39,7 @@ namespace Concordion.Internal.Commands
             {
                 evaluator.SetVariable(TEXT_VARIABLE, commandCall.Element.Text);
                 evaluator.SetVariable(HREF_VARIABLE, getHref(commandCall.Element));
-                m_command.SetUp(commandCall, evaluator, resultRecorder);
+                m_command.Setup(commandCall, evaluator, resultRecorder);
             }
             finally
             {

@@ -26,9 +26,6 @@ namespace Concordion.Internal
 
         public Resource LocateSpecification(object fixture)
         {
-            var config = new ConcordionConfig();
-            config.Load();
-
             var fixtureName = fixture.GetType().ToString();
             fixtureName = fixtureName.Replace(".", "\\");
             fixtureName = fixtureName.Remove(fixtureName.Length - 4);

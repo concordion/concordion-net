@@ -10,6 +10,11 @@ namespace Concordion.Spec
     {
         private object evaluationResult = null;
 
+        public StubEvaluator(object fixture)
+        {
+            this.Fixture = fixture;
+        }
+
         public IEvaluator CreateEvaluator(object fixture)
         {
             return this;
@@ -31,6 +36,12 @@ namespace Concordion.Spec
 
         public void SetVariable(string variableName, object value)
         {
+        }
+
+        public object Fixture
+        {
+            get;
+            private set;
         }
 
         public IEvaluatorFactory withStubbedResult(object evaluationResult)

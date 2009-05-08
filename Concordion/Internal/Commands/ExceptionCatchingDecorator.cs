@@ -46,11 +46,11 @@ namespace Concordion.Internal.Commands
 
         #region Override Methods
 
-        public override void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             try
             {
-                m_command.SetUp(commandCall, evaluator, resultRecorder);
+                m_command.Setup(commandCall, evaluator, resultRecorder);
             }
             catch (Exception e)
             {

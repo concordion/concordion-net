@@ -276,8 +276,7 @@ namespace Concordion.Internal
         {
             RunCommand.Runners.Add("concordion", new DefaultConcordionRunner(Source, Target));
 
-            var config = new ConcordionConfig();
-            config.Load();
+            var config = new ConcordionConfig().Load();
 
             foreach (var runner in config.Runners)
             {

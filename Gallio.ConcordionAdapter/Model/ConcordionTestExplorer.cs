@@ -152,8 +152,7 @@ namespace Gallio.ConcordionAdapter.Model
 
         private void GetInputOutputDirectories(IAssemblyInfo assembly)
         {
-            var config = new ConcordionConfig();
-            config.Load();
+            var config = new SpecificationConfig().Load(assembly.Resolve(false));
 
             var baseInputDirectory = new DirectoryInfo(config.BaseInputDirectory);
             if (baseInputDirectory.Exists)

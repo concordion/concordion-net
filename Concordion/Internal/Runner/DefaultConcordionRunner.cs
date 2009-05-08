@@ -63,19 +63,16 @@ namespace Concordion.Internal.Runner
 
         #region IRunner Members
 
-        public RunnerResult Execute(Resource resource, string href)
+        public RunnerResult Execute(object callingFixture, Resource resource, string href)
         {
-            var config = new ConcordionConfig();
-            config.Load();
-
-            var fixture = GetFixture(resource, href, config);
+            var runnerFixture = GetFixture(resource, href, callingFixture);
 
             var concordion = new ConcordionBuilder()
                                         .WithSource(Source)
                                         .WithTarget(Target)
                                         .Build();
 
-            var results = concordion.Process(fixture);
+            var results = concordion.Process(runnerFixture);
 
             Result result;
             if (results.HasFailures)
@@ -94,7 +91,26 @@ namespace Concordion.Internal.Runner
 		    return new RunnerResult(result);
         }
 
-        private static object GetFixture(Resource resource, string href, ConcordionConfig config)
+        private static object GetFixture(Resource resource, string href, object callingFixture)
+        {
+            var fixtureName = GetNameOfFixtureToRun(resource, href);
+            return GetFixtureToRun(callingFixture, fixtureName);
+        }
+
+        private static object GetFixtureToRun(object fixture, string fixtureName)
+        {
+            var fixtureAssembly = fixture.GetType().Assembly;
+            var fixtureType = fixtureAssembly.GetType(fixtureName, false, true);
+
+            if (fixtureType != null)
+            {
+                return Activator.CreateInstance(fixtureType);
+            }
+
+            return null;
+        }
+
+        private static string GetNameOfFixtureToRun(Resource resource, string href)
         {
             Resource hrefResource = resource.GetRelativeResource(href);
             var fixturePath = hrefResource.Path;
@@ -105,27 +121,7 @@ namespace Concordion.Internal.Runner
             {
                 fixtureName = fixtureName.Remove(0, 1);
             }
-
-            foreach (var fullyQualifiedAssemblyName in config.SpecificationAssemblies)
-            {
-                var specificationAssembly = Assembly.Load(fullyQualifiedAssemblyName);
-                var fixtureType = specificationAssembly.GetType(fixtureName, false, true);
-
-                if (fixtureType != null)
-                {
-                    if (fixtureType.IsClass)
-                    {
-                        var constructor = fixtureType.GetConstructor(Type.EmptyTypes);
-
-                        if (constructor != null)
-                        {
-                            return constructor.Invoke(new Object[] { });
-                        }
-                    }
-                }
-            }
-
-            return null;
+            return fixtureName;
         }
 
         #endregion

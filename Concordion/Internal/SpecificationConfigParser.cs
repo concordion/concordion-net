@@ -16,24 +16,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.IO;
 using System.Xml.Linq;
 using Concordion.Api;
+using System.IO;
 
 namespace Concordion.Internal
 {
     /// <summary>
-    /// Parses the Concordion.config file and stores the results in a <see cref="ConcordionConfig"/> object
+    /// 
     /// </summary>
-    public class ConcordionConfigParser
+    public class SpecificationConfigParser
     {
         #region Properties
-
+        
         /// <summary>
         /// Gets or sets the config.
         /// </summary>
         /// <value>The config.</value>
-        public ConcordionConfig Config
+        public SpecificationConfig Config
         {
             get;
             private set;
@@ -44,17 +44,15 @@ namespace Concordion.Internal
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcordionConfigParser"/> class.
+        /// Initializes a new instance of the <see cref="SpecificationConfigParser"/> class.
         /// </summary>
         /// <param name="config">The config.</param>
-        public ConcordionConfigParser(ConcordionConfig config)
+        public SpecificationConfigParser(SpecificationConfig config)
         {
             this.Config = config;
         } 
 
         #endregion
-
-        #region Methods
 
         /// <summary>
         /// Parses the specified reader.
@@ -74,44 +72,49 @@ namespace Concordion.Internal
         {
             var configElement = document.Root;
 
-            if (configElement.Name == "Concordion")
+            if (configElement.Name == "Specification")
             {
-                LoadRunners(configElement);
+                LoadBaseInputDirectory(configElement);
+                LoadBaseOutputDirectory(configElement);
             }
         }
 
         /// <summary>
-        /// Loads the runners.
+        /// Loads the base output directory.
         /// </summary>
         /// <param name="element">The element.</param>
-        private void LoadRunners(XElement element)
+        private void LoadBaseOutputDirectory(XElement element)
         {
-            var runners = element.Element("Runners");
+            var baseOutputDirectory = element.Element("BaseOutputDirectory");
 
-            if (runners != null)
+            if (baseOutputDirectory != null)
             {
-                foreach (var runner in runners.Elements("Runner"))
+                var pathAttribute = baseOutputDirectory.Attribute("path");
+
+                if (pathAttribute != null)
                 {
-                    var alias = runner.Attribute("alias");
-                    var runnerTypeText = runner.Attribute("type");
-
-                    if (alias != null && runnerTypeText != null)
-                    {
-                        var runnerType = Type.GetType(runnerTypeText.Value);
-
-                        if (runnerType != null)
-                        {
-                            var runnerObject = Activator.CreateInstance(runnerType);
-                            if (runnerObject != null && runnerObject is IRunner)
-                            {
-                                Config.Runners.Add(alias.Value, runnerObject as IRunner);
-                            }
-                        }
-                    }
+                    Config.BaseOutputDirectory = pathAttribute.Value;
                 }
             }
-        } 
+        }
 
-        #endregion
+        /// <summary>
+        /// Loads the base input directory.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        private void LoadBaseInputDirectory(XElement element)
+        {
+            var baseInputDirectory = element.Element("BaseInputDirectory");
+
+            if (baseInputDirectory != null)
+            {
+                var pathAttribute = baseInputDirectory.Attribute("path");
+
+                if (pathAttribute != null)
+                {
+                    Config.BaseInputDirectory = pathAttribute.Value;
+                }
+            }
+        }
     }
 }

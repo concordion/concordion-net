@@ -48,7 +48,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void SetUp(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
         }
 

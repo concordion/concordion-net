@@ -61,7 +61,6 @@ namespace Concordion.Api
                 }
 
                 StringBuilder parentPath = new StringBuilder("\\");
-                //StringBuilder parentPath = new StringBuilder();
                 for (int i = 0; i < Parts.Length - 1; i++)
                 {
                     parentPath.Append(Parts[i] + PATH_SEPARATOR);
@@ -101,7 +100,7 @@ namespace Concordion.Api
                 Path = Path.Replace(System.IO.Path.GetPathRoot(path), @"\");
             }
 
-            if (Path.EndsWith(PATH_SEPARATOR.ToString()))
+            if (Path.EndsWith(PATH_SEPARATOR.ToString(), StringComparison.InvariantCulture))
             {
                 IsPackage = true;
             }

@@ -19,8 +19,16 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// Creates <see cref="IEvaluator"/ objects>
+    /// </summary>
     public interface IEvaluatorFactory
     {
+        /// <summary>
+        /// Creates the evaluator.
+        /// </summary>
+        /// <param name="fixture">The fixture.</param>
+        /// <returns></returns>
         IEvaluator CreateEvaluator(object fixture);
     }
 }

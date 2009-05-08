@@ -19,6 +19,9 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IContext : IResultRecorder, IEvaluator
     {
         Resource Resource { get; }
@@ -27,7 +30,7 @@ namespace Concordion.Api
         object EvaluateExpression();
         void ProcessChildCommandsSequentially();
         bool HasChildCommands();
-        void SetUpChildCommands();
+        void SetupChildCommands();
         void ExecuteChildCommands();
         void VerifyChildCommands();
     }

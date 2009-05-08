@@ -20,9 +20,25 @@ using System.IO;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// Represents the source for specifications
+    /// </summary>
     public interface ISource
     {
+        /// <summary>
+        /// Creates the reader.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <returns></returns>
         TextReader CreateReader(Resource resource);
+
+        /// <summary>
+        /// Determines whether this instance can find the specified resource.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <returns>
+        /// 	<c>true</c> if this instance can find the specified resource; otherwise, <c>false</c>.
+        /// </returns>
         bool CanFind(Resource resource);
     }
 }

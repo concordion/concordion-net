@@ -15,9 +15,9 @@
     <DefaultExclude Include="**\.svn\**" />
     <DefaultExclude Include="**\Test\**" />
     <DefaultExclude Include="**\TestResults\**" />
-	<DefaultExclude Include="tools\**" />
-	<DefaultExclude Include="Results\**" />
-	<DefaultExclude Include="Reports\**" />
+    <DefaultExclude Include="tools\**" />
+    <DefaultExclude Include="Results\**" />
+    <DefaultExclude Include="Reports\**" />
     <DefaultExclude Include="**\doc\**" />
     <DefaultExclude Include="**\www\**" />
     <DefaultExclude Include="**\*.user" />
@@ -28,23 +28,26 @@
 
   <ItemGroup>
     <ZipFiles Include="Concordion\bin\Release\Concordion.dll" />
-	<ZipFiles Include="Concordion\bin\Release\Concordion.pdb" />
-	<ZipFiles Include="Concordion\bin\Release\OGNL.dll" />
-	<ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
-	<ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.pdb" />
-	<ZipFiles Include="Concordion.Test\bin\Release\Concordion.Test.dll" />
-	<ZipFiles Include="Concordion.Test\bin\Release\Concordion.Test.pdb" />
-	<ZipFiles Include="Concordion.Test\bin\Release\Moq.dll" />
-	<ZipFiles Include="Concordion.Test\bin\Release\xunit.dll" />
-	<ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.dll" />
-	<ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.xml" />
-	<ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.pdb" />
-	<ZipFiles Include="Gallio.ConcordionAdapter\Gallio.ConcordionAdaptor.plugin" />
+    <ZipFiles Include="Concordion\bin\Release\Concordion.pdb" />
+    <ZipFiles Include="Concordion\bin\Release\Concordion.xml" />
+    <ZipFiles Include="Concordion\bin\Release\Concordion.config" />
+    <ZipFiles Include="Concordion\bin\Release\OGNL.dll" />
+    <ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
+    <ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.pdb" />
+    <ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.config" />
+    <ZipFiles Include="Concordion.Test\bin\Release\Concordion.Test.dll" />
+    <ZipFiles Include="Concordion.Test\bin\Release\Concordion.Test.pdb" />
+    <ZipFiles Include="Concordion.Test\bin\Release\Moq.dll" />
+    <ZipFiles Include="Concordion.Test\bin\Release\xunit.dll" />
+    <ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.dll" />
+    <ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.xml" />
+    <ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.pdb" />
+    <ZipFiles Include="Gallio.ConcordionAdapter\Gallio.ConcordionAdaptor.plugin" />
   </ItemGroup>
 
   <ItemGroup>
     <TestAssemblies Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
-	<Plugins Include="Gallio.ConcordionAdapter\bin\Debug" />
+    <Plugins Include="Gallio.ConcordionAdapter\bin\Debug" />
   </ItemGroup>
 
   <Target Name="Version">

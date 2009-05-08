@@ -80,7 +80,7 @@ namespace Concordion.Spec
 
         public TestRig WithStubbedEvaluationResult(object evaluationResult)
         {
-            this.EvaluatorFactory = new StubEvaluator().withStubbedResult(evaluationResult);
+            this.EvaluatorFactory = new StubEvaluator(this.Fixture).withStubbedResult(evaluationResult);
             return this;
         }
 
