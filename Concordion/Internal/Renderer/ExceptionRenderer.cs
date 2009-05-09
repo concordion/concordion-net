@@ -27,7 +27,6 @@ namespace Concordion.Internal.Renderer
     {
         #region Fields
 
-        private static readonly string TOGGLING_SCRIPT_RESOURCE_PATH = "/org/concordion/internal/resource/visibility-toggler.js";
         private long buttonId = 0;
         
         #endregion

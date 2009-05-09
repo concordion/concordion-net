@@ -123,7 +123,7 @@ namespace Concordion.Internal.Commands
 
                 resultRecorder.Record(result);
             }
-            catch (Exception e)
+            catch
             {
                 OnFailedRunReported(element);
                 resultRecorder.Record(Result.Failure);

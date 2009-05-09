@@ -14,28 +14,61 @@ using Concordion.Internal;
 namespace Gallio.ConcordionAdapter.Model
 {
     /// <summary>
-    /// Finds tests in Concordion assemblies
+    /// Explores an assembly for Concordion tests
     /// </summary>
     public class ConcordionTestExplorer : BaseTestExplorer
     {
+        #region Fields
+        
         private static readonly string CONCORDION_ASSEMBLY_DISPLAY_NAME = @"Concordion";
 
+        /// <summary>
+        /// 
+        /// </summary>
         public readonly Dictionary<Version, ITest> frameworkTests;
-        public readonly Dictionary<IAssemblyInfo, ITest> assemblyTests;
-        public readonly Dictionary<ITypeInfo, ITest> typeTests;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public readonly Dictionary<IAssemblyInfo, ITest> assemblyTests;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public readonly Dictionary<ITypeInfo, ITest> typeTests; 
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the base input directory.
+        /// </summary>
+        /// <value>The base input directory.</value>
         private DirectoryInfo BaseInputDirectory
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the base output directory.
+        /// </summary>
+        /// <value>The base output directory.</value>
         private DirectoryInfo BaseOutputDirectory
         {
             get;
             set;
-        }
+        } 
 
+        #endregion
+
+        #region Constructors
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConcordionTestExplorer"/> class.
+        /// </summary>
+        /// <param name="model">The model.</param>
         public ConcordionTestExplorer(TestModel model)
             : base(model)
         {
@@ -45,39 +78,11 @@ namespace Gallio.ConcordionAdapter.Model
 
             BaseInputDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
             BaseOutputDirectory = new DirectoryInfo(Environment.GetEnvironmentVariable("TEMP"));
-        }
+        } 
 
-        public override void ExploreAssembly(Gallio.Reflection.IAssemblyInfo assembly, Action<ITest> consumer)
-        {
-            Version frameworkVersion = GetFrameworkVersion(assembly);
+        #endregion
 
-            if (frameworkVersion != null)
-            {
-                ITest frameworkTest = GetFrameworkTest(frameworkVersion, TestModel.RootTest);
-                ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, true);
-
-                if (consumer != null)
-                {
-                    consumer(assemblyTest);
-                }
-            }
-        }
-
-        public override void ExploreType(ITypeInfo type, Action<ITest> consumer)
-        {
-            IAssemblyInfo assembly = type.Assembly;
-            Version frameworkVersion = GetFrameworkVersion(assembly);
-
-            if (frameworkVersion != null)
-            {
-                ITest frameworkTest = GetFrameworkTest(frameworkVersion, TestModel.RootTest);
-                ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, false);
-
-                ITest typeTest = TryGetTypeTest(type, assemblyTest);
-                if (typeTest != null && consumer != null)
-                    consumer(typeTest);
-            }
-        }
+        #region Methods
 
         private static bool IsConcordionAttributePresent(IAssemblyInfo assembly)
         {
@@ -161,7 +166,7 @@ namespace Gallio.ConcordionAdapter.Model
             }
             else
             {
-                TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, "The Base Input Directory of the Concordion Assembly does not exist, reverting to default"));
+                TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, String.Format("The Base Input Directory {0} does not exist, reverting to default", config.BaseInputDirectory)));
             }
 
             var baseOutputDirectory = new DirectoryInfo(config.BaseOutputDirectory);
@@ -263,5 +268,53 @@ namespace Gallio.ConcordionAdapter.Model
 
             return typeTest;
         }
+
+        #endregion
+
+        #region Override Methods
+
+        /// <summary>
+        /// Explores the assembly for Concordion tests
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <param name="consumer">The consumer.</param>
+        public override void ExploreAssembly(Gallio.Reflection.IAssemblyInfo assembly, Action<ITest> consumer)
+        {
+            Version frameworkVersion = GetFrameworkVersion(assembly);
+
+            if (frameworkVersion != null)
+            {
+                ITest frameworkTest = GetFrameworkTest(frameworkVersion, TestModel.RootTest);
+                ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, true);
+
+                if (consumer != null)
+                {
+                    consumer(assemblyTest);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Explores the type for Concordion tests
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="consumer">The consumer.</param>
+        public override void ExploreType(ITypeInfo type, Action<ITest> consumer)
+        {
+            IAssemblyInfo assembly = type.Assembly;
+            Version frameworkVersion = GetFrameworkVersion(assembly);
+
+            if (frameworkVersion != null)
+            {
+                ITest frameworkTest = GetFrameworkTest(frameworkVersion, TestModel.RootTest);
+                ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, false);
+
+                ITest typeTest = TryGetTypeTest(type, assemblyTest);
+                if (typeTest != null && consumer != null)
+                    consumer(typeTest);
+            }
+        } 
+
+        #endregion
     }
 }

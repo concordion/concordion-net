@@ -51,8 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\ConcordionAttributeInfoAdapter.cs" />
-    <Compile Include="Model\ConcordionMethodInfoAdapter.cs" />
     <Compile Include="Model\ConcordionTest.cs" />
     <Compile Include="Model\ConcordionTestController.cs" />
     <Compile Include="Model\ConcordionTestExplorer.cs" />

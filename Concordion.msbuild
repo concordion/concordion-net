@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="C:\Dev\msbuildtasks-trunk\Source\MSBuild.Community.Tasks\bin\Debug\MSBuild.Community.Tasks.Targets"/>
   <UsingTask AssemblyFile="tools\Gallio-3.0.5.546\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 
   <PropertyGroup>
     <Major>0</Major>
-    <Minor>1</Minor>
+    <Minor>2</Minor>
     <Build>1</Build>
     <Revision>9999</Revision>
   </PropertyGroup>
@@ -24,30 +24,6 @@
     <DefaultExclude Include="**\*.suo" />
     <DefaultExclude Include="**\*.zip" />
     <DefaultExclude Include="**\*.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ZipFiles Include="Concordion\bin\Release\Concordion.dll" />
-    <ZipFiles Include="Concordion\bin\Release\Concordion.pdb" />
-    <ZipFiles Include="Concordion\bin\Release\Concordion.xml" />
-    <ZipFiles Include="Concordion\bin\Release\Concordion.config" />
-    <ZipFiles Include="Concordion\bin\Release\OGNL.dll" />
-    <ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
-    <ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.pdb" />
-    <ZipFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.config" />
-    <ZipFiles Include="Concordion.Test\bin\Release\Concordion.Test.dll" />
-    <ZipFiles Include="Concordion.Test\bin\Release\Concordion.Test.pdb" />
-    <ZipFiles Include="Concordion.Test\bin\Release\Moq.dll" />
-    <ZipFiles Include="Concordion.Test\bin\Release\xunit.dll" />
-    <ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.dll" />
-    <ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.xml" />
-    <ZipFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.pdb" />
-    <ZipFiles Include="Gallio.ConcordionAdapter\Gallio.ConcordionAdaptor.plugin" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TestAssemblies Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
-    <Plugins Include="Gallio.ConcordionAdapter\bin\Debug" />
   </ItemGroup>
 
   <Target Name="Version">
@@ -70,18 +46,89 @@
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(Version)"
       Condition="$(Revision) != '0' "/>
-	  
   </Target>
 
   <Target Name="Compile" DependsOnTargets="Version">
     <MSBuild Projects="Concordion.sln"
              Properties="Configuration=Release" />
   </Target>
+  
+  <PropertyGroup>
+    <StagingDirectory>staging</StagingDirectory>
+    <StagingDirectory>staging\Concordion</StagingDirectory>
+    <StagingDirectory>staging\Specifications</StagingDirectory>
+    <StagingDirectory>staging\Tests</StagingDirectory>
+    <StagingDirectory>staging\Gallio-Concordion-Adapter</StagingDirectory>
+    <DeploymentDirectory>deploy</DeploymentDirectory>
+  </PropertyGroup>
 
-  <Target Name="Test-Specs" DependsOnTargets="Compile">
+  <Target Name="PreStaging" DependsOnTargets="Compile">
+    <MakeDir Directories="$(StagingDirectory)"/>
+    <MakeDir Directories="$(DeploymentDirectory)"/>
+  </Target>
+
+  <ItemGroup>
+    <ConcordionFiles Include="Concordion\bin\Release\Concordion.dll" />
+    <ConcordionFiles Include="Concordion\bin\Release\Concordion.pdb" />
+    <!--<ConcordionFiles Include="Concordion\bin\Release\Concordion.xml" />-->
+    <ConcordionFiles Include="Concordion\bin\Release\Concordion.config" />
+    <ConcordionFiles Include="Concordion\bin\Release\OGNL.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ConcordionSpecFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
+    <ConcordionSpecFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.pdb" />
+    <ConcordionSpecFiles Include="Concordion.Spec\bin\Release\Concordion.Spec.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecificationHtmlFiles Include="Specifications\**\*.*" Exclude="@(DefaultExclude)"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ConcordionTestFiles Include="Concordion.Test\bin\Release\Concordion.Test.dll" />
+    <ConcordionTestFiles Include="Concordion.Test\bin\Release\Concordion.Test.pdb" />
+    <ConcordionTestFiles Include="Concordion.Test\bin\Release\Moq.dll" />
+    <ConcordionTestFiles Include="Concordion.Test\bin\Release\xunit.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ConcordionGallioFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.dll" />
+    <ConcordionGallioFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.xml" />
+    <ConcordionGallioFiles Include="Gallio.ConcordionAdapter\bin\Release\Gallio.ConcordionAdapter.pdb" />
+    <ConcordionGallioFiles Include="Gallio.ConcordionAdapter\Gallio.ConcordionAdaptor.plugin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ConcordionLicenseFiles Include="Concordion.License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BatchFiles Include="run-spec-with-echo.cmd" />
+    <BatchFiles Include="run-unit-test-with-echo.cmd" />
+  </ItemGroup>
+
+  <Target Name="Staging" DependsOnTargets="PreStaging">
+    <Copy SourceFiles="@(ConcordionLicenseFiles)" DestinationFolder="staging" />
+    <Copy SourceFiles="@(BatchFiles)" DestinationFolder="staging" />
+    <Copy SourceFiles="@(ConcordionFiles)" DestinationFolder="staging\Concordion" />
+    <Copy SourceFiles="@(ConcordionSpecFiles)" DestinationFolder="staging\Specifications" />
+    <Copy SourceFiles="@(SpecificationHtmlFiles)" DestinationFiles="@(SpecificationHtmlFiles->'staging\Specifications\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="@(ConcordionTestFiles)" DestinationFolder="staging\Test" />
+    <Copy SourceFiles="@(ConcordionGallioFiles)" DestinationFolder="staging\Gallio-Concordion-Adapter" />
+    <Copy SourceFiles="@(ConcordionFiles)" DestinationFolder="staging\Gallio-Concordion-Adapter" />
+  </Target>
+  
+  <ItemGroup>
+    <TestAssemblies Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
+    <Plugins Include="Gallio.ConcordionAdapter\bin\Debug" />
+  </ItemGroup>
+
+  <Target Name="Test-Specs" DependsOnTargets="Staging">
     <Gallio Assemblies="@(TestAssemblies)"
             PluginDirectories="@(Plugins)"
             ReportDirectory="Reports"
+            WorkingDirectory="."
             ReportTypes="XHtml"
             ShowReports="false"
             IgnoreFailures="true"
@@ -89,13 +136,16 @@
             RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration" />
   </Target>
 
-  <Target Name="Zip" DependsOnTargets="Test-Specs">
-    <MakeDir Directories="deploy"/>
-    <Zip Files="@(ZipFiles)" Flatten="true"
-         ZipFileName="deploy\Concordion-$(Version).zip" />
+
+
+  <Target Name="Package" DependsOnTargets="Test-Specs">
+    <ItemGroup>
+      <ZipFiles Include="staging\**\*.*" />
+    </ItemGroup>
+    <Zip Files="@(ZipFiles)" ZipFileName="deploy\Concordion-$(Version).zip" WorkingDirectory="staging" />
   </Target>
 
-  <Target Name="Build" DependsOnTargets="Zip">
+  <Target Name="Build" DependsOnTargets="Package">
     <Message Text="Concordion Build Complete"/>
   </Target>
 

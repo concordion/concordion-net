@@ -20,9 +20,23 @@ using Concordion.Internal.Commands;
 
 namespace Concordion.Internal.Renderer
 {
+    /// <summary>
+    /// Handles events coming from the processing of an <see cref="ISpecification"/> object
+    /// </summary>
     public interface ISpecificationListener
     {
+        /// <summary>
+        /// Handles the SpecificationProcessing event that is triggered before the specification is processed
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="Concordion.Internal.Commands.SpecificationEventArgs"/> instance containing the event data.</param>
         void SpecificationProcessingEventHandler(object sender, SpecificationEventArgs eventArgs);
+
+        /// <summary>
+        /// Handles the SpecificationProcessed event that is triggered after the specification is processed
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The <see cref="Concordion.Internal.Commands.SpecificationEventArgs"/> instance containing the event data.</param>
         void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs);
     }
 }
