@@ -58,7 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AssertionErrorException.cs" />
     <Compile Include="Api\Element.cs" />
+    <Compile Include="Api\ExpectedToFailAttribute.cs" />
+    <Compile Include="Api\ExpectedToPassAttribute.cs" />
     <Compile Include="Api\ICommand.cs" />
     <Compile Include="Api\ICommandFactory.cs" />
     <Compile Include="Api\IContext.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="Api\Resource.cs" />
     <Compile Include="Api\Result.cs" />
     <Compile Include="Api\RunnerResult.cs" />
+    <Compile Include="Api\UnimplementedAttribute.cs" />
     <Compile Include="Concordion.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HtmlFramework.Designer.cs">
@@ -122,11 +126,15 @@
     <Compile Include="Internal\ConcordionConfig.cs" />
     <Compile Include="Internal\ConcordionConfigParser.cs" />
     <Compile Include="Internal\DocumentParser.cs" />
+    <Compile Include="Internal\ExpectedToFailFixtureState.cs" />
     <Compile Include="Internal\FileSource.cs" />
     <Compile Include="Internal\FileTarget.cs" />
+    <Compile Include="Internal\IFixtureState.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
+    <Compile Include="Internal\UnimplementedFixtureState.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />
     <Compile Include="Internal\ParsingEventArgs.cs" />
+    <Compile Include="Internal\ExpectedToPassFixtureState.cs" />
     <Compile Include="Internal\Renderer\AssertEqualsResultRenderer.cs" />
     <Compile Include="Internal\Renderer\BreadCrumbRenderer.cs" />
     <Compile Include="Internal\Renderer\DocumentStructureImprovementRenderer.cs" />

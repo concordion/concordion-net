@@ -54,6 +54,22 @@ namespace Concordion.Internal
             return count;
         }
 
+        private IFixtureState DetermineFixtureState(object fixture)
+        {
+            var attributes = fixture.GetType().GetCustomAttributes(false);
+            
+            if (attributes.Contains(typeof(UnimplementedAttribute)))
+            {
+                return new UnimplementedFixtureState();
+            }
+            else if (attributes.Contains(typeof(ExpectedToFailAttribute)))
+            {
+                return new ExpectedToFailFixtureState();
+            }
+
+            return new ExpectedToPassFixtureState();
+        }
+
         #endregion
 
         #region IResultRecorder Members
@@ -67,21 +83,39 @@ namespace Concordion.Internal
 
         #region IResultSummary Members
 
+        /// <summary>
+        /// Gets the success count.
+        /// </summary>
+        /// <value>The success count.</value>
         public long SuccessCount
         {
             get { return GetCount(Result.Success); }
         }
 
+        /// <summary>
+        /// Gets the failure count.
+        /// </summary>
+        /// <value>The failure count.</value>
         public long FailureCount
         {
             get { return GetCount(Result.Failure); }
         }
 
+        /// <summary>
+        /// Gets the exception count.
+        /// </summary>
+        /// <value>The exception count.</value>
         public long ExceptionCount
         {
             get { return GetCount(Result.Exception); }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance has exceptions.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance has exceptions; otherwise, <c>false</c>.
+        /// </value>
         public bool HasExceptions
         {
             get
@@ -90,6 +124,12 @@ namespace Concordion.Internal
             }
         }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance has failures.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance has failures; otherwise, <c>false</c>.
+        /// </value>
         public bool HasFailures
         {
             get
@@ -98,24 +138,29 @@ namespace Concordion.Internal
             }
         }
 
+        /// <summary>
+        /// Asserts the is satisfied.
+        /// </summary>
         [Obsolete]
         public void AssertIsSatisfied()
         {
         }
-        
+
+        /// <summary>
+        /// Asserts the specification is satisfied.
+        /// </summary>
+        /// <param name="fixture">The fixture.</param>
         public void AssertIsSatisfied(object fixture)
         {
-            if (HasFailures)
-            {
-                throw new ConcordionAssertionException("Specification has failure(s). See output HTML for details.");
-            }
-
-            if (HasExceptions)
-            {
-                throw new ConcordionAssertionException("Specification has exception(s). See output HTML for details.");
-            }
+            var state = DetermineFixtureState(fixture);
+            state.AssertIsSatisfied(this.SuccessCount, this.FailureCount, this.ExceptionCount);
         }
 
+        /// <summary>
+        /// Prints the results.
+        /// </summary>
+        /// <param name="writer">The writer.</param>
+        /// <param name="fixture">The fixture.</param>
         public void Print(TextWriter writer, object fixture)
         {
             writer.Write("Successes: {0}, Failures: {1}", SuccessCount, FailureCount);
