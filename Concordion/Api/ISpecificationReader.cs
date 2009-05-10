@@ -19,8 +19,16 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// Parses and stores the specification at the location identified by the Resource object
+    /// </summary>
     public interface ISpecificationReader
     {
+        /// <summary>
+        /// Reads the specification.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <returns></returns>
         ISpecification ReadSpecification(Resource resource);
     }
 }

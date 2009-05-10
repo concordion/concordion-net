@@ -22,6 +22,9 @@ using System.IO;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// Represents a physical file on the filesystem
+    /// </summary>
     public class Resource
     {
         #region Fields
@@ -33,24 +36,40 @@ namespace Concordion.Api
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
         public string Name
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets or sets the path.
+        /// </summary>
+        /// <value>The path.</value>
         public virtual string Path
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the parts of the Path
+        /// </summary>
+        /// <value>The parts.</value>
         private string[] Parts
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the parent directory of this resource
+        /// </summary>
+        /// <value>The parent.</value>
         public Resource Parent
         {
             get
@@ -69,12 +88,22 @@ namespace Concordion.Api
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is a directory
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is package; otherwise, <c>false</c>.
+        /// </value>
         public bool IsPackage
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets the directory this resource resides in.
+        /// </summary>
+        /// <value>The package.</value>
         public Resource Package
         {
             get
@@ -90,7 +119,11 @@ namespace Concordion.Api
         #endregion
 
         #region Constructors
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Resource"/> class.
+        /// </summary>
+        /// <param name="path">The path.</param>
         public Resource(string path)
         {
             Path = path.Replace('/', PATH_SEPARATOR);
@@ -119,7 +152,12 @@ namespace Concordion.Api
         #endregion
 
         #region Methods
-        
+
+        /// <summary>
+        /// Gets a resource relative to this one based on the path
+        /// </summary>
+        /// <param name="relativePath">The relative path.</param>
+        /// <returns></returns>
         public Resource GetRelativeResource(string relativePath)
         {
             //Check.IsFalse(relativePath.StartsWith(PATH_SEPARATOR.ToString()), "Relative path should not start with a slash");
@@ -142,8 +180,13 @@ namespace Concordion.Api
             Check.IsFalse(subPath.Contains(RELATIVE_PATH_INDICATOR), String.Format("The {0} operator is currently only supported at the start of expressions", RELATIVE_PATH_INDICATOR));
 
             return new Resource(p.Path + subPath);
-        } 
+        }
 
+        /// <summary>
+        /// Gets the relative path.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <returns></returns>
         public string GetRelativePath(Resource resource)
         {
             if (resource.Path == Path)
@@ -199,6 +242,16 @@ namespace Concordion.Api
 
         #region Override Methods
 
+        /// <summary>
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+        /// <returns>
+        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// </returns>
+        /// <exception cref="T:System.NullReferenceException">
+        /// The <paramref name="obj"/> parameter is null.
+        /// </exception>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -213,6 +266,12 @@ namespace Concordion.Api
             return true;
         }
 
+        /// <summary>
+        /// Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// </returns>
         public override int GetHashCode()
         {
             return Path.GetHashCode();

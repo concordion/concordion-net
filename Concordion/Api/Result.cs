@@ -19,11 +19,29 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum Result
     {
+        /// <summary>
+        /// Indicates a specification assertion was successful
+        /// </summary>
         Success,
+
+        /// <summary>
+        /// Indicates a specification assertion was a failure
+        /// </summary>
         Failure,
+
+        /// <summary>
+        /// Indicates a specification assertion had an exception
+        /// </summary>
         Exception,
+
+        /// <summary>
+        /// Indicates a specification assertion was ignored
+        /// </summary>
         Ignored
     }
 }

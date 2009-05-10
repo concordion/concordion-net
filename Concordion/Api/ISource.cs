@@ -21,7 +21,7 @@ using System.IO;
 namespace Concordion.Api
 {
     /// <summary>
-    /// Represents the source for specifications
+    /// Represents the source for specifications (aka The BaseInputDirectory)
     /// </summary>
     public interface ISource
     {

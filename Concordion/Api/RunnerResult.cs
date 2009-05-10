@@ -19,22 +19,36 @@ using System.Text;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// A class to hold the result of running an <see cref="IRunner"/> object
+    /// </summary>
     public class RunnerResult
     {
+        #region Properties
+        
+        /// <summary>
+        /// Gets or sets the result.
+        /// </summary>
+        /// <value>The result.</value>
         public Result Result
         {
             get;
             private set;
-        }
+        } 
 
-        public RunnerResult(Result result) 
+        #endregion
+
+        #region Constructors
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RunnerResult"/> class.
+        /// </summary>
+        /// <param name="result">The result.</param>
+        public RunnerResult(Result result)
         {
             this.Result = result;
-        }
-        
-        public Result getResult() 
-        {
-            return Result;
-        }
+        } 
+
+        #endregion
     }
 }

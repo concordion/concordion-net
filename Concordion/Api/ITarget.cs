@@ -20,11 +20,36 @@ using System.IO;
 
 namespace Concordion.Api
 {
+    /// <summary>
+    /// The destination area of all specifications (aka The BaseOutput Directory)
+    /// </summary>
     public interface ITarget
     {
+        /// <summary>
+        /// Writes the specified resource.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <param name="source">The source.</param>
         void Write(Resource resource, string source);
+
+        /// <summary>
+        /// Writes the specified resource.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <param name="image">The image.</param>
         void Write(Resource resource, System.Drawing.Bitmap image);
+
+        /// <summary>
+        /// Copies to.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
+        /// <param name="destination">The destination.</param>
         void CopyTo(Resource resource, string destination);
+
+        /// <summary>
+        /// Deletes the specified resource.
+        /// </summary>
+        /// <param name="resource">The resource.</param>
         void Delete(Resource resource);
     }
 }
