@@ -22,7 +22,6 @@ namespace Concordion.Internal
 {
     public class CommandCall
     {
-
         #region Properties
         
         public CommandCallList Children
@@ -65,15 +64,18 @@ namespace Concordion.Internal
 
         #endregion
 
-
-        public CommandCall(ICommand command, Element element, string expression, Resource resource) 
+        #region Constructors
+        
+        public CommandCall(ICommand command, Element element, string expression, Resource resource)
         {
             Children = new CommandCallList();
             Command = command;
             Element = element;
             Expression = expression;
             Resource = resource;
-        }
+        } 
+
+        #endregion
 
         #region Methods
 

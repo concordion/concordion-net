@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\tools\Gallio-3.0.5.546\bin\Gallio.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\tools\Ninject\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="OGNL, Version=1.0.3396.12987, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\tools\OGNL.NET\OGNL.dll</HintPath>
@@ -125,12 +129,14 @@
     <Compile Include="Internal\ConcordionBuilder.cs" />
     <Compile Include="Internal\ConcordionConfig.cs" />
     <Compile Include="Internal\ConcordionConfigParser.cs" />
+    <Compile Include="Internal\ConcordionModule.cs" />
     <Compile Include="Internal\DocumentParser.cs" />
     <Compile Include="Internal\ExpectedToFailFixtureState.cs" />
     <Compile Include="Internal\FileSource.cs" />
     <Compile Include="Internal\FileTarget.cs" />
     <Compile Include="Internal\IFixtureState.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
+    <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\UnimplementedFixtureState.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />
     <Compile Include="Internal\ParsingEventArgs.cs" />
