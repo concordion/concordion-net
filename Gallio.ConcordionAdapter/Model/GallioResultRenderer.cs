@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Internal.Renderer;
 using Concordion.Internal.Commands;
-using Gallio.Model.Logging;
+using Gallio.Framework;
 
 namespace Concordion.Integration
 {
@@ -13,33 +13,6 @@ namespace Concordion.Integration
     /// </summary>
     public class GallioResultRenderer : ISpecificationListener
     {
-        #region Properties
-        
-        /// <summary>
-        /// Gets or sets the log writer.
-        /// </summary>
-        /// <value>The log writer.</value>
-        public TestLogWriter LogWriter
-        {
-            get;
-            private set;
-        } 
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GallioResultRenderer"/> class.
-        /// </summary>
-        /// <param name="logWriter">The log writer.</param>
-        public GallioResultRenderer(TestLogWriter logWriter)
-        {
-            LogWriter = logWriter;
-        } 
-
-        #endregion
-
         #region ISpecificationListener Members
 
         /// <summary>
@@ -58,7 +31,7 @@ namespace Concordion.Integration
         /// <param name="eventArgs">The <see cref="SpecificationEventArgs"/> instance containing the event data.</param>
         public void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs)
         {
-            LogWriter.AttachXHtml(eventArgs.Resource.Name, eventArgs.Element.ToXml());
+            TestLog.AttachXHtml(eventArgs.Resource.Name, eventArgs.Element.ToXml());
         }
 
         #endregion

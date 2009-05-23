@@ -12,24 +12,10 @@ namespace Gallio.ConcordionAdapter.Model
     /// </summary>
     public class ConcordionTestFramework : BaseTestFramework
     {
-        private static readonly Guid FRAMEWORK_ID = new Guid("{B4EF2672-1C7B-11DE-A4BE-8E4956D89593}");
-
         /// <inheritdoc />
-        public override Guid Id
+        public override void RegisterTestExplorers(IList<ITestExplorer> explorers)
         {
-            get { return FRAMEWORK_ID; }
-        }
-
-        /// <inheritdoc />
-        public override string Name
-        {
-            get { return Resources.ConcordionTestFramework_ConcordionFrameworkName; }
-        }
-
-        /// <inheritdoc />
-        public override ITestExplorer CreateTestExplorer(TestModel testModel)
-        {
-            return new ConcordionTestExplorer(testModel);
+            explorers.Add(new ConcordionTestExplorer());
         }
     }
 }

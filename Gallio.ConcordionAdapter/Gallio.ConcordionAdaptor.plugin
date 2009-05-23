@@ -1,16 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<configuration>
-  <gallio>
-    <assemblies>
-      <assembly file="Gallio.ConcordionAdapter.dll" />
-      <assembly file="Concordion.dll" />
-    </assemblies>
-    <runtime>
-      <components>
-        <component id="ConcordionAdapter.TestFramework"
-                   service="Gallio.Model.ITestFramework, Gallio"
-                   type="Gallio.ConcordionAdapter.Model.ConcordionTestFramework, Gallio.ConcordionAdapter" />
-      </components>
-    </runtime>
-  </gallio>
-</configuration>
+<plugin pluginId="Gallio.ConcordionAdapter"
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>Concordion Adapter</name>
+    <version>1.0.0.0</version>
+    <description>Provides support for running Concordion tests.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+  </dependencies>
+
+  <assemblies>
+    <assembly fullName="Gallio.ConcordionAdapter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+              codeBase="Gallio.ConcordionAdapter.dll" />
+
+    <assembly fullName="Concordion, Version=0.1.99.9999, Culture=neutral, PublicKeyToken=null"
+              codeBase="Concordion.dll" />
+  </assemblies>
+
+  <components>
+    <component componentId="ConcordionAdapter.TestFramework"
+               serviceId="Gallio.TestFramework"
+               componentType="Gallio.ConcordionAdapter.Model.ConcordionTestFramework, Gallio.ConcordionAdapter">
+      <traits>
+        <id>{B4EF2672-1C7B-11DE-A4BE-8E4956D89593}</id>
+        <name>Concordion</name>
+        <frameworkAssemblyNames>Concordion</frameworkAssemblyNames>
+      </traits>
+    </component>
+  </components>
+</plugin>

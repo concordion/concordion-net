@@ -51,6 +51,16 @@ namespace Concordion.Internal
 
         #endregion
 
+        #region Constructors
+
+        public SpecificationConfig()
+        {
+            this.BaseInputDirectory = Directory.GetCurrentDirectory();
+            this.BaseOutputDirectory = Environment.GetEnvironmentVariable("TEMP");
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

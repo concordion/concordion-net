@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gallio.Model;
-using Gallio.Reflection;
 using Gallio.Model.Execution;
 using Concordion.Api;
+using Gallio.Common.Reflection;
 
 namespace Gallio.ConcordionAdapter.Model
 {
@@ -106,7 +106,7 @@ namespace Gallio.ConcordionAdapter.Model
         /// Gets the test controller factory.
         /// </summary>
         /// <value>The test controller factory.</value>
-        public override Func<ITestController> TestControllerFactory
+        public override Gallio.Common.Func<ITestController> TestControllerFactory
         {
             get
             {
