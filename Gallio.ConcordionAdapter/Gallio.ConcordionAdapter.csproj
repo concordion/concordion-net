@@ -33,6 +33,10 @@
     <DocumentationFile>bin\Release\Gallio.ConcordionAdapter.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Gallio, Version=0.0.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\tools\Gallio-trunk\bin\Gallio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -72,10 +76,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\mb-unit-trunk\v3\src\Gallio\Gallio\Gallio.csproj">
-      <Project>{6CAB7735-05DA-480D-9A04-50615B00F886}</Project>
-      <Name>Gallio</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Concordion\Concordion.csproj">
       <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
       <Name>Concordion</Name>
