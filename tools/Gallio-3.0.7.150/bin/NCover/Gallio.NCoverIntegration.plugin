@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<plugin pluginId="Gallio.NCoverIntegration"
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>NCover Integration Plugin</name>
+    <version>3.0.7.0</version>
+    <description>Provides support for running tests with NCover code coverage.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+  </dependencies>
+
+  <probingPaths>
+    <probingPath>v1.5.8</probingPath>
+  </probingPaths>
+
+  <assemblies>
+    <assembly fullName="Gallio.NCoverIntegration, Version=3.0.7.0, Culture=neutral, PublicKeyToken=null"
+              codeBase="Gallio.NCoverIntegration.dll" />
+
+    <assembly fullName="NCover.Framework, Version=1.5.8.0, Culture=neutral, PublicKeyToken=f4018786f4b01bc6"
+              codeBase="NCover.Framework.dll" />
+  </assemblies>
+
+  <components>
+
+    <!-- v1.5.8 -->
+
+    <component componentId="NCoverIntegration.NCoverHostFactory.v1.5.8"
+               serviceId="Gallio.HostFactory"
+               componentType="Gallio.NCoverIntegration.NCoverHostFactory, Gallio.NCoverIntegration">
+      <parameters>
+        <version>V1</version>
+      </parameters>
+    </component>
+
+    <component componentId="NCoverIntegration.NCoverTestRunnerFactory.v1.5.8"
+               serviceId="Gallio.TestRunnerFactory"
+               componentType="Gallio.Runner.DefaultTestRunnerFactory, Gallio">
+      <parameters>
+        <testDriverFactory>${NCoverIntegration.NCoverTestDriverFactory.v1.5.8}</testDriverFactory>
+      </parameters>
+      <traits>
+        <name>NCover</name>
+        <description>
+          Runs tests in an external process with NCover v1.5.8.  NCover v1.5.8 is included and does not need to be installed.
+
+          Supported test runner properties:
+          - NCoverArguments: Specifies additional command-line arguments for NCover.  eg. "//eas Gallio"
+          - NCoverCoverageFile: Specifies the path of the coverage file to write.  The default is 'Coverage.xml'.
+        </description>
+      </traits>
+    </component>
+
+    <component componentId="NCoverIntegration.NCoverTestDriverFactory.v1.5.8"
+               serviceId="Gallio.TestDriverFactory"
+               componentType="Gallio.Runner.Drivers.HostedTestDriverFactory, Gallio">
+      <parameters>
+        <hostFactory>${NCoverIntegration.NCoverHostFactory.v1.5.8}</hostFactory>
+        <isolationMode>AppDomainPerAssembly</isolationMode>
+      </parameters>
+    </component>
+
+    <!-- v2 -->
+
+    <component componentId="NCoverIntegration.NCoverHostFactory.v2"
+               serviceId="Gallio.HostFactory"
+               componentType="Gallio.NCoverIntegration.NCoverHostFactory, Gallio.NCoverIntegration">
+      <parameters>
+        <version>V2</version>
+      </parameters>
+    </component>
+
+    <component componentId="NCoverIntegration.NCoverTestRunnerFactory.v2"
+               serviceId="Gallio.TestRunnerFactory"
+               componentType="Gallio.Runner.DefaultTestRunnerFactory, Gallio">
+      <parameters>
+        <testDriverFactory>${NCoverIntegration.NCoverTestDriverFactory.v2}</testDriverFactory>
+      </parameters>
+      <traits>
+        <name>NCover2</name>
+        <description>
+          Runs tests in an external process with NCover v2.  NCover v2 must be installed separately.
+
+          Supported test runner properties:
+          - NCoverArguments: Specifies additional command-line arguments for NCover.  eg. "//eas Gallio"
+          - NCoverCoverageFile: Specifies the path of the coverage file to write.  The default is 'Coverage.xml'.
+        </description>
+      </traits>
+    </component>
+
+    <component componentId="NCoverIntegration.NCoverTestDriverFactory.v2"
+               serviceId="Gallio.TestDriverFactory"
+               componentType="Gallio.Runner.Drivers.HostedTestDriverFactory, Gallio">
+      <parameters>
+        <hostFactory>${NCoverIntegration.NCoverHostFactory.v2}</hostFactory>
+        <isolationMode>AppDomainPerAssembly</isolationMode>
+      </parameters>
+    </component>
+
+    <!-- v3 -->
+
+    <component componentId="NCoverIntegration.NCoverHostFactory.v3"
+               serviceId="Gallio.HostFactory"
+               componentType="Gallio.NCoverIntegration.NCoverHostFactory, Gallio.NCoverIntegration">
+      <parameters>
+        <version>V3</version>
+      </parameters>
+    </component>
+
+    <component componentId="NCoverIntegration.NCoverTestRunnerFactory.v3"
+               serviceId="Gallio.TestRunnerFactory"
+               componentType="Gallio.Runner.DefaultTestRunnerFactory, Gallio">
+      <parameters>
+        <testDriverFactory>${NCoverIntegration.NCoverTestDriverFactory.v3}</testDriverFactory>
+      </parameters>
+      <traits>
+        <name>NCover3</name>
+        <description>
+          Runs tests in an external process with NCover v3.  NCover v3 must be installed separately.
+
+          Supported test runner properties:
+          - NCoverArguments: Specifies additional command-line arguments for NCover.  eg. "//eas Gallio"
+          - NCoverCoverageFile: Specifies the path of the coverage file to write.  The default is 'Coverage.xml'.
+        </description>
+      </traits>
+    </component>
+
+    <component componentId="NCoverIntegration.NCoverTestDriverFactory.v3"
+               serviceId="Gallio.TestDriverFactory"
+               componentType="Gallio.Runner.Drivers.HostedTestDriverFactory, Gallio">
+      <parameters>
+        <hostFactory>${NCoverIntegration.NCoverHostFactory.v3}</hostFactory>
+        <isolationMode>AppDomainPerAssembly</isolationMode>
+      </parameters>
+    </component>
+  </components>
+</plugin>

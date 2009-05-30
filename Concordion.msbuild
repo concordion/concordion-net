@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
-  <UsingTask AssemblyFile="tools\Gallio-3.0.5.546\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+  <UsingTask AssemblyFile="tools\Gallio-3.0.7.150\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 
   <PropertyGroup>
@@ -135,8 +135,6 @@
             RunnerType="Local"
             RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration" />
   </Target>
-
-
 
   <Target Name="Package" DependsOnTargets="Test-Specs">
     <ItemGroup>

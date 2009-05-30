@@ -33,9 +33,9 @@
     <DocumentationFile>bin\Release\Gallio.ConcordionAdapter.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Gallio, Version=0.0.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
+    <Reference Include="Gallio, Version=3.0.7.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\tools\Gallio-trunk\bin\Gallio.dll</HintPath>
+      <HintPath>..\tools\Gallio-3.0.7.150\bin\Gallio.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
