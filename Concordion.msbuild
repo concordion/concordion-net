@@ -132,8 +132,7 @@
             ReportTypes="XHtml"
             ShowReports="false"
             IgnoreFailures="true"
-            RunnerType="Local"
-            RunnerExtensions="TeamCityExtension,Gallio.TeamCityIntegration" />
+            RunnerType="Local" />
   </Target>
 
   <Target Name="Package" DependsOnTargets="Test-Specs">
