@@ -272,7 +272,7 @@ namespace Gallio.ConcordionAdapter.Model
                 var resource = CreateResource(ExtrapolateResourcePath(fixture.GetType()));
 
                 var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
-                typeTest.Source = new FileSource(baseInputDirectory.FullName);
+                typeTest.Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
                 typeTest.Target = new FileTarget(baseOutputDirectory.FullName);
                 typeTest.Kind = TestKinds.Fixture;
                 typeTest.IsTestCase = true;
