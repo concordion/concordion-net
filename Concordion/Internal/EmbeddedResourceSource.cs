@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Concordion.Api;
 using System.Reflection;
 using System.IO;
@@ -33,22 +30,34 @@ namespace Concordion.Internal
 
         private string ConvertPathToNamespace(string path)
         {
-            return path.Replace('\\', '.');
+            var dottedPath = path.Replace('\\', '.');
+            if (dottedPath[0] == '.')
+            {
+                dottedPath = dottedPath.Remove(0, 1);
+            }
+            return dottedPath;
         }
 
         #endregion
 
         #region ISource Members
 
-        public System.IO.TextReader CreateReader(Resource resource)
+        public TextReader CreateReader(Resource resource)
         {
-            var path = ConvertPathToNamespace(resource.Path);
-            return new StreamReader(FixtureAssembly.GetManifestResourceStream(path));
+            var fullyQualifiedTypeName = ConvertPathToNamespace(resource.Path);
+
+            if (CanFind(resource))
+            {
+                return new StreamReader(FixtureAssembly.GetManifestResourceStream(fullyQualifiedTypeName));
+            }
+            
+            throw new InvalidOperationException(String.Format("Cannot open the resource {0}", fullyQualifiedTypeName));
         }
 
         public bool CanFind(Resource resource)
         {
-            throw new NotImplementedException();
+            var fullyQualifiedTypeName = ConvertPathToNamespace(resource.Path);
+            return FixtureAssembly.GetManifestResourceInfo(fullyQualifiedTypeName) != null;
         }
 
         #endregion
