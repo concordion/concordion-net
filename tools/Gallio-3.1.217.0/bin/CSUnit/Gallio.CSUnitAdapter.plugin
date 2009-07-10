@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<plugin pluginId="Gallio.CSUnitAdapter"
+        recommendedInstallationPath="CSUnit"
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>csUnit Adapter Plugin</name>
+    <version>3.1.0.0</version>
+    <description>Provides support for running csUnit tests.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+  </dependencies>
+
+  <files>
+    <file path="Gallio.CSUnitAdapter.plugin" />
+    <file path="Gallio.CSUnitAdapter.dll" />
+    <file path="csUnit.dll" />
+    <file path="csUnit.Common.dll" />
+    <file path="csUnit.Interfaces.dll" />
+    <file path="csUnitCore.dll" />
+    <file path="license.txt" />
+    <file path="Readme.txt" />
+  </files>
+  
+  <assemblies>
+    <assembly fullName="Gallio.CSUnitAdapter, Version=3.1.0.0, Culture=neutral, PublicKeyToken=null"
+              codeBase="Gallio.CSUnitAdapter.dll">
+      <qualifyPartialName>true</qualifyPartialName>
+      <bindingRedirects>
+        <bindingRedirect oldVersion="3.1.0.0-65535.65535.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+
+    <assembly fullName="csUnit, Version=2.5.3081.40666, Culture=neutral, PublicKeyToken=6871f04765cca910"
+              codeBase="csUnit.dll">
+      <bindingRedirects>
+        <bindingRedirect oldVersion="2.5.0.0-2.5.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+
+    <assembly fullName="csUnit.Common, Version=2.5.3081.40665, Culture=neutral, PublicKeyToken=6871f04765cca910"
+              codeBase="csUnit.Common.dll">
+      <bindingRedirects>
+        <bindingRedirect oldVersion="2.5.0.0-2.5.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+
+    <assembly fullName="csUnit.Interfaces, Version=2.5.3081.40666, Culture=neutral, PublicKeyToken=6871f04765cca910"
+              codeBase="csUnit.Interfaces.dll">
+      <bindingRedirects>
+        <bindingRedirect oldVersion="2.5.0.0-2.5.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+
+    <assembly fullName="csUnitCore, Version=2.5.3081.40666, Culture=neutral, PublicKeyToken=6871f04765cca910"
+              codeBase="csUnitCore.dll">
+      <bindingRedirects>
+        <bindingRedirect oldVersion="2.5.0.0-2.5.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+  </assemblies>
+
+  <components>
+    <component componentId="CSUnitAdapter.TestFramework"
+               serviceId="Gallio.TestFramework"
+               componentType="Gallio.CSUnitAdapter.Model.CSUnitTestFramework, Gallio.CSUnitAdapter">
+      <traits>
+        <name>csUnit</name>
+        <frameworkAssemblies>csUnit</frameworkAssemblies>
+        <version>2.5.3081.40666</version>
+        <fileTypes>Assembly</fileTypes>
+      </traits>
+    </component>
+  </components>
+</plugin>

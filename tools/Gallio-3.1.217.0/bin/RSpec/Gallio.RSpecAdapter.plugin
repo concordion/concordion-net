@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<plugin pluginId="Gallio.RSpecAdapter"
+        recommendedInstallationPath="RSpec"
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>RSpec Adapter Plugin</name>
+    <version>3.1.0.0</version>
+    <description>Provides support for running RSpec tests.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+    <dependency pluginId="Gallio.DLRIntegration" />
+  </dependencies>
+
+  <files>
+    <file path="Gallio.RSpecAdapter.plugin" />
+    <file path="Gallio.RSpecAdapter.dll" />
+    <file path="MIT License.txt" />
+  </files>
+
+  <assemblies>
+    <assembly fullName="Gallio.RSpecAdapter, Version=3.1.0.0, Culture=neutral, PublicKeyToken=null"
+              codeBase="Gallio.RSpecAdapter.dll">
+      <qualifyPartialName>true</qualifyPartialName>
+      <bindingRedirects>
+        <bindingRedirect oldVersion="3.1.0.0-65535.65535.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+  </assemblies>
+
+  <components>    
+    <component componentId="RSpecAdapter.FileTypeRecognizers.RSpecSource"
+               serviceId="Gallio.FileTypeRecognizer">
+      <traits>
+        <id>RSpecSource</id>
+        <superTypeId>RubySource</superTypeId>
+        <description>An RSpec source file.</description>
+        <fileNameRegex>.*_spec\.rb</fileNameRegex>
+      </traits>
+    </component>
+
+    <component componentId="RSpecAdapter.TestFramework"
+               serviceId="Gallio.TestFramework"
+               componentType="Gallio.RSpecAdapter.Model.RSpecTestFramework, Gallio.RSpecAdapter">
+      <traits>
+        <name>RSpec</name>
+        <fileTypes>RSpecSource</fileTypes>
+      </traits>
+    </component>
+  </components>
+</plugin>

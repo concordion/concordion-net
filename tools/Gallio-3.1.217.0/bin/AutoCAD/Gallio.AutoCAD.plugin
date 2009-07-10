@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<plugin pluginId="Gallio.AutoCAD"
+        recommendedInstallationPath=""
+        xmlns="http://www.gallio.org/">
+  <traits>
+    <name>AutoCAD Integration Plugin</name>
+    <version>3.1.0.0</version>
+    <description>Provides support for testing ObjectARX extensions within AutoCAD.</description>
+  </traits>
+
+  <dependencies>
+    <dependency pluginId="Gallio" />
+  </dependencies>
+
+  <files>
+    <file path="Gallio.AutoCAD.plugin" />
+    <file path="Gallio.AutoCAD.dll" />
+    <file path="Gallio.AutoCAD.Plugin.dll" />
+    <file path="objectarx_license.doc" />
+  </files>
+
+  <assemblies>
+    <assembly fullName="Gallio.AutoCAD, Version=3.1.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e"
+              codeBase="Gallio.AutoCAD.dll">
+      <qualifyPartialName>true</qualifyPartialName>
+      <bindingRedirects>
+        <bindingRedirect oldVersion="3.1.0.0-65535.65535.65535.65535" />
+      </bindingRedirects>
+    </assembly>
+  </assemblies>
+
+  <services>
+    <service serviceId="AutoCAD.AcadProcessFactory"
+             serviceType="Gallio.AutoCAD.IAcadProcessFactory, Gallio.AutoCAD" />
+  </services>
+
+  <components>
+    <component componentId="AutoCAD.AcadTestRunnerFactory"
+               serviceId="Gallio.TestRunnerFactory"
+               componentType="Gallio.Runner.DefaultTestRunnerFactory, Gallio">
+      <parameters>
+        <testDriverFactory>${AutoCAD.AcadTestDriverFactory}</testDriverFactory>
+      </parameters>
+      <traits>
+        <name>AutoCAD</name>
+        <description>Runs tests within an AutoCAD instance.</description>
+      </traits>
+    </component>
+
+    <component componentId="AutoCAD.AcadTestDriverFactory"
+               serviceId="Gallio.TestDriverFactory"
+               componentType="Gallio.AutoCAD.AcadTestDriverFactory, Gallio.AutoCAD" />
+
+    <component componentId="AutoCAD.AcadProcessFactory"
+               serviceId="AutoCAD.AcadProcessFactory"
+               componentType="Gallio.AutoCAD.AcadProcessFactory, Gallio.AutoCAD" />
+  </components>
+</plugin>

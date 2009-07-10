@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Gallio.Model;
 using System.Reflection;
 using Gallio.ConcordionAdapter.Properties;
@@ -45,19 +43,18 @@ namespace Gallio.ConcordionAdapter.Model
 
         private sealed class ExplorerState
         {
-            private readonly TestModel testModel;
-            private readonly Dictionary<Version, ITest> frameworkTests;
-            private readonly Dictionary<IAssemblyInfo, ITest> assemblyTests;
-            private readonly Dictionary<ITypeInfo, ITest> typeTests;
-            private DirectoryInfo baseInputDirectory;
-            private DirectoryInfo baseOutputDirectory;
+            private readonly TestModel _testModel;
+            private readonly Dictionary<Version, ITest> _frameworkTests;
+            private readonly Dictionary<IAssemblyInfo, ITest> _assemblyTests;
+            private readonly Dictionary<ITypeInfo, ITest> _typeTests;
+            private DirectoryInfo _baseOutputDirectory;
 
             public ExplorerState(TestModel testModel)
             {
-                this.testModel = testModel;
-                frameworkTests = new Dictionary<Version, ITest>();
-                assemblyTests = new Dictionary<IAssemblyInfo, ITest>();
-                typeTests = new Dictionary<ITypeInfo, ITest>();
+                _testModel = testModel;
+                _frameworkTests = new Dictionary<Version, ITest>();
+                _assemblyTests = new Dictionary<IAssemblyInfo, ITest>();
+                _typeTests = new Dictionary<ITypeInfo, ITest>();
             }
 
             /// <summary>
@@ -71,7 +68,7 @@ namespace Gallio.ConcordionAdapter.Model
 
                 if (frameworkVersion != null)
                 {
-                    ITest frameworkTest = GetFrameworkTest(frameworkVersion, testModel.RootTest);
+                    ITest frameworkTest = GetFrameworkTest(frameworkVersion, _testModel.RootTest);
                     ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, true);
 
                     if (consumer != null)
@@ -93,7 +90,7 @@ namespace Gallio.ConcordionAdapter.Model
 
                 if (frameworkVersion != null)
                 {
-                    ITest frameworkTest = GetFrameworkTest(frameworkVersion, testModel.RootTest);
+                    ITest frameworkTest = GetFrameworkTest(frameworkVersion, _testModel.RootTest);
                     ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, false);
 
                     ITest typeTest = TryGetTypeTest(type, assemblyTest);
@@ -129,12 +126,12 @@ namespace Gallio.ConcordionAdapter.Model
             private ITest GetFrameworkTest(Version frameworkVersion, RootTest rootTest)
             {
                 ITest frameworkTest;
-                if (!frameworkTests.TryGetValue(frameworkVersion, out frameworkTest))
+                if (!_frameworkTests.TryGetValue(frameworkVersion, out frameworkTest))
                 {
                     frameworkTest = CreateFrameworkTest(frameworkVersion);
                     rootTest.AddChild(frameworkTest);
 
-                    frameworkTests.Add(frameworkVersion, frameworkTest);
+                    _frameworkTests.Add(frameworkVersion, frameworkTest);
                 }
 
                 return frameworkTest;
@@ -152,12 +149,12 @@ namespace Gallio.ConcordionAdapter.Model
             private ITest GetAssemblyTest(IAssemblyInfo assembly, ITest frameworkTest, bool populateRecursively)
             {
                 ITest assemblyTest;
-                if (!assemblyTests.TryGetValue(assembly, out assemblyTest))
+                if (!_assemblyTests.TryGetValue(assembly, out assemblyTest))
                 {
                     assemblyTest = CreateAssemblyTest(assembly);
                     frameworkTest.AddChild(assemblyTest);
 
-                    assemblyTests.Add(assembly, assemblyTest);
+                    _assemblyTests.Add(assembly, assemblyTest);
                 }
 
                 GetInputOutputDirectories(assembly);
@@ -178,19 +175,18 @@ namespace Gallio.ConcordionAdapter.Model
                 var baseInputDirectoryInfo = new DirectoryInfo(config.BaseInputDirectory);
                 if (baseInputDirectoryInfo.Exists)
                 {
-                    this.baseInputDirectory = baseInputDirectoryInfo;
                 }
                 else
                 {
-                    this.testModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, String.Format("The Base Input Directory {0} does not exist, reverting to default", config.BaseInputDirectory)));
+                    this._testModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, String.Format("The Base Input Directory {0} does not exist, reverting to default", config.BaseInputDirectory)));
                 }
 
                 var baseOutputDirectoryInfo = new DirectoryInfo(config.BaseOutputDirectory);
-                this.baseOutputDirectory = baseOutputDirectoryInfo;
+                this._baseOutputDirectory = baseOutputDirectoryInfo;
 
-                if (!baseOutputDirectory.Exists)
+                if (!_baseOutputDirectory.Exists)
                 {
-                    Directory.CreateDirectory(baseOutputDirectory.FullName);
+                    Directory.CreateDirectory(_baseOutputDirectory.FullName);
                 }
             }
 
@@ -207,7 +203,7 @@ namespace Gallio.ConcordionAdapter.Model
             private ITest TryGetTypeTest(ITypeInfo type, ITest assemblyTest)
             {
                 ITest typeTest;
-                if (!typeTests.TryGetValue(type, out typeTest))
+                if (!_typeTests.TryGetValue(type, out typeTest))
                 {
                     try
                     {
@@ -222,13 +218,13 @@ namespace Gallio.ConcordionAdapter.Model
                     }
                     catch (Exception e)
                     {
-                        this.testModel.AddAnnotation(new Annotation(AnnotationType.Error, type, "An exception was thrown while exploring an Concordion test type.", e));
+                        this._testModel.AddAnnotation(new Annotation(AnnotationType.Error, type, "An exception was thrown while exploring an Concordion test type.", e));
                     }
 
                     if (typeTest != null)
                     {
                         assemblyTest.AddChild(typeTest);
-                        typeTests.Add(type, typeTest);
+                        _typeTests.Add(type, typeTest);
                     }
                 }
 
@@ -273,7 +269,7 @@ namespace Gallio.ConcordionAdapter.Model
 
                 var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
                 typeTest.Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
-                typeTest.Target = new FileTarget(baseOutputDirectory.FullName);
+                typeTest.Target = new FileTarget(_baseOutputDirectory.FullName);
                 typeTest.Kind = TestKinds.Fixture;
                 typeTest.IsTestCase = true;
 
