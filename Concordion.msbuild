@@ -121,7 +121,7 @@
   
   <ItemGroup>
     <TestAssemblies Include="Concordion.Spec\bin\Release\Concordion.Spec.dll" />
-    <Plugins Include="Gallio.ConcordionAdapter\bin\Debug" />
+    <Plugins Include="Gallio.ConcordionAdapter\bin\Release" />
   </ItemGroup>
 
   <Target Name="Test-Specs" DependsOnTargets="Staging">
