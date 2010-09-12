@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="tools\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
-  <UsingTask AssemblyFile="tools\Gallio-3.1.217.0\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
+  <UsingTask AssemblyFile="tools\Gallio-3.2.517.0\bin\Gallio.MSBuildTasks.dll" TaskName="Gallio" />
 
 
   <PropertyGroup>
@@ -125,7 +125,7 @@
   </ItemGroup>
 
   <Target Name="Test-Specs" DependsOnTargets="Staging">
-    <Gallio Assemblies="@(TestAssemblies)"
+    <Gallio Files="@(TestAssemblies)"
             PluginDirectories="@(Plugins)"
             ReportDirectory="Reports"
             WorkingDirectory="."

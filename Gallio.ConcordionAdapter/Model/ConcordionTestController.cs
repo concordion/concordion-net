@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Gallio.Model.Execution;
+
 using Gallio.Runtime.ProgressMonitoring;
 using Gallio.Model;
 using Gallio.ConcordionAdapter.Properties;
@@ -10,53 +10,61 @@ using System.Reflection;
 using Concordion;
 using Concordion.Integration;
 using Concordion.Internal;
+using Gallio.Common.Reflection;
+using Gallio.Model.Commands;
+using Gallio.Model.Helpers;
+using Gallio.Model.Tree;
+using Gallio.Model.Contexts;
+
+
 
 namespace Gallio.ConcordionAdapter.Model
 {
     /// <summary>
     /// Controls the execution of Concordion tests
     /// </summary>
-    public class ConcordionTestController : BaseTestController
+    public class ConcordionTestController : TestController
     {
         /// <inheritdoc />
-        protected override TestOutcome RunTestsImpl(ITestCommand rootTestCommand, ITestStep parentTestStep, TestExecutionOptions options, IProgressMonitor progressMonitor)
+        protected override TestResult RunImpl(ITestCommand rootTestCommand, TestStep parentTestStep, TestExecutionOptions options, IProgressMonitor progressMonitor)
         {
             using (progressMonitor.BeginTask(Resources.ConcordionTestController_RunningConcordionTests, rootTestCommand.TestCount))
             {
+                if (progressMonitor.IsCanceled)
+                    return new TestResult(TestOutcome.Canceled);
+
                 if (options.SkipTestExecution)
                 {
-                    SkipAll(rootTestCommand, parentTestStep);
-                    return TestOutcome.Skipped;
+                    return SkipAll(rootTestCommand, parentTestStep);
                 }
                 else
                 {
-                    bool success = RunTest(rootTestCommand, parentTestStep, progressMonitor);
-                    return success ? TestOutcome.Passed : TestOutcome.Failed;
+                    return RunTest(rootTestCommand, parentTestStep, progressMonitor);
                 }
             }
         }
 
-        private static bool RunTest(ITestCommand testCommand, ITestStep parentTestStep, IProgressMonitor progressMonitor)
+        private static TestResult RunTest(ITestCommand testCommand, TestStep parentTestStep, IProgressMonitor progressMonitor)
         {
-            ITest test = testCommand.Test;
+            Test test = testCommand.Test;
             progressMonitor.SetStatus(test.Name);
 
-            bool passed;
+            TestResult result;
             ConcordionTest concordionTest = test as ConcordionTest;
             if (concordionTest == null)
             {
-                passed = RunChildTests(testCommand, parentTestStep, progressMonitor);
+                result = RunChildTests(testCommand, parentTestStep, progressMonitor);
             }
             else
             {
-                passed = RunTestFixture(testCommand, concordionTest, parentTestStep);
+                result = RunTestFixture(testCommand, concordionTest, parentTestStep);
             }
 
             progressMonitor.Worked(1);
-            return passed;
+            return result;
         }
 
-        private static bool RunTestFixture(ITestCommand testCommand, ConcordionTest concordionTest, ITestStep parentTestStep)
+        private static TestResult RunTestFixture(ITestCommand testCommand, ConcordionTest concordionTest, TestStep parentTestStep)
         {
             ITestContext testContext = testCommand.StartPrimaryChildStep(parentTestStep);
             
@@ -70,20 +78,18 @@ namespace Gallio.ConcordionAdapter.Model
             var summary = concordion.Process(concordionTest.Resource, concordionTest.Fixture);
             bool passed = !(summary.HasFailures || summary.HasExceptions);
             testContext.AddAssertCount((int)summary.SuccessCount + (int)summary.FailureCount);
-            testContext.FinishStep(passed ? TestOutcome.Passed : TestOutcome.Failed, null);
-            return passed;
+            return testContext.FinishStep(passed ? TestOutcome.Passed : TestOutcome.Failed, null);
         }
 
-        private static bool RunChildTests(ITestCommand testCommand, ITestStep parentTestStep, IProgressMonitor progressMonitor)
+        private static TestResult RunChildTests(ITestCommand testCommand, TestStep parentTestStep, IProgressMonitor progressMonitor)
         {
             ITestContext testContext = testCommand.StartPrimaryChildStep(parentTestStep);
 
             bool passed = true;
             foreach (ITestCommand child in testCommand.Children)
-                passed &= RunTest(child, testContext.TestStep, progressMonitor);
+                passed &= RunTest(child, testContext.TestStep, progressMonitor).Outcome.Status == TestStatus.Passed;
 
-            testContext.FinishStep(passed ? TestOutcome.Passed : TestOutcome.Failed, null);
-            return passed;
+            return testContext.FinishStep(passed ? TestOutcome.Passed : TestOutcome.Failed, null);
         }
     }
 }

@@ -1,287 +1,218 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gallio.Model;
 using System.Reflection;
 using Gallio.ConcordionAdapter.Properties;
 using Concordion.Integration;
 using Concordion.Api;
 using System.IO;
 using Concordion.Internal;
+using Gallio.Model;
 using Gallio.Common.Reflection;
+using Gallio.Model.Helpers;
+using Gallio.Model.Tree;
+
 
 namespace Gallio.ConcordionAdapter.Model
 {
     /// <summary>
     /// Explores an assembly for Concordion tests
     /// </summary>
-    public class ConcordionTestExplorer : BaseTestExplorer
+    internal class ConcordionTestExplorer : TestExplorer
     {
+
+        internal const string AssemblyKind = "Concordion Assembly";
+
         private static readonly string CONCORDION_ASSEMBLY_DISPLAY_NAME = @"Concordion";
+        private readonly Dictionary<IAssemblyInfo, Test> assemblyTests;
+        private readonly Dictionary<ITypeInfo, Test> typeTests;
+        private DirectoryInfo _baseOutputDirectory;
+
+        public ConcordionTestExplorer()
+        {
+            assemblyTests = new Dictionary<IAssemblyInfo, Test>();
+            typeTests = new Dictionary<ITypeInfo, Test>();
+        }
 
         #region Override Methods
 
-        /// <summary>
-        /// Explores the tests defined within the specified test source and populates the model with them.
-        /// </summary>
-        /// <param name="testModel">The test model to populate</param>
-        /// <param name="testSource">The test source to explore</param>
-        /// <param name="consumer">An action to perform on each top-level test discovered from each source, or null if no action is required</param>
-        public override void Explore(TestModel testModel, TestSource testSource, Action<ITest> consumer)
+        protected override void ExploreImpl(IReflectionPolicy reflectionPolicy, ICodeElementInfo codeElement)
         {
-            var state = new ExplorerState(testModel);
 
-            foreach (IAssemblyInfo assembly in testSource.Assemblies)
-                state.ExploreAssembly(assembly, consumer);
+            IAssemblyInfo assembly = ReflectionUtils.GetAssembly(codeElement);
+            Version frameworkVersion = GetFrameworkVersion(assembly);
+            if (frameworkVersion != null)
+            {
+                ITypeInfo type = ReflectionUtils.GetType(codeElement);
+                Test assemblyTest = GetAssemblyTest(assembly, TestModel.RootTest, frameworkVersion, type == null);
+                if (type != null)
+                {
+                    TryGetTypeTest(type, assemblyTest);
+                }
 
-            foreach (ITypeInfo type in testSource.Types)
-                state.ExploreType(type, consumer);
+            }
         }
 
         #endregion
 
-        #region Internal Class
-
-        private sealed class ExplorerState
+        private static Version GetFrameworkVersion(IAssemblyInfo assembly)
         {
-            private readonly TestModel _testModel;
-            private readonly Dictionary<Version, ITest> _frameworkTests;
-            private readonly Dictionary<IAssemblyInfo, ITest> _assemblyTests;
-            private readonly Dictionary<ITypeInfo, ITest> _typeTests;
-            private DirectoryInfo _baseOutputDirectory;
-
-            public ExplorerState(TestModel testModel)
+            if (IsConcordionAttributePresent(assembly))
             {
-                _testModel = testModel;
-                _frameworkTests = new Dictionary<Version, ITest>();
-                _assemblyTests = new Dictionary<IAssemblyInfo, ITest>();
-                _typeTests = new Dictionary<ITypeInfo, ITest>();
+                AssemblyName frameworkAssemblyName = ReflectionUtils.FindAssemblyReference(assembly, CONCORDION_ASSEMBLY_DISPLAY_NAME);
+                return frameworkAssemblyName != null ? frameworkAssemblyName.Version : null;
             }
 
-            /// <summary>
-            /// Explores the assembly for Concordion tests
-            /// </summary>
-            /// <param name="assembly">The assembly.</param>
-            /// <param name="consumer">The consumer.</param>
-            public void ExploreAssembly(IAssemblyInfo assembly, Action<ITest> consumer)
+            return null;
+        }
+
+        private static bool IsConcordionAttributePresent(IAssemblyInfo assembly)
+        {
+            foreach (var assemblyAttribute in assembly.GetAttributes(null, false))
             {
-                Version frameworkVersion = GetFrameworkVersion(assembly);
-
-                if (frameworkVersion != null)
+                if (assemblyAttribute is ConcordionAssemblyAttribute)
                 {
-                    ITest frameworkTest = GetFrameworkTest(frameworkVersion, _testModel.RootTest);
-                    ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, true);
+                    return true;
+                }
+            }
 
-                    if (consumer != null)
+            return false;
+        }
+
+        private Test GetAssemblyTest(IAssemblyInfo assembly, Test parentTest, Version frameworkVersion, bool populateRecursively)
+        {
+            Test assemblyTest;
+            if (!assemblyTests.TryGetValue(assembly, out assemblyTest))
+            {
+                assemblyTest = CreateAssemblyTest(assembly);
+
+                String frameworkName = CONCORDION_ASSEMBLY_DISPLAY_NAME;
+                assemblyTest.Metadata.SetValue(MetadataKeys.Framework, frameworkName);
+                assemblyTest.Metadata.SetValue(MetadataKeys.File, assembly.Path);
+                assemblyTest.Kind = AssemblyKind;
+
+                parentTest.AddChild(assemblyTest);
+                assemblyTests.Add(assembly, assemblyTest);
+            }
+
+            GetInputOutputDirectories(assembly);
+
+            if (populateRecursively)
+            {
+                foreach (var type in assembly.GetExportedTypes())
+                    TryGetTypeTest(type, assemblyTest);
+            }
+
+            return assemblyTest;
+        }
+
+        private void GetInputOutputDirectories(IAssemblyInfo assembly)
+        {
+            var config = new SpecificationConfig().Load(assembly.Resolve(false));
+
+            var baseInputDirectoryInfo = new DirectoryInfo(config.BaseInputDirectory);
+            if (baseInputDirectoryInfo.Exists)
+            {
+            }
+            else
+            {
+               TestModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, String.Format("The Base Input Directory {0} does not exist, reverting to default", config.BaseInputDirectory)));
+            }
+
+            var baseOutputDirectoryInfo = new DirectoryInfo(config.BaseOutputDirectory);
+            this._baseOutputDirectory = baseOutputDirectoryInfo;
+
+            if (!_baseOutputDirectory.Exists)
+            {
+                Directory.CreateDirectory(_baseOutputDirectory.FullName);
+            }
+        }
+
+
+        private Test CreateAssemblyTest(IAssemblyInfo assembly)
+        {
+            Test assemblyTest = new Test(assembly.Name, assembly);
+            assemblyTest.Kind = TestKinds.Assembly;
+            ModelUtils.PopulateMetadataFromAssembly(assembly, assemblyTest.Metadata);
+            return assemblyTest;
+        }
+
+        private Test TryGetTypeTest(ITypeInfo type, Test assemblyTest)
+        {
+            Test typeTest;
+            if (!typeTests.TryGetValue(type, out typeTest))
+            {
+                try
+                {
+                    foreach (var attribute in type.GetAttributes(null, false))
                     {
-                        consumer(assemblyTest);
-                    }
-                }
-            }
-
-            /// <summary>
-            /// Explores the type for Concordion tests
-            /// </summary>
-            /// <param name="type">The type.</param>
-            /// <param name="consumer">The consumer.</param>
-            public void ExploreType(ITypeInfo type, Action<ITest> consumer)
-            {
-                IAssemblyInfo assembly = type.Assembly;
-                Version frameworkVersion = GetFrameworkVersion(assembly);
-
-                if (frameworkVersion != null)
-                {
-                    ITest frameworkTest = GetFrameworkTest(frameworkVersion, _testModel.RootTest);
-                    ITest assemblyTest = GetAssemblyTest(assembly, frameworkTest, false);
-
-                    ITest typeTest = TryGetTypeTest(type, assemblyTest);
-                    if (typeTest != null && consumer != null)
-                        consumer(typeTest);
-                }
-            }
-
-            private static bool IsConcordionAttributePresent(IAssemblyInfo assembly)
-            {
-                foreach (var assemblyAttribute in assembly.GetAttributes(null, false))
-                {
-                    if (assemblyAttribute is ConcordionAssemblyAttribute)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            private static Version GetFrameworkVersion(IAssemblyInfo assembly)
-            {
-                if (IsConcordionAttributePresent(assembly))
-                {
-                    AssemblyName frameworkAssemblyName = ReflectionUtils.FindAssemblyReference(assembly, CONCORDION_ASSEMBLY_DISPLAY_NAME);
-                    return frameworkAssemblyName != null ? frameworkAssemblyName.Version : null;
-                }
-
-                return null;
-            }
-
-            private ITest GetFrameworkTest(Version frameworkVersion, RootTest rootTest)
-            {
-                ITest frameworkTest;
-                if (!_frameworkTests.TryGetValue(frameworkVersion, out frameworkTest))
-                {
-                    frameworkTest = CreateFrameworkTest(frameworkVersion);
-                    rootTest.AddChild(frameworkTest);
-
-                    _frameworkTests.Add(frameworkVersion, frameworkTest);
-                }
-
-                return frameworkTest;
-            }
-
-            private ITest CreateFrameworkTest(Version frameworkVersion)
-            {
-                BaseTest frameworkTest = new BaseTest(String.Format(Resources.ConcordionTestExplorer_FrameworkNameWithVersionFormat, frameworkVersion), null);
-                frameworkTest.LocalIdHint = Resources.ConcordionTestFramework_ConcordionFrameworkName;
-                frameworkTest.Kind = TestKinds.Framework;
-
-                return frameworkTest;
-            }
-
-            private ITest GetAssemblyTest(IAssemblyInfo assembly, ITest frameworkTest, bool populateRecursively)
-            {
-                ITest assemblyTest;
-                if (!_assemblyTests.TryGetValue(assembly, out assemblyTest))
-                {
-                    assemblyTest = CreateAssemblyTest(assembly);
-                    frameworkTest.AddChild(assemblyTest);
-
-                    _assemblyTests.Add(assembly, assemblyTest);
-                }
-
-                GetInputOutputDirectories(assembly);
-
-                if (populateRecursively)
-                {
-                    foreach (var type in assembly.GetExportedTypes())
-                        TryGetTypeTest(type, assemblyTest);
-                }
-
-                return assemblyTest;
-            }
-
-            private void GetInputOutputDirectories(IAssemblyInfo assembly)
-            {
-                var config = new SpecificationConfig().Load(assembly.Resolve(false));
-
-                var baseInputDirectoryInfo = new DirectoryInfo(config.BaseInputDirectory);
-                if (baseInputDirectoryInfo.Exists)
-                {
-                }
-                else
-                {
-                    this._testModel.AddAnnotation(new Annotation(AnnotationType.Error, assembly, String.Format("The Base Input Directory {0} does not exist, reverting to default", config.BaseInputDirectory)));
-                }
-
-                var baseOutputDirectoryInfo = new DirectoryInfo(config.BaseOutputDirectory);
-                this._baseOutputDirectory = baseOutputDirectoryInfo;
-
-                if (!_baseOutputDirectory.Exists)
-                {
-                    Directory.CreateDirectory(_baseOutputDirectory.FullName);
-                }
-            }
-
-            private ITest CreateAssemblyTest(IAssemblyInfo assembly)
-            {
-                BaseTest assemblyTest = new BaseTest(assembly.Name, assembly);
-                assemblyTest.Kind = TestKinds.Assembly;
-
-                ModelUtils.PopulateMetadataFromAssembly(assembly, assemblyTest.Metadata);
-
-                return assemblyTest;
-            }
-
-            private ITest TryGetTypeTest(ITypeInfo type, ITest assemblyTest)
-            {
-                ITest typeTest;
-                if (!_typeTests.TryGetValue(type, out typeTest))
-                {
-                    try
-                    {
-                        foreach (var attribute in type.GetAttributes(null, false))
+                        if (attribute is ConcordionTestAttribute)
                         {
-                            if (attribute is ConcordionTestAttribute)
-                            {
-                                typeTest = CreateTypeTest(new ConcordionTypeInfoAdapter(type));
-                                break;
-                            }
+                            typeTest = CreateTypeTest(new ConcordionTypeInfoAdapter(type));
+                            break;
                         }
                     }
-                    catch (Exception e)
-                    {
-                        this._testModel.AddAnnotation(new Annotation(AnnotationType.Error, type, "An exception was thrown while exploring an Concordion test type.", e));
-                    }
-
-                    if (typeTest != null)
-                    {
-                        assemblyTest.AddChild(typeTest);
-                        _typeTests.Add(type, typeTest);
-                    }
                 }
-
-                return typeTest;
-            }
-
-            private object CreateFixture(ITypeInfo type)
-            {
-                var resolvedType = type.Resolve(false);
-
-                if (resolvedType.IsClass)
+                catch (Exception ex)
                 {
-                    ConstructorInfo constructor = resolvedType.GetConstructor(Type.EmptyTypes);
-
-                    if (constructor != null)
-                    {
-                        return constructor.Invoke(new Object[] { });
-                    }
+                    TestModel.AddAnnotation(new Annotation(AnnotationType.Error, type, "An exception was thrown while exploring an concordion test type.", ex));
                 }
 
-                throw new InvalidOperationException("Cannot create the fixture");
+                if (typeTest != null)
+                {
+                    assemblyTest.AddChild(typeTest);
+                    typeTests.Add(type, typeTest);
+                }
             }
-
-            private string ExtrapolateResourcePath(Type type)
-            {
-                var typeNamespace = type.Namespace;
-                typeNamespace = typeNamespace.Replace(".", "\\");
-                var fileName = type.Name.Remove(type.Name.Length - 4);
-
-                return typeNamespace + "\\" + fileName + ".html";
-            }
-
-            private Resource CreateResource(string path)
-            {
-                return new Resource(path);
-            }
-
-            private ConcordionTest CreateTypeTest(ConcordionTypeInfoAdapter typeInfo)
-            {
-                var fixture = CreateFixture(typeInfo.Target);
-                var resource = CreateResource(ExtrapolateResourcePath(fixture.GetType()));
-
-                var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
-                typeTest.Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
-                typeTest.Target = new FileTarget(_baseOutputDirectory.FullName);
-                typeTest.Kind = TestKinds.Fixture;
-                typeTest.IsTestCase = true;
-
-                // Add XML documentation.
-                var xmlDocumentation = typeInfo.Target.GetXmlDocumentation();
-                if (xmlDocumentation != null)
-                    typeTest.Metadata.SetValue(MetadataKeys.XmlDocumentation, xmlDocumentation);
-
-                return typeTest;
-            }
+            return typeTest;
         }
 
-        #endregion
+        private ConcordionTest CreateTypeTest(ConcordionTypeInfoAdapter typeInfo)
+        {
+            var fixture = CreateFixture(typeInfo.Target);
+            var resource = CreateResource(ExtrapolateResourcePath(fixture.GetType()));
+
+            var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
+            typeTest.Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
+            typeTest.Target = new FileTarget(_baseOutputDirectory.FullName);
+            typeTest.Kind = TestKinds.Fixture;
+            typeTest.IsTestCase = true;
+
+            // Add XML documentation.
+            var xmlDocumentation = typeInfo.Target.GetXmlDocumentation();
+            if (xmlDocumentation != null)
+                typeTest.Metadata.SetValue(MetadataKeys.XmlDocumentation, xmlDocumentation);
+
+            return typeTest;
+        }
+
+        private object CreateFixture(ITypeInfo type)
+        {
+            var resolvedType = type.Resolve(false);
+            if (resolvedType.IsClass)
+            {
+                ConstructorInfo constructor = resolvedType.GetConstructor(Type.EmptyTypes);
+
+                if (constructor != null)
+                {
+                    return constructor.Invoke(new Object[] { });
+                }
+            }
+
+            throw new InvalidOperationException("Cannot create the fixture");
+        }
+
+        private string ExtrapolateResourcePath(Type type)
+        {
+            var typeNamespace = type.Namespace;
+            typeNamespace = typeNamespace.Replace(".", "\\");
+            var fileName = type.Name.Remove(type.Name.Length - 4);
+
+            return typeNamespace + "\\" + fileName + ".html";
+        }
+
+        private Resource CreateResource(string path)
+        {
+            return new Resource(path);
+        }
     }
 }

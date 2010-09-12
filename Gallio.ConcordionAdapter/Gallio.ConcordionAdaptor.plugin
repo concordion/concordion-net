@@ -24,9 +24,9 @@
                serviceId="Gallio.TestFramework"
                componentType="Gallio.ConcordionAdapter.Model.ConcordionTestFramework, Gallio.ConcordionAdapter">
       <traits>
-        <id>{B4EF2672-1C7B-11DE-A4BE-8E4956D89593}</id>
         <name>Concordion</name>
-        <frameworkAssemblyNames>Concordion</frameworkAssemblyNames>
+        <fileTypes>Assembly</fileTypes>
+        <frameworkAssemblies>Concordion</frameworkAssemblies>
       </traits>
     </component>
   </components>

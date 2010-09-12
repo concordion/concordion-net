@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gallio.Model;
-using Gallio.Model.Execution;
 using Concordion.Api;
 using Gallio.Common.Reflection;
+using Gallio.Common;
+using Gallio.Model.Commands;
+using Gallio.Model.Tree;
 
 namespace Gallio.ConcordionAdapter.Model
 {
     /// <summary>
     /// 
     /// </summary>
-    public class ConcordionTest : BaseTest
+    internal class ConcordionTest : Test
     {
         #region Properties
 
@@ -78,6 +80,7 @@ namespace Gallio.ConcordionAdapter.Model
         /// <param name="typeInfo">The type info.</param>
         /// <param name="resource">The resource.</param>
         /// <param name="fixture">The fixture.</param>
+     
         public ConcordionTest(string name, ICodeElementInfo codeElement, ConcordionTypeInfoAdapter typeInfo, Resource resource, object fixture)
             : base(name, codeElement)
         {
@@ -93,19 +96,22 @@ namespace Gallio.ConcordionAdapter.Model
 
         #region Methods
         
+        /*
         private static ITestController CreateTestController()
         {
             return new ConcordionTestController();
         } 
+         */
 
         #endregion
 
-        #region Override Methods
+        //#region Override Methods
 
         /// <summary>
         /// Gets the test controller factory.
         /// </summary>
         /// <value>The test controller factory.</value>
+        /*
         public override Gallio.Common.Func<ITestController> TestControllerFactory
         {
             get
@@ -113,7 +119,8 @@ namespace Gallio.ConcordionAdapter.Model
                 return CreateTestController;
             }
         } 
+         */
 
-        #endregion
+       // #endregion
     }
 }
