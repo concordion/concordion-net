@@ -42,7 +42,7 @@ namespace Gallio.ConcordionAdapter.Model
         /// Gets or sets the fixture.
         /// </summary>
         /// <value>The fixture.</value>
-        public object Fixture
+        public Type FixtureType
         {
             get;
             private set;
@@ -79,9 +79,9 @@ namespace Gallio.ConcordionAdapter.Model
         /// <param name="codeElement">The code element.</param>
         /// <param name="typeInfo">The type info.</param>
         /// <param name="resource">The resource.</param>
-        /// <param name="fixture">The fixture.</param>
+        /// <param name="fixtureType">The fixture type.</param>
      
-        public ConcordionTest(string name, ICodeElementInfo codeElement, ConcordionTypeInfoAdapter typeInfo, Resource resource, object fixture)
+        public ConcordionTest(string name, ICodeElementInfo codeElement, ConcordionTypeInfoAdapter typeInfo, Resource resource, Type fixtureType)
             : base(name, codeElement)
         {
             if (typeInfo == null)
@@ -89,7 +89,7 @@ namespace Gallio.ConcordionAdapter.Model
 
             this.TypeInfo = typeInfo;
             this.Resource = resource;
-            this.Fixture = fixture;
+            this.FixtureType = fixtureType;
         } 
 
         #endregion

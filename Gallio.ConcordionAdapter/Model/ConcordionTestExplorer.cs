@@ -168,11 +168,11 @@ namespace Gallio.ConcordionAdapter.Model
 
         private ConcordionTest CreateTypeTest(ConcordionTypeInfoAdapter typeInfo)
         {
-            var fixture = CreateFixture(typeInfo.Target);
-            var resource = CreateResource(ExtrapolateResourcePath(fixture.GetType()));
+            var fixtureType = CreateFixtureType(typeInfo.Target);
+            var resource = CreateResource(ExtrapolateResourcePath(fixtureType));
 
-            var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixture);
-            typeTest.Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
+            var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixtureType);
+            typeTest.Source = new EmbeddedResourceSource(fixtureType.Assembly);
             typeTest.Target = new FileTarget(_baseOutputDirectory.FullName);
             typeTest.Kind = TestKinds.Fixture;
             typeTest.IsTestCase = true;
@@ -185,7 +185,7 @@ namespace Gallio.ConcordionAdapter.Model
             return typeTest;
         }
 
-        private object CreateFixture(ITypeInfo type)
+        private Type CreateFixtureType(ITypeInfo type)
         {
             var resolvedType = type.Resolve(false);
             if (resolvedType.IsClass)
@@ -194,7 +194,7 @@ namespace Gallio.ConcordionAdapter.Model
 
                 if (constructor != null)
                 {
-                    return constructor.Invoke(new Object[] { });
+                    return resolvedType;
                 }
             }
 
@@ -205,8 +205,11 @@ namespace Gallio.ConcordionAdapter.Model
         {
             var typeNamespace = type.Namespace;
             typeNamespace = typeNamespace.Replace(".", "\\");
-            var fileName = type.Name.Remove(type.Name.Length - 4);
-
+            var fileName = type.Name;
+            if (fileName.EndsWith("Test"))
+            {
+                fileName = fileName.Remove(fileName.Length - 4);
+            }
             return typeNamespace + "\\" + fileName + ".html";
         }
 

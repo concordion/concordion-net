@@ -75,7 +75,9 @@ namespace Gallio.ConcordionAdapter.Model
                                     .WithSpecificationListener(new GallioResultRenderer())
                                     .Build();
 
-            var summary = concordion.Process(concordionTest.Resource, concordionTest.Fixture);
+            ConstructorInfo constructor = concordionTest.FixtureType.GetConstructor(Type.EmptyTypes);
+            var fixture=constructor.Invoke(new object[]{});
+            var summary = concordion.Process(concordionTest.Resource, fixture);
             bool passed = !(summary.HasFailures || summary.HasExceptions);
             testContext.AddAssertCount((int)summary.SuccessCount + (int)summary.FailureCount);
             return testContext.FinishStep(passed ? TestOutcome.Passed : TestOutcome.Failed, null);
