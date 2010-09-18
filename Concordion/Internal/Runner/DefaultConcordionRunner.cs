@@ -100,7 +100,10 @@ namespace Concordion.Internal.Runner
         {
             var fixtureAssembly = fixture.GetType().Assembly;
             var fixtureType = fixtureAssembly.GetType(fixtureName, false, true);
-
+            if (fixtureType == null)
+            {
+                fixtureType = fixtureAssembly.GetType(fixtureName+"Test", false, true);
+            }
             if (fixtureType != null)
             {
                 return Activator.CreateInstance(fixtureType);
@@ -114,7 +117,7 @@ namespace Concordion.Internal.Runner
             Resource hrefResource = resource.GetRelativeResource(href);
             var fixturePath = hrefResource.Path;
             var fixtureFullyQualifiedPath = fixturePath.Replace("\\", ".");
-            var fixtureName = fixtureFullyQualifiedPath.Replace(".html", "Test");
+            var fixtureName = fixtureFullyQualifiedPath.Replace(".html", "");
 
             if (fixtureName.StartsWith("."))
             {
