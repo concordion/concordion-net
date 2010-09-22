@@ -41,7 +41,7 @@ namespace Concordion.Internal.Util
 
         public static void NotEmpty(string str, string message, params object[] args)
         {
-            IsTrue(String.IsNullOrEmpty(str), message, args);
+            IsTrue(!String.IsNullOrEmpty(str), message, args);
         }
     }
 }
