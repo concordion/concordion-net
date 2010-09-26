@@ -28,7 +28,10 @@ namespace Concordion.Internal
         {
             var fixtureName = fixture.GetType().ToString();
             fixtureName = fixtureName.Replace(".", "\\");
-            fixtureName = fixtureName.Remove(fixtureName.Length - 4);
+            if (fixtureName.EndsWith("Test"))
+            {
+                fixtureName = fixtureName.Remove(fixtureName.Length - 4);
+            }
 
             var path = fixtureName + ".html";
 
