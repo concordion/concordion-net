@@ -171,7 +171,7 @@ namespace Gallio.ConcordionAdapter.Model
             var fixtureType = CreateFixtureType(typeInfo.Target);
             var resource = CreateResource(ExtrapolateResourcePath(fixtureType));
 
-            var typeTest = new ConcordionTest(typeInfo.Target.Name, typeInfo.Target, typeInfo, resource, fixtureType);
+            var typeTest = new ConcordionTest(typeInfo.Target.FullName, typeInfo.Target, typeInfo, resource, fixtureType);
             typeTest.Source = new EmbeddedResourceSource(fixtureType.Assembly);
             typeTest.Target = new FileTarget(_baseOutputDirectory.FullName);
             typeTest.Kind = TestKinds.Fixture;
