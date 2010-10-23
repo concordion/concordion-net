@@ -27,7 +27,8 @@ namespace Concordion.Api
     public class Element
     {
         #region Fields
-        
+        private static XNamespace XHTML_NS = "http://www.w3.org/1999/xhtml";
+
         private XElement m_element;
 
         #endregion
@@ -131,7 +132,7 @@ namespace Concordion.Api
         /// <returns></returns>
         public bool IsNamed(string name)
         {
-            return m_element.Name == name;
+            return m_element.Name.LocalName == name;
         }
 
         /// <summary>
@@ -144,7 +145,7 @@ namespace Concordion.Api
             IList<Element> descendantElements = new List<Element>();
             foreach (XElement element in m_element.Descendants())
             {
-                if (element.Name == name)
+                if (element.Name.LocalName == name && (element.Name.Namespace=="" || element.Name.Namespace == XHTML_NS))
                 {
                     descendantElements.Add(new Element(element));
                 }
@@ -244,11 +245,11 @@ namespace Concordion.Api
         /// <returns>The <see cref="Element"/> if found, null otherwise</returns>
         public Element GetFirstDescendantNamed(string name)
         {
-            foreach (XElement element in m_element.Descendants(XName.Get(name, "")))
+            var elements=GetDescendantElements(name);
+            if (elements.Count > 0)
             {
-                return new Element(element);
+                return elements[0];
             }
-
             return null;
         }
 
