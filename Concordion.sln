@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion", "Concordion\Concordion.csproj", "{F401D347-5762-49DA-B7DF-4C6C9E79E08A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.Test", "Concordion.Test\Concordion.Test.csproj", "{1FB3D6CF-AE3E-4EF6-9AA7-324AE600A932}"

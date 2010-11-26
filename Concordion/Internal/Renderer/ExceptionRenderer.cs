@@ -101,7 +101,8 @@ namespace Concordion.Internal.Renderer
             p.AppendChild(new Element("code").AppendText(expression));
             stackTrace.AppendChild(p);
 
-            var stackTraceElements = exception.ToString().Split(new char[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+            var stackTraceElements = new List<string> { String.Format("{0}: {1}", exception.GetType().ToString(), exception.Message) };
+            stackTraceElements.AddRange(exception.StackTrace.ToString().Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
 
             foreach (var stackTraceElement in stackTraceElements)
             {
