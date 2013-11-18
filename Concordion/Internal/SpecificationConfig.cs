@@ -92,7 +92,7 @@ namespace Concordion.Internal
         /// <returns></returns>
         private SpecificationConfig Load(string pathToAssembly)
         {
-            var configFileName = pathToAssembly.Replace(".dll", ".config");
+            var configFileName = Path.ChangeExtension(pathToAssembly, ".config");
             if (File.Exists(configFileName))
             {
                 var specificationConfigParser = new SpecificationConfigParser(this);
