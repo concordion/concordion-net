@@ -22,6 +22,7 @@ namespace Concordion.Integration.NUnit.Addin
         {
             var testSuite = new TestSuite(type);
             testSuite.Add(new ConcordionTest(type));
+            NUnitFramework.ApplyCommonAttributes(type, testSuite);
             return testSuite;
         }
 

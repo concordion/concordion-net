@@ -15,7 +15,7 @@ namespace Concordion.Integration.NUnit.Addin
         private Type m_FixtureType;
 
         public ConcordionTest(Type fixtureType)
-            : base("Executable Specification: {0}", fixtureType.Name)
+            : base(string.Format("Executable Specification: {0}", fixtureType.Name))
         {
             this.m_FixtureType = fixtureType;
         }
