@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Concordion.Internal
 {
-    interface IExpectationChecker
+    public interface IExpectationChecker
     {
         bool IsAcceptable(string expected, object actual);
     }

@@ -108,9 +108,11 @@
     </Compile>
     <Compile Include="Integration\ConcordionAssemblyAttribute.cs" />
     <Compile Include="Integration\ConcordionTestAttribute.cs" />
+    <Compile Include="Internal\AbstractCheckerBase.cs" />
     <Compile Include="Internal\BannedWordsValidator.cs" />
     <Compile Include="Internal\BooleanExpectationChecker.cs" />
     <Compile Include="Internal\BrowserStyleWhitespaceComparer.cs" />
+    <Compile Include="Internal\ChainOfExpectationCheckers.cs" />
     <Compile Include="Internal\ClassNameBasedSpecificationLocator.cs" />
     <Compile Include="Internal\CommandCall.cs" />
     <Compile Include="Internal\CommandCallList.cs" />

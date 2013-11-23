@@ -17,59 +17,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Concordion.Internal.Util;
 
 namespace Concordion.Internal
 {
     public class BrowserStyleWhitespaceComparer : IComparer<object>
     {
-        #region Methods
+        private readonly ChainOfExpectationCheckers m_ChainOfCheckers = new ChainOfExpectationCheckers();
 
-        public static string Normalize(object obj)
+        public BrowserStyleWhitespaceComparer()
         {
-            string s = ConvertObjectToString(obj);
-            s = ProcessLineContinuations(s);
-            s = StripNewlines(s);
-            s = ReplaceMultipleWhitespaceWithOneSpace(s);
-            return s.Trim();
+            this.m_ChainOfCheckers.Add(new DefaultExpectationChecker());
         }
-
-        private static string ReplaceMultipleWhitespaceWithOneSpace(string s)
-        {
-            var lineContinuationRegex = new Regex(@"[\s]+");
-            var processedString = lineContinuationRegex.Replace(s, " ");
-
-            return processedString;
-        }
-
-        private static string ProcessLineContinuations(string s)
-        {
-            var lineContinuationRegex = new Regex(@" _");
-            var processedString = lineContinuationRegex.Replace(s, String.Empty);
-
-            return processedString;
-        }
-
-        private static string StripNewlines(string s)
-        {
-            var newlineRegex = new Regex(@"\r?\n");
-            var processedString = newlineRegex.Replace(s, String.Empty);
-
-            return processedString;
-        }
-
-        private static string ConvertObjectToString(object obj)
-        {
-            if (obj == null) return "(null)";
-            else return obj.ToString();
-        }
-
-        #endregion
 
         #region IComparer<object> Members
 
         public int Compare(object x, object y)
         {
-            return Normalize(x).CompareTo(Normalize(y));
+            Check.IsTrue(y is string, "This comparator only supports comparisons with String objects");
+            if (m_ChainOfCheckers.IsAcceptable((string) y, x))
+            {
+                return 0;
+            }
+            return -1;
         }
 
         #endregion

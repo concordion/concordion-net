@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace Concordion.Internal
 {
-    class BooleanExpectationChecker : DefaultExpectationChecker
+    public class BooleanExpectationChecker : AbstractCheckerBase
     {
 
         public override bool IsAcceptable(string expected, object actual)
