@@ -109,6 +109,7 @@
     <Compile Include="Integration\ConcordionAssemblyAttribute.cs" />
     <Compile Include="Integration\ConcordionTestAttribute.cs" />
     <Compile Include="Internal\BannedWordsValidator.cs" />
+    <Compile Include="Internal\BooleanExpectationChecker.cs" />
     <Compile Include="Internal\BrowserStyleWhitespaceComparer.cs" />
     <Compile Include="Internal\ClassNameBasedSpecificationLocator.cs" />
     <Compile Include="Internal\CommandCall.cs" />
@@ -146,8 +147,10 @@
     <Compile Include="Internal\ConcordionConfig.cs" />
     <Compile Include="Internal\ConcordionConfigParser.cs" />
     <Compile Include="Internal\ConcordionModule.cs" />
+    <Compile Include="Internal\DefaultExpectationChecker.cs" />
     <Compile Include="Internal\DocumentParser.cs" />
     <Compile Include="Internal\EmbeddedResourceSource.cs" />
+    <Compile Include="Internal\IExpectationChecker.cs" />
     <Compile Include="Internal\ExpectedToFailFixtureState.cs" />
     <Compile Include="Internal\FileSource.cs" />
     <Compile Include="Internal\FileTarget.cs" />
