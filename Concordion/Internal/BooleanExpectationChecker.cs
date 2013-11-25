@@ -15,8 +15,8 @@ namespace Concordion.Internal
 
             var boolActual = (bool) actual;
             var normalizedExpected = this.Normalize(expected).ToLower();
-            return (boolActual && Regex.IsMatch(normalizedExpected, "true|yes|y")) ||
-                   (!boolActual && Regex.IsMatch(normalizedExpected, "false|no|n|-"));
+            return (boolActual && Regex.IsMatch(normalizedExpected, "^(true|yes|y)$")) ||
+                   (!boolActual && Regex.IsMatch(normalizedExpected, "^(false|no|n|-)$"));
         }
     }
 }

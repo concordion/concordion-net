@@ -28,6 +28,7 @@ namespace Concordion.Internal
         public BrowserStyleWhitespaceComparer()
         {
             this.m_ChainOfCheckers.Add(new DefaultExpectationChecker());
+            this.m_ChainOfCheckers.Add(new BooleanExpectationChecker());
         }
 
         #region IComparer<object> Members
