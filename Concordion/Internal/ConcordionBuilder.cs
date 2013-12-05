@@ -201,6 +201,12 @@ namespace Concordion.Internal
             return this;
         }
 
+        public ConcordionBuilder WithSpecificationLocator(ISpecificationLocator specificationLocator)
+        {
+            this.SpecificationLocator = specificationLocator;
+            return this;
+        }
+
         public ConcordionBuilder WithEvaluatorFactory(IEvaluatorFactory evaluatorFactory) 
         {
             this.EvaluatorFactory = evaluatorFactory;

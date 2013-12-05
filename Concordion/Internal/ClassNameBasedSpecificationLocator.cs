@@ -22,7 +22,16 @@ namespace Concordion.Internal
 {
     public class ClassNameBasedSpecificationLocator : ISpecificationLocator
     {
-        #region ISpecificationLocator Members
+       #region ISpecificationLocator Members
+
+        private string m_SpecificationSuffix;
+
+        public ClassNameBasedSpecificationLocator() : this("html") {}
+
+        public ClassNameBasedSpecificationLocator(string mSpecificationSuffix)
+        {
+            this.m_SpecificationSuffix = mSpecificationSuffix;
+        }
 
         public Resource LocateSpecification(object fixture)
         {
@@ -33,7 +42,7 @@ namespace Concordion.Internal
                 fixtureName = fixtureName.Remove(fixtureName.Length - 4);
             }
 
-            var path = fixtureName + ".html";
+            var path = fixtureName + "." + m_SpecificationSuffix;
 
             return new Resource(path);
         }

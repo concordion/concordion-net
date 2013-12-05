@@ -76,6 +76,7 @@ namespace Concordion.Internal
             {
                 LoadBaseInputDirectory(configElement);
                 LoadBaseOutputDirectory(configElement);
+                LoadSpecificationSuffix(configElement);
             }
         }
 
@@ -115,6 +116,23 @@ namespace Concordion.Internal
                     Config.BaseInputDirectory = pathAttribute.Value;
                 }
             }
+        }
+
+        private void LoadSpecificationSuffix(XElement element)
+        {
+            var specificationExtensions = element.Element("SpecificationFileExtensions");
+            if (specificationExtensions == null) return;
+
+            var extensionNames = new List<string>();
+            foreach (var extension in specificationExtensions.Elements("FileExtensions"))
+            {
+                var extensionName = extension.Attribute("name");
+                if (extensionName != null)
+                {
+                    extensionNames.Add(extensionName.ToString());
+                }
+            }
+            Config.SpecificationFileExtensions = extensionNames;
         }
     }
 }

@@ -97,6 +97,7 @@
     <Compile Include="Concordion\Command\VerifyRows\TableBodySupportTest.cs" />
     <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
     <Compile Include="Concordion\ConcordionTest.cs" />
+    <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\EmptyFailureTest.cs" />
@@ -136,6 +137,7 @@
     <None Include="Concordion.Spec.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.xhtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Examples\Demo.html">

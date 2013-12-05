@@ -29,8 +29,17 @@ namespace Concordion.Integration.NUnit.Addin
             Fixture = Reflect.Construct(m_FixtureType);
 
             var source = new EmbeddedResourceSource(m_FixtureType.Assembly);
-            var target = new FileTarget(new SpecificationConfig().Load(m_FixtureType).BaseOutputDirectory);
-            var concordion = new ConcordionBuilder().WithSource(source).WithTarget(target).Build();
+            var specificationConfig = new SpecificationConfig().Load(m_FixtureType);
+            var target = new FileTarget(specificationConfig.BaseOutputDirectory);
+            //TODO: handle all specifcation extensions
+            //workaround use just the first one to get tests pass
+            var firstSpecificationExtension = specificationConfig.SpecificationFileExtensions.First();
+            var specificationLocator = new ClassNameBasedSpecificationLocator(firstSpecificationExtension);
+            var concordion = new ConcordionBuilder()
+                                    .WithSource(source)
+                                    .WithTarget(target)
+                                    .WithSpecificationLocator(specificationLocator)
+                                    .Build();
 
             var concordionResult = concordion.Process(Fixture);
             var testResult = NUnitTestResult(concordionResult);
