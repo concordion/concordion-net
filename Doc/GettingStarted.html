@@ -1,139 +1,211 @@
 <!DOCTYPE html>
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
-  <head>
+<head>
     <meta content="text/html; charset=windows-1252" http-equiv="content-type">
     <link media="all" rel="stylesheet" type="text/css" href="css/default.css">
     <link media="print" rel="stylesheet" type="text/css" href="css/print.css">
-  </head>
-  <body>
-    <h1>Getting Started</h1>
-    <p>This guide explains the basic mechanics of turning specifications into <span
-        style="font-style: italic;">active specifications</span> using
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+
+
+            <a href="http://www.opensource.org/">
+                <img class="open-source-logo" src="images/opensource-110x95.png"
+                    alt="Open source (Apache 2.0 license)" />
+            </a>
+
+            <a href="index.html">
+                <img src="images/front-page-banner.png"
+                    alt="Concordion is a simple, but powerful, agile acceptance testing tool." />
+            </a>
+
+        </div>
+        <!-- header -->
+        <div class="menuBar">
+
+            <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="selectedTab"><a href="GettingStarted.html">Getting Started</a></li>
+                <li><a href="RunningTests.html">Running Tests</a></li>
+                <li><a href="ReleaseNotes.html">Release Note</a></li>
+                <li><a href="AdvancedFeatures.html">Advanced Features</a></li>
+            </ul>
+
+        </div>
+        <!-- menuBar  -->
+        <div class="content">
+            <h1>Getting Started</h1>
+            
+                <p>
+                    This guide explains the basic mechanics of turning specifications into <span
+                        style="font-style: italic;">active specifications</span> using
       Concordion-NET. It should take you not more than 15-30 minutes to
-      complete, assuming you are already familiar with C# and XHTML. </p>
-    <h2>Setup</h2>
-    <hr>
-    <p>To kickstart this tutorial, we've created a "Hello World!" project with
-      the following structure.</p>
-    <p>Download: <a target="_top" href="https://github.com/x97mdr/concordion-net/downloads/concordion-net.kickstart.zip">concordion-net-kickstart.zip</a>
-    </p>
-    <img alt="Structure" src="images/project-structure.jpg">
-    <p> It contains the latest stable version of Concordion-NET, all its
-      dependencies, and a simple "Hello World!" example.</p>
-    <ol>
-      <li>"Greeter.cs" is the class we want to test</li>
-      <li>"Kickstart.Spec" is a Visual Studio project for the specifications and
+      complete, assuming you are already familiar with C# and XHTML.
+                </p>
+                <h2>Setup</h2>
+                <hr/>
+                <p>
+                    To kickstart this tutorial, we've created a "Hello World!" project with
+      the following structure.
+                </p>
+                <p>
+                    Download: <a target="_top" href="https://github.com/x97mdr/concordion-net/downloads/concordion-net.kickstart.zip">concordion-net-kickstart.zip</a>
+                </p>
+                <img alt="Structure" src="images/project-structure.jpg">
+                <p>
+                    It contains the latest stable version of Concordion-NET, all its
+      dependencies, and a simple "Hello World!" example.
+                </p>
+                <ol>
+                    <li>"Greeter.cs" is the class we want to test</li>
+                    <li>"Kickstart.Spec" is a Visual Studio project for the specifications and
         acceptance tests. Unit tests are typically held in a project ending with
         "Test" but we prefer the name "Spec", for the Concordion acceptance
-        tests, to emphasize the fact that these tests are concerned with <span
-          style="font-style: italic;">external behavior</span>. </li>
-      <li>"HelloWorldTest.cs" is a Concordion test fixture class. We'll explain
+        tests, to emphasize the fact that these tests are concerned with <span
+            style="font-style: italic;">external behavior</span>. </li>
+                    <li>"HelloWorldTest.cs" is a Concordion test fixture class. We'll explain
         how this works, below.</li>
-      <li>"HelloWorld.html" is the Concordion specification and is processed by
+                    <li>"HelloWorld.html" is the Concordion specification and is processed by
         the <code>"HelloWorldTest.cs"</code> fixture. The name of the fixture
         and the HTML file share the same base name. The fixture has an optional
         suffix of "Test" - for example, it may be named "HelloWorld.cs" or
         "HelloWorldTest.cs".</li>
-      <li>"concordion.css" is a stylesheet to make the specs look nice while
+                    <li>"concordion.css" is a stylesheet to make the specs look nice while
         you're writing them.</li>
-    </ol>
-    <p>Concordion-NET requires the .NET framework with version 3.5 or higher. You
-      have to add the following references to your project:</p>
-    <ul>
-      <li>Concordion.dll</li>
-      <li>OGNL.dll</li>
-      <li>nunit.framework.dll (version 2.6.3)</li>
-    </ul>
-    <p>These dependencies are included in the distribution.</p>
-    <ol>
-    </ol>
-    <h2>The Basics</h2>
-    <hr>
-    <p> A Concordion active specification consists of two parts: </p>
-    <ol>
-      <li>a well-formed XHTML document describing the functionality, and </li>
-      <li>fixture code written in C#&nbsp; that finds concrete examples in the
+                </ol>
+                <p>
+                    Concordion-NET requires the .NET framework with version 3.5 or higher. You
+      have to add the following references to your project:
+                </p>
+                <ul>
+                    <li>Concordion.dll</li>
+                    <li>OGNL.dll</li>
+                    <li>nunit.framework.dll (version 2.6.3)</li>
+                </ul>
+                <p>These dependencies are included in the distribution.</p>
+                <ol>
+                </ol>
+                <h2>The Basics</h2>
+                <hr>
+                <p>A Concordion active specification consists of two parts: </p>
+                <ol>
+                    <li>a well-formed XHTML document describing the functionality, and </li>
+                    <li>fixture code written in C#&nbsp; that finds concrete examples in the
         document and uses them to verify the system under test.</li>
-    </ol>
-    <p>Both files must be in the same package. In order for the magic to happen,
-      the document must first be <em>instrumented</em> with commands.
-      Concordion commands are specified as attributes on elements in the XHTML
-      document. Web browsers ignore attributes that they don't understand, so
-      these commands are effectively invisible. </p>
-    <p> The commands use a <code>"concordion"</code> namespace defined at the
-      top of each document as follows: </p>
-    <pre class="html">&lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
+                </ol>
+                <p>
+                    Both files must be in the same package. In order for the magic to happen,
+                    the document must first be <em>instrumented</em> with commands.
+                    Concordion commands are specified as attributes on elements in the XHTML
+                    document. Web browsers ignore attributes that they don't understand, so
+                    these commands are effectively invisible.
+                </p>
+               
+                <p>
+                    The commands use a <code>"concordion"</code> namespace defined at the
+      top of each document as follows:
+                </p>
+                <pre class="html">&lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
 </pre>
-    <p> Let's start with a really simple example... </p>
-    <h2>concordion:assertEquals</h2>
-    <hr>
-    <ol>
-    </ol>
-    <ol>
-      <li>Create a folder inside your Spec project called "Example".</li>
-      <li> Create a file "HelloWorld.html"inside containing:
+                <p>Let's start with a really simple example... </p>
+                <h2>concordion:assertEquals</h2>
+                <hr>
+                <ol>
+                </ol>
+                <ol>
+                    <li>Create a folder inside your Spec project called "Example".</li>
+                    <li>Create a file "HelloWorld.html"inside containing:
         <pre class="html">&lt;html&gt;
     &lt;body&gt;
         &lt;p&gt;Hello World!&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</pre> </li>
-      <li> Now instrument the file as follows:
+</pre>
+                    </li>
+                    <li>Now instrument the file as follows:
         <pre class="html">&lt;html <b>xmlns:concordion="http://www.concordion.org/2007/concordion"</b>&gt;
     &lt;body&gt;
         &lt;p <b>concordion:assertEquals="getGreeting()"</b>&gt;Hello World!&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-</pre> </li>
-      <li> In the same <code>folder</code>, create a file <code>"HelloWorldTest.cs"</code>
-        containing:
-        <pre class="java">using Concordion.Integration;
+</pre>
+                    </li>
+                    <li>In the same <code>folder</code>, create a file <code>"HelloWorldTest.cs"</code>
+                        containing:
+                    <pre class="java">using Concordion.Integration;
 
-namespace Kickstart.Spec.HelloWorld
-{
-    [ConcordionTest]
-    public class HelloWorldTest
-    {
-     private readonly Greeter m_HelloWorldGreeter = new Greeter();
+            namespace Kickstart.Spec.HelloWorld
+            {
+                [ConcordionTest]
+                public class HelloWorldTest
+                {
+                 private readonly Greeter m_HelloWorldGreeter = new Greeter();
 
-     public string GetGreeting()
-        {
-            return m_HelloWorldGreeter.GetMessage();
-        }
-    } 
-}
-</pre> </li>
-      <li>Now <a href="RunningTests.html">run </a>the HelloWorldTest class
+                 public string GetGreeting()
+                    {
+                        return m_HelloWorldGreeter.GetMessage();
+                    }
+                } 
+            }
+            </pre>
+
+                    </li>
+
+
+                    <li>Now <a href="RunningTests.html">run </a>the HelloWorldTest class
         using NUnit.</li>
-    </ol>
-    <p>If you've done it right, NUnit should give you a green bar and a message
-      like this should be printed to the console:</p>
-    <pre class="console">C:\temp\concordion\example\HelloWorld.html <br>Successes: 1  Failures: 0
+                </ol>
+                <p>
+                    If you've done it right, NUnit should give you a green bar and a message
+      like this should be printed to the console:
+                </p>
+                <pre class="console">C:\temp\concordion\example\HelloWorld.html <br>Successes: 1  Failures: 0
     </pre>
-    <p>The message shows the path of the output (results) file for the test and
+                <p>
+                    The message shows the path of the output (results) file for the test and
       a summary of success and failure counts. By default, Concordion outputs to
       the temp directory (e.g. C:\User\&lt;your user&gt;\AppData\Local\Temp =
-      Windows environment variable %TEMP%).</p>
-    <p>Open the output file in a browser and you should see the same content as
+      Windows environment variable %TEMP%).
+                </p>
+                <p>
+                    Open the output file in a browser and you should see the same content as
       the input document but with the words <code>Hello World!</code>
-      highlighted in green.</p>
-    <img style="padding-right: 0px" src="Images/HelloWorldSuccess.jpg" alt="Hello World! successful outcome"><br>
-    <h3>Properties</h3>
-    <p>In the example above, the call to <code>"GetGreeting()"</code> can be
+                    highlighted in green.
+                </p>
+                <img style="padding-right: 0px" src="Images/HelloWorldSuccess.jpg" alt="Hello World! successful outcome"><br>
+                <h3>Properties</h3>
+                <p>
+                    In the example above, the call to <code>"GetGreeting()"</code> can be
       simplified to <code>"Greeting"</code> since Concordion's expression
-      language understands simple properties.</p>
-    <pre class="html">&lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
+      language understands simple properties.
+                </p>
+                <pre class="html">&lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
     &lt;body&gt;
         &lt;p <b>concordion:assertEquals="Greeting"</b>&gt;Hello World!&lt;/p&gt;
     &lt;/body&gt;
 &lt;/html&gt;
     </pre>
-    <p>You can find a detailed walk through in the <a href="http://concordion.org/Tutorial.html#set">Concordion
+                <p>
+                    You can find a detailed walk through in the <a href="http://concordion.org/Tutorial.html#set">Concordion
         tutorial</a>. Please note that it is based on the Java version of
       Concordion. Thus, you have to adapt to the syntax, but the described test
-      classes and test methods can be easily translated to C#.</p>
-    <p>Once you are comfortable with the basic mechanics, you might like to look
+      classes and test methods can be easily translated to C#.
+                </p>
+                <p>
+                    Once you are comfortable with the basic mechanics, you might like to look
       at some <a href="AdvancedFeatures.html">advanced features of
-        Concordion-NET</a>.</p>
-  </body>
+        Concordion-NET</a>.
+                </p>
+            </div>
+          
+
+
+
+        </div>
+        <!-- content -->
+
+    </div>
+    <!-- page -->
+</body>
 </html>
