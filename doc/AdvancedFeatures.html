@@ -8,8 +8,7 @@
     <div class="page">
       <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo" src="images/opensource-110x95.png"
             alt="Open source (Apache 2.0 license)"> </a> <a href="index.html"> <img src="images/front-page-banner.png"
-            alt="Concordion is a simple, but powerful, agile acceptance testing tool."> </a>
-      </div>
+            alt="Concordion is a simple, but powerful, agile acceptance testing tool."> </a> </div>
       <!-- header -->
       <div class="menuBar">
         <ul class="menu">
@@ -27,13 +26,22 @@
         <p>Concordion-NET does not implement the <a href="http://concordion.org/Tutorial.html#advanced">annotations /
             attributes of the Java version</a>: <a href="http://concordion.org/dist/1.4.4/spec/concordion/annotation/Annotation.html">"@ExpectedToPass",
             "@ExpectedToFail", and "@Unimplemented"</a>.</p>
-        <p>Instead the <a href="RunningTests.html">Concordion-NUnit-Addin</a> supports the usage of <a href="http://www.nunit.org/index.php?p=attributes&amp;r=2.6.3">NUnit
-            attributes</a>. Thus, you can use the <a href="http://www.nunit.org/index.php?p=ignore&amp;r=2.6.3">IgnoreAttribute
-            </a>to achieve a similar behavior as the @Unimplemented annotation.<br>
-        </p>
+        <p>Instead the <a href="RunningTests.html">Concordion-NUnit-Addin</a> supports using&nbsp;<a href="http://www.nunit.org/index.php?p=attributes&amp;r=2.6.3">NUnit
+            attributes</a> on Concordion-NET fixture classes. Thus, you can use the <a href="http://www.nunit.org/index.php?p=ignore&amp;r=2.6.3">IgnoreAttribute
+            </a>to achieve a similar behavior as the @Unimplemented annotation:</p>
+        <pre class="java">            using Concordion.Integration;
+            namespace Kickstart.Spec.HelloWorld
+            {
+                [ConcordionTest]<br>                <span style="font-weight: bold;">[Ignore("ignore fixture and active specification")]</span><br>               &nbsp;public class HelloWorldTest
+                {
+                    public string GetGreeting()
+                    {
+                        //add call to your system under test here
+                    }
+                } 
+            }</pre>
       </div>
-      <!-- content -->
-    </div>
+      <!-- content --> </div>
     <!-- page -->
   </body>
 </html>
