@@ -132,6 +132,7 @@
     <Compile Include="Internal\Commands\IgnoredReportedEventArgs.cs" />
     <Compile Include="Internal\Commands\IResultReporter.cs" />
     <Compile Include="Internal\Commands\IRunReporter.cs" />
+    <Compile Include="Internal\Commands\ListExecuteStrategy.cs" />
     <Compile Include="Internal\Commands\LocalTextDecorator.cs" />
     <Compile Include="Internal\Commands\MissingRowEventArgs.cs" />
     <Compile Include="Internal\Commands\RunCommand.cs" />
