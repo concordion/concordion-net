@@ -22,11 +22,11 @@ namespace Concordion.Internal
 {
     public class ClassNameBasedSpecificationLocator : ISpecificationLocator
     {
-       #region ISpecificationLocator Members
+        #region ISpecificationLocator Members
 
         private string m_SpecificationSuffix;
 
-        public ClassNameBasedSpecificationLocator() : this("html") {}
+        public ClassNameBasedSpecificationLocator() : this("html") { }
 
         public ClassNameBasedSpecificationLocator(string mSpecificationSuffix)
         {
@@ -37,13 +37,20 @@ namespace Concordion.Internal
         {
             var fixtureName = fixture.GetType().ToString();
             fixtureName = fixtureName.Replace(".", "\\");
-            if (fixtureName.EndsWith("Test"))
+
+            //Todo:in Config File aufnehemn
+            //Add Test und Fixture -> Case Sensitive 
+            string[] suffixStringstoReplace = { "Test", "Fixture" };
+
+            foreach (var testSuffix in suffixStringstoReplace)
             {
-                fixtureName = fixtureName.Remove(fixtureName.Length - 4);
+                if (fixtureName.EndsWith(testSuffix))
+                {
+                    fixtureName = fixtureName.Replace(testSuffix, "");
+                }
             }
-
+            //Suffix from Concordion.Specification.config
             var path = fixtureName + "." + m_SpecificationSuffix;
-
             return new Resource(path);
         }
 

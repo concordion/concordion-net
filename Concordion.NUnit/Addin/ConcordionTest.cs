@@ -19,9 +19,7 @@ namespace Concordion.Integration.NUnit.Addin
         {
             this.m_FixtureType = fixtureType;
         }
-
         #region Overrides of Test
-
         public override TestResult Run(EventListener listener, ITestFilter filter)
         {
             listener.TestStarted(this.TestName);
@@ -31,42 +29,59 @@ namespace Concordion.Integration.NUnit.Addin
             var source = new EmbeddedResourceSource(m_FixtureType.Assembly);
             var specificationConfig = new SpecificationConfig().Load(m_FixtureType);
             var target = new FileTarget(specificationConfig.BaseOutputDirectory);
-            //TODO: handle all specifcation extensions
-            //workaround use just the first one to get tests pass
-            var firstSpecificationExtension = specificationConfig.SpecificationFileExtensions.First();
-            var specificationLocator = new ClassNameBasedSpecificationLocator(firstSpecificationExtension);
-            var concordion = new ConcordionBuilder()
-                                    .WithSource(source)
-                                    .WithTarget(target)
-                                    .WithSpecificationLocator(specificationLocator)
-                                    .Build();
-
-            var concordionResult = concordion.Process(Fixture);
-            var testResult = NUnitTestResult(concordionResult);
+ 
+			var testResult = new TestResult(this);
+            var specExtensions = specificationConfig.SpecificationFileExtensions;
+            foreach (var specExtension in specExtensions)
+            {
+                var specLocator = new ClassNameBasedSpecificationLocator(specExtension);
+                var specResource = specLocator.LocateSpecification(Fixture);
+                if (source.CanFind(specResource))
+                {
+                    var concordion = new ConcordionBuilder()
+                                            .WithSource(source)
+                                            .WithTarget(target)
+                                            .WithSpecificationLocator(specLocator)
+                                            .Build();
+                    var concordionResult = concordion.Process(Fixture);
+                    AddToTestResults(concordionResult, testResult);
+                }
+            }
 
             listener.TestFinished(testResult);
-
+            if (!testResult.HasResults)
+            {
+                testResult.Error(new NUnitException(string.Format("no active specification found for fixture: {0}", m_FixtureType.FullName)));
+            }
+            
             return testResult;
         }
 
-        private TestResult NUnitTestResult(IResultSummary concordionResult)
+       private TestResult AddToTestResults(IResultSummary concordionResult, TestResult nunitResult)
         {
-            var testResult = new TestResult(this);
-            testResult.AssertCount = (int) concordionResult.SuccessCount + (int) concordionResult.FailureCount;
-            if (!(concordionResult.HasFailures || concordionResult.HasExceptions))
+            if (nunitResult == null)
             {
-                testResult.Success();
+                nunitResult = new TestResult(this);
             }
-            else if (concordionResult.HasFailures)
+
+            nunitResult.AssertCount += (int)concordionResult.SuccessCount + (int)concordionResult.FailureCount;
+
+            if (!(nunitResult.IsFailure || nunitResult.IsError)
+                && !(concordionResult.HasFailures || concordionResult.HasExceptions))
             {
-                testResult.Failure("Concordion Test Failures: " + concordionResult.FailureCount,
+                nunitResult.Success();
+            }
+            else if (!nunitResult.IsError && concordionResult.HasFailures)
+            {
+                nunitResult.Failure("Concordion Test Failures: " + concordionResult.FailureCount,
                                    "for stack trace, please see Concordion test reports");
             }
             else if (concordionResult.HasExceptions)
             {
-                testResult.Error(new NUnitException("Exception in Concordion test: please see Concordion test reports"));
+                nunitResult.Error(new NUnitException("Exception in Concordion test: please see Concordion test reports"));
             }
-            return testResult;
+
+            return nunitResult;
         }
 
         public override string TestType

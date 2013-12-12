@@ -54,9 +54,14 @@ namespace Concordion.Internal
         }
 
         private ISpecificationLocator SpecificationLocator
+
+
         {
             get;
             set;
+
+
+
         }
 
         private CommandRegistry CommandRegistry
@@ -201,9 +206,16 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithSpecificationLocator(ISpecificationLocator specificationLocator)
+		public ConcordionBuilder WithSpecificOutputDirectory()
         {
-            this.SpecificationLocator = specificationLocator;
+
+            return this;
+        }
+		
+
+        public ConcordionBuilder WithSpecificationLocator(ClassNameBasedSpecificationLocator specificationLocator)
+        {
+           this.SpecificationLocator = specificationLocator;
             return this;
         }
 

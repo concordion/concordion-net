@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using Concordion.Api;
 using System.IO;
@@ -55,7 +56,7 @@ namespace Concordion.Internal
                 BaseDirectory = baseDirectory + "\\";
             }
         }
-        
+
         #endregion
 
         #region Methods
@@ -79,6 +80,16 @@ namespace Concordion.Internal
         private StreamWriter CreateWriter(Resource resource)
         {
             string path = Path.Combine(BaseDirectory, resource.Path);
+            var pos = path.LastIndexOf('.');
+
+            //Extension remove
+            if (!path.EndsWith(".html"))
+            {
+                path = path.Remove(pos, 1);
+                path = path + ".html";
+
+            }
+            
             return new StreamWriter(path, false, Encoding.UTF8);
         }
 

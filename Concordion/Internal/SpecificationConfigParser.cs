@@ -122,17 +122,10 @@ namespace Concordion.Internal
         {
             var specificationExtensions = element.Element("SpecificationFileExtensions");
             if (specificationExtensions == null) return;
-
-            var extensionNames = new List<string>();
-            foreach (var extension in specificationExtensions.Elements("FileExtensions"))
-            {
-                var extensionName = extension.Attribute("name");
-                if (extensionName != null)
-                {
-                    extensionNames.Add(extensionName.ToString());
-                }
-            }
-            Config.SpecificationFileExtensions = extensionNames;
+            var extensionNames = (from extension in specificationExtensions.Elements("FileExtensions").Attributes().ToList() 
+                                  where extension != null select extension.Value).ToList();
+            
+			Config.SpecificationFileExtensions = extensionNames;
         }
     }
 }
