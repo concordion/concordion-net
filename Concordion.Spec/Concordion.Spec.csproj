@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Concordion.Spec</RootNamespace>
     <AssemblyName>Concordion.Spec</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -31,6 +31,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Concordion\Command\AssertEquals\AssertEqualsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\ExceptionsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NonString\BooleanTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\Whitespace\LineContinuationsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NestedActionsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NestedHtmlElementsTest.cs" />
@@ -132,12 +134,6 @@
       <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
       <Name>Concordion</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Concordion.Spec.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.xhtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Examples\Demo.html">
@@ -326,6 +322,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Concordion\Command\AssertEquals\NonString\Boolean.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Concordion.Spec.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

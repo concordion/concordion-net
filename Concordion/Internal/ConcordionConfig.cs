@@ -60,9 +60,12 @@ namespace Concordion.Internal
         /// </summary>
         public ConcordionConfig Load()
         {
-            var defaultConfigFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + @"\Concordion.config";
-            Load(defaultConfigFile);
-
+            var assemblyCodebase = new Uri(Assembly.GetExecutingAssembly().CodeBase);
+            if (assemblyCodebase.IsFile)
+            {
+                var defaultConfigFile = Path.GetDirectoryName(assemblyCodebase.LocalPath) + @"\Concordion.config";
+                Load(defaultConfigFile);
+            }
             return this;
         }
 

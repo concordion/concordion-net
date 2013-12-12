@@ -88,7 +88,11 @@ namespace Concordion.Internal
         /// <returns></returns>
         public SpecificationConfig Load(Assembly assembly)
         {
-            Load(assembly.Location);
+            var assemblyCodebase = new Uri(assembly.CodeBase);
+            if (assemblyCodebase.IsFile)
+            {
+                this.Load(assemblyCodebase.LocalPath);
+            }
             return this;
         }
 

@@ -8,7 +8,7 @@ using NUnit.Core.Extensibility;
 
 namespace Concordion.Integration.NUnit.Addin
 {
-    [NUnitAddin(Name = "Concordion Test Runner", Description = "Runs Concordion Tests with NUnit", Type = ExtensionType.Core)]
+    [NUnitAddin(Name = "ConcordionNUnitAddin", Description = "Runs Concordion Tests with NUnit", Type = ExtensionType.Core)]
     public class SuiteBuilderAddin : ISuiteBuilder, IAddin
     {
         #region Implementation of ISuiteBuilder
