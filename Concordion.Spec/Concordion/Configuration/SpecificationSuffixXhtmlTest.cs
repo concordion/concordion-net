@@ -6,7 +6,7 @@ using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Configuration
 {
-    //[ConcordionTest]
+    [ConcordionTest]
     public class SpecificationSuffixXhtmlTest
     {
         public bool HasBeenProcessed()

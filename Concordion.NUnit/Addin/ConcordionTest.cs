@@ -32,6 +32,7 @@ namespace Concordion.Integration.NUnit.Addin
  
 			var testResult = new TestResult(this);
             var specExtensions = specificationConfig.SpecificationFileExtensions;
+            bool anySpecExecuted = false;
             foreach (var specExtension in specExtensions)
             {
                 var specLocator = new ClassNameBasedSpecificationLocator(specExtension);
@@ -45,14 +46,17 @@ namespace Concordion.Integration.NUnit.Addin
                                             .Build();
                     var concordionResult = concordion.Process(Fixture);
                     AddToTestResults(concordionResult, testResult);
+                    anySpecExecuted = true;
                 }
             }
-
-            listener.TestFinished(testResult);
-            if (!testResult.HasResults)
+            if (!anySpecExecuted)
             {
                 testResult.Error(new NUnitException(string.Format("no active specification found for fixture: {0}", m_FixtureType.FullName)));
             }
+           
+            listener.TestFinished(testResult);
+         
+            
             
             return testResult;
         }
