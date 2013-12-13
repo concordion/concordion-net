@@ -35,6 +35,10 @@ namespace Concordion.Internal.Commands
             {
                 strategy = new TableExecuteStrategy();
             }
+            else if (commandCall.Element.IsNamed("ol") || commandCall.Element.IsNamed("ul"))
+            {
+                strategy = new ListExecuteStrategy();
+            }
             else
             {
                 strategy = new DefaultExecuteStrategy();
