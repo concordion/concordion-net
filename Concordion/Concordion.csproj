@@ -159,6 +159,7 @@
     <Compile Include="Internal\FileTarget.cs" />
     <Compile Include="Internal\IFixtureState.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
+    <Compile Include="Internal\ListEntry.cs" />
     <Compile Include="Internal\ListSupport.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\UnimplementedFixtureState.cs" />

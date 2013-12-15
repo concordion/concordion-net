@@ -58,6 +58,21 @@ namespace Concordion.Internal
             return listElements;
         }
 
+        public List<ListEntry> GetListEntries()
+        {
+            List<ListEntry> listEntries = new List<ListEntry>();
+            foreach (Element listElement in ListCommandCall.Element.GetChildElements())
+            {
+                if (listElement.IsNamed("li") ||
+                    listElement.IsNamed("ul") ||
+                    listElement.IsNamed("ol"))
+                {
+                    listEntries.Add(new ListEntry(listElement));
+                }
+            }
+            return listEntries;
+        }
+
         #endregion
     }
 }

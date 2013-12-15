@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.Spec", "Concordi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gallio.ConcordionAdapter", "Gallio.ConcordionAdapter\Gallio.ConcordionAdapter.csproj", "{57D6B2E4-69A8-42A6-8220-AAE6EDFB902D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.Integration.NUnit", "Concordion.Integration.NUnit\Concordion.Integration.NUnit.csproj", "{FB522DBB-6F64-4834-9C87-029389AA0ABB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Concordion.NUnit", "Concordion.NUnit\Concordion.NUnit.csproj", "{FB522DBB-6F64-4834-9C87-029389AA0ABB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

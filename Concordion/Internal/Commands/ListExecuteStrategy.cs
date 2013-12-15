@@ -14,15 +14,17 @@ namespace Concordion.Internal.Commands
         {
             increaseLevel(evaluator);
             ListSupport listSupport = new ListSupport(commandCall);
-            foreach (Element listItem in listSupport.GetListItemElements())
+            foreach (ListEntry listEntry in listSupport.GetListEntries())
             {
-                commandCall.Element = listItem;
-                commandCall.Execute(evaluator, resultRecorder);
-            }
-            foreach (Element listElement in listSupport.GetListElements())
-            {
-                commandCall.Element = listElement;
-                Execute(commandCall, evaluator, resultRecorder);
+                commandCall.Element = listEntry.Element;
+                if (listEntry.IsItem)
+                {
+                    commandCall.Execute(evaluator, resultRecorder);
+                }
+                if (listEntry.IsList)
+                {
+                    Execute(commandCall, evaluator, resultRecorder);
+                }
             }
             decreaseLevel(evaluator);
         }
@@ -35,17 +37,13 @@ namespace Concordion.Internal.Commands
             }
             else
             {
-                int level = (int)evaluator.GetVariable(LEVEL_VARIABLE);
-                level = level++;
-                evaluator.SetVariable(LEVEL_VARIABLE, level);
+                evaluator.SetVariable(LEVEL_VARIABLE, 1 + (int)evaluator.GetVariable(LEVEL_VARIABLE));
             }
         }
 
         private void decreaseLevel(IEvaluator evaluator)
         {
-            int level = (int)evaluator.GetVariable(LEVEL_VARIABLE);
-            level = level--;
-            evaluator.SetVariable(LEVEL_VARIABLE, level);
+            evaluator.SetVariable(LEVEL_VARIABLE, (int)evaluator.GetVariable(LEVEL_VARIABLE) - 1);
         }
     }
 }

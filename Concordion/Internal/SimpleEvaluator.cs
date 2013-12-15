@@ -29,7 +29,7 @@ namespace Concordion.Internal
         private static readonly string PROPERTY_NAME_PATTERN = "[a-z][a-zA-Z0-9_]*";
         private static readonly string STRING_PATTERN = "'[^']+'";
         private static readonly string LHS_VARIABLE_PATTERN = "#" + METHOD_NAME_PATTERN;
-        private static readonly string RHS_VARIABLE_PATTERN = "(" + LHS_VARIABLE_PATTERN + "|#TEXT|#HREF)";
+        private static readonly string RHS_VARIABLE_PATTERN = "(" + LHS_VARIABLE_PATTERN + "|#TEXT|#HREF|#LEVEL)";
 
         #endregion
 

@@ -88,7 +88,9 @@
     <Compile Include="Concordion\Command\Echo\EscapingHtmlCharactersTest.cs" />
     <Compile Include="Concordion\Command\Execute\AccessToLinkHrefTest.cs" />
     <Compile Include="Concordion\Command\Execute\ExecuteTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecutingListTest.cs" />
     <Compile Include="Concordion\Command\Execute\ExecutingTablesTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ListExampleTest.cs" />
     <Compile Include="Concordion\Command\Results\Stylesheet\MissingHeadElementTest.cs" />
     <Compile Include="Concordion\Command\Results\Stylesheet\StylesheetTest.cs" />
     <Compile Include="Concordion\Command\Run\RunTest.cs" />
@@ -328,9 +330,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Concordion.Spec.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <EmbeddedResource Include="Concordion\Command\Execute\ListExample.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Concordion\Command\Execute\ExecutingList.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
