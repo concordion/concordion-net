@@ -6,8 +6,7 @@
   </head>
   <body>
     <div class="page">
-      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo"
-
+      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo"
             src="images/opensource-110x95.png" alt="Open source (Apache 2.0 license)">
         </a> <a href="index.html"> <img src="images/front-page-banner.png" alt="Concordion is a simple, but powerful, agile acceptance testing tool.">
         </a> </div>
@@ -24,10 +23,10 @@
       </div>
       <!-- menuBar  -->
       <div class="content">
-        <h1>How to configure Concordion-NET</h1>
+        <h1>Configuring Concordion-NET</h1>
         <p>In contrast to the Java version of Concordion, where configuration is
           done via system properties, Concordion-NET uses two types of
-          configuration files to define basic parameters for running
+          configuration files to define basic parameters for the execution of
           Concordion-NET fixtures.</p>
         <ol>
         </ol>
@@ -35,21 +34,17 @@
         <ol>
         </ol>
         This first configuration file contains setting for the test runners to
-        be used. The default test runner of concordion is the RunTestRunner. An
-        example configuration setting up this runner is shown below. However, it
-        is not necessary to define any runners at all - if Concordion-NET does
-        not find a particular configuration for any runnner, it uses this
-        default one. If you want to use any other test runner, you can configure
-        that in the Concordion.config file. The file has to be located in the
-        same directory as the concordion.dll to be found by the Concordion-NET
-        framework.<br>
+        be used. The default test runner of Concordion-NET is the RunTestRunner.
+        An example configuration setting up this runner is shown below. The
+        config file has to be located in the same directory as the
+        Concordion.dll in order to be found by the Concordion-NET framework.<br>
         <h3>Runners</h3>
         <p>Runners are used to call and run one specification from another
           specification. Another specification may be in a different testing
           suite (like FIT, FitNesse, Cucumber, etc.) </p>
         <h4>Runner</h4>
         <p>Each runner element has two attributes that must be present to be
-          recognised properly. They are "alias" and "type". The alias is used to
+          recognized properly. They are "alias" and "type". The alias is used to
           refer to the type in the concordion:run="alias" statement. The type is
           the Assembly-Qualified Name of the type that you will associate with
           the alias and will be used to run the called specification. See the
@@ -66,12 +61,10 @@
  	 	PublicKeyToken=null" /&gt;
   &lt;/Runners&gt;
 &lt;/Concordion&gt;</pre>
-        <ol>
-          <li>&lt;your-spec-project&gt;.config</li>
-        </ol>
-        <p>The second file is specific for each project containing
+        <h2>2. Spec-Project specific configuration</h2>
+        <p>The second configuration file is specific for each project containing
           Concordion-NET documents and fixtures. This configuration file has the
-          same file name as the dll file, but the file extension ".dll" is
+          same file name as the DLL file, but the file extension ".dll" is
           replaced by ".config". The file has to be located in the same
           directory as your &lt;spec&gt;.dll to be loaded by Concordion-NET.</p>
         <h3>BaseOutputDirectory</h3>
@@ -88,6 +81,5 @@
       </div>
       <!-- content --> </div>
     <!-- page -->
-    
   </body>
 </html>
