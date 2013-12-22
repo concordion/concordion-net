@@ -5,6 +5,7 @@ using System.Text;
 using Concordion.Api;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 
 namespace Concordion.Spec
@@ -94,9 +95,9 @@ namespace Concordion.Spec
             return XDocument.Parse(documentXML);
         }
 
-        public FailureReportedEventArgs GetLastAssertEqualsFailureEvent()
+        public AssertFailureEvent GetLastAssertEqualsFailureEvent()
         {
-            return eventRecorder.GetLast<FailureReportedEventArgs>();
+            return eventRecorder.GetLast(typeof(AssertFailureEvent)) as AssertFailureEvent;
         }
     }
 }

@@ -20,7 +20,7 @@ using Concordion.Api;
 
 namespace Concordion.Internal.Renderer
 {
-    public class AssertEqualsResultRenderer : IAssertEqualsListener
+    public class AssertEqualsResultRenderer //: IAssertEqualsListener
     {
         #region IAssertEqualsListener Members
 

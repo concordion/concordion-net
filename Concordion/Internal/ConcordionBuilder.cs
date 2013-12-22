@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 using Concordion.Api;
 using Concordion.Internal.Util;
@@ -164,10 +165,13 @@ namespace Concordion.Internal
             WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "echo", EchoCommand);
 
             // Wire up the command listeners
-            
+
+            var assertResultRenderer = new AssertResultRenderer();
+            WithAssertEqualsListener(assertResultRenderer);
+
             var assertEqualsResultRenderer = new AssertEqualsResultRenderer();
-            AssertEqualsCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
-            AssertEqualsCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
+            //AssertEqualsCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
+            //AssertEqualsCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
             AssertTrueCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
             AssertTrueCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
             AssertFalseCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
@@ -213,12 +217,23 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithAssertEqualsListener(AssertEqualsResultRenderer renderer)
+        public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener listener)
         {
-            AssertEqualsCommand.SuccessReported += renderer.SuccessReportedEventHandler;
-            AssertEqualsCommand.FailureReported += renderer.FailureReportedEventHandler;
+            AssertEqualsCommand.addAssertEqualsListener(listener);
             return this;
         }
+
+        //public ConcordionBuilder WithAssertTrueListener(IAssertTrueListener listener)
+        //{
+        //    AssertTrueCommand.addAssertListener(listener);
+        //    return this;
+        //}
+
+        //public ConcordionBuilder WithAssertFalseListener(IAssertFalseListener listener)
+        //{
+        //    AssertFalseCommand.addAssertListener(listener);
+        //    return this;
+        //}
 
         private ConcordionBuilder WithApprovedCommand(string namespaceURI, string commandName, ICommand command) 
         {
@@ -284,18 +299,18 @@ namespace Concordion.Internal
             }
         }
 
-        public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener eventRecorder)
-        {
-            AssertEqualsCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
-            AssertEqualsCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
-            AssertTrueCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
-            AssertTrueCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
-            AssertFalseCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
-            AssertFalseCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
-            return this;
-        }
+        //public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener eventRecorder)
+        //{
+        //    AssertEqualsCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
+        //    AssertEqualsCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
+        //    AssertTrueCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
+        //    AssertTrueCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
+        //    AssertFalseCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
+        //    AssertFalseCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
+        //    return this;
+        //}
 
-        public ConcordionBuilder WithExceptionListener(IExceptionListener eventRecorder)
+        public ConcordionBuilder WithExceptionListener(IExceptionCaughtListener listener)
         {
             // TODO - add code here for processing
             return this;

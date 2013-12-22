@@ -17,15 +17,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Listener;
 using Concordion.Internal.Util;
 
 namespace Concordion.Internal.Commands
 {
-    public class AssertEqualsCommand : ICommand, IResultReporter
+    public class AssertEqualsCommand : AbstractCommand
     {
         #region Fields
 
         private IComparer<object> m_comparer;
+        private readonly List<IAssertEqualsListener> m_Listeners = new List<IAssertEqualsListener>();
 
         #endregion
 
@@ -44,6 +46,32 @@ namespace Concordion.Internal.Commands
         #endregion
 
         #region Methods
+
+        public void addAssertEqualsListener(IAssertEqualsListener listener)
+        {
+            this.m_Listeners.Add(listener);
+        }
+
+        public void removeAssertEqualsListener(IAssertEqualsListener listener)
+        {
+            this.m_Listeners.Add(listener);
+        }
+
+        private void AnnounceSuccess(Element element)
+        {
+            foreach (var assertEqualsListener in m_Listeners)
+            {
+                assertEqualsListener.SuccessReported(new AssertSuccessEvent(element));
+            }
+        }
+
+        private void AnnounceFailure(Element element, String expected, Object actual)
+        {
+            foreach (var assertEqualsListener in m_Listeners)
+            {
+                assertEqualsListener.FailureReported(new AssertFailureEvent(element, expected, actual));
+            }
+        }
 
         private void OnSuccessReported(Element element)
         {
@@ -65,15 +93,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
-        {
-        }
-
-        public void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
-        {
-        }
-
-        public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             Check.IsFalse(commandCall.HasChildCommands, "Nesting commands inside an 'assertEquals' is not supported");
 
@@ -85,12 +105,12 @@ namespace Concordion.Internal.Commands
             if (m_comparer.Compare(actual, expected) == 0)
             {
                 resultRecorder.Record(Result.Success);
-                OnSuccessReported(element);
+                AnnounceSuccess(element);
             }
             else
             {
                 resultRecorder.Record(Result.Failure);
-                OnFailureReported(element, actual, expected);
+                AnnounceFailure(element, expected, actual);
             }
         }
 

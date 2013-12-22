@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\AbstractCommand.cs" />
     <Compile Include="Api\AssertionErrorException.cs" />
     <Compile Include="Api\Element.cs" />
     <Compile Include="Api\ExpectedToFailAttribute.cs" />
@@ -95,6 +96,14 @@
     <Compile Include="Api\ISpecificationLocator.cs" />
     <Compile Include="Api\ISpecificationReader.cs" />
     <Compile Include="Api\ITarget.cs" />
+    <Compile Include="Api\Listener\AssertFailureEvent.cs" />
+    <Compile Include="Api\Listener\IAssertTrueListener.cs" />
+    <Compile Include="Api\Listener\IAssertFalseListener.cs" />
+    <Compile Include="Api\Listener\IAssertListener.cs" />
+    <Compile Include="Api\Listener\AssertSuccessEvent.cs" />
+    <Compile Include="Api\Listener\ExceptionCaughtEvent.cs" />
+    <Compile Include="Api\Listener\IAssertEqualsListener.cs" />
+    <Compile Include="Api\Listener\IExceptionCaughtListener.cs" />
     <Compile Include="Api\Resource.cs" />
     <Compile Include="Api\Result.cs" />
     <Compile Include="Api\RunnerResult.cs" />
@@ -117,7 +126,6 @@
     <Compile Include="Internal\CommandCall.cs" />
     <Compile Include="Internal\CommandCallList.cs" />
     <Compile Include="Internal\CommandRegistry.cs" />
-    <Compile Include="Internal\Commands\AbstractCommand.cs" />
     <Compile Include="Internal\Commands\AbstractCommandDecorator.cs" />
     <Compile Include="Internal\Commands\AssertEqualsCommand.cs" />
     <Compile Include="Internal\Commands\AssertFalseCommand.cs" />
@@ -159,6 +167,7 @@
     <Compile Include="Internal\IFixtureState.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
+    <Compile Include="Internal\Renderer\AssertResultRenderer.cs" />
     <Compile Include="Internal\UnimplementedFixtureState.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />
     <Compile Include="Internal\ParsingEventArgs.cs" />
@@ -167,7 +176,6 @@
     <Compile Include="Internal\Renderer\BreadCrumbRenderer.cs" />
     <Compile Include="Internal\Renderer\DocumentStructureImprovementRenderer.cs" />
     <Compile Include="Internal\Renderer\ExceptionRenderer.cs" />
-    <Compile Include="Internal\Renderer\IAssertEqualsListener.cs" />
     <Compile Include="Internal\Renderer\IDocumentParsingListener.cs" />
     <Compile Include="Internal\Renderer\IExceptionListener.cs" />
     <Compile Include="Internal\Renderer\IRunListener.cs" />

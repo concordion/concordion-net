@@ -2,48 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Concordion.Internal.Renderer;
+using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 
 namespace Concordion.Spec
 {
-    class EventRecorder : IAssertEqualsListener, IExceptionListener
+    class EventRecorder : IAssertEqualsListener, IExceptionCaughtListener
     {
-        private List<EventArgs> events;
+        private readonly List<Object> m_Events;
 
         public EventRecorder()
 	    {
-            events = new List<EventArgs>();
+            this.m_Events = new List<Object>();
 	    }
 
-        public T GetLast<T>() where T : EventArgs
+        public Object GetLast(Type eventType)
         {
-            T lastMatch = default(T);
-            foreach (EventArgs theEvent in events)
+            Object lastMatch = null;
+            foreach (var anEvent in m_Events.Where(eventType.IsInstanceOfType))
             {
-                if (theEvent is T)
-                {
-                    lastMatch = theEvent as T;
-                }
+                lastMatch = anEvent;
             }
             return lastMatch;
         }
 
-        public void ExceptionCaughtEventHandler(object sender, ExceptionCaughtEventArgs e)
+        public void ExceptionCaught(ExceptionCaughtEvent caughtEvent)
         {
-            events.Add(e);
+            this.m_Events.Add(caughtEvent);
         }
 
         #region IAssertEqualsListener Members
 
-        public void SuccessReportedEventHandler(object sender, SuccessReportedEventArgs e)
+        public void SuccessReported(AssertSuccessEvent successEvent)
         {
-            events.Add(e);
+            this.m_Events.Add(successEvent);
         }
 
-        public void FailureReportedEventHandler(object sender, FailureReportedEventArgs e)
+        public void FailureReported(AssertFailureEvent failureEvent)
         {
-            events.Add(e);
+            this.m_Events.Add(failureEvent);
         }
 
         #endregion
