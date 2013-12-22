@@ -26,7 +26,7 @@ namespace Concordion.Internal.Commands
     {
         #region Fields
 
-        private IComparer<object> m_comparer;
+        private readonly IComparer<object> m_Comparer;
         private readonly List<IAssertEqualsListener> m_Listeners = new List<IAssertEqualsListener>();
 
         #endregion
@@ -40,19 +40,19 @@ namespace Concordion.Internal.Commands
 
         public AssertEqualsCommand(IComparer<object> comparer)
         {
-            m_comparer = comparer;
+            this.m_Comparer = comparer;
         }
 
         #endregion
 
         #region Methods
 
-        public void addAssertEqualsListener(IAssertEqualsListener listener)
+        public void AddAssertEqualsListener(IAssertEqualsListener listener)
         {
             this.m_Listeners.Add(listener);
         }
 
-        public void removeAssertEqualsListener(IAssertEqualsListener listener)
+        public void RemoveAssertEqualsListener(IAssertEqualsListener listener)
         {
             this.m_Listeners.Add(listener);
         }
@@ -73,22 +73,6 @@ namespace Concordion.Internal.Commands
             }
         }
 
-        private void OnSuccessReported(Element element)
-        {
-            if (SuccessReported != null)
-            {
-                SuccessReported(this, new SuccessReportedEventArgs { Element = element });
-            }
-        }
-
-        private void OnFailureReported(Element element, object actual, string expected)
-        {
-            if (FailureReported != null)
-            {
-                FailureReported(this, new FailureReportedEventArgs { Element = element, Actual = actual, Expected = expected });
-            }
-        }
-
         #endregion
 
         #region ICommand Members
@@ -102,7 +86,7 @@ namespace Concordion.Internal.Commands
             object actual = evaluator.Evaluate(commandCall.Expression);
             string expected = element.Text;
 
-            if (m_comparer.Compare(actual, expected) == 0)
+            if (this.m_Comparer.Compare(actual, expected) == 0)
             {
                 resultRecorder.Record(Result.Success);
                 AnnounceSuccess(element);
@@ -113,13 +97,6 @@ namespace Concordion.Internal.Commands
                 AnnounceFailure(element, expected, actual);
             }
         }
-
-        #endregion
-
-        #region IResultReporter Members
-
-        public event EventHandler<SuccessReportedEventArgs> SuccessReported;
-        public event EventHandler<FailureReportedEventArgs> FailureReported;
 
         #endregion
     }
