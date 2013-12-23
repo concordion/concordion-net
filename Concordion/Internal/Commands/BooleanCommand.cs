@@ -18,26 +18,39 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Data;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Commands
 {
-    public abstract class BooleanCommand : ICommand, IResultReporter
+    public abstract class BooleanCommand : AbstractCommand
     {
+        private readonly List<IAssertListener> m_Listeners = new List<IAssertListener>();
+
         #region Methods
 
-        protected void OnSuccessReported(Element element)
+        public void AddAssertListener(IAssertListener listener)
         {
-            if (SuccessReported != null)
+            m_Listeners.Add(listener);
+        }
+
+        public void RemoveAssertListener(IAssertListener listener)
+        {
+            m_Listeners.Remove(listener);
+        }
+
+        protected void AnnounceSuccess(Element element)
+        {
+            foreach (var assertListener in m_Listeners)
             {
-                SuccessReported(this, new SuccessReportedEventArgs { Element = element });
+                assertListener.SuccessReported(new AssertSuccessEvent(element));
             }
         }
 
-        protected void OnFailureReported(Element element, object actual, string expected)
+        protected void AnnounceFailure(Element element, String expected, Object actual)
         {
-            if (FailureReported != null)
+            foreach (var assertListener in m_Listeners)
             {
-                FailureReported(this, new FailureReportedEventArgs { Element = element, Actual = actual, Expected = expected });
+                assertListener.FailureReported(new AssertFailureEvent(element, expected, actual));
             }
         }
 
@@ -48,15 +61,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
-        {
-        }
-
-        public void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
-        {
-        }
-
-        public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             CommandCallList childCommands = commandCall.Children;
             childCommands.SetUp(evaluator, resultRecorder);
@@ -82,13 +87,6 @@ namespace Concordion.Internal.Commands
                 throw new InvalidExpressionException("Expression '" + expression + "' did not produce a boolean result (needed for assertTrue).");
             }
         }
-
-        #endregion
-
-        #region IResultReporter Members
-
-        public event EventHandler<SuccessReportedEventArgs> SuccessReported;
-        public event EventHandler<FailureReportedEventArgs> FailureReported;
 
         #endregion
     }

@@ -22,16 +22,17 @@ namespace Concordion.Internal.Commands
 {
     public class AssertTrueCommand : BooleanCommand
     {
-        protected override void ProcessTrueResult(CommandCall commandCall, global::Concordion.Api.IResultRecorder resultRecorder)
+        protected override void ProcessTrueResult(CommandCall commandCall, IResultRecorder resultRecorder)
         {
             resultRecorder.Record(Result.Success);
-            OnSuccessReported(commandCall.Element);
+            AnnounceSuccess(commandCall.Element);
         }
 
-        protected override void ProcessFalseResult(CommandCall commandCall, global::Concordion.Api.IResultRecorder resultRecorder)
+        protected override void ProcessFalseResult(CommandCall commandCall, IResultRecorder resultRecorder)
         {
             resultRecorder.Record(Result.Failure);
-            OnFailureReported(commandCall.Element, "== false", commandCall.Expression);
+            string expected = commandCall.Element.Text;
+            AnnounceFailure(commandCall.Element, expected, "== false");
         }
     }
 }

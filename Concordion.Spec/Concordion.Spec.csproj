@@ -114,6 +114,8 @@
     <Compile Include="Concordion\Results\Breadcrumbs\BreadcrumbsTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\DeterminingBreadcrumbsTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\WordingTest.cs" />
+    <Compile Include="Concordion\Results\AssertFalse\Failure\OnFailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertFalse\Success\OnSuccessTest.cs" />
     <Compile Include="Concordion\Results\Exception\ExceptionTest.cs" />
     <Compile Include="Concordion\Results\ResultsTest.cs" />
     <Compile Include="Examples\DemoTest.cs" />
@@ -135,6 +137,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Concordion\Results\AssertFalse\Success\OnSuccess.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Examples\Demo.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

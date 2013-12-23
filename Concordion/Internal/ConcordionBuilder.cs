@@ -168,14 +168,8 @@ namespace Concordion.Internal
 
             var assertResultRenderer = new AssertResultRenderer();
             WithAssertEqualsListener(assertResultRenderer);
-
-            var assertEqualsResultRenderer = new AssertEqualsResultRenderer();
-            //AssertEqualsCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
-            //AssertEqualsCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
-            AssertTrueCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
-            AssertTrueCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
-            AssertFalseCommand.SuccessReported += assertEqualsResultRenderer.SuccessReportedEventHandler;
-            AssertFalseCommand.FailureReported += assertEqualsResultRenderer.FailureReportedEventHandler;
+            WithAssertTrueListener(assertResultRenderer);
+            WithAssertFalseListener(assertResultRenderer);
 
             var verifyRowsCommandRenderer = new VerifyRowResultRenderer();
             VerifyRowsCommand.MissingRowFound += verifyRowsCommandRenderer.MissingRowFoundEventHandler;
@@ -219,21 +213,21 @@ namespace Concordion.Internal
 
         public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener listener)
         {
-            AssertEqualsCommand.addAssertEqualsListener(listener);
+            AssertEqualsCommand.AddAssertEqualsListener(listener);
             return this;
         }
 
-        //public ConcordionBuilder WithAssertTrueListener(IAssertTrueListener listener)
-        //{
-        //    AssertTrueCommand.addAssertListener(listener);
-        //    return this;
-        //}
+        public ConcordionBuilder WithAssertTrueListener(IAssertTrueListener listener)
+        {
+            AssertTrueCommand.AddAssertListener(listener);
+            return this;
+        }
 
-        //public ConcordionBuilder WithAssertFalseListener(IAssertFalseListener listener)
-        //{
-        //    AssertFalseCommand.addAssertListener(listener);
-        //    return this;
-        //}
+        public ConcordionBuilder WithAssertFalseListener(IAssertFalseListener listener)
+        {
+            AssertFalseCommand.AddAssertListener(listener);
+            return this;
+        }
 
         private ConcordionBuilder WithApprovedCommand(string namespaceURI, string commandName, ICommand command) 
         {
