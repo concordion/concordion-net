@@ -15,13 +15,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Concordion.Api;
-using Concordion.Internal.Commands;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Renderer
 {
-    public class SpecificationRenderer : ISpecificationListener
+    public class SpecificationRenderer : ISpecificationProcessingListener
     {
         #region Fields
 		        
@@ -48,27 +47,28 @@ namespace Concordion.Internal.Renderer
 
         #endregion
 
-        #region ISpecificationRenderer Members
+        #region ISpecificationProcessingListener Members
 
-        public void SpecificationProcessingEventHandler(object sender, SpecificationEventArgs eventArgs)
+        public void BeforeProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
+            // No action required
         }
 
-        public void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs)
+        public void AfterProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
             try 
             {
-                Target.Write(eventArgs.Resource, XML_DECLARATION + eventArgs.Element.ToXml());
+                Target.Write(processingEvent.Resource, XML_DECLARATION + processingEvent.RootElement.ToXml());
                 if (Target is FileTarget) 
                 {
                     // TODO - Replace this with something meaningful
 
-                    Console.WriteLine("Processed specifications : " + ((FileTarget)Target).GetTargetPath(eventArgs.Resource));
+                    Console.WriteLine("Processed specifications : " + ((FileTarget)Target).GetTargetPath(processingEvent.Resource));
                 }
             } 
             catch (Exception e) 
             {
-                throw new Exception("Failed to write results to '" + eventArgs.Resource.Path + "'.", e);
+                throw new Exception("Failed to write results to '" + processingEvent.Resource.Path + "'.", e);
             }
         }
 

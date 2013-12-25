@@ -18,12 +18,15 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Xml.Linq;
+using Concordion.Api.Listener;
 using Concordion.Internal.Util;
 
 namespace Concordion.Internal
 {
     public class DocumentParser
     {
+        private readonly List<IDocumentParsingListener> m_Listeners = new List<IDocumentParsingListener>();
+
         #region Properties
 
         private ICommandFactory CommandFactory
@@ -45,9 +48,27 @@ namespace Concordion.Internal
 
         #region Methods
 
+        public void AddDocumentParsingListener(IDocumentParsingListener listener)
+        {
+            m_Listeners.Add(listener);
+        }
+
+        public void RemoveDocumentParsingListener(IDocumentParsingListener listener)
+        {
+            m_Listeners.Remove(listener);
+        }
+
+        private void AnnounceBeforeParsing(XDocument document)
+        {
+            foreach (var listener in m_Listeners)
+            {
+                listener.BeforeParsing(document);
+            }
+        }
+
         public ISpecification Parse(XDocument document, Resource resource)
         {
-            OnDocumentParsing(document);
+            AnnounceBeforeParsing(document);
             XElement rootElement = document.Root;
             CommandCall rootCommandCall = new CommandCall(CreateSpecificationCommand(), new Element(rootElement), "", resource);
             GenerateCommandCallTree(rootElement, rootCommandCall, resource);
@@ -94,20 +115,6 @@ namespace Concordion.Internal
                 GenerateCommandCallTree(child, parentCommandCall, resource);
             }
         }
-
-        private void OnDocumentParsing(XDocument document)
-        {
-            if (DocumentParsing != null)
-            {
-                DocumentParsing(this, new DocumentParsingEventArgs { Document = document });
-            }
-        }
-
-        #endregion
-
-        #region Events
-
-        public event EventHandler<DocumentParsingEventArgs> DocumentParsing;
 
         #endregion
     }

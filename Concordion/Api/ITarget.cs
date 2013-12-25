@@ -46,6 +46,8 @@ namespace Concordion.Api
         /// <param name="destination">The destination.</param>
         void CopyTo(Resource resource, string destination);
 
+        void CopyTo(Resource resource, TextReader inputReader);
+
         /// <summary>
         /// Deletes the specified resource.
         /// </summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
@@ -37,6 +38,11 @@ namespace Concordion.Spec
 
         public void CopyTo(Resource resource, string destination)
         {
+        }
+
+        public void CopyTo(Resource resource, TextReader inputReader)
+        {
+            //ToDo: add implementation
         }
 
         public void Delete(Resource resource)

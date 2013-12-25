@@ -15,16 +15,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Concordion.Internal.Commands;
+using Concordion.Api.Listener;
 using Concordion.Api;
 using System.Xml.Linq;
-using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Concordion.Internal.Renderer
 {
-    public class BreadCrumbRenderer : ISpecificationListener
+    public class BreadCrumbRenderer : ISpecificationProcessingListener
     {
         #region Properties
 
@@ -172,22 +170,23 @@ namespace Concordion.Internal.Renderer
 
         #endregion
 
-        #region ISpecificationRenderer Members
+        #region ISpecificationProcessingListener Members
 
-        public void SpecificationProcessingEventHandler(object sender, SpecificationEventArgs eventArgs)
+        public void BeforeProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
+            // No action needed beforehand
         }
 
-        public void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs)
+        public void AfterProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
             try
             {
                 Element span = new Element("span").AddStyleClass("breadcrumbs");
-                AppendBreadcrumbsTo(span, eventArgs.Resource);
+                AppendBreadcrumbsTo(span, processingEvent.Resource);
 
                 if (span.HasChildren)
                 {
-                    GetDocumentBody(eventArgs.Element).PrependChild(span);
+                    GetDocumentBody(processingEvent.RootElement).PrependChild(span);
                 }
             }
             catch (Exception e)

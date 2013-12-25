@@ -17,26 +17,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Commands
 {
-    public class SpecificationCommand : ICommand
+    public class SpecificationCommand : AbstractCommand
     {
+        #region Fields
+
+        private readonly List<ISpecificationProcessingListener> m_Listeners = new List<ISpecificationProcessingListener>();
+
+        #endregion
+
         #region Methods
 
-        private void OnSpecificationCommandProcessing(Resource resource, Element element)
+        public void AddSpecificationListener(ISpecificationProcessingListener listener)
         {
-            if (SpecificationCommandProcessing != null)
+            m_Listeners.Add(listener);
+        }
+
+        public void RemoveSpecificationListener(ISpecificationProcessingListener listener)
+        {
+            m_Listeners.Remove(listener);
+        }
+
+        private void AnnounceAfterProcessingEvent(Resource resource, Element element)
+        {
+            foreach (var listener in m_Listeners)
             {
-                SpecificationCommandProcessing(this, new SpecificationEventArgs { Element = element, Resource = resource });
+                listener.AfterProcessingSpecification(new SpecificationProcessingEvent(resource, element));
             }
         }
 
-        private void OnSpecificationCommandProcessed(Resource resource, Element element)
+        private void AnnounceBeforeProcessingEvent(Resource resource, Element element)
         {
-            if (SpecificationCommandProcessed != null)
+            foreach (var listener in m_Listeners)
             {
-                SpecificationCommandProcessed(this, new SpecificationEventArgs { Element = element, Resource = resource });
+                listener.BeforeProcessingSpecification(new SpecificationProcessingEvent(resource, element));
             }
         }
 
@@ -44,29 +61,22 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             throw new InvalidOperationException("Unexpected call to SpecificationCommand's SetUp() method. Only the Execute() method should be called.");
         }
 
-        public void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
-            OnSpecificationCommandProcessing(commandCall.Resource, commandCall.Element);
+            AnnounceBeforeProcessingEvent(commandCall.Resource, commandCall.Element);
             commandCall.Children.ProcessSequentially(evaluator, resultRecorder);
-            OnSpecificationCommandProcessed(commandCall.Resource, commandCall.Element);
+            AnnounceAfterProcessingEvent(commandCall.Resource, commandCall.Element);
         }
 
-        public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             throw new InvalidOperationException("Unexpected call to SpecificationCommand's Verify() method. Only the Execute() method should be called.");
         }
-
-        #endregion
-
-        #region Events
-
-        public event EventHandler<SpecificationEventArgs> SpecificationCommandProcessing;
-        public event EventHandler<SpecificationEventArgs> SpecificationCommandProcessed;
 
         #endregion
     }

@@ -131,6 +131,19 @@ namespace Concordion.Internal
             File.Copy(source, destination);
         }
 
+        public void CopyTo(Resource resource, TextReader inputReader)
+        {
+            Check.NotNull(resource, "resource is null");
+            MakeDirectories(resource);
+            var outputFile = GetTargetPath(resource);
+            // Do not overwrite if a recent copy already exists
+            if (File.Exists(outputFile) && IsFreshEnough(outputFile))
+            {
+                return;
+            }
+            IOUtil.Copy(inputReader, new StreamWriter(outputFile));
+        }
+
         public void Delete(Resource resource)
         {
             Check.NotNull(resource, "resource is null");

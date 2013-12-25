@@ -19,6 +19,7 @@ using System.Text;
 using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 using Concordion.Api;
+using Concordion.Internal.Listener;
 using Concordion.Internal.Util;
 using Concordion.Internal.Renderer;
 using System.IO;
@@ -132,10 +133,32 @@ namespace Concordion.Internal
             set;
         }
 
+        private List<IConcordionBuildListener> BuildListeners
+        {
+            get;
+            set;
+        }
+
+        private List<ISpecificationProcessingListener> SpecificationProcessingListeners
+        {
+            get;
+            set;
+        }
+
+        private Dictionary<string, Resource> ResourceToCopyMap
+        {
+            get;
+            set;
+        } 
+
         #endregion
     
         public ConcordionBuilder()
         {
+            BuildListeners = new List<IConcordionBuildListener>();
+            SpecificationProcessingListeners = new List<ISpecificationProcessingListener>();
+            ResourceToCopyMap = new Dictionary<string, Resource>();
+
             SpecificationLocator = new ClassNameBasedSpecificationLocator();
             Source = null;
             Target = null;
@@ -180,11 +203,8 @@ namespace Concordion.Internal
             RunCommand.FailedRunReported += runResultRenderer.FailedRunReportedEventHandler;
             RunCommand.IgnoredRunReported += runResultRenderer.IgnoredRunReportedEventHandler;
 
-            var documentStructureImprovementRenderer = new DocumentStructureImprovementRenderer();
-            DocumentParser.DocumentParsing += documentStructureImprovementRenderer.DocumentParsingEventHandler;
-
-            var stylesheetEmbeddingRenderer = new StylesheetEmbeddingRenderer(HtmlFramework.EMBEDDED_STYLESHEET_RESOURCE);
-            DocumentParser.DocumentParsing += stylesheetEmbeddingRenderer.DocumentParsingEventHandler;
+            WithDocumentParsingListener(new DocumentStructureImprover());
+            WithEmbeddedCss(HtmlFramework.EMBEDDED_STYLESHEET_RESOURCE);
         }
     
         public ConcordionBuilder WithSource(ISource source) 
@@ -238,6 +258,24 @@ namespace Concordion.Internal
             return this;
         }
 
+        public ConcordionBuilder WithDocumentParsingListener(IDocumentParsingListener listener)
+        {
+            DocumentParser.AddDocumentParsingListener(listener);
+            return this;
+        }
+
+        public ConcordionBuilder WithSpecificationProcessingListener(ISpecificationProcessingListener listener)
+        {
+            SpecificationProcessingListeners.Add(listener);
+            return this;
+        }
+
+        public ConcordionBuilder WithBuildListener(IConcordionBuildListener listener)
+        {
+            BuildListeners.Add(listener);
+            return this;
+        }
+
         public ConcordionBuilder WithCommand(string namespaceURI, string commandName, ICommand command) 
         {
             Check.NotEmpty(namespaceURI, "Namespace URI is mandatory");
@@ -247,6 +285,35 @@ namespace Concordion.Internal
                     "The namespace URI for user-contributed command '" + commandName + "' "
                   + "must not contain 'concordion.org'. Use your own domain name instead.");
             return WithApprovedCommand(namespaceURI, commandName, command);
+        }
+
+        public ConcordionBuilder WithResource(String sourcePath, Resource targetResource)
+        {
+            ResourceToCopyMap.Add(sourcePath, targetResource);
+            return this;
+        }
+
+        public ConcordionBuilder WithEmbeddedCss(string css)
+        {
+            var embedder = new StylesheetEmbedder(css);
+            WithDocumentParsingListener(embedder);
+            return this;
+        }
+
+        public ConcordionBuilder WithEmbeddedJavaScript(string javaScript)
+        {
+            var embedder = new JavaScriptEmbedder(javaScript);
+            WithDocumentParsingListener(embedder);
+            return this;
+        }
+
+        public ConcordionBuilder WithLinkedJavaScript(string jsPath, Resource targetResource)
+        {
+            WithResource(jsPath, targetResource);
+            var javaScriptLinker = new JavaScriptLinker(targetResource);
+            WithDocumentParsingListener(javaScriptLinker);
+            WithSpecificationProcessingListener(javaScriptLinker);
+            return this;
         }
 
         public ConcordionBuilder SendOutputTo(string directory)
@@ -264,21 +331,41 @@ namespace Concordion.Internal
 
             SetAllRunners();
 
-            var breadCrumbRenderer = new BreadCrumbRenderer(Source);
-            SpecificationCommand.SpecificationCommandProcessing += breadCrumbRenderer.SpecificationProcessingEventHandler;
-            SpecificationCommand.SpecificationCommandProcessed += breadCrumbRenderer.SpecificationProcessedEventHandler;
+            SpecificationCommand.AddSpecificationListener(new BreadCrumbRenderer(this.Source));
+            SpecificationCommand.AddSpecificationListener(new PageFooterRenderer(this.Target));
+            SpecificationCommand.AddSpecificationListener(new SpecificationRenderer(this.Target));
 
-            var pageFooterRenderer = new PageFooterRenderer(Target);
-            SpecificationCommand.SpecificationCommandProcessing += pageFooterRenderer.SpecificationProcessingEventHandler;
-            SpecificationCommand.SpecificationCommandProcessed += pageFooterRenderer.SpecificationProcessedEventHandler;
+            SpecificationReader = new XmlSpecificationReader(Source, DocumentParser);
 
-            var specificationRenderer = new SpecificationRenderer(Target);
-            SpecificationCommand.SpecificationCommandProcessing += specificationRenderer.SpecificationProcessingEventHandler;
-            SpecificationCommand.SpecificationCommandProcessed += specificationRenderer.SpecificationProcessedEventHandler;
+            CopyResources();
 
-            SpecificationReader = new XmlSpecificationReader(Source, DocumentParser);        
+            AddSpecificationListeners();
+
+            foreach (var concordionBuildListener in BuildListeners)
+            {
+                concordionBuildListener.ConcordionBuilt(new ConcordionBuildEvent(Target));
+            }
 
             return new Concordion(SpecificationLocator, SpecificationReader, EvaluatorFactory);
+        }
+
+        private void AddSpecificationListeners()
+        {
+            foreach (var listener in SpecificationProcessingListeners)
+            {
+                SpecificationCommand.AddSpecificationListener(listener);
+            }
+        }
+
+        private void CopyResources()
+        {
+            foreach (var resource in ResourceToCopyMap)
+            {
+                var sourcePath = resource.Key;
+                var targetResource = resource.Value;
+                var inputReader = Source.CreateReader(new Resource(sourcePath));
+                Target.CopyTo(targetResource, inputReader);
+            }
         }
 
         private void SetAllRunners()
@@ -307,13 +394,6 @@ namespace Concordion.Internal
         public ConcordionBuilder WithExceptionListener(IExceptionCaughtListener listener)
         {
             // TODO - add code here for processing
-            return this;
-        }
-
-        public ConcordionBuilder WithSpecificationListener(ISpecificationListener listener)
-        {
-            SpecificationCommand.SpecificationCommandProcessing += listener.SpecificationProcessingEventHandler;
-            SpecificationCommand.SpecificationCommandProcessed += listener.SpecificationProcessedEventHandler;
             return this;
         }
     }

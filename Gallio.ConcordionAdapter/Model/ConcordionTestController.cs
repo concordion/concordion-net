@@ -72,7 +72,7 @@ namespace Gallio.ConcordionAdapter.Model
             var concordion = new ConcordionBuilder()
                                     .WithSource(concordionTest.Source)
                                     .WithTarget(concordionTest.Target)
-                                    .WithSpecificationListener(new GallioResultRenderer())
+                                    .WithSpecificationProcessingListener(new GallioResultRenderer())
                                     .Build();
 
             ConstructorInfo constructor = concordionTest.FixtureType.GetConstructor(Type.EmptyTypes);

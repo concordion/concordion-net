@@ -15,14 +15,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Concordion.Api;
-using Concordion.Internal.Commands;
-using System.Drawing;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Renderer
 {
-    public class PageFooterRenderer : ISpecificationListener
+    public class PageFooterRenderer : ISpecificationProcessingListener
     {
         #region Fields
         
@@ -91,24 +89,24 @@ namespace Concordion.Internal.Renderer
 
         #endregion
 
-        #region ISpecificationRenderer Members
+        #region ISpecificationProcessingListener Members
 
-        public void SpecificationProcessingEventHandler(object sender, SpecificationEventArgs eventArgs)
+        public void BeforeProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
             start = DateTime.Now;
         }
 
-        public void SpecificationProcessedEventHandler(object sender, SpecificationEventArgs eventArgs)
+        public void AfterProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
             try
             {
                 CopyLogoToTarget();
                 TimeSpan span = new TimeSpan(DateTime.Now.Ticks).Subtract(new TimeSpan(start.Ticks));
-                AddFooterToDocument(eventArgs.Element, eventArgs.Resource, span.Ticks);
+                AddFooterToDocument(processingEvent.RootElement, processingEvent.Resource, span.Ticks);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine("Failed to write page footer. {0}", e.Message);
             }
         }
 
