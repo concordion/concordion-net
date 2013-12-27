@@ -294,10 +294,19 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithEmbeddedCss(string css)
+        public IConcordionExtender WithEmbeddedCss(string css)
         {
             var embedder = new StylesheetEmbedder(css);
             WithDocumentParsingListener(embedder);
+            return this;
+        }
+
+        public IConcordionExtender WithLinkedCss(string cssPath, Resource targetResource)
+        {
+            WithResource(cssPath, targetResource);
+            StylesheetLinker cssLinker = new StylesheetLinker(targetResource);
+            WithDocumentParsingListener(cssLinker);
+            WithSpecificationProcessingListener(cssLinker);
             return this;
         }
 

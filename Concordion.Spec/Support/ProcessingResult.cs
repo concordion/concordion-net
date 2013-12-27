@@ -105,6 +105,22 @@ namespace Concordion.Spec
             return new Element(GetXDocument().Root);
         }
 
+        public bool HasCssDeclaration(string cssFilename)
+        {
+            var head = GetRootElement().GetFirstChildElement("head");
+            return head.GetChildElements("link").Any(
+                link =>
+                    string.Equals("text/css", link.GetAttributeValue("type")) &&
+                    string.Equals("stylesheet", link.GetAttributeValue("rel")) &&
+                    string.Equals(cssFilename, link.GetAttributeValue("href")));
+        }
+
+        public bool HasEmbeddedCss(string css)
+        {
+            var head = GetRootElement().GetFirstChildElement("head");
+            return head.GetChildElements("style").Any(style => style.Text.Contains(css));
+        }
+
         public bool HasJavaScriptDeclaration(string cssFilename) {
             var head = GetRootElement().GetFirstChildElement("head");
             return head.GetChildElements("script").Any(

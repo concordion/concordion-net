@@ -9,20 +9,21 @@ using Concordion.Internal.Util;
 
 namespace Concordion.Internal.Listener
 {
-    public class JavaScriptLinker : IDocumentParsingListener, ISpecificationProcessingListener
+    public class StylesheetLinker : IDocumentParsingListener, ISpecificationProcessingListener
     {
         #region Fields
 
-        private readonly Resource m_JavaScriptResource;
-        private XElement m_Script;
+        private readonly Resource m_StylesheetResource;
+
+        private XElement m_Link;
 
         #endregion
 
         #region Constructors
 
-        public JavaScriptLinker(Resource javaScriptResource)
+        public StylesheetLinker(Resource stylesheetResource)
         {
-            this.m_JavaScriptResource = javaScriptResource;
+            this.m_StylesheetResource = stylesheetResource;
         }
 
         #endregion
@@ -34,10 +35,11 @@ namespace Concordion.Internal.Listener
             var html = document.Root;
             var head = html.Element("head");
             Check.NotNull(head, "<head> section is missing from document");
-            m_Script = new XElement("script");
-            m_Script.SetAttributeValue(XName.Get("type"), "text/javascript");
-            m_Script.SetValue("");
-            head.Add(m_Script);
+            m_Link = new XElement("link");
+            m_Link.SetAttributeValue(XName.Get("type"), "text/css");
+            m_Link.SetAttributeValue(XName.Get("rel"), "stylesheet");
+            m_Link.SetValue("");
+            head.Add(m_Link);
         }
 
         #endregion
@@ -47,8 +49,8 @@ namespace Concordion.Internal.Listener
         public void BeforeProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
             Resource resource = processingEvent.Resource;
-            var javaScriptPath = resource.GetRelativePath(m_JavaScriptResource).Replace("\\", "/");
-            m_Script.SetAttributeValue(XName.Get("src"), javaScriptPath);
+            var javaScriptPath = resource.GetRelativePath(m_StylesheetResource).Replace("\\", "/");
+            m_Link.SetAttributeValue(XName.Get("href"), javaScriptPath);
         }
 
         public void AfterProcessingSpecification(SpecificationProcessingEvent processingEvent)

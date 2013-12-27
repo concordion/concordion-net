@@ -175,6 +175,7 @@
     <Compile Include="Internal\IExpressionValidator.cs" />
     <Compile Include="Internal\Listener\JavaScriptEmbedder.cs" />
     <Compile Include="Internal\Listener\JavaScriptLinker.cs" />
+    <Compile Include="Internal\Listener\StylesheetLinker.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\Renderer\AssertResultRenderer.cs" />
     <Compile Include="Internal\UnimplementedFixtureState.cs" />
