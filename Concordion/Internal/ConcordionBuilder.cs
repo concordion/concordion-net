@@ -271,7 +271,7 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithBuildListener(IConcordionBuildListener listener)
+        public IConcordionExtender WithBuildListener(IConcordionBuildListener listener)
         {
             BuildListeners.Add(listener);
             return this;
@@ -288,7 +288,7 @@ namespace Concordion.Internal
             return WithApprovedCommand(namespaceURI, commandName, command);
         }
 
-        public ConcordionBuilder WithResource(String sourcePath, Resource targetResource)
+        public IConcordionExtender WithResource(String sourcePath, Resource targetResource)
         {
             ResourceToCopyMap.Add(sourcePath, targetResource);
             return this;

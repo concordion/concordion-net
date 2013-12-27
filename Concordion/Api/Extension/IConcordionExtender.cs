@@ -2,11 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Api.Listener;
 
 namespace Concordion.Api.Extension
 {
     public interface IConcordionExtender
     {
+        /**
+         * <summary>
+         * Adds a listener that is invoked when a Concordion instance is built, providing access to the {@link Target}
+         * to which resources can be written.  
+         * </summary>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithBuildListener(IConcordionBuildListener listener);
+
+        /**
+         * <summary>
+         * Copies a resource to the Concordion output.
+         * </summary>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithResource(String sourcePath, Resource targetResource);
+
         /**
          * <summary>
          * Embeds the given CSS in the Concordion output.
