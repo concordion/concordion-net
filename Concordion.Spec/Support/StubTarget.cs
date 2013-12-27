@@ -12,6 +12,7 @@ namespace Concordion.Spec
     class StubTarget : ITarget
     {
         private readonly Dictionary<Resource, String> writtenStrings;
+        private readonly List<Resource> m_CopiedResources = new List<Resource>();
 
         public StubTarget()
         {
@@ -42,7 +43,12 @@ namespace Concordion.Spec
 
         public void CopyTo(Resource resource, TextReader inputReader)
         {
-            //ToDo: add implementation
+            m_CopiedResources.Add(resource);
+        }
+
+        public bool HasCopiedResource(Resource resource)
+        {
+            return m_CopiedResources.Contains(resource);
         }
 
         public void Delete(Resource resource)

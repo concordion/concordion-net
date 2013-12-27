@@ -153,14 +153,24 @@ namespace Concordion.Api
             return descendantElements;
         }
 
+        public IEnumerable<Element> GetChildElements(string name)
+        {
+            return WrapXElements(m_element.Elements(XName.Get(name)));
+        }
+
         /// <summary>
         /// Gets only the immediate child <see cref="Element"/> of the current one
         /// </summary>
         /// <returns>A list of child elements</returns>
         public IEnumerable<Element> GetChildElements()
         {
+            return WrapXElements(m_element.Elements());
+        }
+
+        private static IEnumerable<Element> WrapXElements(IEnumerable<XElement> xElements)
+        {
             var childElements = new List<Element>();
-            foreach (XElement childElement in m_element.Elements())
+            foreach (XElement childElement in xElements)
             {
                 childElements.Add(new Element(childElement));
             }

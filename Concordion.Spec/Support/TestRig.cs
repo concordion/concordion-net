@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Extension;
 using Concordion.Internal;
 using Concordion.Internal.Runner;
 
 namespace Concordion.Spec
 {
-    class TestRig
+    public class TestRig
     {
+        private IConcordionExtension extension;
+
+        private StubTarget m_StubTarget;
+
         private object Fixture
         {
             get;
@@ -43,20 +48,26 @@ namespace Concordion.Spec
         public ProcessingResult Process(Resource resource)
         {
             var eventRecorder = new EventRecorder();
-            var stubTarget = new StubTarget();
+            this.m_StubTarget = new StubTarget();
 
-            var concordion = new ConcordionBuilder()
+            var concordionBuilder = new ConcordionBuilder()
                 .WithAssertEqualsListener(eventRecorder)
                 .WithExceptionListener(eventRecorder)
                 .WithSource(Source)
                 .WithEvaluatorFactory(EvaluatorFactory)
-                .WithTarget(stubTarget)
-                .Build();
+                .WithTarget(this.m_StubTarget);
+
+            if (extension != null)
+            {
+                extension.AddTo(concordionBuilder);
+            }
+
+            var concordion = concordionBuilder.Build();
 
             try
             {
                 IResultSummary resultSummary = concordion.Process(resource, Fixture);
-                string xml = stubTarget.GetWrittenString(resource);
+                string xml = this.m_StubTarget.GetWrittenString(resource);
                 return new ProcessingResult(resultSummary, eventRecorder, xml);
             }
             catch (Exception e)
@@ -101,6 +112,17 @@ namespace Concordion.Spec
                 + HtmlFramework.NAMESPACE_CONCORDION_2007 + "'>"
                 + fragment
                 + "</html>";
+        }
+
+        public bool HasCopiedResource(Resource resource)
+        {
+            return m_StubTarget.HasCopiedResource(resource);
+        }
+
+        public TestRig WithExtension(IConcordionExtension extension)
+        {
+            this.extension = extension;
+            return this;
         }
     }
 }

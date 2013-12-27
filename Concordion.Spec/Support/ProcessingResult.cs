@@ -10,7 +10,7 @@ using Concordion.Internal.Commands;
 
 namespace Concordion.Spec
 {
-    class ProcessingResult
+    public class ProcessingResult
     {
         private readonly IResultSummary resultSummary;
         private readonly EventRecorder eventRecorder;
@@ -98,6 +98,27 @@ namespace Concordion.Spec
         public AssertFailureEvent GetLastAssertEqualsFailureEvent()
         {
             return eventRecorder.GetLast(typeof(AssertFailureEvent)) as AssertFailureEvent;
+        }
+
+        public Element GetRootElement()
+        {
+            return new Element(GetXDocument().Root);
+        }
+
+        public bool HasJavaScriptDeclaration(string cssFilename) {
+            var head = GetRootElement().GetFirstChildElement("head");
+            return head.GetChildElements("script").Any(
+                script => 
+                    string.Equals("text/javascript", script.GetAttributeValue("type")) && 
+                    string.Equals(cssFilename, script.GetAttributeValue("src")));
+        }
+
+        public bool HasEmbeddedJavaScript(string javaScript) {
+            var head = GetRootElement().GetFirstChildElement("head");
+            return head.GetChildElements("script").Any(
+                script => 
+                    string.Equals("text/javascript", (string) script.GetAttributeValue("type")) && 
+                    script.Text.Contains(javaScript));
         }
     }
 }

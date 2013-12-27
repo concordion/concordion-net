@@ -50,7 +50,8 @@ namespace Concordion.Internal.Listener
         public void BeforeProcessingSpecification(SpecificationProcessingEvent processingEvent)
         {
             Resource resource = processingEvent.Resource;
-            m_Script.SetAttributeValue(XName.Get("src"), resource.GetRelativePath(m_JavaScriptResource));
+            var javaScriptPath = resource.GetRelativePath(m_JavaScriptResource).Replace("\\", "/");
+            m_Script.SetAttributeValue(XName.Get("src"), javaScriptPath);
         }
 
         public void AfterProcessingSpecification(SpecificationProcessingEvent processingEvent)

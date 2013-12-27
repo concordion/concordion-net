@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Api.Extension;
 using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 using Concordion.Api;
@@ -27,7 +28,7 @@ using Concordion.Internal.Runner;
 
 namespace Concordion.Internal
 {
-    public class ConcordionBuilder
+    public class ConcordionBuilder : IConcordionExtender
     {
         #region Properties
 
@@ -300,14 +301,14 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithEmbeddedJavaScript(string javaScript)
+        public IConcordionExtender WithEmbeddedJavaScript(string javaScript)
         {
             var embedder = new JavaScriptEmbedder(javaScript);
             WithDocumentParsingListener(embedder);
             return this;
         }
 
-        public ConcordionBuilder WithLinkedJavaScript(string jsPath, Resource targetResource)
+        public IConcordionExtender WithLinkedJavaScript(string jsPath, Resource targetResource)
         {
             WithResource(jsPath, targetResource);
             var javaScriptLinker = new JavaScriptLinker(targetResource);
@@ -379,17 +380,6 @@ namespace Concordion.Internal
                 RunCommand.Runners.Add(runner.Key, runner.Value);
             }
         }
-
-        //public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener eventRecorder)
-        //{
-        //    AssertEqualsCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
-        //    AssertEqualsCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
-        //    AssertTrueCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
-        //    AssertTrueCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
-        //    AssertFalseCommand.SuccessReported += eventRecorder.SuccessReportedEventHandler;
-        //    AssertFalseCommand.FailureReported += eventRecorder.FailureReportedEventHandler;
-        //    return this;
-        //}
 
         public ConcordionBuilder WithExceptionListener(IExceptionCaughtListener listener)
         {
