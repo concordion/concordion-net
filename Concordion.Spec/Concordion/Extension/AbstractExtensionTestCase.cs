@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
@@ -9,10 +10,22 @@ namespace Concordion.Spec.Concordion.Extension
 {
     public class AbstractExtensionTestCase
     {
-        private List<String> eventList;
-        private TestRig testRig;
-        private ProcessingResult processingResult;
-        private IConcordionExtension extension;
+        #region Fields
+
+        protected IConcordionExtension Extension { get; set; }
+
+        protected TestRig TestRig { get; set; }
+
+        protected ProcessingResult ProcessingResult { get; set; }
+
+        public TextWriter LogWriter { get; set; }
+
+        #endregion
+
+        public AbstractExtensionTestCase()
+        {
+            this.LogWriter = new StringWriter();
+        }
 
         public void processAnything()
         {
@@ -21,27 +34,28 @@ namespace Concordion.Spec.Concordion.Extension
     
         public void process(String fragment)
         {
-            testRig = new TestRig();
-            configureTestRig(testRig);
-            processingResult = testRig.WithFixture(this)
-              .WithExtension(extension)
+            TestRig = new TestRig();
+            this.ConfigureTestRig();
+            ProcessingResult = TestRig.WithFixture(this)
+              .WithExtension(this.Extension)
               .ProcessFragment(fragment);
         }
 
-        protected virtual void configureTestRig(TestRig testRig)
+        protected virtual void ConfigureTestRig()
         {
         }
 
-        public bool isAvailable(string resourcePath) {
-            return testRig.HasCopiedResource(new Resource(resourcePath));
+        public List<string> GetEventLog()
+        {
+            LogWriter.Flush();
+            var loggedEvents = LogWriter.ToString().Split(new[] {LogWriter.NewLine}, StringSplitOptions.None);
+            var eventLog = loggedEvents.ToList();
+            eventLog.Remove("");
+            return eventLog;
         }
 
-        protected ProcessingResult getProcessingResult() {
-            return processingResult;
-        }
-    
-        protected void SetExtension(IConcordionExtension extension) {
-            this.extension = extension;
+        public bool isAvailable(string resourcePath) {
+            return TestRig.HasCopiedResource(new Resource(resourcePath));
         }
     }
 }

@@ -277,7 +277,7 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithCommand(string namespaceURI, string commandName, ICommand command) 
+        public IConcordionExtender WithCommand(string namespaceURI, string commandName, ICommand command) 
         {
             Check.NotEmpty(namespaceURI, "Namespace URI is mandatory");
             Check.NotEmpty(commandName, "Command name is mandatory");

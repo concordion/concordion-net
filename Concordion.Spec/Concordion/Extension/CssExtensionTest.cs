@@ -13,24 +13,29 @@ namespace Concordion.Spec.Concordion.Extension
         public static readonly string SourcePath = "/test/concordion/my.css";
         public static readonly string TestCss = "/* My test CSS */";
 
-        public void addLinkedCSSExtension() {
-            SetExtension(new CssLinkedExtension());
+        public void addLinkedCSSExtension()
+        {
+            Extension = new CssLinkedExtension();
         }
 
-        public void addEmbeddedCSSExtension() {
-            SetExtension(new CssEmbeddedExtension());
+        public void addEmbeddedCSSExtension()
+        {
+            Extension = new CssEmbeddedExtension();
         }
 
-        protected override void configureTestRig(TestRig testRig) {
-            testRig.WithResource(new Resource(SourcePath), TestCss);
+        protected override void ConfigureTestRig()
+        {
+            TestRig.WithResource(new Resource(SourcePath), TestCss);
         }
     
-        public bool hasCSSDeclaration(String cssFilename) {
-            return getProcessingResult().HasCssDeclaration(cssFilename);
+        public bool hasCSSDeclaration(String cssFilename)
+        {
+            return ProcessingResult.HasCssDeclaration(cssFilename);
         }
 
-        public bool hasEmbeddedTestCSS() {
-            return getProcessingResult().HasEmbeddedCss(TestCss);
+        public bool hasEmbeddedTestCSS()
+        {
+            return ProcessingResult.HasEmbeddedCss(TestCss);
         }
     }
 }

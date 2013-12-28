@@ -13,25 +13,29 @@ namespace Concordion.Spec.Concordion.Extension
         public static readonly String SourcePath = "/test/concordion/my.js";
         public static readonly String TestJs = "/* My test JS */";
 
-        public void addLinkedJavaScriptExtension() {
-            SetExtension(new JavaScriptLinkedExtension());
+        public void addLinkedJavaScriptExtension()
+        {
+            Extension = new JavaScriptLinkedExtension();
         }
 
-        public void addEmbeddedJavaScriptExtension() {
-            SetExtension(new JavaScriptEmbeddedExtension());
+        public void addEmbeddedJavaScriptExtension()
+        {
+            Extension = new JavaScriptEmbeddedExtension();
         }
 
-        protected override void configureTestRig(TestRig testRig) {
-            testRig.WithResource(new Resource(SourcePath), TestJs);
+        protected override void ConfigureTestRig()
+        {
+            TestRig.WithResource(new Resource(SourcePath), TestJs);
         }
     
         public bool hasJavaScriptDeclaration(string cssFilename)
         {
-            return getProcessingResult().HasJavaScriptDeclaration(cssFilename);
+            return ProcessingResult.HasJavaScriptDeclaration(cssFilename);
         }
 
-        public bool hasEmbeddedTestJavaScript() {
-            return getProcessingResult().HasEmbeddedJavaScript(TestJs);
+        public bool hasEmbeddedTestJavaScript()
+        {
+            return ProcessingResult.HasEmbeddedJavaScript(TestJs);
         }
     }
 }

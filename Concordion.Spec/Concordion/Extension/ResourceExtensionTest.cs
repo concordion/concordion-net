@@ -10,19 +10,23 @@ namespace Concordion.Spec.Concordion.Extension
     [ConcordionTest]
     public class ResourceExtensionTest : AbstractExtensionTestCase
     {
-        public void addResourceExtension() {
-            SetExtension(new ResourceExtension());
+        public void addResourceExtension()
+        {
+            Extension = new ResourceExtension();
         }
 
-        public void addDynamicResourceExtension() {
-            SetExtension(new DynamicResourceExtension());
+        public void addDynamicResourceExtension()
+        {
+            Extension = new DynamicResourceExtension();
         }
 
-        protected override void configureTestRig(TestRig testRig) {
-            testRig.WithResource(new Resource(ResourceExtension.SourcePath), "0101");
+        protected override void ConfigureTestRig()
+        {
+            TestRig.WithResource(new Resource(ResourceExtension.SourcePath), "0101");
         }
     
-        public int getMeaningOfLife() {
+        public int getMeaningOfLife()
+        {
             return 42;
         }
     }

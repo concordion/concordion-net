@@ -101,13 +101,16 @@
     <Compile Include="Concordion\ConcordionTest.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
     <Compile Include="Concordion\Extension\AbstractExtensionTestCase.cs" />
+    <Compile Include="Concordion\Extension\CommandExtension.cs" />
     <Compile Include="Concordion\Extension\CssEmbeddedExtension.cs" />
     <Compile Include="Concordion\Extension\CssExtensionTest.cs" />
     <Compile Include="Concordion\Extension\CssLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\CustomCommandTest.cs" />
     <Compile Include="Concordion\Extension\DynamicResourceExtension.cs" />
     <Compile Include="Concordion\Extension\JavaScriptEmbeddedExtension.cs" />
     <Compile Include="Concordion\Extension\JavaScriptExtensionTest.cs" />
     <Compile Include="Concordion\Extension\JavaScriptLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\LogCommand.cs" />
     <Compile Include="Concordion\Extension\ResourceExtension.cs" />
     <Compile Include="Concordion\Extension\ResourceExtensionTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
@@ -148,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Concordion\Extension\CssExtension.html" />
+    <EmbeddedResource Include="Concordion\Extension\CustomCommand.html" />
     <EmbeddedResource Include="Concordion\Extension\JavaScriptExtension.html" />
     <EmbeddedResource Include="Concordion\Extension\ResourceExtension.html" />
     <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
