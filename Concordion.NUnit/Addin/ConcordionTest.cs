@@ -24,39 +24,29 @@ namespace Concordion.Integration.NUnit.Addin
 
         public override TestResult Run(EventListener listener, ITestFilter filter)
         {
-            listener.TestStarted(this.TestName);
-
+            listener.TestStarted(TestName);
             Fixture = Reflect.Construct(m_FixtureType);
-
-            var source = new EmbeddedResourceSource(m_FixtureType.Assembly);
-            var target = new FileTarget(new SpecificationConfig().Load(m_FixtureType).BaseOutputDirectory);
-            var concordion = new ConcordionBuilder().WithSource(source).WithTarget(target).Build();
-
-            var concordionResult = concordion.Process(Fixture);
-            var testResult = NUnitTestResult(concordionResult);
-
-            listener.TestFinished(testResult);
-
-            return testResult;
+            var result = Translate(new FixtureRunner().Run(Fixture));
+            listener.TestFinished(result);
+            return result;
         }
 
-        private TestResult NUnitTestResult(IResultSummary concordionResult)
+        private TestResult Translate(IResultSummary resultSummary)
         {
             var testResult = new TestResult(this);
-            testResult.AssertCount = (int) concordionResult.SuccessCount + (int) concordionResult.FailureCount;
-            if (!(concordionResult.HasFailures || concordionResult.HasExceptions))
+
+            if (resultSummary.HasExceptions)
+            {
+                testResult.Error(new NUnitException("Exception in Concordion test: please see Concordion test reports"));
+            } else if (resultSummary.HasFailures)
+            {
+                testResult.Failure("Concordion Test Failures: " + resultSummary.FailureCount,
+                                   "for stack trace, please see Concordion test reports");
+            } else
             {
                 testResult.Success();
             }
-            else if (concordionResult.HasFailures)
-            {
-                testResult.Failure("Concordion Test Failures: " + concordionResult.FailureCount,
-                                   "for stack trace, please see Concordion test reports");
-            }
-            else if (concordionResult.HasExceptions)
-            {
-                testResult.Error(new NUnitException("Exception in Concordion test: please see Concordion test reports"));
-            }
+
             return testResult;
         }
 

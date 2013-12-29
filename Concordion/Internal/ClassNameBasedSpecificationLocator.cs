@@ -24,17 +24,33 @@ namespace Concordion.Internal
     {
         #region ISpecificationLocator Members
 
+        private string m_SpecificationSuffix;
+
+        public ClassNameBasedSpecificationLocator() : this("html") { }
+
+        public ClassNameBasedSpecificationLocator(string mSpecificationSuffix)
+        {
+            this.m_SpecificationSuffix = mSpecificationSuffix;
+        }
+
         public Resource LocateSpecification(object fixture)
         {
             var fixtureName = fixture.GetType().ToString();
             fixtureName = fixtureName.Replace(".", "\\");
-            if (fixtureName.EndsWith("Test"))
+
+            //Todo:in Config File aufnehemn
+            //Add Test und Fixture -> Case Sensitive 
+            string[] suffixStringstoReplace = { "Test", "Fixture" };
+
+            foreach (var testSuffix in suffixStringstoReplace)
             {
-                fixtureName = fixtureName.Remove(fixtureName.Length - 4);
+                if (fixtureName.EndsWith(testSuffix))
+                {
+                    fixtureName = fixtureName.Replace(testSuffix, "");
+                }
             }
-
-            var path = fixtureName + ".html";
-
+            //Suffix from Concordion.Specification.config
+            var path = fixtureName + "." + m_SpecificationSuffix;
             return new Resource(path);
         }
 

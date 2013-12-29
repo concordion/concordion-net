@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Concordion.Spec</RootNamespace>
     <AssemblyName>Concordion.Spec</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -99,6 +99,7 @@
     <Compile Include="Concordion\Command\VerifyRows\TableBodySupportTest.cs" />
     <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
     <Compile Include="Concordion\ConcordionTest.cs" />
+    <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
     <Compile Include="Concordion\Extension\AbstractExtensionTestCase.cs" />
     <Compile Include="Concordion\Extension\CommandExtension.cs" />
@@ -107,12 +108,14 @@
     <Compile Include="Concordion\Extension\CssLinkedExtension.cs" />
     <Compile Include="Concordion\Extension\CustomCommandTest.cs" />
     <Compile Include="Concordion\Extension\DynamicResourceExtension.cs" />
+    <Compile Include="Concordion\Extension\FileSuffixExtensionsTest.cs" />
     <Compile Include="Concordion\Extension\JavaScriptEmbeddedExtension.cs" />
     <Compile Include="Concordion\Extension\JavaScriptExtensionTest.cs" />
     <Compile Include="Concordion\Extension\JavaScriptLinkedExtension.cs" />
     <Compile Include="Concordion\Extension\LogCommand.cs" />
     <Compile Include="Concordion\Extension\ResourceExtension.cs" />
     <Compile Include="Concordion\Extension\ResourceExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\XhtmlExtension.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\EmptyFailureTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\FailureTest.cs" />
@@ -152,6 +155,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Concordion\Extension\CssExtension.html" />
     <EmbeddedResource Include="Concordion\Extension\CustomCommand.html" />
+    <EmbeddedResource Include="Concordion\Extension\FileSuffixExtensions.xhtml" />
     <EmbeddedResource Include="Concordion\Extension\JavaScriptExtension.html" />
     <EmbeddedResource Include="Concordion\Extension\ResourceExtension.html" />
     <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
@@ -351,6 +355,21 @@
     <EmbeddedResource Include="Concordion\Command\AssertEquals\NonString\Boolean.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.xhtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Concordion.Spec.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

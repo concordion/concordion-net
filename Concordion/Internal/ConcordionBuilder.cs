@@ -57,9 +57,14 @@ namespace Concordion.Internal
         }
 
         private ISpecificationLocator SpecificationLocator
+
+
         {
             get;
             set;
+
+
+
         }
 
         private CommandRegistry CommandRegistry
@@ -214,9 +219,22 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithTarget(ITarget target) 
+        public IConcordionExtender WithTarget(ITarget target) 
         {
             this.Target = target;
+            return this;
+        }
+
+		public ConcordionBuilder WithSpecificOutputDirectory()
+        {
+
+            return this;
+        }
+
+
+        public IConcordionExtender WithSpecificationLocator(ISpecificationLocator specificationLocator)
+        {
+            this.SpecificationLocator = specificationLocator;
             return this;
         }
 
@@ -265,7 +283,7 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithSpecificationProcessingListener(ISpecificationProcessingListener listener)
+        public IConcordionExtender WithSpecificationProcessingListener(ISpecificationProcessingListener listener)
         {
             SpecificationProcessingListeners.Add(listener);
             return this;

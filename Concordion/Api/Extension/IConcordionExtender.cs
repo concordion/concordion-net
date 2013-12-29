@@ -22,6 +22,15 @@ namespace Concordion.Api.Extension
 
         /**
          * <summary>
+         * Adds a listener that is invoked before and after Concordion has processed the specification,
+         * providing access to the specification resource and root element. 
+         * </summary>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithSpecificationProcessingListener(ISpecificationProcessingListener listener);
+
+        /**
+         * <summary>
          * Adds a listener that is invoked when a Concordion instance is built, providing access to the {@link Target}
          * to which resources can be written.  
          * </summary>
@@ -68,5 +77,31 @@ namespace Concordion.Api.Extension
          * <returns>this - to enable fluent interfaces</returns>
          */
         IConcordionExtender WithLinkedJavaScript(string jsPath, Resource targetResource);
+
+        /**
+         * <summary>
+         * Overrides the target that the Concordion specifications are written to.
+         * </summary>
+         * <param name="target">the new target</param>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithTarget(ITarget target);
+
+        /**
+         * <summary>
+         * Overrides the locator for Concordion specifications.
+         * </summary>
+         * <param name="locator">the new specification locator</param>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithSpecificationLocator(ISpecificationLocator locator);
+
+        /**
+         * <summary>
+         * Factory method to create an instance of the Concordion class to process the active specification.
+         * </summary>
+         * <returns>the Concordion instance to run the active specification</returns>
+         */
+        Concordion Build();
     }
 }

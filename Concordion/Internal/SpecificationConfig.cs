@@ -49,6 +49,12 @@ namespace Concordion.Internal
             set;
         }
 
+        /// <summary>
+        /// Gets or sets the suffix to be used for specification files.
+        /// </summary>
+        /// <value>The file suffix of specification documents (e.g. "html").</value>
+        public List<string> SpecificationFileExtensions { get; set; }
+
         #endregion
 
         #region Constructors
@@ -57,6 +63,7 @@ namespace Concordion.Internal
         {
             this.BaseInputDirectory = Directory.GetCurrentDirectory();
             this.BaseOutputDirectory = Environment.GetEnvironmentVariable("TEMP");
+            this.SpecificationFileExtensions = new List<string> {"html"};
         }
 
         #endregion
