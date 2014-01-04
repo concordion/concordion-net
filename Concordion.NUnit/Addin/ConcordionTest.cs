@@ -24,11 +24,21 @@ namespace Concordion.Integration.NUnit.Addin
 
         public override TestResult Run(EventListener listener, ITestFilter filter)
         {
-            listener.TestStarted(TestName);
-            Fixture = Reflect.Construct(m_FixtureType);
-            var result = Translate(new FixtureRunner().Run(Fixture));
-            listener.TestFinished(result);
-            return result;
+            try
+            {
+                listener.TestStarted(TestName);
+                Fixture = Reflect.Construct(m_FixtureType);
+                var result = Translate(new FixtureRunner().Run(Fixture));
+                listener.TestFinished(result);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                var expectionResult = new TestResult(this);
+                expectionResult.Error(e);
+                return expectionResult;
+            }
         }
 
         private TestResult Translate(IResultSummary resultSummary)
