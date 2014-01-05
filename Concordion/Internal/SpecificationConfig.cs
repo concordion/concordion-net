@@ -19,6 +19,7 @@ using System.Text;
 using Concordion.Api;
 using System.Reflection;
 using System.IO;
+using Concordion.Api.Extension;
 
 namespace Concordion.Internal
 {
@@ -50,6 +51,13 @@ namespace Concordion.Internal
         }
 
         /// <summary>
+        /// Gets or sets names of extensions.
+        /// </summary>
+        /// <seealso cref="IConcordionExtension"/>
+        /// <value>Qualified type names together with assembly names of Concordion extensions.</value>
+        public IDictionary<string, string> ConcordionExtensions { get; set; }
+
+        /// <summary>
         /// Gets or sets the suffix to be used for specification files.
         /// </summary>
         /// <value>The file suffix of specification documents (e.g. "html").</value>
@@ -64,6 +72,7 @@ namespace Concordion.Internal
             this.BaseInputDirectory = Directory.GetCurrentDirectory();
             this.BaseOutputDirectory = Environment.GetEnvironmentVariable("TEMP");
             this.SpecificationFileExtensions = new List<string> {"html"};
+            this.ConcordionExtensions = new Dictionary<string, string>();
         }
 
         #endregion
@@ -91,7 +100,7 @@ namespace Concordion.Internal
             var assemblyCodebase = new Uri(assembly.CodeBase);
             if (assemblyCodebase.IsFile)
             {
-                this.Load(assemblyCodebase.LocalPath);
+                Load(assemblyCodebase.LocalPath);
             }
             return this;
         }

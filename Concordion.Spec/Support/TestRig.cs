@@ -5,15 +5,14 @@ using System.Text;
 using Concordion.Api;
 using Concordion.Api.Extension;
 using Concordion.Internal;
+using Concordion.Internal.Extension;
 using Concordion.Internal.Runner;
 
 namespace Concordion.Spec
 {
     public class TestRig
     {
-        private IConcordionExtension extension;
-
-        private StubTarget m_StubTarget;
+        public SpecificationConfig Configuration { get; set; }
 
         private object Fixture
         {
@@ -33,10 +32,19 @@ namespace Concordion.Spec
             set;
         }
 
+        private StubTarget Target
+        {
+            get;
+            set;
+        }
+
+        private IConcordionExtension Extension { get; set; }
+
         public TestRig()
         {
             EvaluatorFactory = new SimpleEvaluatorFactory();
             Source = new StubSource();
+            Configuration = new SpecificationConfig();
         }
 
         public TestRig WithFixture(object fixture)
@@ -48,18 +56,23 @@ namespace Concordion.Spec
         public ProcessingResult Process(Resource resource)
         {
             var eventRecorder = new EventRecorder();
-            this.m_StubTarget = new StubTarget();
+            this.Target = new StubTarget();
 
             var concordionBuilder = new ConcordionBuilder()
                 .WithAssertEqualsListener(eventRecorder)
                 .WithExceptionListener(eventRecorder)
                 .WithSource(Source)
                 .WithEvaluatorFactory(EvaluatorFactory)
-                .WithTarget(this.m_StubTarget);
+                .WithTarget(Target);
 
-            if (extension != null)
+            if (Fixture != null)
             {
-                extension.AddTo(concordionBuilder);
+                new ExtensionLoader(Configuration).AddExtensions(Fixture, concordionBuilder);
+            }
+            
+            if (Extension != null)
+            {
+                Extension.AddTo(concordionBuilder);
             }
 
             var concordion = concordionBuilder.Build();
@@ -67,7 +80,7 @@ namespace Concordion.Spec
             try
             {
                 IResultSummary resultSummary = concordion.Process(resource, Fixture);
-                string xml = this.m_StubTarget.GetWrittenString(resource);
+                string xml = Target.GetWrittenString(resource);
                 return new ProcessingResult(resultSummary, eventRecorder, xml);
             }
             catch (Exception e)
@@ -116,12 +129,12 @@ namespace Concordion.Spec
 
         public bool HasCopiedResource(Resource resource)
         {
-            return m_StubTarget.HasCopiedResource(resource);
+            return Target.HasCopiedResource(resource);
         }
 
         public TestRig WithExtension(IConcordionExtension extension)
         {
-            this.extension = extension;
+            this.Extension = extension;
             return this;
         }
     }

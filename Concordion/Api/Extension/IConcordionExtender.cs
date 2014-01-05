@@ -22,6 +22,15 @@ namespace Concordion.Api.Extension
 
         /**
          * <summary>
+         * Adds a listener that is invoked when Concordion parses the specification document, providing 
+         * access to the parsed document.
+         * </summary>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithDocumentParsingListener(IDocumentParsingListener listener);
+
+        /**
+         * <summary>
          * Adds a listener that is invoked before and after Concordion has processed the specification,
          * providing access to the specification resource and root element. 
          * </summary>

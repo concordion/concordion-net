@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Internal.Extension;
 
 namespace Concordion.Internal
 {
@@ -15,6 +16,7 @@ namespace Concordion.Internal
                 var source = new EmbeddedResourceSource(fixture.GetType().Assembly);
                 var specificationConfig = new SpecificationConfig().Load(fixture.GetType());
                 var target = new FileTarget(specificationConfig.BaseOutputDirectory);
+                var extensionLoader = new ExtensionLoader(specificationConfig);
 
                 var testSummary = new SummarizingResultRecorder();
                 var specExtensions = specificationConfig.SpecificationFileExtensions;
@@ -25,7 +27,9 @@ namespace Concordion.Internal
                     var specResource = specLocator.LocateSpecification(fixture);
                     if (source.CanFind(specResource))
                     {
-                        var concordion = new ConcordionBuilder()
+                        var concordionBuilder = new ConcordionBuilder();
+                        extensionLoader.AddExtensions(fixture, concordionBuilder);
+                        var concordion = concordionBuilder
                             .WithSource(source)
                             .WithTarget(target)
                             .WithSpecificationLocator(specLocator)

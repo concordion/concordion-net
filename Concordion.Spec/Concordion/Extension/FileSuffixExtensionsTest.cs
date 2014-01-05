@@ -7,7 +7,7 @@ using Concordion.Integration;
 
 namespace Concordion.Spec.Concordion.Extension
 {
-    [ConcordionTest]
+    //[ConcordionTest]
     public class FileSuffixExtensionsTest
     {
         #region Fields

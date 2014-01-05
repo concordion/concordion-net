@@ -103,6 +103,18 @@
     <Compile Include="Concordion\ExampleTest.cs" />
     <Compile Include="Concordion\Extension\AbstractExtensionTestCase.cs" />
     <Compile Include="Concordion\Extension\CommandExtension.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleDerivedFixtureWithClassAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureBaseWithClassAttribute.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureBaseWithFieldAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleDerivedFixtureWithFieldAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithClassAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithFieldAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithoutExtensions.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExtensionConfigurationTest.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension1.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension2.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension2Factory.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtensionBase.cs" />
     <Compile Include="Concordion\Extension\CssEmbeddedExtension.cs" />
     <Compile Include="Concordion\Extension\CssExtensionTest.cs" />
     <Compile Include="Concordion\Extension\CssLinkedExtension.cs" />
@@ -153,6 +165,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concordion\Extension\Configuration\ExtensionConfiguration.html" />
     <EmbeddedResource Include="Concordion\Extension\CssExtension.html" />
     <EmbeddedResource Include="Concordion\Extension\CustomCommand.html" />
     <EmbeddedResource Include="Concordion\Extension\FileSuffixExtensions.xhtml" />
@@ -371,6 +384,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

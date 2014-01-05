@@ -277,7 +277,7 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithDocumentParsingListener(IDocumentParsingListener listener)
+        public IConcordionExtender WithDocumentParsingListener(IDocumentParsingListener listener)
         {
             DocumentParser.AddDocumentParsingListener(listener);
             return this;
