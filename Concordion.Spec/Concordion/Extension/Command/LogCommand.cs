@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using Concordion.Api;
 using Concordion.Internal;
 
-namespace Concordion.Spec.Concordion.Extension
+namespace Concordion.Spec.Concordion.Extension.Command
 {
     public class LogCommand : ICommand
     {
@@ -23,7 +19,7 @@ namespace Concordion.Spec.Concordion.Extension
 
         public void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
-            LogWriter.WriteLine(commandCall.Element.Text);
+            this.LogWriter.WriteLine(commandCall.Element.Text);
         }
 
         public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)

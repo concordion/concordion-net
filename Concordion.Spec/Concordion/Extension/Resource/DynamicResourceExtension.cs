@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
+using Concordion.Api;
 using Concordion.Api.Extension;
 using Concordion.Api.Listener;
-using Concordion.Api;
 
-namespace Concordion.Spec.Concordion.Extension
+namespace Concordion.Spec.Concordion.Extension.Resource
 {
     public class DynamicResourceExtension : IConcordionExtension, IConcordionBuildListener
     {
@@ -28,7 +25,7 @@ namespace Concordion.Spec.Concordion.Extension
 
         private void CreateResourceInTarget()
         {
-            m_Target.CopyTo(new Resource("/resource/my.txt"), new StringReader("success"));
+            this.m_Target.CopyTo(new global::Concordion.Api.Resource("/resource/my.txt"), new StringReader("success"));
         }
     }
 }

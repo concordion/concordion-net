@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using Concordion.Api;
 using Concordion.Api.Extension;
-using Concordion.Internal;
 
-namespace Concordion.Spec.Concordion.Extension
+namespace Concordion.Spec.Concordion.Extension.Command
 {
     public class CommandExtension : IConcordionExtension
     {
@@ -20,7 +14,7 @@ namespace Concordion.Spec.Concordion.Extension
 
         public void AddTo(IConcordionExtender concordionExtender)
         {
-            concordionExtender.WithCommand("http://myorg.org/my/extension", "log", new LogCommand(m_LogWriter));
+            concordionExtender.WithCommand("http://myorg.org/my/extension", "log", new LogCommand(this.m_LogWriter));
         }
     }
 }

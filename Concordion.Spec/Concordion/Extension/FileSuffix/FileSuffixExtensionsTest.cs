@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Concordion.Api.Extension;
-using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Extension
+namespace Concordion.Spec.Concordion.Extension.FileSuffix
 {
     //[ConcordionTest]
     public class FileSuffixExtensionsTest
@@ -18,7 +13,7 @@ namespace Concordion.Spec.Concordion.Extension
 
         public void addXhtmlExtension()
         {
-            Extension = new XhtmlExtension();
+            this.Extension = new XhtmlExtension();
         }
 
         public bool hasBeenProcessed()

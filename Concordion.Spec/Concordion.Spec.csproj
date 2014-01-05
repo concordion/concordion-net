@@ -102,7 +102,9 @@
     <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
     <Compile Include="Concordion\Extension\AbstractExtensionTestCase.cs" />
-    <Compile Include="Concordion\Extension\CommandExtension.cs" />
+    <Compile Include="Concordion\Extension\Command\CommandExtension.cs" />
+    <Compile Include="Concordion\Extension\Command\CustomCommandTest.cs" />
+    <Compile Include="Concordion\Extension\Command\LogCommand.cs" />
     <Compile Include="Concordion\Extension\Configuration\ExampleDerivedFixtureWithClassAttributes.cs" />
     <Compile Include="Concordion\Extension\Configuration\ExampleFixtureBaseWithClassAttribute.cs" />
     <Compile Include="Concordion\Extension\Configuration\ExampleFixtureBaseWithFieldAttributes.cs" />
@@ -115,19 +117,18 @@
     <Compile Include="Concordion\Extension\Configuration\FakeExtension2.cs" />
     <Compile Include="Concordion\Extension\Configuration\FakeExtension2Factory.cs" />
     <Compile Include="Concordion\Extension\Configuration\FakeExtensionBase.cs" />
-    <Compile Include="Concordion\Extension\CssEmbeddedExtension.cs" />
-    <Compile Include="Concordion\Extension\CssExtensionTest.cs" />
-    <Compile Include="Concordion\Extension\CssLinkedExtension.cs" />
-    <Compile Include="Concordion\Extension\CustomCommandTest.cs" />
-    <Compile Include="Concordion\Extension\DynamicResourceExtension.cs" />
-    <Compile Include="Concordion\Extension\FileSuffixExtensionsTest.cs" />
-    <Compile Include="Concordion\Extension\JavaScriptEmbeddedExtension.cs" />
-    <Compile Include="Concordion\Extension\JavaScriptExtensionTest.cs" />
-    <Compile Include="Concordion\Extension\JavaScriptLinkedExtension.cs" />
-    <Compile Include="Concordion\Extension\LogCommand.cs" />
-    <Compile Include="Concordion\Extension\ResourceExtension.cs" />
-    <Compile Include="Concordion\Extension\ResourceExtensionTest.cs" />
-    <Compile Include="Concordion\Extension\XhtmlExtension.cs" />
+    <Compile Include="Concordion\Extension\Css\CssEmbeddedExtension.cs" />
+    <Compile Include="Concordion\Extension\Css\CssExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\Css\CssLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\ExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\FileSuffix\FileSuffixExtensionsTest.cs" />
+    <Compile Include="Concordion\Extension\FileSuffix\XhtmlExtension.cs" />
+    <Compile Include="Concordion\Extension\JavaScript\JavaScriptEmbeddedExtension.cs" />
+    <Compile Include="Concordion\Extension\JavaScript\JavaScriptExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\JavaScript\JavaScriptLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\Resource\DynamicResourceExtension.cs" />
+    <Compile Include="Concordion\Extension\Resource\ResourceExtension.cs" />
+    <Compile Include="Concordion\Extension\Resource\ResourceExtensionTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\EmptyFailureTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\FailureTest.cs" />
@@ -165,12 +166,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concordion\Extension\Command\CustomCommand.html" />
     <EmbeddedResource Include="Concordion\Extension\Configuration\ExtensionConfiguration.html" />
-    <EmbeddedResource Include="Concordion\Extension\CssExtension.html" />
-    <EmbeddedResource Include="Concordion\Extension\CustomCommand.html" />
-    <EmbeddedResource Include="Concordion\Extension\FileSuffixExtensions.xhtml" />
-    <EmbeddedResource Include="Concordion\Extension\JavaScriptExtension.html" />
-    <EmbeddedResource Include="Concordion\Extension\ResourceExtension.html" />
+    <EmbeddedResource Include="Concordion\Extension\Css\CssExtension.html" />
+    <EmbeddedResource Include="Concordion\Extension\Extension.html" />
+    <EmbeddedResource Include="Concordion\Extension\FileSuffix\FileSuffixExtensions.xhtml" />
+    <EmbeddedResource Include="Concordion\Extension\JavaScript\JavaScriptExtension.html" />
+    <EmbeddedResource Include="Concordion\Extension\Resource\ResourceExtension.html" />
     <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

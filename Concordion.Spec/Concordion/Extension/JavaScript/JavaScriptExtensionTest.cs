@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System;
 using Concordion.Api;
 using Concordion.Integration;
 
-namespace Concordion.Spec.Concordion.Extension
+namespace Concordion.Spec.Concordion.Extension.JavaScript
 {
     [ConcordionTest]
     public class JavaScriptExtensionTest : AbstractExtensionTestCase
@@ -15,27 +12,27 @@ namespace Concordion.Spec.Concordion.Extension
 
         public void addLinkedJavaScriptExtension()
         {
-            Extension = new JavaScriptLinkedExtension();
+            this.Extension = new JavaScriptLinkedExtension();
         }
 
         public void addEmbeddedJavaScriptExtension()
         {
-            Extension = new JavaScriptEmbeddedExtension();
+            this.Extension = new JavaScriptEmbeddedExtension();
         }
 
         protected override void ConfigureTestRig()
         {
-            TestRig.WithResource(new Resource(SourcePath), TestJs);
+            this.TestRig.WithResource(new global::Concordion.Api.Resource(SourcePath), TestJs);
         }
     
         public bool hasJavaScriptDeclaration(string cssFilename)
         {
-            return ProcessingResult.HasJavaScriptDeclaration(cssFilename);
+            return this.ProcessingResult.HasJavaScriptDeclaration(cssFilename);
         }
 
         public bool hasEmbeddedTestJavaScript()
         {
-            return ProcessingResult.HasEmbeddedJavaScript(TestJs);
+            return this.ProcessingResult.HasEmbeddedJavaScript(TestJs);
         }
     }
 }

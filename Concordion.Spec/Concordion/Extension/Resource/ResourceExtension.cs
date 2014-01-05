@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Concordion.Api;
+using System;
 using Concordion.Api.Extension;
 
-namespace Concordion.Spec.Concordion.Extension
+namespace Concordion.Spec.Concordion.Extension.Resource
 {
     public class ResourceExtension : IConcordionExtension
     {
@@ -13,7 +9,9 @@ namespace Concordion.Spec.Concordion.Extension
 
         public void AddTo(IConcordionExtender concordionExtender)
         {
-            concordionExtender.WithResource(SourcePath, new Resource(("/images/o.png")));
+            concordionExtender.WithResource(
+                                    SourcePath, 
+                                    new global::Concordion.Api.Resource(("/images/o.png")));
         }
     }
 }
