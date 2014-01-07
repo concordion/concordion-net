@@ -30,6 +30,8 @@ namespace Concordion.Internal
 {
     public class ConcordionBuilder : IConcordionExtender
     {
+        private bool m_BuiltAlready = false;
+
         #region Properties
 
         private ExceptionRenderer ExceptionRenderer
@@ -62,9 +64,6 @@ namespace Concordion.Internal
         {
             get;
             set;
-
-
-
         }
 
         private CommandRegistry CommandRegistry
@@ -151,6 +150,12 @@ namespace Concordion.Internal
             set;
         }
 
+        private List<IExceptionCaughtListener> ExceptionListeners
+        {
+            get; 
+            set;
+        }
+
         private Dictionary<string, Resource> ResourceToCopyMap
         {
             get;
@@ -164,6 +169,7 @@ namespace Concordion.Internal
             BuildListeners = new List<IConcordionBuildListener>();
             SpecificationProcessingListeners = new List<ISpecificationProcessingListener>();
             ResourceToCopyMap = new Dictionary<string, Resource>();
+            ExceptionListeners = new List<IExceptionCaughtListener>();
 
             SpecificationLocator = new ClassNameBasedSpecificationLocator();
             Source = null;
@@ -181,18 +187,12 @@ namespace Concordion.Internal
             EchoCommand = new EchoCommand();
             ExceptionRenderer = new ExceptionRenderer();
 
+            WithExceptionListener(ExceptionRenderer);
+
             // Set up the commands
             
             CommandRegistry.Register("", "specification", SpecificationCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "run", RunCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "execute", ExecuteCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "set", new SetCommand());
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertEquals", AssertEqualsCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertTrue", AssertTrueCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertFalse", AssertFalseCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "verifyRows", VerifyRowsCommand);
-            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "echo", EchoCommand);
-
+            
             // Wire up the command listeners
 
             var assertResultRenderer = new AssertResultRenderer();
@@ -200,9 +200,7 @@ namespace Concordion.Internal
             WithAssertTrueListener(assertResultRenderer);
             WithAssertFalseListener(assertResultRenderer);
 
-            var verifyRowsCommandRenderer = new VerifyRowResultRenderer();
-            VerifyRowsCommand.MissingRowFound += verifyRowsCommandRenderer.MissingRowFoundEventHandler;
-            VerifyRowsCommand.SurplusRowFound += verifyRowsCommandRenderer.SurplusRowFoundEventHandler;
+            WithVerifyRowsListener(new VerifyRowResultRenderer());
 
             var runResultRenderer = new RunResultRenderer();
             RunCommand.SuccessfulRunReported += runResultRenderer.SuccessfulRunReportedEventHandler;
@@ -250,19 +248,19 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithAssertEqualsListener(IAssertEqualsListener listener)
+        public IConcordionExtender WithAssertEqualsListener(IAssertEqualsListener listener)
         {
             AssertEqualsCommand.AddAssertEqualsListener(listener);
             return this;
         }
 
-        public ConcordionBuilder WithAssertTrueListener(IAssertTrueListener listener)
+        public IConcordionExtender WithAssertTrueListener(IAssertTrueListener listener)
         {
             AssertTrueCommand.AddAssertListener(listener);
             return this;
         }
 
-        public ConcordionBuilder WithAssertFalseListener(IAssertFalseListener listener)
+        public IConcordionExtender WithAssertFalseListener(IAssertFalseListener listener)
         {
             AssertFalseCommand.AddAssertListener(listener);
             return this;
@@ -270,10 +268,22 @@ namespace Concordion.Internal
 
         private ConcordionBuilder WithApprovedCommand(string namespaceURI, string commandName, ICommand command) 
         {
-            ExceptionCatchingDecorator ExceptionCatchingDecorator = new ExceptionCatchingDecorator(new LocalTextDecorator(command));
-            ExceptionCatchingDecorator.ExceptionCaught += ExceptionRenderer.ExceptionCaughtEventHandler;
-            ICommand decoratedCommand = ExceptionCatchingDecorator;
+            var exceptionCatchingDecorator = new ExceptionCatchingDecorator(new LocalTextDecorator(command));
+            ExceptionListeners.ForEach(exceptionCatchingDecorator.AddExceptionListener);
+            ICommand decoratedCommand = exceptionCatchingDecorator;
             CommandRegistry.Register(namespaceURI, commandName, decoratedCommand);
+            return this;
+        }
+
+        public IConcordionExtender WithVerifyRowsListener(IVerifyRowsListener listener)
+        {
+            VerifyRowsCommand.AddVerifyRowsListener(listener);
+            return this;
+        }
+
+        public IConcordionExtender WithExecuteListener(IExecuteListener listener)
+        {
+            ExecuteCommand.AddExecuteListener(listener);
             return this;
         }
 
@@ -300,9 +310,9 @@ namespace Concordion.Internal
             Check.NotEmpty(namespaceURI, "Namespace URI is mandatory");
             Check.NotEmpty(commandName, "Command name is mandatory");
             Check.NotNull(command, "Command is null");
-            Check.IsFalse(namespaceURI.Contains("concordion.org"),
+            Check.IsFalse(namespaceURI.StartsWith("Concordion"),
                     "The namespace URI for user-contributed command '" + commandName + "' "
-                  + "must not contain 'concordion.org'. Use your own domain name instead.");
+                  + "must not start with 'Concordion'. Use your own domain name instead.");
             return WithApprovedCommand(namespaceURI, commandName, command);
         }
 
@@ -352,6 +362,18 @@ namespace Concordion.Internal
         
         public Concordion Build() 
         {
+            Check.IsFalse(this.m_BuiltAlready, "ConcordionBuilder currently does not support calling build() twice");
+            this.m_BuiltAlready = true;
+
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "run", RunCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "execute", ExecuteCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "set", new SetCommand());
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertEquals", AssertEqualsCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertTrue", AssertTrueCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "assertFalse", AssertFalseCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "verifyRows", VerifyRowsCommand);
+            WithApprovedCommand(HtmlFramework.NAMESPACE_CONCORDION_2007, "echo", EchoCommand);
+
             if (Target == null)
             {
                 Target = new FileTarget(BaseOutputDir ?? Directory.GetCurrentDirectory());
@@ -408,9 +430,9 @@ namespace Concordion.Internal
             }
         }
 
-        public ConcordionBuilder WithExceptionListener(IExceptionCaughtListener listener)
+        public IConcordionExtender WithExceptionListener(IExceptionCaughtListener listener)
         {
-            // TODO - add code here for processing
+            ExceptionListeners.Add(listener);
             return this;
         }
     }

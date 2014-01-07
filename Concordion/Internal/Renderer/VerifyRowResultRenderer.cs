@@ -17,25 +17,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Renderer
 {
-    public class VerifyRowResultRenderer : IVerifyRowResultListener
+    public class VerifyRowResultRenderer : IVerifyRowsListener
     {
-        #region IVerifyRowResultListener Members
+        #region IVerifyRowsListener Members
 
-        public void SurplusRowFoundEventHandler(object sender, global::Concordion.Internal.Commands.SurplusRowEventArgs e)
+        public void ExpressionEvaluated(ExpressionEvaluatedEvent expressionEvaluatedEvent)
         {
-            Element element = e.RowElement;
-            element.AddStyleClass("surplus");
+
         }
 
-        public void MissingRowFoundEventHandler(object sender, global::Concordion.Internal.Commands.MissingRowEventArgs e)
+        public void MissingRow(MissingRowEvent missingRowEvent)
         {
-            Element element = e.RowElement;
+            Element element = missingRowEvent.RowElement;
             element.AddStyleClass("missing");
         }
 
+        public void SurplusRow(SurplusRowEvent surplusRowEvent)
+        {
+            Element element = surplusRowEvent.RowElement;
+            element.AddStyleClass("surplus");
+        }
+
         #endregion
+
     }
 }

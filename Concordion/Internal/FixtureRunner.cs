@@ -9,42 +9,36 @@ namespace Concordion.Internal
 {
     public class FixtureRunner
     {
+        private object m_Fixture;
+
+        private EmbeddedResourceSource m_Source;
+
+        private FileTarget m_Target;
+
+        private SpecificationConfig m_SpecificationConfig;
+
         public IResultSummary Run(object fixture)
         {
             try
             {
-                var source = new EmbeddedResourceSource(fixture.GetType().Assembly);
-                var specificationConfig = new SpecificationConfig().Load(fixture.GetType());
-                var target = new FileTarget(specificationConfig.BaseOutputDirectory);
-                var extensionLoader = new ExtensionLoader(specificationConfig);
+                this.m_Fixture = fixture;
+                this.m_Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
+                this.m_SpecificationConfig = new SpecificationConfig().Load(fixture.GetType());
+                this.m_Target = new FileTarget(m_SpecificationConfig.BaseOutputDirectory);
 
-                var testSummary = new SummarizingResultRecorder();
-                var specExtensions = specificationConfig.SpecificationFileExtensions;
-                var anySpecExecuted = false;
-                foreach (var specExtension in specExtensions)
+                var fileExtensions = m_SpecificationConfig.SpecificationFileExtensions;
+                if (fileExtensions.Count > 1)
                 {
-                    var specLocator = new ClassNameBasedSpecificationLocator(specExtension);
-                    var specResource = specLocator.LocateSpecification(fixture);
-                    if (source.CanFind(specResource))
-                    {
-                        var concordionBuilder = new ConcordionBuilder();
-                        extensionLoader.AddExtensions(fixture, concordionBuilder);
-                        var concordion = concordionBuilder
-                            .WithSource(source)
-                            .WithTarget(target)
-                            .WithSpecificationLocator(specLocator)
-                            .Build();
-                        var fixtureResult = concordion.Process(fixture);
-                        this.AddToTestResults(fixtureResult, testSummary);
-                        anySpecExecuted = true;
-                    }
+                    return RunAllSpecifications(fileExtensions);
                 }
-                if (!anySpecExecuted)
+                else if (fileExtensions.Count == 1)
                 {
-                    testSummary.Record(Result.Exception);
-                    Console.WriteLine(string.Format("no active specification found for fixture: {0}", fixture.GetType().FullName));
+                    return RunSingleSpecification(fileExtensions.First());
                 }
-                return testSummary;
+                else
+                {
+                    throw new InvalidOperationException(string.Format("no specification extensions defined for: {0}", this.m_SpecificationConfig));
+                }
             }
             catch (Exception e)
             {
@@ -53,6 +47,42 @@ namespace Concordion.Internal
                 exceptionResult.Record(Result.Exception);
                 return exceptionResult;
             }
+        }
+
+        private IResultSummary RunAllSpecifications(IEnumerable<string> fileExtensions)
+        {
+            var testSummary = new SummarizingResultRecorder();
+            var anySpecExecuted = false;
+            foreach (var fileExtension in fileExtensions)
+            {
+                var specLocator = new ClassNameBasedSpecificationLocator(fileExtension);
+                var specResource = specLocator.LocateSpecification(m_Fixture);
+                if (m_Source.CanFind(specResource))
+                {
+                    var fixtureResult = RunSingleSpecification(fileExtension);
+                    AddToTestResults(fixtureResult, testSummary);
+                    anySpecExecuted = true;
+                }
+            }
+            if (!anySpecExecuted)
+            {
+                testSummary.Record(Result.Exception);
+                Console.WriteLine("no active specification found for fixture: {0}", m_Fixture.GetType().FullName);
+            }
+            return testSummary;
+        }
+
+        private IResultSummary RunSingleSpecification(string fileExtension)
+        {
+            var concordionExtender = new ConcordionBuilder();
+            concordionExtender
+                .WithSource(m_Source)
+                .WithTarget(m_Target)
+                .WithSpecificationLocator(new ClassNameBasedSpecificationLocator(fileExtension));
+            var extensionLoader = new ExtensionLoader(m_SpecificationConfig);
+            extensionLoader.AddExtensions(m_Fixture, concordionExtender);
+            var concordion = concordionExtender.Build();
+            return concordion.Process(m_Fixture);
         }
 
         private void AddToTestResults(IResultSummary singleResult, IResultRecorder resultSummary)

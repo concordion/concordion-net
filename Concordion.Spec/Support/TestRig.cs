@@ -59,11 +59,11 @@ namespace Concordion.Spec
             this.Target = new StubTarget();
 
             var concordionBuilder = new ConcordionBuilder()
-                .WithAssertEqualsListener(eventRecorder)
-                .WithExceptionListener(eventRecorder)
                 .WithSource(Source)
                 .WithEvaluatorFactory(EvaluatorFactory)
-                .WithTarget(Target);
+                .WithTarget(Target)
+                .WithAssertEqualsListener(eventRecorder)
+                .WithExceptionListener(eventRecorder);
 
             if (Fixture != null)
             {

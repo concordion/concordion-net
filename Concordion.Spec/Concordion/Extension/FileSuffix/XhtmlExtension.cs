@@ -8,8 +8,7 @@ namespace Concordion.Spec.Concordion.Extension.FileSuffix
         public void AddTo(IConcordionExtender concordionExtender)
         {
             concordionExtender
-                .WithSpecificationLocator(new ClassNameBasedSpecificationLocator("xhtml"))
-                .WithTarget(new FileTargetWithSuffix("html"));
+                .WithSpecificationLocator(new ClassNameBasedSpecificationLocator("xhtml"));
         }
     }
 }

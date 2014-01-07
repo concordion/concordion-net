@@ -45,7 +45,7 @@ namespace Concordion.Spec.Concordion.Extension
         {
         }
 
-        public List<string> GetEventLog()
+        public List<string> getEventLog()
         {
             LogWriter.Flush();
             var loggedEvents = LogWriter.ToString().Split(new[] {LogWriter.NewLine}, StringSplitOptions.None);

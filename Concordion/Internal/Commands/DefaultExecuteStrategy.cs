@@ -21,6 +21,13 @@ namespace Concordion.Internal.Commands
 {
     internal class DefaultExecuteStrategy : IExecuteStrategy
     {
+        private readonly ExecuteCommand m_ExecuteCommand;
+
+        public DefaultExecuteStrategy(ExecuteCommand executeCommand)
+        {
+            this.m_ExecuteCommand = executeCommand;
+        }
+
         #region IExecuteStrategy Members
 
         public void Execute(CommandCall commandCall, global::Concordion.Api.IEvaluator evaluator, global::Concordion.Api.IResultRecorder resultRecorder)
@@ -30,6 +37,7 @@ namespace Concordion.Internal.Commands
             childCommands.SetUp(evaluator, resultRecorder);
             evaluator.Evaluate(commandCall.Expression);
             childCommands.Execute(evaluator, resultRecorder);
+            m_ExecuteCommand.AnnounceExecuteCompleted(commandCall.Element);
             childCommands.Verify(evaluator, resultRecorder);
         }
 

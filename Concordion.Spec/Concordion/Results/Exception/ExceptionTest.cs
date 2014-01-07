@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Api.Listener;
 using Concordion.Internal.Renderer;
 using System.Xml.Linq;
 using Concordion.Spec.Support;
@@ -31,13 +32,11 @@ namespace Concordion.Spec.Concordion.Results.Exception
                                 .ProcessFragment(fragment)
                                 .GetXDocument();
 
-            var element = document.Descendants("p").ToArray()[0];
+            var element = new Element(document.Descendants("p").ToArray()[0]);
 
-            var eventArgs = new ExceptionCaughtEventArgs { Exception = exception, Expression = expression, Element = new Element(element) };
-            new ExceptionRenderer().ExceptionCaughtEventHandler(this, eventArgs);
+            new ExceptionRenderer().ExceptionCaught(new ExceptionCaughtEvent(exception, element, expression));
 
-            //return element.ToString(SaveOptions.DisableFormatting);
-            return element.ToString();
+            return element.ToXml();
         }
     }
 }

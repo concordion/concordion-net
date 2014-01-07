@@ -22,6 +22,51 @@ namespace Concordion.Api.Extension
 
         /**
          * <summary>
+         * Adds a listener to <code>concordion:assertEquals</code> commands.
+         * </summary>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithAssertEqualsListener(IAssertEqualsListener listener);
+
+        /**
+         * Adds a listener to <code>concordion:assertTrue</code> commands.
+         * @param listener 
+         * @return this
+         */
+        IConcordionExtender WithAssertTrueListener(IAssertTrueListener listener);
+
+        /**
+         * Adds a listener to <code>concordion:assertFalse</code> commands.
+         * @param listener 
+         * @return this
+         */
+        IConcordionExtender WithAssertFalseListener(IAssertFalseListener listener);
+
+        /**
+         * Adds a listener to <code>concordion:execute</code> commands.
+         * @param executeListener 
+         * @return this
+         */
+        IConcordionExtender WithExecuteListener(IExecuteListener listener);
+
+        /**
+         * Adds a listener to <code>concordion:verifyRows</code> commands.
+         * @param listener 
+         * @return this
+         */
+        IConcordionExtender WithVerifyRowsListener(IVerifyRowsListener listener);
+
+        /**
+         * <summary>
+         * Adds a listener that is invoked when an uncaught {@link Throwable} is thrown by a command,
+         * including commands that have been added using {@link #withCommand(String, String, Command)}.
+         * </summary>
+         * <returns>this - to enable fluent interfaces</returns>
+         */
+        IConcordionExtender WithExceptionListener(IExceptionCaughtListener listener);
+
+        /**
+         * <summary>
          * Adds a listener that is invoked when Concordion parses the specification document, providing 
          * access to the parsed document.
          * </summary>

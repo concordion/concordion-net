@@ -5,16 +5,16 @@
     <h1>File Suffix Extensions</h1>
 
     <p>
-       Concordion can read and write to files using different file suffixes by configuring an extension using the <code>WithSpecificationLocator()</code> and 
-            <code>WithTarget()</code> methods.  
+       Concordion can read and write to files using different file suffixes by configuring an extension using the <code>withSpecificationLocator()</code> and 
+            <code>withTarget()</code> methods.  
     </p>
 
     <div class="example">
 
         <h3>Example</h3>
-        <p>An extension for handling specification documents with file extensions "xhtml" <span concordion:execute="addXhtmlExtension()">is installed</span>.</p>
+        
         <p>This specification uses a suffix of ".xhtml" and <span concordion:assertTrue="hasBeenProcessed()">has been processed</span> by Concordion.</p>
-        <p>See <code>FileSuffixExtensionsTest.java</code> for implementation details.</p>
+        <p>See <code>FileSuffixExtensionsTest.cs</code> for implementation details.</p>
     </div>
 
 </body>

@@ -17,11 +17,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Commands
 {
     public class ExecuteCommand : ICommand
     {
+        private readonly List<IExecuteListener> m_Listeners = new List<IExecuteListener>();
+
+        public void AddExecuteListener(IExecuteListener listener)
+        {
+            m_Listeners.Add(listener);
+        }
+
+        public void RemoveExecuteListener(IExecuteListener listener)
+        {
+            m_Listeners.Remove(listener);
+        }
+
+        public void AnnounceExecuteCompleted(Element element)
+        {
+            foreach (var listener in m_Listeners)
+            {
+                listener.ExecuteCompleted(new ExecuteEvent(element));
+            }
+        }
+
         #region ICommand Members
 
         public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
@@ -37,7 +58,7 @@ namespace Concordion.Internal.Commands
             }
             else
             {
-                strategy = new DefaultExecuteStrategy();
+                strategy = new DefaultExecuteStrategy(this);
             }
             strategy.Execute(commandCall, evaluator, resultRecorder);
         }

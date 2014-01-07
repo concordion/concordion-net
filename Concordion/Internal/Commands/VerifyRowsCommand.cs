@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Text.RegularExpressions;
+using Concordion.Api.Listener;
 using Concordion.Internal.Util;
 using System.Collections;
 
@@ -25,21 +26,41 @@ namespace Concordion.Internal.Commands
 {
     public class VerifyRowsCommand : ICommand
     {
+        private List<IVerifyRowsListener> m_Listeners = new List<IVerifyRowsListener>();
+
         #region Methods
 
-        private void OnSurplusRow(Element element)
+        public void AddVerifyRowsListener(IVerifyRowsListener listener)
         {
-            if (SurplusRowFound != null)
+            m_Listeners.Add(listener);
+        }
+
+        public void RemoveVerifyRowsListener(IVerifyRowsListener listener)
+        {
+            m_Listeners.Remove(listener);
+        }
+
+        private void AnnounceExpressionEvaluated(Element element)
+        {
+            foreach (var listener in m_Listeners)
             {
-                SurplusRowFound(this, new SurplusRowEventArgs { RowElement = element });
+                listener.ExpressionEvaluated(new ExpressionEvaluatedEvent(element));
             }
         }
 
-        private void OnMissingRow(Element element)
+        private void AnnounceMissingRow(Element element)
         {
-            if (MissingRowFound != null)
+            foreach (var listener in m_Listeners)
             {
-                MissingRowFound(this, new MissingRowEventArgs { RowElement = element });
+                listener.MissingRow(new MissingRowEvent(element));
+            }
+        }
+
+        private void AnnounceSurplusRow(Element element)
+        {
+            foreach (var listener in m_Listeners)
+            {
+                listener.SurplusRow(new SurplusRowEvent(element));
             }
         }
 
@@ -78,6 +99,8 @@ namespace Concordion.Internal.Commands
             var tableSupport = new TableSupport(commandCall);
             var detailRows = tableSupport.GetDetailRows();
 
+            AnnounceExpressionEvaluated(commandCall.Element);
+
             int index = 0;
             foreach (var loopVar in iterable) 
             {
@@ -90,7 +113,7 @@ namespace Concordion.Internal.Commands
                 else 
                 {
                     detailRow = tableSupport.AddDetailRow();
-                    OnSurplusRow(detailRow.RowElement);
+                    AnnounceSurplusRow(detailRow.RowElement);
                 }
                 tableSupport.CopyCommandCallsTo(detailRow);
                 commandCall.Children.Verify(evaluator, resultRecorder);
@@ -100,16 +123,9 @@ namespace Concordion.Internal.Commands
             for (; index < detailRows.Count; index++) {
                 Row detailRow = detailRows[index];
                 resultRecorder.Record(Result.Failure);
-                OnMissingRow(detailRow.RowElement);
+                AnnounceMissingRow(detailRow.RowElement);
             }
         }
-
-        #endregion
-
-        #region Events
-
-        public event EventHandler<SurplusRowEventArgs> SurplusRowFound;
-        public event EventHandler<MissingRowEventArgs> MissingRowFound;
 
         #endregion
     }

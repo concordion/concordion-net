@@ -8,12 +8,12 @@ namespace Concordion.Spec.Concordion.Extension.Command
     {
         public void addCommandExtension()
         {
-            this.Extension = new CommandExtension(this.LogWriter);
+            this.Extension = new CommandExtension(LogWriter);
         }
 
         public List<string> getOutput()
         {
-            return this.GetEventLog();
+            return this.getEventLog();
         }
     }
 }

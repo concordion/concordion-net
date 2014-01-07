@@ -114,6 +114,15 @@ namespace Concordion.Api
             m_element.Add(child.m_element);
         }
 
+        public void AppendSister(Element element)
+        {
+            m_element.AddAfterSelf(element.m_element);
+
+            //nu.xom.Element xomParentElement = (nu.xom.Element)xomElement.getParent();
+            //int elementIndex = xomParentElement.indexOf(xomElement);
+            //xomParentElement.insertChild(element.xomElement, elementIndex + 1);
+        }
+
         /// <summary>
         /// Prepends a child <see cref="Element"/> before this one
         /// </summary>

@@ -59,11 +59,10 @@ namespace Concordion.Internal.Renderer
             try 
             {
                 Target.Write(processingEvent.Resource, XML_DECLARATION + processingEvent.RootElement.ToXml());
-                if (Target is FileTarget) 
+                var description = Target.ResolvedPathFor(processingEvent.Resource);
+                if (!string.IsNullOrEmpty(description))
                 {
-                    // TODO - Replace this with something meaningful
-
-                    Console.WriteLine("Processed specifications : " + ((FileTarget)Target).GetTargetPath(processingEvent.Resource));
+                    Console.WriteLine(description);
                 }
             } 
             catch (Exception e) 

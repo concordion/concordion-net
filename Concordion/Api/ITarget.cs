@@ -53,5 +53,7 @@ namespace Concordion.Api
         /// </summary>
         /// <param name="resource">The resource.</param>
         void Delete(Resource resource);
+
+        string ResolvedPathFor(Resource resource);
     }
 }

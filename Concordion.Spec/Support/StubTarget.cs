@@ -55,6 +55,11 @@ namespace Concordion.Spec
         {
         }
 
+        public string ResolvedPathFor(Resource resource)
+        {
+            return "";
+        }
+
         #endregion
     }
 }

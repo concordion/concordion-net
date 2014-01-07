@@ -5,8 +5,8 @@
     <h1>Custom Commands</h1>
 
     <p>
-       Users can add their own commands to Concordion as <a href="Extension.html">extensions</a>. User-contributed commands must use their own namespace that must not contain <code>concordion.org</code>.
-       Custom commands are automatically wrapped with a class that will notify <code>ThrowableCaughtListeners</code> of any <code>Throwables</code> that are thrown by the command.
+       Users can add their own commands to Concordion as <a href="../Extension.html">extensions</a>. User-contributed commands must use their own namespace that must not start with <code>Concordion</code>.
+       Custom commands are automatically wrapped with a class that will notify <code>ExceptionCaughtListeners</code> of any <code>Exceptions</code> that are thrown by the command.
     </p>
 
     <div class="example">

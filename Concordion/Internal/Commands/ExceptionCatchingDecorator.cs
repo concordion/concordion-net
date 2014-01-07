@@ -18,29 +18,43 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Threading;
+using Concordion.Api.Listener;
 
 namespace Concordion.Internal.Commands
 {
     public class ExceptionCatchingDecorator : AbstractCommandDecorator
     {
+        private readonly List<IExceptionCaughtListener> m_Listeners;
+
         #region Constructors
         
         public ExceptionCatchingDecorator(ICommand command)
             : base(command)
         {
+            this.m_Listeners = new List<IExceptionCaughtListener>();
         } 
 
         #endregion
 
         #region Methods
-        
-        private void OnExceptionCaught(Element element, Exception exception, string expression)
+
+        public void AddExceptionListener(IExceptionCaughtListener listener)
         {
-            if (ExceptionCaught != null)
+            m_Listeners.Add(listener);
+        }
+
+        public void RemoveExceptionListener(IExceptionCaughtListener listener)
+        {
+            m_Listeners.Remove(listener);
+        }
+
+        private void AnnounceThrowableCaught(Element element, Exception exception, string expression)
+        {
+            foreach (var listener in m_Listeners)
             {
-                ExceptionCaught(this, new ExceptionCaughtEventArgs { Element = element, Exception = exception, Expression = expression });
+                listener.ExceptionCaught(new ExceptionCaughtEvent(exception, element, expression));
             }
-        } 
+        }
 
         #endregion
 
@@ -55,7 +69,7 @@ namespace Concordion.Internal.Commands
             catch (Exception e)
             {
                 resultRecorder.Record(Result.Exception);
-                OnExceptionCaught(commandCall.Element, e, commandCall.Expression);
+                AnnounceThrowableCaught(commandCall.Element, e, commandCall.Expression);
             }
         }
 
@@ -68,7 +82,7 @@ namespace Concordion.Internal.Commands
             catch (Exception e)
             {
                 resultRecorder.Record(Result.Exception);
-                OnExceptionCaught(commandCall.Element, e, commandCall.Expression);
+                AnnounceThrowableCaught(commandCall.Element, e, commandCall.Expression);
             }
         }
 
@@ -81,15 +95,9 @@ namespace Concordion.Internal.Commands
             catch (Exception e)
             {
                 resultRecorder.Record(Result.Exception);
-                OnExceptionCaught(commandCall.Element, e, commandCall.Expression);
+                AnnounceThrowableCaught(commandCall.Element, e, commandCall.Expression);
             }
         }
-
-        #endregion
-
-        #region Events
-        
-        public event EventHandler<ExceptionCaughtEventArgs> ExceptionCaught; 
 
         #endregion
     }

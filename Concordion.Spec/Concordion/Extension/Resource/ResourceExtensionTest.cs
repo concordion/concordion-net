@@ -7,17 +7,17 @@ namespace Concordion.Spec.Concordion.Extension.Resource
     {
         public void addResourceExtension()
         {
-            this.Extension = new ResourceExtension();
+            Extension = new ResourceExtension();
         }
 
         public void addDynamicResourceExtension()
         {
-            this.Extension = new DynamicResourceExtension();
+            Extension = new DynamicResourceExtension();
         }
 
         protected override void ConfigureTestRig()
         {
-            this.TestRig.WithResource(new Api.Resource(ResourceExtension.SourcePath), "0101");
+            TestRig.WithResource(new Api.Resource(ResourceExtension.SourcePath), "0101");
         }
     
         public int getMeaningOfLife()

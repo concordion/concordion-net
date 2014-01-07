@@ -17,13 +17,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 using ognl;
 using Concordion.Internal.Util;
 
 namespace Concordion.Internal.Renderer
 {
-    public class ExceptionRenderer : IExceptionListener
+    public class ExceptionRenderer : IExceptionCaughtListener
     {
         #region Fields
 
@@ -51,18 +52,6 @@ namespace Concordion.Internal.Renderer
         #endregion
 
         #region Methods
-
-        public void ExceptionCaughtEventHandler(object sender, ExceptionCaughtEventArgs e)
-        {
-            buttonId++;
-            Element element = e.Element;
-            element.AppendChild(ExpectedSpan(element));
-            element.AppendChild(ExceptionMessage(e.Exception.Message));
-            element.AppendChild(StackTraceTogglingButton());
-            element.AppendChild(StackTrace(e.Exception, e.Expression));
-            
-            EnsureDocumentHasTogglingScript(element);
-        }
 
         private Element ExpectedSpan(Element element)
         {
@@ -166,5 +155,29 @@ namespace Concordion.Internal.Renderer
         }
 
         #endregion
+
+        #region IExceptionCaughtListener Members
+
+        public void ExceptionCaught(ExceptionCaughtEvent caughtEvent)
+        {
+            buttonId++;
+            var element = caughtEvent.Element;
+            element.AppendChild(ExpectedSpan(element));
+            // Special handling for <a> tags to avoid the stack-trace being inside the link text
+            if (element.IsNamed("a"))
+            {
+                var div = new Element("div");
+                element.AppendSister(div);
+                element = div;
+            }
+            element.AppendChild(ExceptionMessage(caughtEvent.CaughtException.Message));
+            element.AppendChild(StackTraceTogglingButton());
+            element.AppendChild(StackTrace(caughtEvent.CaughtException, caughtEvent.Expression));
+
+            EnsureDocumentHasTogglingScript(element);
+        }
+
+        #endregion
+
     }
 }

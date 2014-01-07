@@ -126,6 +126,13 @@
     <Compile Include="Concordion\Extension\JavaScript\JavaScriptEmbeddedExtension.cs" />
     <Compile Include="Concordion\Extension\JavaScript\JavaScriptExtensionTest.cs" />
     <Compile Include="Concordion\Extension\JavaScript\JavaScriptLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\Listener\AssertLogger.cs" />
+    <Compile Include="Concordion\Extension\Listener\ExecuteLogger.cs" />
+    <Compile Include="Concordion\Extension\Listener\ExecuteTableListenerTest.cs" />
+    <Compile Include="Concordion\Extension\Listener\ListenerTest.cs" />
+    <Compile Include="Concordion\Extension\Listener\LoggingExtension.cs" />
+    <Compile Include="Concordion\Extension\Listener\VerifyRowsListenerTest.cs" />
+    <Compile Include="Concordion\Extension\Listener\VerifyRowsLogger.cs" />
     <Compile Include="Concordion\Extension\Resource\DynamicResourceExtension.cs" />
     <Compile Include="Concordion\Extension\Resource\ResourceExtension.cs" />
     <Compile Include="Concordion\Extension\Resource\ResourceExtensionTest.cs" />
@@ -172,6 +179,9 @@
     <EmbeddedResource Include="Concordion\Extension\Extension.html" />
     <EmbeddedResource Include="Concordion\Extension\FileSuffix\FileSuffixExtensions.xhtml" />
     <EmbeddedResource Include="Concordion\Extension\JavaScript\JavaScriptExtension.html" />
+    <EmbeddedResource Include="Concordion\Extension\Listener\ExecuteTableListener.html" />
+    <EmbeddedResource Include="Concordion\Extension\Listener\Listener.html" />
+    <EmbeddedResource Include="Concordion\Extension\Listener\VerifyRowsListener.html" />
     <EmbeddedResource Include="Concordion\Extension\Resource\ResourceExtension.html" />
     <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

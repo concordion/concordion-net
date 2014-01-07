@@ -79,17 +79,8 @@ namespace Concordion.Internal
 
         private StreamWriter CreateWriter(Resource resource)
         {
-            string path = Path.Combine(BaseDirectory, resource.Path);
-            var pos = path.LastIndexOf('.');
 
-            //Extension remove
-            if (!path.EndsWith(".html"))
-            {
-                path = path.Remove(pos, 1);
-                path = path + ".html";
-
-            }
-            
+            string path = this.GetTargetPath(resource);
             return new StreamWriter(path, false, Encoding.UTF8);
         }
 
@@ -101,7 +92,15 @@ namespace Concordion.Internal
 
         public string GetTargetPath(Resource resource)
         {
-            return Path.Combine(BaseDirectory, resource.Path);
+            string path = Path.Combine(BaseDirectory, resource.Path);
+            //use html as file extension - place original extenion name at the end of file name
+            if (!path.EndsWith(".html"))
+            {
+                path = path.Remove(path.LastIndexOf('.'), 1);
+                path = path + ".html";
+
+            }
+            return path;
         }
 
         #endregion
@@ -159,6 +158,11 @@ namespace Concordion.Internal
         {
             Check.NotNull(resource, "resource is null");
             File.Delete(BaseDirectory + resource.Path);
+        }
+
+        public string ResolvedPathFor(Resource resource)
+        {
+            return GetTargetPath(resource);
         }
 
         #endregion
