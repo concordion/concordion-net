@@ -50,6 +50,13 @@ namespace Concordion.Api.Extension
         IConcordionExtender WithExecuteListener(IExecuteListener listener);
 
         /**
+         * Adds a listener to <code>concordion:run</code> commands.
+         * @param listener 
+         * @return this
+         */
+        IConcordionExtender WithRunListener(IRunListener listener);
+
+        /**
          * Adds a listener to <code>concordion:verifyRows</code> commands.
          * @param listener 
          * @return this
@@ -133,6 +140,13 @@ namespace Concordion.Api.Extension
         IConcordionExtender WithLinkedJavaScript(string jsPath, Resource targetResource);
 
         /**
+         * Overrides the source that the Concordion specifications are read from.
+         * @param source the new source 
+         * @return this
+         */
+        IConcordionExtender WithSource(ISource source);
+
+        /**
          * <summary>
          * Overrides the target that the Concordion specifications are written to.
          * </summary>
@@ -149,6 +163,8 @@ namespace Concordion.Api.Extension
          * <returns>this - to enable fluent interfaces</returns>
          */
         IConcordionExtender WithSpecificationLocator(ISpecificationLocator locator);
+
+        IConcordionExtender WithEvaluatorFactory(IEvaluatorFactory evaluatorFactory);
 
         /**
          * <summary>

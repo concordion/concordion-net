@@ -17,14 +17,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
+using Concordion.Api.Listener;
 using Concordion.Internal.Util;
 using Concordion.Internal.Runner;
 using System.Reflection;
 
 namespace Concordion.Internal.Commands
 {
-    public class RunCommand : ICommand, IRunReporter
+    public class RunCommand : AbstractCommand
     {
+        private List<IRunListener> m_Listeners = new List<IRunListener>();
+
         #region Properties
 
         public Dictionary<string, IRunner> Runners
@@ -37,27 +40,45 @@ namespace Concordion.Internal.Commands
 
         #region Methods
 
-        private void OnSuccessfulRunReported(Element element)
+        public void AddRunListener(IRunListener runListener)
         {
-            if (SuccessfulRunReported != null)
+            m_Listeners.Add(runListener);
+        }
+
+        public void RemoveRunListener(IRunListener runListener)
+        {
+            m_Listeners.Remove(runListener);
+        }
+
+        private void AnnounceIgnored(Element element)
+        {
+            foreach (var listener in m_Listeners)
             {
-                SuccessfulRunReported(this, new RunResultEventArgs { Element = element });
+                listener.IgnoredReported(new RunIgnoreEvent(element));
             }
         }
 
-        private void OnFailedRunReported(Element element)
+        private void AnnounceSuccess(Element element)
         {
-            if (FailedRunReported != null)
+            foreach (var listener in m_Listeners)
             {
-                FailedRunReported(this, new RunResultEventArgs { Element = element });
+                listener.SuccessReported(new RunSuccessEvent(element));
             }
         }
 
-        private void OnIgnoredRunReported(Element element)
+        private void AnnounceFailure(Element element)
         {
-            if (IgnoredRunReported != null)
+            foreach (var listener in m_Listeners)
             {
-                IgnoredRunReported(this, new RunResultEventArgs { Element = element });
+                listener.FailureReported(new RunFailureEvent(element));
+            }
+        }
+
+        private void AnnounceFailure(Exception exception, Element element, string expression)
+        {
+            foreach (var listener in m_Listeners)
+            {
+                listener.ExceptionCaught(new ExceptionCaughtEvent(exception, element, expression));
             }
         }
 
@@ -74,11 +95,7 @@ namespace Concordion.Internal.Commands
 
         #region ICommand Members
 
-        public void Setup(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
-        {
-        }
-
-        public void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
+        public override void Execute(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
         {
             Check.IsFalse(commandCall.HasChildCommands, "Nesting commands inside a 'run' is not supported");
 
@@ -110,37 +127,25 @@ namespace Concordion.Internal.Commands
 
                 if (result == Result.Success)
                 {
-                    OnSuccessfulRunReported(element);
+                    AnnounceSuccess(element);
                 }
                 else if (result == Result.Ignored)
                 {
-                    OnIgnoredRunReported(element);
+                    AnnounceIgnored(element);
                 }
                 else
                 {
-                    OnFailedRunReported(element);
+                    AnnounceFailure(element);
                 }
 
                 resultRecorder.Record(result);
             }
             catch
             {
-                OnFailedRunReported(element);
+                AnnounceFailure(element);
                 resultRecorder.Record(Result.Failure);
             }
         }
-
-        public void Verify(CommandCall commandCall, IEvaluator evaluator, IResultRecorder resultRecorder)
-        {
-        }
-
-        #endregion
-
-        #region IRunReporter Members
-
-        public event EventHandler<RunResultEventArgs> SuccessfulRunReported;
-        public event EventHandler<RunResultEventArgs> FailedRunReported;
-        public event EventHandler<RunResultEventArgs> IgnoredRunReported;
 
         #endregion
     }

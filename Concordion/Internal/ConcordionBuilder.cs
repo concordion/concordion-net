@@ -199,19 +199,13 @@ namespace Concordion.Internal
             WithAssertEqualsListener(assertResultRenderer);
             WithAssertTrueListener(assertResultRenderer);
             WithAssertFalseListener(assertResultRenderer);
-
             WithVerifyRowsListener(new VerifyRowResultRenderer());
-
-            var runResultRenderer = new RunResultRenderer();
-            RunCommand.SuccessfulRunReported += runResultRenderer.SuccessfulRunReportedEventHandler;
-            RunCommand.FailedRunReported += runResultRenderer.FailedRunReportedEventHandler;
-            RunCommand.IgnoredRunReported += runResultRenderer.IgnoredRunReportedEventHandler;
-
+            WithRunListener(new RunResultRenderer());
             WithDocumentParsingListener(new DocumentStructureImprover());
             WithEmbeddedCss(HtmlFramework.EMBEDDED_STYLESHEET_RESOURCE);
         }
     
-        public ConcordionBuilder WithSource(ISource source) 
+        public IConcordionExtender WithSource(ISource source) 
         {
             this.Source = source;
             return this;
@@ -236,7 +230,7 @@ namespace Concordion.Internal
             return this;
         }
 
-        public ConcordionBuilder WithEvaluatorFactory(IEvaluatorFactory evaluatorFactory) 
+        public IConcordionExtender WithEvaluatorFactory(IEvaluatorFactory evaluatorFactory) 
         {
             this.EvaluatorFactory = evaluatorFactory;
             return this;
@@ -278,6 +272,12 @@ namespace Concordion.Internal
         public IConcordionExtender WithVerifyRowsListener(IVerifyRowsListener listener)
         {
             VerifyRowsCommand.AddVerifyRowsListener(listener);
+            return this;
+        }
+
+        public IConcordionExtender WithRunListener(IRunListener listener)
+        {
+            RunCommand.AddRunListener(listener);
             return this;
         }
 

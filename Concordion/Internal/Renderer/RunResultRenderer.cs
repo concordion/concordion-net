@@ -16,29 +16,31 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Concordion.Api.Listener;
 using Concordion.Internal.Commands;
 
 namespace Concordion.Internal.Renderer
 {
-    public class RunResultRenderer : IRunListener
+    public class RunResultRenderer : ExceptionRenderer, IRunListener
     {
         #region IRunListener Members
 
-        public void SuccessfulRunReportedEventHandler(object sender, RunResultEventArgs e)
+        public void SuccessReported(RunSuccessEvent runSuccessEvent)
         {
-            e.Element.AddStyleClass("success").AppendNonBreakingSpaceIfBlank();
+            runSuccessEvent.Element.AddStyleClass("success").AppendNonBreakingSpaceIfBlank();
         }
 
-        public void FailedRunReportedEventHandler(object sender, RunResultEventArgs e)
+        public void FailureReported(RunFailureEvent runFailureEvent)
         {
-            e.Element.AddStyleClass("failure").AppendNonBreakingSpaceIfBlank();
+            runFailureEvent.Element.AddStyleClass("failure").AppendNonBreakingSpaceIfBlank();
         }
 
-        public void IgnoredRunReportedEventHandler(object sender, RunResultEventArgs e)
+        public void IgnoredReported(RunIgnoreEvent runIgnoreEvent)
         {
-            e.Element.AddStyleClass("ignored").AppendNonBreakingSpaceIfBlank();
+            runIgnoreEvent.Element.AddStyleClass("ignored").AppendNonBreakingSpaceIfBlank();
         }
 
         #endregion
+
     }
 }

@@ -115,9 +115,13 @@
     <Compile Include="Api\Listener\IDocumentParsingListener.cs" />
     <Compile Include="Api\Listener\IExceptionCaughtListener.cs" />
     <Compile Include="Api\Listener\IExecuteListener.cs" />
+    <Compile Include="Api\Listener\IRunListener.cs" />
     <Compile Include="Api\Listener\ISpecificationProcessingListener.cs" />
     <Compile Include="Api\Listener\IVerifyRowsListener.cs" />
     <Compile Include="Api\Listener\MissingRowEvent.cs" />
+    <Compile Include="Api\Listener\RunFailureEvent.cs" />
+    <Compile Include="Api\Listener\RunIgnoreEvent.cs" />
+    <Compile Include="Api\Listener\RunSuccessEvent.cs" />
     <Compile Include="Api\Listener\SpecificationProcessingEvent.cs" />
     <Compile Include="Api\Listener\SurplusRowEvent.cs" />
     <Compile Include="Api\Resource.cs" />
@@ -194,7 +198,6 @@
     <Compile Include="Internal\Renderer\BreadCrumbRenderer.cs" />
     <Compile Include="Internal\Renderer\DocumentStructureImprover.cs" />
     <Compile Include="Internal\Renderer\ExceptionRenderer.cs" />
-    <Compile Include="Internal\Renderer\IRunListener.cs" />
     <Compile Include="Internal\Renderer\PageFooterRenderer.cs" />
     <Compile Include="Internal\Renderer\RunResultRenderer.cs" />
     <Compile Include="Internal\Renderer\SpecificationRenderer.cs" />
