@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Xml.Linq;
+using Concordion.Spec.Support;
 
 namespace Concordion.Spec.Concordion.Results.Breadcrumbs
 {

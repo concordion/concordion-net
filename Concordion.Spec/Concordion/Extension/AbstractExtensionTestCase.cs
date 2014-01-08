@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using Concordion.Api.Extension;
+using Concordion.Spec.Support;
 
 namespace Concordion.Spec.Concordion.Extension
 {

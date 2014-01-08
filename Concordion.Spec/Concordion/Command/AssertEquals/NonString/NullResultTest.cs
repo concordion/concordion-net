@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Integration;
 using System.Text.RegularExpressions;
+using Concordion.Spec.Support;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals.NonString
 {

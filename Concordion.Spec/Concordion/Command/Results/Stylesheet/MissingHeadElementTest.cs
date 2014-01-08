@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Concordion.Integration;
+using Concordion.Spec.Support;
 
 namespace Concordion.Spec.Concordion.Command.Results.Stylesheet
 {

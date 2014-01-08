@@ -5,6 +5,7 @@ using System.Text;
 using Concordion.Internal;
 using System.Text.RegularExpressions;
 using Concordion.Integration;
+using Concordion.Spec.Support;
 
 namespace Concordion.Spec.Concordion.Command.AssertEquals.Whitespace
 {

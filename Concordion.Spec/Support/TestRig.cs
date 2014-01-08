@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Concordion.Api;
 using Concordion.Api.Extension;
 using Concordion.Internal;
 using Concordion.Internal.Extension;
-using Concordion.Internal.Runner;
 
-namespace Concordion.Spec
+namespace Concordion.Spec.Support
 {
     public class TestRig
     {
@@ -42,14 +40,14 @@ namespace Concordion.Spec
 
         public TestRig()
         {
-            EvaluatorFactory = new SimpleEvaluatorFactory();
-            Source = new StubSource();
-            Configuration = new SpecificationConfig();
+            this.EvaluatorFactory = new SimpleEvaluatorFactory();
+            this.Source = new StubSource();
+            this.Configuration = new SpecificationConfig();
         }
 
         public TestRig WithFixture(object fixture)
         {
-            Fixture = fixture;
+            this.Fixture = fixture;
             return this;
         }
 
@@ -59,28 +57,28 @@ namespace Concordion.Spec
             this.Target = new StubTarget();
 
             var concordionBuilder = new ConcordionBuilder()
-                .WithEvaluatorFactory(EvaluatorFactory)
-                .WithSource(Source)
-                .WithTarget(Target)
+                .WithEvaluatorFactory(this.EvaluatorFactory)
+                .WithSource(this.Source)
+                .WithTarget(this.Target)
                 .WithAssertEqualsListener(eventRecorder)
                 .WithExceptionListener(eventRecorder);
 
-            if (Fixture != null)
+            if (this.Fixture != null)
             {
-                new ExtensionLoader(Configuration).AddExtensions(Fixture, concordionBuilder);
+                new ExtensionLoader(this.Configuration).AddExtensions(this.Fixture, concordionBuilder);
             }
             
-            if (Extension != null)
+            if (this.Extension != null)
             {
-                Extension.AddTo(concordionBuilder);
+                this.Extension.AddTo(concordionBuilder);
             }
 
             var concordion = concordionBuilder.Build();
 
             try
             {
-                IResultSummary resultSummary = concordion.Process(resource, Fixture);
-                string xml = Target.GetWrittenString(resource);
+                IResultSummary resultSummary = concordion.Process(resource, this.Fixture);
+                string xml = this.Target.GetWrittenString(resource);
                 return new ProcessingResult(resultSummary, eventRecorder, xml);
             }
             catch (Exception e)
@@ -92,13 +90,13 @@ namespace Concordion.Spec
         public ProcessingResult Process(string html)
         {
             Resource resource = new Resource("/testrig");
-            WithResource(resource, html);
-            return Process(resource);
+            this.WithResource(resource, html);
+            return this.Process(resource);
         }
 
         public TestRig WithResource(Resource resource, string html)
         {
-            Source.AddResource(resource, html);
+            this.Source.AddResource(resource, html);
             return this;
         }
 
@@ -110,13 +108,13 @@ namespace Concordion.Spec
 
         public ProcessingResult ProcessFragment(string fragment)
         {
-            return Process(WrapFragment(fragment));
+            return this.Process(this.WrapFragment(fragment));
         }
 
         private string WrapFragment(string fragment)
         {
             var wrappedFragment = "<body><fragment>" + fragment + "</fragment></body>";
-            return WrapWithNamespaceDeclaration(wrappedFragment);
+            return this.WrapWithNamespaceDeclaration(wrappedFragment);
         }
 
         private string WrapWithNamespaceDeclaration(string fragment)
@@ -129,7 +127,7 @@ namespace Concordion.Spec
 
         public bool HasCopiedResource(Resource resource)
         {
-            return Target.HasCopiedResource(resource);
+            return this.Target.HasCopiedResource(resource);
         }
 
         public TestRig WithExtension(IConcordionExtension extension)

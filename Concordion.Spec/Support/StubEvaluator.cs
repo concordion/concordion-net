@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Concordion.Api;
 
-namespace Concordion.Spec
+namespace Concordion.Spec.Support
 {
     public class StubEvaluator : IEvaluator, IEvaluatorFactory
     {
@@ -22,11 +21,11 @@ namespace Concordion.Spec
 
         public object Evaluate(string expression) 
         {
-            if (evaluationResult is Exception) 
+            if (this.evaluationResult is Exception) 
             {
-                throw (Exception) evaluationResult;
+                throw (Exception) this.evaluationResult;
             }
-            return evaluationResult;
+            return this.evaluationResult;
         }
 
         public object GetVariable(string variableName)

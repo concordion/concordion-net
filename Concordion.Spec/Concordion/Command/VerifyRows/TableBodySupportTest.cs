@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Concordion.Integration;
 using System.Xml.Linq;
+using Concordion.Spec.Support;
 
 namespace Concordion.Spec.Concordion.Command.VerifyRows
 {

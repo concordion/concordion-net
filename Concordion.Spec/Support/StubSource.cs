@@ -6,7 +6,7 @@ using Concordion.Api;
 using Concordion.Internal.Util;
 using System.IO;
 
-namespace Concordion.Spec
+namespace Concordion.Spec.Support
 {
     class StubSource : ISource
     {
@@ -14,19 +14,19 @@ namespace Concordion.Spec
 
         public void AddResource(string resourceName, string content) 
         {
-            AddResource(new Resource(resourceName), content);
+            this.AddResource(new Resource(resourceName), content);
         }
 
         public void AddResource(Resource resource, string content) 
         {
-            if (!resources.ContainsKey(resource))
+            if (!this.resources.ContainsKey(resource))
             {
-                resources.Add(resource, content);
+                this.resources.Add(resource, content);
             }
             else
             {
-                resources.Remove(resource);
-                resources.Add(resource, content);
+                this.resources.Remove(resource);
+                this.resources.Add(resource, content);
             }
         }
 
@@ -34,19 +34,19 @@ namespace Concordion.Spec
 
         public System.IO.Stream CreateInputStream(Resource resource)
         {
-            Check.IsTrue(CanFind(resource), "No such resource exists in simulator: " + resource.Path);
-            return new MemoryStream(UTF8Encoding.UTF8.GetBytes(resources[resource]));
+            Check.IsTrue(this.CanFind(resource), "No such resource exists in simulator: " + resource.Path);
+            return new MemoryStream(UTF8Encoding.UTF8.GetBytes(this.resources[resource]));
         }
 
         public TextReader CreateReader(Resource resource)
         {
-            Check.IsTrue(CanFind(resource), "No such resource exists in simulator: " + resource.Path);
-            return new StreamReader(new MemoryStream(UTF8Encoding.UTF8.GetBytes(resources[resource])));
+            Check.IsTrue(this.CanFind(resource), "No such resource exists in simulator: " + resource.Path);
+            return new StreamReader(new MemoryStream(UTF8Encoding.UTF8.GetBytes(this.resources[resource])));
         }
 
         public bool CanFind(Resource resource)
         {
-            return resources.ContainsKey(resource);
+            return this.resources.ContainsKey(resource);
         }
 
         #endregion

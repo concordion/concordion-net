@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Concordion.Api;
+using Concordion.Test.Support;
 using NUnit.Framework;
 using Concordion.Internal.Listener;
 
@@ -26,7 +27,7 @@ namespace Concordion.Test.Listener
             javaScriptLinker.BeforeParsing(new XDocument(html));
 
             var expected = "<head><script type=\"text/javascript\"></script></head>";
-            var actual = head.ToString().Replace("\n", "").Replace("\r", "").Replace("> ", ">").Replace(" <", "<");
+            var actual = new HtmlUtil().RemoveWhitespaceBetweenTags(head.ToString());
             Assert.AreEqual(expected, actual);
         }
     }

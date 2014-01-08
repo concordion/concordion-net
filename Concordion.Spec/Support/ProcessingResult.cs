@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using System.Xml.Linq;
-using System.Text.RegularExpressions;
 using Concordion.Api.Listener;
-using Concordion.Internal.Commands;
 
-namespace Concordion.Spec
+namespace Concordion.Spec.Support
 {
     public class ProcessingResult
     {
@@ -20,7 +18,7 @@ namespace Concordion.Spec
         {
             get
             {
-                return resultSummary.SuccessCount;
+                return this.resultSummary.SuccessCount;
             }
         }
 
@@ -28,7 +26,7 @@ namespace Concordion.Spec
         {
             get
             {
-                return resultSummary.FailureCount;
+                return this.resultSummary.FailureCount;
             }
         }
 
@@ -36,7 +34,7 @@ namespace Concordion.Spec
         {
             get
             {
-                return resultSummary.ExceptionCount;
+                return this.resultSummary.ExceptionCount;
             }
         }
 
@@ -44,7 +42,7 @@ namespace Concordion.Spec
         {
             get
             {
-                return FailureCount + ExceptionCount != 0;
+                return this.FailureCount + this.ExceptionCount != 0;
             }
         }
 
@@ -52,7 +50,7 @@ namespace Concordion.Spec
         {
             get
             {
-                return !HasFailures;
+                return !this.HasFailures;
             }
         }
 
@@ -65,12 +63,12 @@ namespace Concordion.Spec
 
         public string SuccessOrFailureInWords()
         {
-            return HasFailures ? "FAILURE" : "SUCCESS";
+            return this.HasFailures ? "FAILURE" : "SUCCESS";
         }
 
         public XElement GetOutputFragment()
         {
-            foreach (var descendant in GetXDocument().Root.Descendants("fragment"))
+            foreach (var descendant in this.GetXDocument().Root.Descendants("fragment"))
             {
                 return descendant;
             }
@@ -79,7 +77,7 @@ namespace Concordion.Spec
 
         public string GetOutputFragmentXML()
         {
-            var fragment = GetOutputFragment();
+            var fragment = this.GetOutputFragment();
             var xmlFragmentBuilder = new StringBuilder();
             foreach (var child in fragment.Elements())
             {
@@ -92,22 +90,22 @@ namespace Concordion.Spec
 
         public XDocument GetXDocument()
         {
-            return XDocument.Parse(documentXML);
+            return XDocument.Parse(this.documentXML);
         }
 
         public AssertFailureEvent GetLastAssertEqualsFailureEvent()
         {
-            return eventRecorder.GetLast(typeof(AssertFailureEvent)) as AssertFailureEvent;
+            return this.eventRecorder.GetLast(typeof(AssertFailureEvent)) as AssertFailureEvent;
         }
 
         public Element GetRootElement()
         {
-            return new Element(GetXDocument().Root);
+            return new Element(this.GetXDocument().Root);
         }
 
         public bool HasCssDeclaration(string cssFilename)
         {
-            var head = GetRootElement().GetFirstChildElement("head");
+            var head = this.GetRootElement().GetFirstChildElement("head");
             return head.GetChildElements("link").Any(
                 link =>
                     string.Equals("text/css", link.GetAttributeValue("type")) &&
@@ -117,12 +115,12 @@ namespace Concordion.Spec
 
         public bool HasEmbeddedCss(string css)
         {
-            var head = GetRootElement().GetFirstChildElement("head");
+            var head = this.GetRootElement().GetFirstChildElement("head");
             return head.GetChildElements("style").Any(style => style.Text.Contains(css));
         }
 
         public bool HasJavaScriptDeclaration(string cssFilename) {
-            var head = GetRootElement().GetFirstChildElement("head");
+            var head = this.GetRootElement().GetFirstChildElement("head");
             return head.GetChildElements("script").Any(
                 script => 
                     string.Equals("text/javascript", script.GetAttributeValue("type")) && 
@@ -130,7 +128,7 @@ namespace Concordion.Spec
         }
 
         public bool HasEmbeddedJavaScript(string javaScript) {
-            var head = GetRootElement().GetFirstChildElement("head");
+            var head = this.GetRootElement().GetFirstChildElement("head");
             return head.GetChildElements("script").Any(
                 script => 
                     string.Equals("text/javascript", (string) script.GetAttributeValue("type")) && 

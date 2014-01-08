@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Concordion.Api.Listener;
-using Concordion.Internal.Commands;
 
-namespace Concordion.Spec
+namespace Concordion.Spec.Support
 {
     public class EventRecorder : IAssertEqualsListener, IExceptionCaughtListener
     {
@@ -19,7 +17,7 @@ namespace Concordion.Spec
         public Object GetLast(Type eventType)
         {
             Object lastMatch = null;
-            foreach (var anEvent in m_Events.Where(eventType.IsInstanceOfType))
+            foreach (var anEvent in this.m_Events.Where(eventType.IsInstanceOfType))
             {
                 lastMatch = anEvent;
             }
