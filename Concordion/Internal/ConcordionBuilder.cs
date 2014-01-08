@@ -22,7 +22,6 @@ using Concordion.Internal.Commands;
 using Concordion.Api;
 using Concordion.Internal.Listener;
 using Concordion.Internal.Util;
-using Concordion.Internal.Renderer;
 using System.IO;
 using Concordion.Internal.Runner;
 

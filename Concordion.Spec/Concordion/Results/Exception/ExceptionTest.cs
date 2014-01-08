@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api.Listener;
-using Concordion.Internal.Renderer;
+using Concordion.Internal.Listener;
 using System.Xml.Linq;
 using Concordion.Spec.Support;
 using System.Diagnostics;

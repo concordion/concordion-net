@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Concordion.Api.Listener;
-using Concordion.Internal.Renderer;
 using Concordion.Internal.Commands;
 using Gallio.Framework;
 

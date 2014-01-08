@@ -1,4 +1,4 @@
-﻿// Copyright 2009 Jeffrey Cameron
+// Copyright 2009 Jeffrey Cameron
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,16 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Concordion.Api;
+using System.Xml.Linq;
 using Concordion.Api.Listener;
 using Concordion.Internal.Util;
-using System.Xml.Linq;
 
-namespace Concordion.Internal.Renderer
+namespace Concordion.Internal.Listener
 {
     public class StylesheetEmbedder : IDocumentParsingListener
     {
@@ -39,7 +34,7 @@ namespace Concordion.Internal.Renderer
 
         public StylesheetEmbedder(string stylesheetContent)
         {
-            StylesheetContent = stylesheetContent;
+            this.StylesheetContent = stylesheetContent;
         }
 
         #endregion
@@ -52,7 +47,7 @@ namespace Concordion.Internal.Renderer
             XElement head = html.Element("head");
             Check.NotNull(head, "<head> section is missing from document");
             XElement style = new XElement("style");
-            style.SetValue(StylesheetContent);
+            style.SetValue(this.StylesheetContent);
             head.AddFirst(style);
         } 
 

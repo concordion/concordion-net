@@ -1,4 +1,4 @@
-﻿// Copyright 2009 Jeffrey Cameron
+// Copyright 2009 Jeffrey Cameron
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 using Concordion.Api.Listener;
 using Concordion.Internal.Util;
 
-namespace Concordion.Internal.Renderer
+namespace Concordion.Internal.Listener
 {
     public class DocumentStructureImprover : IDocumentParsingListener
     {
@@ -33,7 +30,7 @@ namespace Concordion.Internal.Renderer
 
         private void CopyNodesBeforeBodyIntoHead(XElement html, XElement head)
         {
-            foreach (XElement child in NodesBeforeBody(html)) 
+            foreach (XElement child in this.NodesBeforeBody(html)) 
             {
                 child.Remove();
                 head.Add(child);
@@ -46,7 +43,7 @@ namespace Concordion.Internal.Renderer
 
             foreach (XElement child in html.Elements())
             {
-                if (isBodySection(child))
+                if (this.isBodySection(child))
                 {
                     break;
                 }
@@ -71,10 +68,10 @@ namespace Concordion.Internal.Renderer
             Check.IsTrue("html".Equals(html.Name.LocalName),
                     "Only <html> documents are supported (<" + html.Name.LocalName + "> is not)");
 
-            if (!HasHeadSection(html))
+            if (!this.HasHeadSection(html))
             {
                 XElement head = new XElement("head");
-                CopyNodesBeforeBodyIntoHead(html, head);
+                this.CopyNodesBeforeBodyIntoHead(html, head);
                 html.AddFirst(head);
             }
         }

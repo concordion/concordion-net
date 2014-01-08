@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Concordion.Api;
 using Concordion.Api.Listener;
 
-namespace Concordion.Internal.Renderer
+namespace Concordion.Internal.Listener
 {
     class AssertResultRenderer : IAssertEqualsListener, IAssertTrueListener, IAssertFalseListener
     {
