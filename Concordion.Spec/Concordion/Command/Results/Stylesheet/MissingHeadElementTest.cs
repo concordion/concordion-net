@@ -16,24 +16,32 @@ namespace Concordion.Spec.Concordion.Command.Results.Stylesheet
                                     .Process(html)
                                     .GetXDocument()
                                     .Root;
-            removeIrrelevantElements(rootElement);
+            RemoveIrrelevantElements(rootElement);
             return rootElement.ToString(SaveOptions.DisableFormatting);
         }
 
-        private void removeIrrelevantElements(XElement rootElement)
+        private void RemoveIrrelevantElements(XElement rootElement)
         {
-            removeIrrelevantStylesheet(rootElement);
-            removeIrrelevantFooter(rootElement);
+            RemoveIrrelevantStylesheet(rootElement);
+            RemoveIrrelevantMetadata(rootElement);
+            RemoveIrrelevantFooter(rootElement);
         }
 
-        private void removeIrrelevantStylesheet(XElement rootElement)
+        private void RemoveIrrelevantStylesheet(XElement rootElement)
         {
             var head = rootElement.Element("head");
             var style = head.Element("style");
             style.Remove();
         }
 
-        private void removeIrrelevantFooter(XElement rootElement)
+        private void RemoveIrrelevantMetadata(XElement rootElement)
+        {
+            var head = rootElement.Element("head");
+            var meta = head.Element("meta");
+            meta.Remove();
+        }
+
+        private void RemoveIrrelevantFooter(XElement rootElement)
         {
             var body = rootElement.Element("body");
             var footer = body.Element("div");

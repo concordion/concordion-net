@@ -201,6 +201,7 @@ namespace Concordion.Internal
             WithVerifyRowsListener(new VerifyRowResultRenderer());
             WithRunListener(new RunResultRenderer());
             WithDocumentParsingListener(new DocumentStructureImprover());
+            WithDocumentParsingListener(new MetadataCreator());
             WithEmbeddedCss(HtmlFramework.EMBEDDED_STYLESHEET_RESOURCE);
         }
     

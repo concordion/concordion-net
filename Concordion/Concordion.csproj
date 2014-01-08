@@ -184,6 +184,7 @@
     <Compile Include="Internal\Listener\ExceptionRenderer.cs" />
     <Compile Include="Internal\Listener\JavaScriptEmbedder.cs" />
     <Compile Include="Internal\Listener\JavaScriptLinker.cs" />
+    <Compile Include="Internal\Listener\MetadataCreator.cs" />
     <Compile Include="Internal\Listener\PageFooterRenderer.cs" />
     <Compile Include="Internal\Listener\RunResultRenderer.cs" />
     <Compile Include="Internal\Listener\SpecificationRenderer.cs" />
