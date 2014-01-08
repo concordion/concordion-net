@@ -154,18 +154,11 @@
     <Compile Include="Internal\Commands\DefaultExecuteStrategy.cs" />
     <Compile Include="Internal\Commands\EchoCommand.cs" />
     <Compile Include="Internal\Commands\ExecuteCommand.cs" />
-    <Compile Include="Internal\Commands\FailureReportedEventArgs.cs" />
     <Compile Include="Internal\Commands\IExecuteStrategy.cs" />
-    <Compile Include="Internal\Commands\IgnoredReportedEventArgs.cs" />
-    <Compile Include="Internal\Commands\IResultReporter.cs" />
-    <Compile Include="Internal\Commands\IRunReporter.cs" />
     <Compile Include="Internal\Commands\LocalTextDecorator.cs" />
     <Compile Include="Internal\Commands\RunCommand.cs" />
-    <Compile Include="Internal\Commands\RunResultEventArgs.cs" />
     <Compile Include="Internal\Commands\SetCommand.cs" />
     <Compile Include="Internal\Commands\SpecificationCommand.cs" />
-    <Compile Include="Internal\Commands\SpecificationEventArgs.cs" />
-    <Compile Include="Internal\Commands\SuccessReportedEventArgs.cs" />
     <Compile Include="Internal\Commands\TableExecuteStrategy.cs" />
     <Compile Include="Internal\Commands\ExceptionCatchingDecorator.cs" />
     <Compile Include="Internal\Commands\VerifyRowsCommand.cs" />
@@ -194,7 +187,6 @@
     <Compile Include="Internal\OgnlEvaluator.cs" />
     <Compile Include="Internal\ParsingEventArgs.cs" />
     <Compile Include="Internal\ExpectedToPassFixtureState.cs" />
-    <Compile Include="Internal\Renderer\AssertEqualsResultRenderer.cs" />
     <Compile Include="Internal\Renderer\BreadCrumbRenderer.cs" />
     <Compile Include="Internal\Renderer\DocumentStructureImprover.cs" />
     <Compile Include="Internal\Renderer\ExceptionRenderer.cs" />
