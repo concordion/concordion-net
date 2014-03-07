@@ -50,7 +50,7 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals.Whitespace
         {
             // Bit naughty calling internal method normalize() directly 
             return replaceRealWhitespaceCharactersWithNames(
-                    BrowserStyleWhitespaceComparer.Normalize(replaceNamedWhitespaceWithRealWhitespaceCharacters(s)));
+                    new DefaultExpectationChecker().Normalize(replaceNamedWhitespaceWithRealWhitespaceCharacters(s)));
         }
 
         private static string replaceNamedWhitespaceWithRealWhitespaceCharacters(string s) 

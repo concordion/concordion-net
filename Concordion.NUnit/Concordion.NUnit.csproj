@@ -8,8 +8,8 @@
     <ProjectGuid>{FB522DBB-6F64-4834-9C87-029389AA0ABB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Concordion.Integration.NUnit</RootNamespace>
-    <AssemblyName>Concordion.Integration.NUnit</AssemblyName>
+    <RootNamespace>Concordion.NUnit</RootNamespace>
+    <AssemblyName>Concordion.NUnit</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
