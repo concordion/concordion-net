@@ -20,7 +20,7 @@ namespace Concordion.Integration.NUnit.Addin
 
         public Test BuildFrom(Type type)
         {
-            var testSuite = new TestSuite(type);
+            var testSuite = new TestSuite(type.FullName);
             testSuite.Add(new ConcordionTest(type));
             NUnitFramework.ApplyCommonAttributes(type, testSuite);
             return testSuite;

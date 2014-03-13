@@ -26,12 +26,11 @@ namespace Concordion.Integration.NUnit.Addin
         {
             listener.TestStarted(this.TestName);
 
-            Fixture = Reflect.Construct(m_FixtureType);
-
             var source = new EmbeddedResourceSource(m_FixtureType.Assembly);
             var target = new FileTarget(new SpecificationConfig().Load(m_FixtureType).BaseOutputDirectory);
             var concordion = new ConcordionBuilder().WithSource(source).WithTarget(target).Build();
 
+            Fixture = Reflect.Construct(m_FixtureType);
             var concordionResult = concordion.Process(Fixture);
             var testResult = NUnitTestResult(concordionResult);
 

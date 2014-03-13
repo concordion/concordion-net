@@ -1,0 +1,22 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type" />
+    <link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>Using Constructor of Test Class for Initialization</h1>
+    <p> Similar to xUnit, where setup of test is accomplished through a 
+	parameterless constructor. For each execution of the examples within an 
+	active specification this constructor is called.</p>
+    <div class="example">
+      <h3>Example</h3>
+      <p>The test fixture class for this specification contains a parameterless 
+	  constructor, which is <span concordion:assertTrue="ConstructorCallCount == 1">called once</span> 
+	  on <span concordion:execute="ResetCounter()">test execution</span>.</p>
+    </div>
+    <h2>Further Details</h2>
+    <ul>
+      <li><a href="../Whitespace/LineContinuations.html">Line continuations</a></li>
+    </ul>
+  </body>
+</html>
