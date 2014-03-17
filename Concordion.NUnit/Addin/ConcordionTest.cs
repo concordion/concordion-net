@@ -12,19 +12,30 @@ namespace Concordion.Integration.NUnit.Addin
 {
     public class ConcordionTest : Test
     {
-        private Type m_FixtureType;
+        #region Fields
+
+        private readonly Type m_FixtureType;
+
+        private readonly MethodInfo[] m_FixtureSetUpMethods;
+
+        private readonly MethodInfo[] m_FixtureTearDownMethods;
+
+        #endregion
+
+        #region Constructors
 
         public ConcordionTest(Type fixtureType)
-        //    : base(string.Format("Executable Specification: {0}", fixtureType.Name))
-            : base(fixtureType.FullName)
+            : base(string.Format("Executable Specification: {0}", fixtureType.Name))
         {
             this.m_FixtureType = fixtureType;
 
-            this.fixtureSetUpMethods =
+            this.m_FixtureSetUpMethods =
                 Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.FixtureSetUpAttribute, true);
-            this.fixtureTearDownMethods =
+            this.m_FixtureTearDownMethods =
                 Reflect.GetMethodsWithAttribute(fixtureType, NUnitFramework.FixtureTearDownAttribute, true);
         }
+
+        #endregion
 
         #region Overrides of Test
 
@@ -32,47 +43,52 @@ namespace Concordion.Integration.NUnit.Addin
         {
             listener.TestStarted(this.TestName);
 
-            RunSetup();
+            Fixture = Reflect.Construct(m_FixtureType);
+
+            RunFixtureSetUp();
 
             var source = new EmbeddedResourceSource(m_FixtureType.Assembly);
             var target = new FileTarget(new SpecificationConfig().Load(m_FixtureType).BaseOutputDirectory);
             var concordion = new ConcordionBuilder().WithSource(source).WithTarget(target).Build();
 
-            Fixture = Reflect.Construct(m_FixtureType);
             var concordionResult = concordion.Process(Fixture);
             var testResult = NUnitTestResult(concordionResult);
 
-            RunTeardown();
+            RunFixtureTearDown();
 
             listener.TestFinished(testResult);
 
             return testResult;
         }
 
-        private void RunFixtureSetUp()
+        public override string TestType
         {
-            if (setUpMethods != null)
-                foreach (MethodInfo setUpMethod in setUpMethods)
-                    Reflect.InvokeMethod(setUpMethod, setUpMethod.IsStatic ? null : this.Fixture);
+            get { return "ConcordionTest"; }
         }
 
-        private void RunFixtureTearDown(TestResult testResult)
-        {
-            try
-            {
-                if (tearDownMethods != null)
-                {
-                    int index = tearDownMethods.Length;
-                    while (--index >= 0)
-                        Reflect.InvokeMethod(tearDownMethods[index], tearDownMethods[index].IsStatic ? null : this.Fixture);
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is NUnitException)
-                    ex = ex.InnerException;
+        public override sealed object Fixture { get; set; }
 
-                RecordException(ex, testResult, FailureSite.TearDown);
+        #endregion
+
+        #region private methods
+
+        private void RunFixtureSetUp()
+        {
+            if (m_FixtureSetUpMethods != null)
+            {
+                foreach (MethodInfo setUpMethod in m_FixtureSetUpMethods)
+                    Reflect.InvokeMethod(setUpMethod, setUpMethod.IsStatic ? null : Fixture);
+            }
+        }
+
+        private void RunFixtureTearDown()
+        {
+            if (m_FixtureTearDownMethods != null)
+            {
+                foreach (MethodInfo tearDownMethod in m_FixtureTearDownMethods)
+                {
+                    Reflect.InvokeMethod(tearDownMethod, tearDownMethod.IsStatic ? null : this.Fixture);
+                }
             }
         }
 
@@ -95,13 +111,6 @@ namespace Concordion.Integration.NUnit.Addin
             }
             return testResult;
         }
-
-        public override string TestType
-        {
-            get { return "ConcordionTest"; }
-        }
-
-        public override sealed object Fixture { get; set; }
 
         #endregion
     }
