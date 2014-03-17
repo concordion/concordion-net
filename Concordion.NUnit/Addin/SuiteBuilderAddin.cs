@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using NUnit.Core;
 using NUnit.Core.Extensibility;
 
-namespace Concordion.Integration.NUnit.Addin
+namespace Concordion.NUnit.Addin
 {
     [NUnitAddin(Name = "ConcordionNUnitAddin", Description = "Runs Concordion Tests with NUnit", Type = ExtensionType.Core)]
     public class SuiteBuilderAddin : ISuiteBuilder, IAddin
