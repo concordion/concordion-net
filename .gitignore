@@ -1,5 +1,6 @@
 bin
 obj
 *.suo
+*.user
 *.VisualState.xml
 TestResult.xml

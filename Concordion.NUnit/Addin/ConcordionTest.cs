@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Concordion.Internal;
 using NUnit.Core;
 using Concordion.Api;
 
-namespace Concordion.Integration.NUnit.Addin
+namespace Concordion.NUnit.Addin
 {
     public class ConcordionTest : Test
     {
@@ -24,14 +21,13 @@ namespace Concordion.Integration.NUnit.Addin
 
         public override TestResult Run(EventListener listener, ITestFilter filter)
         {
-            listener.TestStarted(this.TestName);
-
-            Fixture = Reflect.Construct(m_FixtureType);
+            listener.TestStarted(TestName);
 
             var source = new EmbeddedResourceSource(m_FixtureType.Assembly);
             var target = new FileTarget(new SpecificationConfig().Load(m_FixtureType).BaseOutputDirectory);
             var concordion = new ConcordionBuilder().WithSource(source).WithTarget(target).Build();
 
+            Fixture = Reflect.Construct(m_FixtureType);
             var concordionResult = concordion.Process(Fixture);
             var testResult = NUnitTestResult(concordionResult);
 
