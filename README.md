@@ -14,7 +14,7 @@ To get started, check out <http://www.concordion.org/dotnet/>!
 
 Keep track of development and community news.
 
-- Read and subscribe to [the Concordion user group](https://groups.yahoo.com/neo/groups/concordion-dev/conversations/topics).
+- Read and subscribe to [the Concordion user group](https://groups.yahoo.com/neo/groups/concordion/conversations/topics).
 - Chat with Concordion.NET fellows on [the Concordion.NET user group](https://groups.google.com/forum/#!forum/concordion-for-net).
 - Share your ideas on [the developer group](https://groups.yahoo.com/neo/groups/concordion-dev/conversations/topics).
 - Implementation help may be found at [Stack Overflow](http://stackoverflow.com/questions/tagged/concordion).
@@ -29,7 +29,7 @@ Have a bug or a feature request? Please first search for existing and closed iss
 2. Create a branch (`git checkout -b my_contribution`)
 3. Commit your changes (`git commit -am "Added cool stuff"`)
 4. Push to the branch (`git push origin my_contribution`)
-5. Open a [Pull Request][1]
+5. Open a [Pull Request](https://github.com/x97mdr/concordion-net/pulls)
 6. Enjoy a refreshing Diet Coke and wait
 
 ## License
