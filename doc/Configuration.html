@@ -6,7 +6,8 @@
   </head>
   <body>
     <div class="page">
-      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo"
+      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo"
+
             src="images/opensource-110x95.png" alt="Open source (Apache 2.0 license)">
         </a> <a href="index.html"> <img src="images/front-page-banner.png" alt="Concordion is a simple, but powerful, agile acceptance testing tool.">
         </a> </div>
@@ -23,21 +24,21 @@
       </div>
       <!-- menuBar  -->
       <div class="content">
-        <h1>Configuring Concordion-NET</h1>
+        <h1>Configuring Concordion.NET</h1>
         <p>In contrast to the Java version of Concordion, where configuration is
-          done via system properties, Concordion-NET uses two types of
+          done via system properties, Concordion.NET uses two types of
           configuration files to define basic parameters for the execution of
-          Concordion-NET fixtures.</p>
+          Concordion.NET fixtures.</p>
         <ol>
         </ol>
         <h2>1. Concordion.config</h2>
         <ol>
         </ol>
         This first configuration file contains setting for the test runners to
-        be used. The default test runner of Concordion-NET is the RunTestRunner.
+        be used. The default test runner of Concordion.NET is the RunTestRunner.
         An example configuration is shown below. The
         config file has to be located in the same directory as the
-        Concordion.dll in order to be found by the Concordion-NET framework.<br>
+        Concordion.dll in order to be found by the Concordion.NET framework.<br>
         <h3>Runners</h3>
         <p>Runners are used to call and run one specification from another
           specification. Another specification may be in a different testing
@@ -63,14 +64,14 @@
 &lt;/Concordion&gt;</pre>
         <h2>2. Spec-Project specific configuration</h2>
         <p>The second configuration file is specific for each project containing
-          Concordion-NET documents and fixtures. This configuration file has the
+          Concordion.NET documents and fixtures. This configuration file has the
           same file name as the DLL file, but the file extension ".dll" is
           replaced by ".config". The &lt;spec&gt;.config file has to be located in the same
-          directory as your &lt;spec&gt;.dll to be loaded by Concordion-NET.</p>
+          directory as your &lt;spec&gt;.dll to be loaded by Concordion.NET.</p>
         <h3>BaseOutputDirectory</h3>
-        <p>The BaseOutputDirectory element tells Concordion-NET where to place
+        <p>The BaseOutputDirectory element tells Concordion.NET where to place
           the resulting Concordion test reports. If this element is
-          not specified then Concordion-NET places the output in the directory
+          not specified then Concordion.NET places the output in the directory
           defined by the users TEMP environment variable. </p>
         <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;Specification&gt;

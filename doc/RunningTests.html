@@ -6,8 +6,10 @@
   </head>
   <body>
     <div class="page">
-      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo" src="images/opensource-110x95.png"
-            alt="Open source (Apache 2.0 license)"> </a> <a href="index.html"> <img src="images/front-page-banner.png"
+      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo" src="images/opensource-110x95.png"
+
+            alt="Open source (Apache 2.0 license)"> </a> <a href="index.html"> <img src="images/front-page-banner.png"
+
             alt="Concordion is a simple, but powerful, agile acceptance testing tool."> </a> </div>
       <!-- header -->
       <div class="menuBar">
@@ -22,24 +24,24 @@
       </div>
       <!-- menuBar  -->
       <div class="content">
-        <h1>Run Concordion-NET Tests with NUnit</h1>
-        <p>Similar to the <a href="http://concordion.org/">Java version</a>, Concordion-NET integrates with one of the
-          most popular testing frameworks.&nbsp;Concordion-NET provides an NUnit-Addin that allows executing <a href="index.html">active
+        <h1>Run Concordion.NET Tests with NUnit</h1>
+        <p>Similar to the <a href="http://concordion.org/">Java version</a>, Concordion.NET integrates with one of the
+          most popular testing frameworks. Concordion.NET provides an NUnit-Addin that allows executing <a href="index.html">active
             specifications</a> with any NUnit environment that supports NUnit-Addins.</p>
-        <p>Please note that at the time of writing the <a href="http://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6.2">NUnit
-            Test Adapter for Visual Studio</a> needs an <a href="https://github.com/nunit/nunit-vs-adapter/issues/9">update
+        <p>Please note that at the time of writing the <a class="externalLink" href="http://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6.2">NUnit
+            Test Adapter for Visual Studio</a> needs an <a class="externalLink" href="https://github.com/nunit/nunit-vs-adapter/issues/9">update
             to fully support addins</a>. Nevertheless, the Concordion-NUnit-Addin works fine with the standalone NUnit
-          runner. Thus, we are describing here how to run Concordion-NET tests with the standard NUnit GUI runner.</p>
+          runner. Thus, we are describing here how to run Concordion.NET tests with the standard NUnit GUI runner.</p>
         <ul>
         </ul>
         <ol>
-          <li>First download and <a href="http://www.nunit.org/index.php?p=installation&amp;r=2.6.3">install NUnit</a>.</li>
+          <li>First download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&amp;r=2.6.3">install NUnit</a>.</li>
           <li>If you have not already done, <a href="Download.html">download
-              Concordion-NET</a>.</li>
+              Concordion.NET</a>.</li>
           <li>Take the Concordion.NUnit.dll and copy it to the addin directory of our NUnit installation
             (&lt;NUnit-installation-path&gt;/bin/addins). Please, make sure to use the latest version of this DLL, when
-            you update Concordion-NET.</li>
-          <li>Make sure that the follwing DLLs are <a href="http://msdn.microsoft.com/en-us/library/wkze6zky%28VS.80%29.aspx">referenced
+            you update Concordion.NET.</li>
+          <li>Make sure that the follwing DLLs are <a class="externalLink" href="http://msdn.microsoft.com/en-us/library/wkze6zky%28VS.80%29.aspx">referenced
               in your project</a>. You find the Concordion.dll and the necessary OGNL.dll in the package you have
             downloaded in step 2. The nunit.framework.dll is part of the NUnit installation from step 1. </li>
           <ul>
@@ -48,26 +50,26 @@
             <li><span style="font-weight: bold;">OGNL.dll</span></li>
           </ul>
           <li>Add the attribute "[assembly: RequiredAddin("ConcordionNUnitAddin")]" to the AssemblyInfo.cs of your
-            project. This indicates NUnit that the <a href="http://www.nunit.org/index.php?p=requiredAddin&amp;r=2.6.3">Concordion-NUnit-Addin
-              is required</a> to run your Concordion-NET tests.</li>
+            project. This indicates NUnit that the <a class="externalLink" href="http://www.nunit.org/index.php?p=requiredAddin&amp;r=2.6.3">Concordion-NUnit-Addin
+              is required</a> to run your Concordion.NET tests.</li>
 			<li>Make sure that you use .NET framework 4.0 or higher as target framework version in your Spec project that
-            contains your Concordion-NET fixtures.</li>
+            contains your Concordion.NET fixtures.</li>
           <li>Make sure that all your active specifications have the property 
 		  &quot;Build Action&quot; set to &quot;Embedded Resource&quot; in our Visual Studio 
 		  project.</li>
-          <li>Build your <a href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-3.html">project
+          <li>Build your <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-3.html">project
               containing your executable specifications</a>.</li>
-          <li>Finally, execute your Concordion-NET tests like any "usual" <a href="http://www.nunit.org/index.php?p=runningTests&amp;r=2.6.3">NUnit
+          <li>Finally, execute your Concordion.NET tests like any "usual" <a class="externalLink" href="http://www.nunit.org/index.php?p=runningTests&amp;r=2.6.3">NUnit
               tests with the runner of your choice</a>.</li>
         </ol>
         <p>You will see the typical green bar, when your tests pass. :-)</p>
         <p> <img alt="TestResult" src="images/NunitResult.jpg"> </p>
         <p>You can find the resulting report pages in the output directory that can be specified in 
 		<a href="Configuration.html">configuration
-            files</a> of Concordion-NET. By default Concordion-NET places them into the temp directory (on Windows defined by the
+            files</a> of Concordion.NET. By default Concordion.NET places them into the temp directory (on Windows defined by the
           environment variable %Temp%, which by default points to
           C:\Users\&lt;your-windows-user&gt;\AppData\Local\Temp).</p>
-        <p>If you want to debug your Concordion-NET tests, you can do this in the same way as <a href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
+        <p>If you want to debug your Concordion.NET tests, you can do this in the same way as <a class="externalLink" href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
             NUnit tests</a>.</p>
       </div>
       <!-- content --> </div>
