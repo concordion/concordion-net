@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Concordion.Api;
 
 namespace Concordion.Internal
@@ -40,15 +41,7 @@ namespace Concordion.Internal
 
             //Todo:in Config File aufnehemn
             //Add Test und Fixture -> Case Sensitive 
-            string[] suffixStringstoReplace = { "Test", "Fixture" };
-
-            foreach (var testSuffix in suffixStringstoReplace)
-            {
-                if (fixtureName.EndsWith(testSuffix))
-                {
-                    fixtureName = fixtureName.Replace(testSuffix, "");
-                }
-            }
+            fixtureName = Regex.Replace(fixtureName, "(Fixture|Test)$", "");
             //Suffix from Concordion.Specification.config
             var path = fixtureName + "." + m_SpecificationSuffix;
             return new Resource(path);
