@@ -39,7 +39,6 @@ namespace Concordion.Internal
             var fixtureName = fixture.GetType().ToString();
             fixtureName = fixtureName.Replace(".", "\\");
 
-            //Todo:in Config File aufnehemn
             //Add Test und Fixture -> Case Sensitive 
             fixtureName = Regex.Replace(fixtureName, "(Fixture|Test)$", "");
             //Suffix from Concordion.Specification.config
