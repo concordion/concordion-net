@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Concordion.Internal;
 using NUnit.Core;
 using Concordion.Api;
 
-namespace Concordion.Integration.NUnit.Addin
+namespace Concordion.NUnit.Addin
 {
     public class ConcordionTest : Test
     {
