@@ -1,11 +1,11 @@
 # [Concordion.NET](http://www.concordion.org/dotnet/)
 
 Concordion is an acceptance testing framework that allows users to place their specifications in HTML file. These files contain references to fixtures in test code that are executed by Concordion.  This project is a faithful port of Concordion to .NET to allow it to work with .NET projects
-To get started, check out <http://www.concordion.org/dotnet/>!
+To get started, check out <http://www.concordion.org/dotnet/>
 
 ## Quick start
 
-- [Download the latest release](https://github.com/x97mdr/concordion-net/releases/)
+- [Download the latest release](https://github.com/concordion/concordion-net/releases/)
 - [Read the Tutorial](http://www.concordion.org/dotnet/GettingStarted.html)
 - Write and [Run](http://www.concordion.org/dotnet/RunningTests.html) your own active specifications :-)
 
@@ -20,7 +20,7 @@ Keep track of development and community news.
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/x97mdr/concordion-net/issues/new).
+Have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/concordion/concordion-net/issues/new).
 
 ## Contributing
 
@@ -28,7 +28,7 @@ Have a bug or a feature request? Please first search for existing and closed iss
 2. Create a branch (`git checkout -b my_contribution`)
 3. Commit your changes (`git commit -am "Added cool stuff"`)
 4. Push to the branch (`git push origin my_contribution`)
-5. Open a [Pull Request](https://github.com/x97mdr/concordion-net/pulls)
+5. Open a [Pull Request](https://github.com/concordion/concordion-net/pulls)
 6. Enjoy a refreshing Diet Coke and wait
 
 ## Project History
@@ -40,10 +40,10 @@ History prior to February 2013 is in the [Google Code repository](https://code.g
 Copyright 2010 Jeffrey Cameron
 
    Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
+   you may not use these files except in compliance with the License.
    You may obtain a copy of the License at
-
-       <http://www.apache.org/licenses/LICENSE-2.0>
+   
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
