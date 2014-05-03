@@ -31,6 +31,10 @@ Have a bug or a feature request? Please first search for existing and closed iss
 5. Open a [Pull Request](https://github.com/x97mdr/concordion-net/pulls)
 6. Enjoy a refreshing Diet Coke and wait
 
+## Project History
+
+History prior to February 2013 is in the [Google Code repository](https://code.google.com/p/concordion-net/).
+
 ## License
 
 Copyright 2010 Jeffrey Cameron
