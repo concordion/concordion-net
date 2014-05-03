@@ -4,19 +4,17 @@
     <link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Using Constructor of Test Class for Initialization</h1>
-    <p> Similar to xUnit, where setup of test is accomplished through a 
-	parameterless constructor. For each execution of the examples within an 
-	active specification this constructor is called.</p>
+    <h1>Using Constructor of Fixture Class for Initialization</h1>
+    <p> Similar to <a href="http://xunit.codeplex.com/">xUnit.NET</a>, where setup of test is accomplished through a 
+	parameterless constructor, constructors of fixture classes can be used with 
+	Concordion-NET to setup execution of active specifications. Before the execution of 
+	all examples within an 
+	active specification the constructor without parameters is called.</p>
     <div class="example">
       <h3>Example</h3>
-      <p>The test fixture class for this specification contains a parameterless 
+      <p>The fixture class for this specification contains a parameterless 
 	  constructor, which is <span concordion:assertTrue="ConstructorCallCount == 1">called once</span> 
 	  on <span concordion:execute="ResetCounter()">test execution</span>.</p>
     </div>
-    <h2>Further Details</h2>
-    <ul>
-      <li><a href="../Whitespace/LineContinuations.html">Line continuations</a></li>
-    </ul>
   </body>
 </html>
