@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <link href="css/default.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="page">
+      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo"
+
+            src="images/opensource-110x95.png" alt="Open source (Apache 2.0 license)">
+        </a> <a href="index.html"> <img src="images/front-page-banner.png" alt="Concordion is a simple, but powerful, agile acceptance testing tool.">
+        </a> </div>
+      <!-- header -->
+      <div class="menuBar">
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="GettingStarted.html">Getting Started</a></li>
+          <li><a href="RunningTests.html">Running Tests</a></li>
+          <li><a href="AdvancedFeatures.html">Advanced Features</a></li>
+          <li class="selectedTab"><a href="Configuration.html">Configuration</a></li>
+          <li><a href="Download.html">Download</a></li>
+        </ul>
+      </div>
+      <!-- menuBar  -->
+      <div class="content">
+        <h1>Configuring Concordion.NET</h1>
+        <p>In contrast to the Java version of Concordion, where configuration is
+          done via system properties, Concordion.NET uses two types of
+          configuration files to define basic parameters for the execution of
+          Concordion.NET fixtures.</p>
+        <ol>
+        </ol>
+        <h2>1. Concordion.config</h2>
+        <ol>
+        </ol>
+        This first configuration file contains setting for the test runners to
+        be used. The default test runner of Concordion.NET is the RunTestRunner.
+        An example configuration is shown below. The
+        config file has to be located in the same directory as the
+        Concordion.dll in order to be found by the Concordion.NET framework.<br>
+        <h3>Runners</h3>
+        <p>Runners are used to call and run one specification from another
+          specification. Another specification may be in a different testing
+          suite (like FIT, FitNesse, Cucumber, etc.) </p>
+        <h4>Runner</h4>
+        <p>Each runner element has two attributes that must be present to be
+          recognized properly. They are "alias" and "type". The alias is the 
+		name of the runner used in the concordion:run statement. The type is
+          the Assembly-Qualified Name of the type that you will associate with
+          the alias and will be used to run the called specification. See the
+          specification for Run for more details. </p>
+        <br>
+        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Concordion&gt;
+  &lt;Runners&gt;
+    &lt;Runner
+    	alias="runtestrunner"
+    	type="Concordion.Spec.Concordion.Command.Run.RunTestRunner,
+  		Concordion.Spec, Version=1.0.0.0,
+  		Culture=neutral,
+ 	 	PublicKeyToken=null" /&gt;
+  &lt;/Runners&gt;
+&lt;/Concordion&gt;</pre>
+        <h2>2. Spec-Project specific configuration</h2>
+        <p>The second configuration file is specific for each project containing
+          Concordion.NET documents and fixtures. This configuration file has the
+          same file name as the DLL file, but the file extension ".dll" is
+          replaced by ".config". The &lt;spec&gt;.config file has to be located in the same
+          directory as your &lt;spec&gt;.dll to be loaded by Concordion.NET.</p>
+        <h3>BaseOutputDirectory</h3>
+        <p>The BaseOutputDirectory element tells Concordion.NET where to place
+          the resulting Concordion test reports. If this element is
+          not specified then Concordion.NET places the output in the directory
+          defined by the users TEMP environment variable. </p>
+        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Specification&gt;
+  &lt;BaseOutputDirectory path="C:\Dev\concordion-net\Results" /&gt;
+&lt;/Specification&gt;</pre>
+        <ul>
+        </ul>
+      </div>
+      <!-- content --> </div>
+    <!-- page -->
+  </body>
+</html>

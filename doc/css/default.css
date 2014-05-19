@@ -1,0 +1,220 @@
+body {
+  background-color: #a5a5a0;
+  margin: 0px;
+}
+* {
+  line-height: 145%;
+}
+h1, h2, h3, h4, .copyright {
+  font-family: Arial, Helvetica, SansSerif;
+}
+div, span, p, li, td, th, h4 {
+  font-family: Arial, Helvetica, SansSerif;
+  font-size: 10pt;  
+}
+code, pre {
+  font-size: 10pt;  
+  
+}
+li {
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+.page {
+  background-color: white;
+  width: 966px;
+  margin: 0 auto;
+  min-height: 690px;
+}
+.content {
+  background-color: #fcfcfa;
+  margin: 0px 0px 0px 0px;
+  padding: 20px 64px 50px 64px;
+}
+.copyright {
+  width: 950px;
+  margin: 0px auto;
+  text-align: right;
+  padding: 8px;
+  background-color: white;
+}
+.copyright, .copyright * {
+  font-size: 9pt;
+  color: #333;
+}
+.header {
+  padding: 0px 64px 0px 64px;
+  background-color: white;
+}
+a img {
+  border: 0px;
+}
+.menuBar {
+  background-color: white;
+  clear: both;
+  padding-top: 10px;
+}
+.menu {
+  border-bottom: 2px solid #e6e6dd;
+  margin: 0;
+  padding-bottom: 24px;
+  padding-left: 64px;
+  clear: both;
+}
+.menu a {
+  background: #f5f5f3;
+  border: 2px solid #e6e6dd;
+  color: black;
+  float: left;
+  font-size: 10pt;
+  font-weight: bold;
+  line-height: 14px;
+  margin-right: 6px;
+  padding: 4px 10px 4px 10px;
+  text-decoration: none;
+}
+.menu ul, .menu li  {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.menu .selectedTab a {
+  background: #fcfcfa !important;
+  border-bottom: 2px solid #fcfcfa !important;
+}
+.open-source-logo {
+  margin-top: 38px;
+  float: right;
+}
+.keyPoint {
+  font-size: 13pt;
+  font-weight: bold;
+  display: block;
+}
+.summary {
+  font-style: italic;
+  font-size: 13pt;
+  margin-left: 40px;
+}
+tt, tt *, pre, code, pre *, code * {
+  font-family: Courier New, Courier, Fixed;
+  font-size: 10pt;
+}
+pre {
+  padding: 8px;
+  margin-left: 40px;
+  margin-right: 0px;
+  background-color: white;
+  
+}
+
+h1 {
+  margin-top: 16px;  
+  font-size: 24pt;
+}
+h2 {
+  margin-top: 32px;
+}
+h3, h3 * {
+  font-size: 12pt;
+}
+h4 {
+  font-size: 10pt;
+}
+
+.memo {
+  padding: 1px 0px 24px 0px;
+}
+.memo p, .memo li, .memo .goodExample, .memo .badExample {
+  width: 600px;
+  margin-left: 40px
+}
+.memo li {
+  margin-bottom: 8px;
+  width: 480px;
+  vertical-align: top;
+}
+.memo h1 {
+  font-size: 17pt;
+  border-bottom : 1px dotted black;
+  padding-bottom: 6px;
+}
+.memo h2 {
+  font-size: 13pt;
+  margin-top: 20px;
+  margin-bottom: 4px;
+  padding-left: 40px;
+}
+.memo h2 + p, .tight-top {
+  margin-top: 2px;
+}
+
+.goodExample {
+  background-color: #d9ffd9;
+  padding: 12px;
+  background-image: url("../image/technique/Good.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+.badExample {
+  background-color: #ffd9d9;
+  padding: 12px;
+  background-image: url("../image/technique/Bad.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+.externalLink {
+  background: url("../image/shared/ExternalLink.png") center right no-repeat;
+  padding-right: 12px;
+}
+.pdfLink {
+  background: url("../image/shared/AcrobatLink.gif") center right no-repeat;
+  padding-right: 18px;
+}
+
+.banner {
+  padding-top: 48px;
+  padding-right: 40px;   
+}
+
+.java .keyword {
+  color: #7f0055;
+  font-weight: bold;
+}
+.java .annotation {
+  color: #646464;
+}
+.java .comment {
+  color: #3f7f5f;
+}
+.java .string {
+  color: #2a00ff;
+}
+
+.breadcrumbs, .breadcrumbs * {
+  font-size: 13pt;   
+}
+
+.quote {
+  float: right;
+  width: 422px;
+  height: 158px;
+  padding: 0px 0px 0px 0px;
+  background: url("../image/quote.png") top center no-repeat;
+}
+.quote * {
+  font-size: 18pt;
+  line-height: 24pt;
+}
+
+pre.java {
+    background-color: #e4eefc;
+}
+pre.html {
+    background-color: #ffffd9;
+    border: 1px solid #ededdf;
+}
+pre.console {
+    background-color: #f0f0f0;
+}
