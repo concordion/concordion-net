@@ -13,9 +13,9 @@ To get started, check out <http://www.concordion.org/dotnet/>
 
 Keep track of development and community news.
 
-- Read and subscribe to [the Concordion user group](https://groups.yahoo.com/neo/groups/concordion/conversations/topics).
+- Read and subscribe to [the Concordion user group](https://groups.google.com/forum/#!forum/concordion).
 - Chat with Concordion.NET fellows on [the Concordion.NET user group](https://groups.google.com/forum/#!forum/concordion-for-net).
-- Share your ideas on [the developer group](https://groups.yahoo.com/neo/groups/concordion-dev/conversations/topics).
+- Share your ideas on [the developer group](https://groups.google.com/forum/#!forum/concordion-dev).
 - Implementation help may be found at [Stack Overflow](https://stackoverflow.com/search?q=concordion).
 
 ## Bugs and feature requests
