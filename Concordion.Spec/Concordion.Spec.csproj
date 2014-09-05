@@ -82,6 +82,7 @@
     <Compile Include="Concordion\Command\AssertEquals\Whitespace\WhitespaceTest.cs" />
     <Compile Include="Concordion\Command\AssertFalse\AssertFalseTest.cs" />
     <Compile Include="Concordion\Command\AssertTrue\AssertTrueTest.cs" />
+    <Compile Include="Concordion\Command\CaseInsensitiveCommandsTest.cs" />
     <Compile Include="Concordion\Command\CommandTest.cs" />
     <Compile Include="Concordion\Command\Echo\DisplayingNullsTest.cs" />
     <Compile Include="Concordion\Command\Echo\EchoTest.cs" />
@@ -136,6 +137,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concordion\Command\CaseInsensitiveCommands.html" />
     <EmbeddedResource Include="Concordion\Integration\Constructor.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
