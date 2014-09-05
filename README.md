@@ -13,10 +13,10 @@ To get started, check out <http://www.concordion.org/dotnet/>
 
 Keep track of development and community news.
 
-- Read and subscribe to [the Concordion user group](https://groups.yahoo.com/neo/groups/concordion/conversations/topics).
+- Read and subscribe to [the Concordion user group](https://groups.google.com/forum/#!forum/concordion).
 - Chat with Concordion.NET fellows on [the Concordion.NET user group](https://groups.google.com/forum/#!forum/concordion-for-net).
-- Share your ideas on [the developer group](https://groups.yahoo.com/neo/groups/concordion-dev/conversations/topics).
-- Implementation help may be found at [Stack Overflow](http://stackoverflow.com/questions/tagged/concordion).
+- Share your ideas on [the developer group](https://groups.google.com/forum/#!forum/concordion-dev).
+- Find help at [Stack Overflow](https://stackoverflow.com/search?q=concordion).
 
 ## Bugs and feature requests
 
@@ -37,7 +37,7 @@ History prior to February 2013 is in the [Google Code repository](https://code.g
 
 ## License
 
-Copyright 2010 Jeffrey Cameron
+Copyright 2010-2014 Jeffrey Cameron
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use these files except in compliance with the License.
