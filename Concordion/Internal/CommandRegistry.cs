@@ -47,7 +47,7 @@ namespace Concordion.Internal
 
         private string MakeKey(string namespaceURI, string commandName)
         {
-            return namespaceURI + " " + commandName;
+            return namespaceURI + " " + commandName.ToLower();
         } 
 
         #endregion
