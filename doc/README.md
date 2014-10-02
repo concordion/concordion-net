@@ -10,3 +10,15 @@ If you are new to Concordion.NET we recommend to start with the  [Getting Starte
 
 ## Publishing Process
 
+The Concordion.NET documentation is maintained together with the specifications, source code, and tests in the repository of Concordion.NET (https://github.com/concordion/concordion-net). All documentation pages are grouped under the `doc` directory and published to the Concordion web page (http://www.concordion.net/dotnet/).
+
+The publishing process is composed of two major steps:
+
+1. Making the Concordion.NET documentation available on its own branch.
+2. Integrating the Concordion.NET documentation into the web pag of Concordion.
+
+### Initial setup
+
+### Update branch
+
+### Publish to Concordion web page
