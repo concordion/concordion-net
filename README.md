@@ -6,8 +6,8 @@ To get started, check out <http://www.concordion.org/dotnet/>
 ## Quick start
 
 - [Download the latest release](https://github.com/concordion/concordion-net/releases/)
-- [Read the Tutorial](http://www.concordion.org/dotnet/GettingStarted.html)
-- Write and [Run](http://www.concordion.org/dotnet/RunningTests.html) your own active specifications :-)
+- [Read the tutorial](http://www.concordion.org/dotnet/GettingStarted.html)
+- [Use your own active specifications](http://www.concordion.org/dotnet/RunningTests.html) :-)
 
 ## Community
 
