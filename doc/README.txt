@@ -10,6 +10,7 @@ Initial Setup
 + split branch
 Please, use the "subtree" command of git to extract this directory, which contains the documentation, into a new branch:
 	$ git subtree split --prefix=doc --branch=gh-pages
+	$ git push origin gh-pages
 
 + pull into web project
 To integrate the new gh-pages branch from Concordion.NET into the Concordion website, we need to clone this repository first and then add the Concordion.NET documentation as subtree.
