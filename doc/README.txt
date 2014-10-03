@@ -1,3 +1,6 @@
+Concordion.NET - Documentation
+==============================
+
 This directory contains the basic documentation of Concordion.NET.
 
 With the help of "git subtree" it is published to Github pages (http://concordion.github.io/concordion-net/) as well as the Concordion homepage (http://concordion.org/dotnet/).
@@ -15,6 +18,7 @@ Please, use the "subtree" command of git to extract this directory, which contai
 + pull into web project
 To integrate the new gh-pages branch from Concordion.NET into the Concordion website, we need to clone this repository first and then add the Concordion.NET documentation as subtree.
 	$ git subtree add --prefix=static-content/dotnet https://github.com/concordion/concordion-net.git gh-pages
+	$ git push origin master
 
 ---
 
