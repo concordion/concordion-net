@@ -15,10 +15,23 @@ The Concordion.NET documentation is maintained together with the specifications,
 The publishing process is composed of two major steps:
 
 1. Making the Concordion.NET documentation available on its own branch.
-2. Integrating the Concordion.NET documentation into the web pag of Concordion.
+2. Integrating the Concordion.NET documentation into the web page of Concordion.
 
 ### Initial setup
 
-### Update branch
+To publish this Concoridon.NET documentation to the Concordion web page, we need to transfer  changes made in the the master branch of this Concordion.NET repository to the [concordion-website repository](https://github.com/concordion/concordion-website). This is accomplished by extracting the `doc` directory from the master into the gh-pages branch and by including this gh-pages branch as the sub-directory static-content/dotnet into the remote repository of concoridon-website. We are using [git-subtree](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.txt) to move changes between repositories. git-subtree can construct synthetic branches from existing commits.
+
+To make this Concordion.NET documentation available on a seperate branch, we use the following git-subtree command:
+```
+$ git subtree split --prefix=doc --branch=gh-pages
+```
+When we use the branch ph-pages, it has the benefit that the documentation is also published on the project page on GitHub Pages: https://concordion.github.io/concordion-net
+
+To integrate this Concoridion.NET documentation into [the web page of Concordion](http://concordion.org/), we use the following git-subtree command:
+```
+$ git subtree add --squash --prefix=static-content/dotnet https://github.com/concordion/concordion-net.git gh-pages
+```
+
+### Update documentation branch
 
 ### Publish to Concordion web page
