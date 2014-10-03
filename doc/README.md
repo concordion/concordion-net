@@ -29,9 +29,21 @@ When we use the branch ph-pages, it has the benefit that the documentation is al
 
 To integrate this Concoridion.NET documentation into [the web page of Concordion](http://concordion.org/), we use the following git-subtree command:
 ```
-$ git subtree add --squash --prefix=static-content/dotnet https://github.com/concordion/concordion-net.git gh-pages
+$ git subtree add --squash --message="initial import of Concordion.NET documenation" --prefix=static-content/dotnet https://github.com/concordion/concordion-net.git gh-pages
+```
+The `--squash` option ensures that only the documenation updates are added to the concordion-website without the entire history from the Concordion.NET repository.
+The `--message` option allows to provide a comment about the updates of the documentation into the git history.
+
+### Publish updates
+
+If you want to publish updates of this Concordion.NET documenation to [Concordion.org](http://www.concordion.org/dotnet/), you can use the pull and push commands of git-subtree.
+
+First, push the changes from the master to the gh-pages branch on the [Concordion.NET repository](https://github.com/concordion/concordion-net):
+```
+$ git subtree push --prefix=doc origin gh-pages
 ```
 
-### Update documentation branch
-
-### Publish to Concordion web page
+Second, pull the ph-pages branch as directory into the [concordion-website repository](https://github.com/concordion/concordion-website):
+```
+$ git subtree pull --message="<update-comment>" --squash --prefix=static-content/dotnet https://github.com/concordion/concordion-net.git gh-pages
+```
