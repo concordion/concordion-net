@@ -132,6 +132,7 @@
     <Compile Include="Internal\Commands\IgnoredReportedEventArgs.cs" />
     <Compile Include="Internal\Commands\IResultReporter.cs" />
     <Compile Include="Internal\Commands\IRunReporter.cs" />
+    <Compile Include="Internal\Commands\ListExecuteStrategy.cs" />
     <Compile Include="Internal\Commands\LocalTextDecorator.cs" />
     <Compile Include="Internal\Commands\MissingRowEventArgs.cs" />
     <Compile Include="Internal\Commands\RunCommand.cs" />
@@ -158,6 +159,8 @@
     <Compile Include="Internal\FileTarget.cs" />
     <Compile Include="Internal\IFixtureState.cs" />
     <Compile Include="Internal\IExpressionValidator.cs" />
+    <Compile Include="Internal\ListEntry.cs" />
+    <Compile Include="Internal\ListSupport.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\UnimplementedFixtureState.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />
