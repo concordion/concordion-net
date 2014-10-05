@@ -95,7 +95,6 @@
     <Compile Include="Concordion\Command\Execute\ExecuteTest.cs" />
     <Compile Include="Concordion\Command\Execute\ExecutingListTest.cs" />
     <Compile Include="Concordion\Command\Execute\ExecutingTablesTest.cs" />
-    <Compile Include="Concordion\Command\Execute\ListExampleTest.cs" />
     <Compile Include="Concordion\Command\Results\Stylesheet\MissingHeadElementTest.cs" />
     <Compile Include="Concordion\Command\Results\Stylesheet\StylesheetTest.cs" />
     <Compile Include="Concordion\Command\Run\RunTest.cs" />
