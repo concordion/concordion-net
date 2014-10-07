@@ -106,6 +106,7 @@
     <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
     <Compile Include="Concordion\ConcordionTest.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
+    <Compile Include="Concordion\Integration\IntegrationTest.cs" />
     <Compile Include="Concordion\Integration\ConstructorTest.cs" />
     <Compile Include="Concordion\Integration\SetupMethodTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />

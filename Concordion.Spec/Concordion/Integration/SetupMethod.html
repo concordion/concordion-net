@@ -4,17 +4,17 @@
     <link href="../../../../concordion.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Using SetUp Attribute to Run Setup Methods befor Test Execution</h1>
+    <h1>Using TestFixtureSetUp Attribute to Run before Test Execution</h1>
     <p> NUnit provides a mechanism to call functions just before each test 
 	execution. This is accomplished with the help of the NUnit
-	<a href="http://www.nunit.org/index.php?p=setup&amp;r=2.6.3">SetUpAttribute</a>.</p>
+	<a href="http://nunit.org/index.php?p=fixtureSetup&amp;r=2.6.3">TestFixtureSetUpAttribute</a>.</p>
 	<p>This mechanism can be used in Concordion.NET as well. All methods marked 
 	with the attribute <em>[TestFixtureSetUp] </em>are executed before the actual processing of 
 	the active specification.</p>
     <div class="example">
       <h3>Example</h3>
       <p>The test fixture class for this specification contains two method with 
-	  the SetUp attribute, which are 
+	  the TestFixtureSetUp attribute, which are 
 	  <span concordion:assertTrue="SetupMethodsCalled()">called before test execution</span>.</p>
     </div>
     <h2>Further Details</h2>
