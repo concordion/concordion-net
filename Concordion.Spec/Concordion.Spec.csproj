@@ -121,8 +121,8 @@
     <Compile Include="Concordion\Results\AssertEquals\Success\HasAttributesTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Success\HasClassAttributeTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Success\SuccessTest.cs" />
-    <Compile Include="Concordion\Results\AssertTrue\Failure\OnFailureTest.cs" />
-    <Compile Include="Concordion\Results\AssertTrue\Success\OnSuccessTest.cs" />
+    <Compile Include="Concordion\Results\AssertTrue\Failure\FailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertTrue\Success\SuccessTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\AbstractBreadcrumbsTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\BreadcrumbsTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\DeterminingBreadcrumbsTest.cs" />
@@ -295,10 +295,10 @@
     <EmbeddedResource Include="Concordion\Results\Breadcrumbs\Wording.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertTrue\Failure\OnFailure.html">
+    <EmbeddedResource Include="Concordion\Results\AssertTrue\Failure\Failure.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertTrue\Success\OnSuccess.html">
+    <EmbeddedResource Include="Concordion\Results\AssertTrue\Success\Success.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Concordion\Results\AssertEquals\Success\EmptySuccess.html" />
