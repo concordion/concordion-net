@@ -72,6 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concordion\Attributes\AttributesTest.cs" />
+    <Compile Include="Concordion\Attributes\ConcordionTestAttributeTest.cs" />
+    <Compile Include="Concordion\Attributes\IgnoreAttributeTest.cs" />
+    <Compile Include="Concordion\Attributes\ExampleIgnoreTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\AssertEqualsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\ExceptionsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NonString\BooleanTest.cs" />
@@ -144,6 +148,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concordion\Attributes\Attributes.html" />
+    <EmbeddedResource Include="Concordion\Attributes\ConcordionTestAttribute.html" />
+    <EmbeddedResource Include="Concordion\Attributes\IgnoreAttribute.html" />
     <EmbeddedResource Include="Concordion\Command\CaseInsensitiveCommands.html" />
     <EmbeddedResource Include="Concordion\Integration\Constructor.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -265,9 +272,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Concordion\Command\Results\Stylesheet\MissingHeadElement.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Annotation\Annotation.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="concordion.css">
