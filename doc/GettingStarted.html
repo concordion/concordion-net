@@ -122,22 +122,22 @@ height="172" width="435"></pre>
 </pre> </li>
           <li>In the same <code>folder</code>, create a file <code>"HelloWorldTest.cs"</code>
             containing:
-            <pre class="java">using Concordion.Integration;
+            <pre class="java">
+using Concordion.Integration;
 
-            namespace Kickstart.Spec.HelloWorld
-            {
-                [ConcordionTest]
-                public class HelloWorldTest
-                {
-                 private readonly Greeter m_HelloWorldGreeter = new Greeter();
+namespace Kickstart.Spec.HelloWorld
+{
+    [ConcordionTest]
+    public class HelloWorldTest
+    {
+        private readonly Greeter m_HelloWorldGreeter = new Greeter();
 
-                 public string GetGreeting()
-                    {
-                        return m_HelloWorldGreeter.GetMessage();
-                    }
-                } 
-            }
-            </pre>
+        public string GetGreeting()
+        {
+            return m_HelloWorldGreeter.GetMessage();
+        }
+    } 
+}</pre>
           </li>
           <li>Now <a href="RunningTests.html">run the HelloWorldTest class
               using NUnit</a>.</li>
