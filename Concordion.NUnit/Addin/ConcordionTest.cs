@@ -89,12 +89,13 @@ namespace Concordion.NUnit.Addin
         {
             var testResult = new TestResult(this);
 
-            if (resultSummary.HasExceptions)
+            if (concordionResult.HasExceptions)
             {
                 testResult.Error(new NUnitException("Exception in Concordion test: please see Concordion test reports"));
-            } else if (resultSummary.HasFailures)
+            }
+            else if (concordionResult.HasFailures)
             {
-                testResult.Failure("Concordion Test Failures: " + resultSummary.FailureCount,
+                testResult.Failure("Concordion Test Failures: " + concordionResult.FailureCount,
                                    "for stack trace, please see Concordion test reports");
             } else
             {

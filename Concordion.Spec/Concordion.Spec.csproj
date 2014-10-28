@@ -199,7 +199,7 @@
     <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertFalse\Success\OnSuccess.html">
+    <EmbeddedResource Include="Concordion\Results\AssertFalse\Success\OnSuccess.html" />
     <EmbeddedResource Include="Concordion\Attributes\Attributes.html" />
     <EmbeddedResource Include="Concordion\Attributes\ConcordionTestAttribute.html" />
     <EmbeddedResource Include="Concordion\Attributes\IgnoreAttribute.html" />
@@ -414,7 +414,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
     <EmbeddedResource Include="Concordion\Command\Execute\ExecutingList.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
