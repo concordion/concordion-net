@@ -155,6 +155,10 @@
     <Compile Include="Internal\Commands\EchoCommand.cs" />
     <Compile Include="Internal\Commands\ExecuteCommand.cs" />
     <Compile Include="Internal\Commands\IExecuteStrategy.cs" />
+    <Compile Include="Internal\Commands\IgnoredReportedEventArgs.cs" />
+    <Compile Include="Internal\Commands\IResultReporter.cs" />
+    <Compile Include="Internal\Commands\IRunReporter.cs" />
+    <Compile Include="Internal\Commands\ListExecuteStrategy.cs" />
     <Compile Include="Internal\Commands\LocalTextDecorator.cs" />
     <Compile Include="Internal\Commands\RunCommand.cs" />
     <Compile Include="Internal\Commands\SetCommand.cs" />
@@ -191,6 +195,8 @@
     <Compile Include="Internal\Listener\StylesheetEmbedder.cs" />
     <Compile Include="Internal\Listener\StylesheetLinker.cs" />
     <Compile Include="Internal\Listener\VerifyRowResultRenderer.cs" />
+    <Compile Include="Internal\ListEntry.cs" />
+    <Compile Include="Internal\ListSupport.cs" />
     <Compile Include="Internal\ObjectFactory.cs" />
     <Compile Include="Internal\UnimplementedFixtureState.cs" />
     <Compile Include="Internal\OgnlEvaluator.cs" />

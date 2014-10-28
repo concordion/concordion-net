@@ -1,0 +1,53 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+    
+    <style>
+    .annotationSummary td, .annotationSummary th {
+      padding: 8px;
+      line-height: 135%;
+    }
+    .annotationName {
+      font-family: Courier New, Courier;
+  	  font-size: 10pt;
+  	  vertical-align: top;
+    }
+    </style>
+    
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>Ignore Attribute: Temporary omitting Tests</h1>
+
+    <p>
+    	To allow you to include Concordion.NET specifications in the build 
+		before they have been fully implemented, you can annotate a fixture 
+		class with the <a href="http://nunit.org/index.php?p=ignore&amp;r=2.6.3">
+		NUnit IgnoreAttribute</a>. When you add the [Ignore] attribute on top of 
+		your Concordion.NET fixture class, NUnit will not run this particular 
+		active specification. Instead, the test will be marked yellow and added 
+		to your test reports. This helps that the test will not be forgotten in 
+		future.</p>
+    
+    <div class="example">        
+    
+        <h3>Example</h3>
+		<p>When the fixture class associated with the [Ignore] attribute is 
+		passed to the NUnit runner</p>
+
+<pre>
+namespace Concordion.Spec.Concordion.Attributes
+{
+  <strong>[Ignore]</strong>
+  [ConcordionTest]
+  public class ExampleIgnoreTest
+  {
+    ...
+  }
+}
+</pre>
+<p concordion:asserttrue="IsExampleTestIgnored()">the test is not run.</p>
+
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+    
+    <style>
+    .annotationSummary td, .annotationSummary th {
+      padding: 8px;
+      line-height: 135%;
+    }
+    .annotationName {
+      font-family: Courier New, Courier;
+  	  font-size: 10pt;
+  	  vertical-align: top;
+    }
+    </style>
+    
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>Attributes associated with Fixture Classes</h1>
+
+    <p>
+    	Concordion.NET does not use inheritance or naming conventions to 
+		identify its test classes. Instead attributes are used for this purpose. 
+		Thus, the developer is free to use inheritance for his own purpose and 
+		use names that convey the intended purpose of the fixture code. The 
+		following attributes can be used with Concordion.NET:</p>
+	<ul>
+		<li><a href="ConcordionTestAttribute.html">[ConcordionTest]</a> 
+		indicates that the associated class is a Concordion.NET test fixture.</li>
+		<li><a href="IgnoreAttribute.html">[Ignore]</a> marks a Concordion.NET 
+		test class to be ignored by NUnit test runners.</li>
+		<li><a href="../Integration/SetupMethod.html">[TestFixtureSetUp]</a> is 
+		used to show that the associated methods are called for initialization 
+		before the execution of the test code.</li>
+	</ul>
+
+
+</body>
+</html>
