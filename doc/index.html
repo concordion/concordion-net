@@ -74,15 +74,47 @@
             real-life system.</p>
           <img alt="Living Documentation" src="image/AnatomyOfAnActiveSpec.jpg"> </div>
         <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
+		Documentation as Specification</h2>
+		  <p>Agile methods help to get the highest possible value from the time 
+		  invested. When investing a lot of effort into automated tests with 
+		  techniques such as Test Driven Development (TDD) the idea arises to 
+		  use tests as documentation. But testing frameworks often prevent 
+		  non-developers from participation. Additionally, tests are often 
+		  strongly related to the technical aspects of the system and are 
+		  difficult to understand by other stakeholders.</p>
+		  <p>With the emergence of Behavior Driven Development (BDD) and 
+		  Specification by Example (SBE) we could use specifications as 
+		  documentation. But specifications are still describing what the system 
+		  should do from a perspective of construction. Additionally, 
+		  specifications often use a structured language as scenarios in the 
+		  form of given-when-then.</p>
+		  <p>What about using Documentation as Specification? The main goal of 
+		  software projects is to address customer needs and to deliver benefits 
+		  to the project stakeholders. User Stories of the form &quot;As&lt;role&gt; I want 
+		  &lt;feature&gt; so that &lt;benefit&gt;&quot; remind us to focus on the benefit. The 
+		  concept of Minimal Marketable Feature (MMF) and Minimum Viable Product 
+		  (MVP) recognize that a single story may not have customer value. Thus, 
+		  we have to change our viewpoint and look at the problem from the 
+		  customer perspective. Documentation such as marketing papers or user 
+		  manuals describe which benefits the software system can bring for the 
+		  customer as well as how the desired benefit can be achieved.</p>
+		  <p>Concordion.NET is based on HTML and can use the expressiveness of 
+		  the web to describe the software product from the customer 
+		  perspective. We can use documentation that shows how to use the 
+		  product as inputs into our development process. BDD in plain English 
+		  with the help of Concordion.NET enables to work outside in: first 
+		  describe the customer benefits, drive your tests with this 
+		  description, use the tests as basis for your implementation.</p>
+		  <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
 		Additional Information</h2>
         <div class="memo">
           <ul>
             <li>Jeffrey Cameron has written a blog on <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-1.html">living
                 in Concordion with .NET</a>. Please note that you can <a href="RunningTests.html">use NUnit to run
                 Concordion.NET tests</a> (instead of Gallio). Thus, you can skip <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-5.html">part
-                5</a> of the blog that relates to Gallio. If you want to debug Concordion.NET tests, please read the
-              blog on <a class="externalLink" href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
-                with NUnit</a> of Robert Koritnik. </li>
+                5</a> of the blog that relates to Gallio. If you want to debug Concordion.NET 
+			tests, you can use the same techniques when <a class="externalLink" href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
+                with NUnit</a>. </li>
             <li>Concordion.NET has been moved from <a class="externalLink" href="https://code.google.com/p/concordion-net/">Google Code</a>
               to <a class="externalLink" href="https://github.com/concordion/concordion-net">GitHub</a>.
           </ul>
