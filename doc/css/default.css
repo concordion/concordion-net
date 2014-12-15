@@ -1,4 +1,4 @@
-body {
+﻿body {
   background-color: #a5a5a0;
   margin: 0px;
 }
@@ -165,7 +165,7 @@ h4 {
   background-position: top right;
 }
 .externalLink {
-  background: url("../images/ExternalLink.png") center right no-repeat;
+  background: url("../image/ExternalLink.png") center right no-repeat;
   padding-right: 12px;
 }
 .pdfLink {
