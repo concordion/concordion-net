@@ -1,0 +1,52 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+    
+    <style>
+    .annotationSummary td, .annotationSummary th {
+      padding: 8px;
+      line-height: 135%;
+    }
+    .annotationName {
+      font-family: Courier New, Courier;
+  	  font-size: 10pt;
+  	  vertical-align: top;
+    }
+    </style>
+    
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h1>ConcordionTest Attribute: Test Fixture Classes</h1>
+	<p>Each Concordion.NET fixture class has to be decorated with the attribute 
+	[ConcordionTest]. This tells the test runner that this class is intended to 
+	be a test. When NUnit discovers a class containing Concordion.NET fixture 
+	code annotated with [ConcordionTest], the Concordion.NUnit addin loads the 
+	related HTML specification document and creates a test instance that is 
+	executed with the help of NUnit.</p>
+
+    <div class="example">        
+    
+        <h3>Example</h3>
+		<p>To run this active specification we need the minimal Concordion.NET 
+		fixture where the class is associated with [ConcordionTest].</p>
+		<p>The test class ConcordionTestAttributeTest.cs looks like this:</p>
+
+<pre>
+namespace Concordion.Spec.Concordion.Attributes
+{
+  <strong>[ConcordionTest]</strong>
+  public class ConcordionTestAttributeTest
+  {
+    public bool HasBeenProcessed()
+    {
+      return true;
+    }
+  }
+}</pre>
+<p>When it is <a href="http://concordion.org/dotnet/RunningTests.html">executed 
+with any NUnit test runner</a>, is <span concordion:asserttrue="HasBeenProcessed()">processed</span> by Concordion.NET.</p>
+
+	</div>
+
+
+</body>
+</html>

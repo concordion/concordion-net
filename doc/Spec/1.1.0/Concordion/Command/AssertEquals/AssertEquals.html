@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="UTF-8"?><html xmlns:concordion="http://www.concordion.org/2007/concordion">
+  <head>
+    <style>* {
+  font-family: Arial;
+}
+body {
+  padding: 32px;  
+}
+pre {
+  padding: 6px 28px 6px 28px;
+  background-color: #E8EEF7;
+}
+pre, pre *, code, kbd {
+  font-family: Courier New, Courier;
+  font-size: 10pt;
+}
+h1, h1 * {
+  font-size: 24pt;	
+}
+p, td, th, li, .breadcrumbs {
+  font-size: 10pt;
+}
+p, li {
+  line-height: 140%;
+}
+table {
+  border-collapse: collapse;
+  empty-cells: show;
+  margin: 8px 0px 8px 0px;
+}
+th, td {
+  border: 1px solid black;
+  padding: 3px;
+}
+td {
+  background-color: white;
+  vertical-align: top;
+}
+th {
+  background-color: #C3D9FF;
+}
+li {
+  margin-top: 6px;
+  margin-bottom: 6px; 
+}
+
+
+.example {
+  padding: 2px 12px 6px 12px;
+  border: 1px solid #C3D9FF;
+  margin: 6px 0px 28px 0px;
+  background-color: #F5F9FD;
+}
+.example h3 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 12pt;
+}
+
+p.success {
+  padding: 2px;
+}
+.success, .success * {
+  background-color: #afa !important;
+}
+.success pre {
+  background-color: #bbffbb;
+}
+.failure, .failure * {
+  background-color: #ffb0b0;
+  padding: 1px;
+}
+.failure .expected {
+  text-decoration: line-through;
+  color: #bb5050;
+}
+.ignored, .ignored * {
+  background-color: #f0f0f0 !important;	
+}
+
+ins {
+  text-decoration: none;	
+}
+
+.exceptionMessage {
+  background-color: #fdd;
+  font-family: Courier New, Courier, Monospace;
+  font-size: 10pt;
+  display: block;
+  font-weight: normal;
+  padding: 4px;
+  text-decoration: none !important;
+}
+.stackTrace, .stackTrace * {
+  font-weight: normal;
+}
+.stackTrace {
+  display: none;
+  padding: 1px 4px 4px 4px;
+  background-color: #fdd;
+  border-top: 1px dotted black;
+}
+.stackTraceExceptionMessage {
+  display: block;
+  font-family: Courier New, Courier, Monospace;
+  font-size: 8pt;
+  white-space: wrap;
+  padding: 1px 0px 1px 0px;
+}
+.stackTraceEntry {
+  white-space: nowrap;
+  font-family: Courier New, Courier, Monospace;
+  display: block;
+  font-size: 8pt;
+  padding: 1px 0px 1px 32px;
+}
+.stackTraceButton {
+  font-size: 8pt;
+  margin: 2px 8px 2px 0px;
+  font-weight: normal;
+  font-family: Arial;
+}
+
+.special {
+  font-style: italic;
+}
+.missing, .missing * {
+  background-color: #ff9999;
+}
+.surplus, .surplus * {
+  background-color: #ff9999;
+}
+.footer {
+  text-align: right;
+  margin-top: 40px;
+  font-size: 8pt;
+  width: 100%;
+  color: #999;
+}
+.footer .testTime {
+  padding: 2px 10px 0px 0px;
+}
+
+.idea {
+  font-size: 9pt;
+  color: #888;
+  font-style: italic;	
+}
+.tight li {
+  margin-top: 1px;
+  margin-bottom: 1px; 
+}
+.commentary {
+  float: right;
+  width: 200px;
+  background-color: #ffffd0;
+  padding:8px;
+  border: 3px solid #eeeeb0;	 
+  margin: 10px 0px 10px 10px;	 
+}
+.commentary, .commentary * {
+  font-size: 8pt;
+}</style>
+    <link href="../../../concordion.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <span class="breadcrumbs">
+      <a href="..\..\Concordion.html">Concordion.NET</a> &gt; <a href="..\Command.html">Commands</a> &gt; <a href="AssertEquals.html">assertEquals</a> &gt;</span>
+    <h1>assertEquals</h1>
+    <p>
+       The <code>assertEquals</code> command evaluates an expression and compares
+       the result to the contents of an element in the document. The command reports
+       a success if the evaluation result is equal to the text in the document,
+       or a failure otherwise. The comparisons are case-sensitive.
+    </p>
+    <div class="example">
+      <h3>Example</h3>
+      <p>Given this instrumentation:</p>
+      <pre concordion:set="#snippet">&lt;span concordion:assertEquals="#user.firstName"&gt;Fred&lt;/span&gt;</pre>
+      <p>We get the following outcomes depending on the evaluation result of the expression <code>#user.firstName</code>:</p>
+      <table concordion:execute="#outcome = successOrFailure(#snippet, #evaluationResult)">
+        <tr>
+          <th concordion:set="#evaluationResult">Evaluation Result</th>
+          <th concordion:assertEquals="#outcome">Outcome</th>
+        </tr>
+        <tr>
+          <td>Fred</td>
+          <td class="success">SUCCESS</td>
+        </tr>
+        <tr>
+          <td>Wilma</td>
+          <td class="success">FAILURE</td>
+        </tr>
+        <tr>
+          <td>fred</td>
+          <td class="success">FAILURE</td>
+        </tr>
+      </table>
+    </div>
+    <h2>Further Details</h2>
+    <ul>
+      <li>
+        <a href="Whitespace/Whitespace.html">Are line-breaks and other whitespace significant?</a>
+      </li>
+      <li>
+        <a href="NonString/NonString.html">What if the evaluation does not return a String (e.g. int, double, null, void)?</a>
+      </li>
+      <li>
+        <a href="Exceptions.html">What if the evaluation throws an exception?</a>
+      </li>
+      <li>
+        <a href="NestedElements.html">Are nested HTML elements (e.g. &lt;strong&gt;) supported?</a>
+      </li>
+      <li>
+        <a href="SupportedElements.html">Can this tag be used on elements other than &lt;span&gt;?</a>
+      </li>
+      <li>
+        <a href="NonString/Boolean.html">Which strings can be used to match a bool?</a>
+      </li>
+    </ul>
+    <div class="footer">Results generated by <a href="http://www.concordion.org"><img src="..\..\..\..\..\image\concordion-logo.png" alt="Concordion" border="0" /></a><div class="testTime">in 710042 ms 09.10.2014 13:44:42</div></div>
+  </body>
+</html>

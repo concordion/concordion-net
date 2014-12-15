@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Concordion.Api;
 
 namespace Concordion.Internal
@@ -46,7 +47,7 @@ namespace Concordion.Internal
             {
                 if (fixtureName.EndsWith(testSuffix))
                 {
-                    fixtureName = fixtureName.Replace(testSuffix, "");
+                    fixtureName = Regex.Replace(fixtureName, testSuffix + "$", "");
                 }
             }
             //Suffix from Concordion.Specification.config

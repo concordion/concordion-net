@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+  <head>
+    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
+    <title>BDD in plain English for .NET|Concordion.NET</title>
+    <meta name="description" content="Enables BDD and ATDD for .NET and C# in plain English without the need to specify requirements in specially structured language.">
+    <meta name="keywords" content="BDD, Behavior Driven Development, ATDD, Acceptance Test Driven Development, framework, .NET, C#">
+    <link href="css/default.css" rel="stylesheet" type="text/css">
+    <link href="image/favicon.ico" rel="icon" type="image/vnd.microsoft.icon">
+    <meta name="viewport" content="width=device-width">
+  </head>
+  <body>
+    <div class="page">
+      <div class="header"> <a href="http://www.opensource.org/"> <img class="open-source-logo" src="image/opensource-110x95.png"
+
+            alt="Open source (Apache 2.0 license)"> </a> <a href="index.html"> 
+		  <img src="image/front-page-banner.png"
+
+            alt="BDD in plain English"> </a> </div>
+      <!-- header -->
+      <div class="menuBar">
+        <ul class="menu">
+          <li class="selectedTab"><a href="index.html">Home</a></li>
+          <li><a href="GettingStarted.html">Getting Started</a></li>
+          <li><a href="RunningTests.html">Running Tests</a></li>
+          <li><a href="AdvancedFeatures.html">Advanced Features</a></li>
+          <li><a href="Configuration.html">Configuration</a></li>
+          <li><a href="Download.html">Download</a></li>
+        </ul>
+      </div>
+      <!-- menuBar  -->
+      <div class="content">
+        <h1> &nbsp;<a class="externalLink" href="http://assertselenium.com/2012/11/05/difference-between-tdd-bdd-atdd/">BDD &amp; ATDD</a> 
+		framework for .NET / C#.</h1>
+		  <p style="font-size: 10pt; font-style: italic">
+			*
+			There are also versions for <a href="http://concordion.org/">Java</a>, Python, Scala, and Ruby. [<a href="http://concordion.org/Ports.html">More details</a>]
+			<br />
+			</p>
+        <p> It supports <a class="externalLink" href="http://dannorth.net/introducing-bdd/">Behavior Driven Development</a> (BDD) similar to
+          great tools such as Cucumber, SpecFlow,
+          FitNesse, and NBehave. According to the
+          excellent <a class="externalLink" href="http://blog.jonasbandi.net/2010/03/classifying-bdd-tools-unit-test-driven.html">classification
+            of BDD tools</a>, it focuses on business readable input (and reaches business readable output as well).</p>
+		  <p> Concordion acceptance tests are so readable, they can double up as system documentation. They are written in
+          HTML, so can be easily hyperlinked into a navigable structure. And, since the tests run against the system,
+          you can be confident the documentation is always up-to-date.</p>
+        <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
+		Behavior Driven Development with Active Specifications</h2>
+        <div class="memo">
+          <ul class="keyBenefits">
+            <li>On the <a href="GettingStarted.html">Getting Started</a> page you'll find a kick-start solution for
+              your C# projects in Visual Studio as well as a first example.</li>
+            <li> To setup your infrastructure, please <a href="Download.html">Download</a> the latest version of
+              Concordion.NET. </li>
+            <li> To execute your automated tests please visit the page on <a href="RunningTests.html">running
+                Concordion.NET tests with NUnit</a>.</li>
+          </ul>
+          <br>
+          <p><img alt="Executable Specification" src="image/HowItWorks.jpg"></p>
+        </div>
+        <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">Specification by Example</h2>
+        <div class="memo">
+          <p>As Concordion specifications are written in simple HTML, it provides a good basis for a <a class="externalLink" href="http://specificationbyexample.com/key_ideas.html">living
+              documentation system</a>. You can use a what-you-see-is-what-you-get (WYSIWYG) editor like BlueGriffon
+              to describe your intended behavior of your software in simple HTML documents and instrument them to
+            verify your system under test.</p>
+          <p>Watch the <a class="externalLink" href="http://gojko.net/2009/09/01/acceptance-testing-in-plain-english-with-concordion-net/">video
+              to see how to use Concordion.NET</a>. As the <span style="font-style: italic;">active specifications</span>
+            are readable to business people, it can help to achieve the goal of <a class="externalLink" href="http://jacekratzinger.blogspot.co.at/2012/01/purpose-driven-development-pdd.html">purpose
+              driven development</a>. Concrete examples within your specifications are turned into executable
+            specifications with a <a href="http://concordion.org/dist/1.4.4/spec/concordion/Concordion.html">small set
+              of commands</a> (e.g. "set", "execute", "assertEquals"). These allow checking the examples against the
+            real-life system.</p>
+          <img alt="Living Documentation" src="image/AnatomyOfAnActiveSpec.jpg"> </div>
+        <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
+		Additional Information</h2>
+        <div class="memo">
+          <ul>
+            <li>Jeffrey Cameron has written a blog on <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-1.html">living
+                in Concordion with .NET</a>. Please note that you can <a href="RunningTests.html">use NUnit to run
+                Concordion.NET tests</a> (instead of Gallio). Thus, you can skip <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-5.html">part
+                5</a> of the blog that relates to Gallio. If you want to debug Concordion.NET tests, please read the
+              blog on <a class="externalLink" href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
+                with NUnit</a> of Robert Koritnik. </li>
+            <li>Concordion.NET has been moved from <a class="externalLink" href="https://code.google.com/p/concordion-net/">Google Code</a>
+              to <a class="externalLink" href="https://github.com/concordion/concordion-net">GitHub</a>.
+          </ul>
+        </div>
+        <!-- memo --> </div>
+      <!-- content --> </div>
+    <!-- page -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-543bae9469f79b87" async></script>
+  </body>
+</html>

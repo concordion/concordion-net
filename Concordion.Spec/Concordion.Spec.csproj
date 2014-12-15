@@ -53,6 +53,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\tools\NUnit-2.6.3\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -68,6 +72,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Concordion\Attributes\AttributesTest.cs" />
+    <Compile Include="Concordion\Attributes\ConcordionTestAttributeTest.cs" />
+    <Compile Include="Concordion\Attributes\IgnoreAttributeTest.cs" />
+    <Compile Include="Concordion\Attributes\ExampleIgnoreTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\AssertEqualsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\ExceptionsTest.cs" />
     <Compile Include="Concordion\Command\AssertEquals\NonString\BooleanTest.cs" />
@@ -82,12 +90,14 @@
     <Compile Include="Concordion\Command\AssertEquals\Whitespace\WhitespaceTest.cs" />
     <Compile Include="Concordion\Command\AssertFalse\AssertFalseTest.cs" />
     <Compile Include="Concordion\Command\AssertTrue\AssertTrueTest.cs" />
+    <Compile Include="Concordion\Command\CaseInsensitiveCommandsTest.cs" />
     <Compile Include="Concordion\Command\CommandTest.cs" />
     <Compile Include="Concordion\Command\Echo\DisplayingNullsTest.cs" />
     <Compile Include="Concordion\Command\Echo\EchoTest.cs" />
     <Compile Include="Concordion\Command\Echo\EscapingHtmlCharactersTest.cs" />
     <Compile Include="Concordion\Command\Execute\AccessToLinkHrefTest.cs" />
     <Compile Include="Concordion\Command\Execute\ExecuteTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecutingListTest.cs" />
     <Compile Include="Concordion\Command\Execute\ExecutingTablesTest.cs" />
     <Compile Include="Concordion\Command\Results\Stylesheet\MissingHeadElementTest.cs" />
     <Compile Include="Concordion\Command\Results\Stylesheet\StylesheetTest.cs" />
@@ -100,8 +110,10 @@
     <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
     <Compile Include="Concordion\ConcordionTest.cs" />
     <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
-    <Compile Include="Concordion\Configuration\TestwithnoSpecification.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
+    <Compile Include="Concordion\Integration\IntegrationTest.cs" />
+    <Compile Include="Concordion\Integration\ConstructorTest.cs" />
+    <Compile Include="Concordion\Integration\SetupMethodTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\EmptyFailureTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\FailureTest.cs" />
@@ -110,8 +122,8 @@
     <Compile Include="Concordion\Results\AssertEquals\Success\HasAttributesTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Success\HasClassAttributeTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Success\SuccessTest.cs" />
-    <Compile Include="Concordion\Results\AssertTrue\Failure\OnFailureTest.cs" />
-    <Compile Include="Concordion\Results\AssertTrue\Success\OnSuccessTest.cs" />
+    <Compile Include="Concordion\Results\AssertTrue\Failure\FailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertTrue\Success\SuccessTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\AbstractBreadcrumbsTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\BreadcrumbsTest.cs" />
     <Compile Include="Concordion\Results\Breadcrumbs\DeterminingBreadcrumbsTest.cs" />
@@ -137,6 +149,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Concordion\Attributes\Attributes.html" />
+    <EmbeddedResource Include="Concordion\Attributes\ConcordionTestAttribute.html" />
+    <EmbeddedResource Include="Concordion\Attributes\IgnoreAttribute.html" />
+    <EmbeddedResource Include="Concordion\Command\CaseInsensitiveCommands.html" />
+    <EmbeddedResource Include="Concordion\Integration\Constructor.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Concordion\Integration\SetupMethod.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Examples\Demo.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -253,9 +275,6 @@
     <EmbeddedResource Include="Concordion\Command\Results\Stylesheet\MissingHeadElement.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Annotation\Annotation.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="concordion.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -277,10 +296,10 @@
     <EmbeddedResource Include="Concordion\Results\Breadcrumbs\Wording.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertTrue\Failure\OnFailure.html">
+    <EmbeddedResource Include="Concordion\Results\AssertTrue\Failure\Failure.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertTrue\Success\OnSuccess.html">
+    <EmbeddedResource Include="Concordion\Results\AssertTrue\Success\Success.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Concordion\Results\AssertEquals\Success\EmptySuccess.html" />
@@ -330,12 +349,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\Concordion.Spec.dll" />
-    <Content Include="bin\Debug\Concordion.Spec.pdb" />
-    <Content Include="Concordion.Spec.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
+    <EmbeddedResource Include="Concordion\Command\Execute\ExecutingList.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.xhtml">

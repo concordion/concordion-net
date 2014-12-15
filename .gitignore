@@ -4,3 +4,4 @@ obj
 *.user
 *.VisualState.xml
 TestResult.xml
+_ReSharper.*
