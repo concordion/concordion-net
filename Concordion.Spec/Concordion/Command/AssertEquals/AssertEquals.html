@@ -1,58 +1,94 @@
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
-<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>AssertEquals</title>
+<link media="all" rel="stylesheet" type="text/css" href="../../../concordion.css"/>
+</head>
+
 <body>
+<h2>concordion:assertEquals</h2>
+<hr></hr>
+    <ol>
+        <li>Create a folder inside your Spec project called &quot;Example&quot;.</li>
+          
+        <li>Create a file &quot;HelloWorld.html&quot;inside containing:
+<pre class="html">&lt;html&gt;
+    &lt;body&gt;
+        &lt;p&gt;Hello World!&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre> 
+        </li>
+          
+        <li>Make sure that the file &quot;HelloWorld.html&quot; will be included in your 
+		DLL file: In Visual Studio set the value &quot;Embedded Resource&quot; on the 
+		property &quot;Build Action&quot;.
+            <pre><img alt="properties dialog" src="../../../image/SpecificationProperties.jpg" /></pre>
+        </li>
+          
+          <li>Now instrument the file as follows:
+<pre class="html">&lt;html <b>xmlns:concordion=&quot;http://www.concordion.org/2007/concordion&quot;</b>&gt;
+    &lt;body&gt;
+        <span concordion:set="#snippet">&lt;p <b>concordion:assertEquals=&quot;GetGreeting()&quot;</b>&gt;Hello World!&lt;/p&gt;</span>
+    &lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+          </li>
+          
+          <li>In the same <code>folder</code>, create a file <code>
+		  &quot;HelloWorldTest.cs&quot;</code>
+            containing:
+<pre class="code">
+using Concordion.Integration;
 
-    <h1>assertEquals</h1>
+namespace Kickstart.Spec.HelloWorld
+{
+    [ConcordionTest]
+    public class HelloWorldTest
+    {
+        private readonly Greeter m_HelloWorldGreeter = new Greeter();
 
-    <p>
-       The <code>assertEquals</code> command evaluates an expression and compares
-       the result to the contents of an element in the document. The command reports
-       a success if the evaluation result is equal to the text in the document,
-       or a failure otherwise. The comparisons are case-sensitive.
-    </p>
-
-    <div class="example">
-
-        <h3>Example</h3>
-
-        <p>Given this instrumentation:</p>
-
-        <pre concordion:set="#snippet">&lt;span concordion:assertEquals="#user.firstName"&gt;Fred&lt;/span&gt;</pre>
-
-        <p>We get the following outcomes depending on the evaluation result of the expression <code>#user.firstName</code>:</p>
-
-        <table concordion:execute="#outcome = successOrFailure(#snippet, #evaluationResult)">
-            <tr>
-                <th concordion:set="#evaluationResult">Evaluation Result</th>
-                <th concordion:assertEquals="#outcome">Outcome</th>
-            </tr>
-            <tr>
-                <td>Fred</td>
-                <td>SUCCESS</td>
-            </tr>
-            <tr>
-                <td>Wilma</td>
-                <td>FAILURE</td>
-            </tr>
-            <tr>
-                <td>fred</td>
-                <td>FAILURE</td>
-            </tr>
-        </table>
-    </div>
+        public string GetGreeting()
+        {
+            return m_HelloWorldGreeter.GetMessage();
+        }
+    } 
+}</pre>
+          </li>
+          
+          <li><p>Now <a href="RunningTests.html">run the HelloWorldTest class 
+		  using NUnit</a>.</p>
+        
+        <p>If you've done it right, <span concordion:assertTrue="GreetingsProcessed(#snippet)">NUnit should give you a green bar</span> and a 
+		message like this should be printed to the console:</p>
+		
+        <pre class="console">Processed specifications: C:\Temp\Kickstart\Spec\HelloWorld\HelloWorld.html <br/>Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0,65 seconds    </pre>
+        <p> The message shows a summary of success and failure counts, and the 
+		path of the output (results) file for the test. By default, Concordion 
+		outputs to the temp directory (e.g. C:\User\&lt;your 
+		user&gt;\AppData\Local\Temp = Windows environment variable %TEMP%). </p>
+        <p> Open the output file in a browser and you should see the same 
+		content as the input document but with the words <code>Hello World!</code>
+          highlighted in green. </p>
+        <img style="padding-right: 0px" src="../../../image/HelloWorldSuccess.jpg" alt="Hello World! successful outcome"/><br/>
+        </li>
+        </ol>       
 
 
-    <h2>Further Details</h2>
+<h3>Properties</h3>
+    <p> In the example above, the call to <code>&quot;GetGreeting()&quot;</code> can be 
+	simplified to <code>&quot;Greeting&quot;</code> since Concordion's expression language 
+	understands simple properties. </p>
+        <pre class="html">&lt;html xmlns:concordion=&quot;http://www.concordion.org/2007/concordion&quot;&gt;
+    &lt;body&gt;
+        &lt;p <b>concordion:assertEquals=&quot;Greeting&quot;</b>&gt;Hello World!&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </pre>
 
-    <ul>
-        <li><a href="Whitespace/Whitespace.html">Are line-breaks and other whitespace significant?</a></li>
-        <li><a href="NonString/NonString.html">What if the evaluation does not return a String (e.g. int, double, null, void)?</a></li>
-        <li><a href="Exceptions.html">What if the evaluation throws an exception?</a></li>
-        <li><a href="NestedElements.html">Are nested HTML elements (e.g. &lt;strong&gt;) supported?</a></li>
-        <li><a href="SupportedElements.html">Can this tag be used on elements other than &lt;span&gt;?</a></li>
-        <li><a href="NonString/Boolean.html">Which strings can be used to match a bool?</a></li>
-    </ul>
-
+<p>Please, find further details about the assertEquals command
+<a href="contents.html">here</a>.</p>
 
 </body>
 </html>
