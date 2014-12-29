@@ -32,138 +32,13 @@
           into <span style="font-style: italic;">active specifications</span>
           using Concordion.NET. It should take you not more than 15-30 minutes
           to complete, assuming you are already familiar with C# and XHTML. </p>
-        <h2>Setup</h2>
-        <hr>
-        <p> To kickstart this tutorial, we've created a "Hello World!" project
-          with the following structure. </p>
-        <p> Download: <a href="https://github.com/concordion/concordion-net-kickstart/releases/latest"
 
-            target="_top">concordion-net-kickstart.zip</a> </p>
-        <img alt="Structure" src="image/project-structure.jpg">
-        <p> It contains the latest stable version of Concordion.NET, all its
-          dependencies, and a simple "Hello World!" example. </p>
-        <ol>
-          <li>"Greeter.cs" is the class we want to test</li>
-          <li>"Kickstart.Spec" is a Visual Studio project for the specifications
-            and acceptance tests. Unit tests are typically held in a project
-            ending with "Test" but we prefer the name "Spec", for the Concordion
-            acceptance tests, to emphasize the fact that these tests are
-            concerned with <span style="font-style: italic;">external behavior</span>.
-          </li>
-          <li>"HelloWorldTest.cs" is a Concordion test fixture class. We'll
-            explain how this works, below.</li>
-          <li>"HelloWorld.html" is the Concordion specification and is processed
-            by the <code>"HelloWorldTest.cs"</code> fixture. The name of the
-            fixture and the HTML file share the same base name. The fixture has
-            an optional suffix of "Test" - for example, it may be named
-            "HelloWorld.cs" or "HelloWorldTest.cs".</li>
-          <li>"concordion.css" is a stylesheet to make the specs look nice while
-            you're writing them.</li>
-        </ol>
-        <p>Concordion.NET requires the .NET framework with version 4.0 or
-          higher. You have to add the following references to your project: </p>
-        <ul>
-          <li>Concordion.dll</li>
-          <li>OGNL.dll</li>
-          <li>nunit.framework.dll (version 2.6.3)</li>
-        </ul>
-        <p>To be able to <a href="RunningTests.html">run the Concordion.NET
-            tests with NUnit</a> you need to make the Concordion-NUnit addin
-          available to your installation of NUnit:</p>
-        <ul>
-          <li>copy Concordion.NUnit.dll to &lt;nunit-2.6.3-installation-path&gt;\bin\addins\</li>
-        </ul>
-        <p>These dependencies are included in the distribution.</p>
-        <ol>
-        </ol>
-        <h2>The Basics</h2>
-        <hr>
-        <p>A Concordion active specification consists of two parts: </p>
-        <ol>
-          <li>a well-formed XHTML document describing the functionality, and </li>
-          <li>fixture code written in C#&nbsp; that finds concrete examples in
-            the document and uses them to verify the system under test.</li>
-        </ol>
-        <p> Both files must be in the same package. In order for the magic to
-          happen, the document must first be <em>instrumented</em> with
-          commands. Concordion commands are specified as attributes on elements
-          in the XHTML document. Web browsers ignore attributes that they don't
-          understand, so these commands are effectively invisible. </p>
-        <p> The commands use a <code>"concordion"</code> namespace defined at
-          the top of each document as follows: </p>
-        <pre class="html">&lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
-</pre>
+        <iframe src="Concordion/Setup.html" onload="setIframeHeight(this.id)" name="setup" id="setup" width="100%" height="1400" border="0" frameborder="0"></iframe>
+        
         <p>Let's start with a really simple example... </p>
-        <h2>concordion:assertEquals</h2>
-        <hr>
-        <ol>
-        </ol>
-        <ol>
-          <li>Create a folder inside your Spec project called "Example".</li>
-          <li>Create a file "HelloWorld.html"inside containing:
-            <pre class="html">&lt;html&gt;
-    &lt;body&gt;
-        &lt;p&gt;Hello World!&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</pre> </li>
-          <li>Make sure that the file "HelloWorld.html" will be included in your
-            DLL file: In Visual Studio set the value "Embedded Resource" on the
-            property "Build Action". <br>
-            <pre><img alt="properties dialog" src="image/SpecificationProperties.jpg"
 
-height="172" width="435"></pre>
-          </li>
-          <li>Now instrument the file as follows:
-            <pre class="html">&lt;html <b>xmlns:concordion="http://www.concordion.org/2007/concordion"</b>&gt;
-    &lt;body&gt;
-        &lt;p <b>concordion:assertEquals="GetGreeting()"</b>&gt;Hello World!&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</pre> </li>
-          <li>In the same <code>folder</code>, create a file <code>"HelloWorldTest.cs"</code>
-            containing:
-            <pre class="java">
-using Concordion.Integration;
+        <iframe src="Concordion/Command/AssertEquals/AssertEquals.html" onload="setIframeHeight(this.id)" name="assertequals" id="assertequals" width="100%" height="1700" border="0" frameborder="0"></iframe>
 
-namespace Kickstart.Spec.HelloWorld
-{
-    [ConcordionTest]
-    public class HelloWorldTest
-    {
-        private readonly Greeter m_HelloWorldGreeter = new Greeter();
-
-        public string GetGreeting()
-        {
-            return m_HelloWorldGreeter.GetMessage();
-        }
-    } 
-}</pre>
-          </li>
-          <li>Now <a href="RunningTests.html">run the HelloWorldTest class
-              using NUnit</a>.</li>
-        </ol>
-        <p> If you've done it right, NUnit should give you a green bar and a
-          message like this should be printed to the console: </p>
-        <pre class="console">Processed specifications: C:\Temp\Kickstart\Spec\HelloWorld\HelloWorld.html <br>Tests run: 1, Errors: 0, Failures: 0, Inconclusive: 0, Time: 0,658764124511223 seconds    </pre>
-        <p> The message shows a summary of success and failure counts, and the
-          path of the output (results) file for the test. By default, Concordion
-          outputs to the temp directory (e.g. C:\User\&lt;your
-          user&gt;\AppData\Local\Temp = Windows environment variable %TEMP%). </p>
-        <p> Open the output file in a browser and you should see the same
-          content as the input document but with the words <code>Hello World!</code>
-          highlighted in green. </p>
-        <img style="padding-right: 0px" src="image/HelloWorldSuccess.jpg" alt="Hello World! successful outcome"><br>
-        <h3>Properties</h3>
-        <p> In the example above, the call to <code>"GetGreeting()"</code> can
-          be simplified to <code>"Greeting"</code> since Concordion's
-          expression language understands simple properties. </p>
-        <pre class="html">&lt;html xmlns:concordion="http://www.concordion.org/2007/concordion"&gt;
-    &lt;body&gt;
-        &lt;p <b>concordion:assertEquals="Greeting"</b>&gt;Hello World!&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-    </pre>
         <p> You can find an extended version of this tutorial on in the <a href="http://concordion.org/Tutorial.html#set">Concordion</a>
           web page. Please note that that one is based on the Java version of
           Concordion. Thus, you have to adapt to the syntax, but the described
@@ -175,6 +50,25 @@ namespace Kickstart.Spec.HelloWorld
     </div>
     <!-- content -->
     <!-- page -->
+    <script type="text/javascript">
+      function setIframeHeight(id) {
+        var ifrm = document.getElementById(id);
+        var doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+        ifrm.style.visibility = 'hidden';
+        ifrm.style.height = "10px"; // reset to minimal height ...
+        // IE opt. for bing/msn needs a bit added or scrollbar appears
+        ifrm.style.height = getDocHeight( doc ) + 4 + "px";
+        ifrm.style.visibility = 'visible';
+	  }
+	  function getDocHeight(doc) {
+        doc = doc || document;
+        var body = doc.body, html = doc.documentElement;
+        var height = Math.max( body.scrollHeight, body.offsetHeight, 
+            html.clientHeight, html.scrollHeight, html.offsetHeight );
+        return height;
+	  }
+    </script>
+    
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-543bae9469f79b87" async></script>
   </body>
 </html>

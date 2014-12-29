@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Concordion.Integration;
 using Concordion.Spec.Support;
 
@@ -10,12 +8,25 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals
     [ConcordionTest]
     public class AssertEqualsTest
     {
-        public string successOrFailure(string fragment, string evaluationResult)
+        public bool GreetingsProcessed(string fragment)
         {
             return new TestRig()
-                .WithStubbedEvaluationResult(evaluationResult)
+                .WithFixture(this)
                 .ProcessFragment(fragment)
-                .SuccessOrFailureInWords();
+                .IsSuccess;
+        }
+
+        public string GetGreeting()
+        {
+            return new Greeter().GetMessage();
+        }
+    }
+
+    public class Greeter
+    {
+        public string GetMessage()
+        {
+            return "Hello World!";
         }
     }
 }
