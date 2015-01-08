@@ -2,7 +2,7 @@
 <html xmlns:concordion="http://www.concordion.org/2007/concordion">
   <head>
     <meta content="text/html; charset=windows-1252" http-equiv="content-type">
-    <title>BDD in plain English for .NET|Concordion.NET</title>
+    <title>BDD & ATDD in C#|Concordion.NET</title>
     <meta name="description" content="Enables BDD and ATDD for .NET and C# in plain English without the need to specify requirements in specially structured language.">
     <meta name="keywords" content="BDD, Behavior Driven Development, ATDD, Acceptance Test Driven Development, framework, .NET, C#">
     <link href="css/default.css" rel="stylesheet" type="text/css">
@@ -34,16 +34,17 @@
 		framework for .NET / C#.</h1>
 		  <p style="font-size: 10pt; font-style: italic">
 			*
-			There are also versions for <a href="http://concordion.org/">Java</a>, Python, Scala, and Ruby. [<a href="http://concordion.org/Ports.html">More details</a>]
+			There are also versions for <a href="http://concordion.org/">Java</a>, Python, Scala, and Ruby. [<a href="http://concordion.org/Ports.html">supported languages</a>]
 			<br />
 			</p>
-        <p> It supports <a class="externalLink" href="http://dannorth.net/introducing-bdd/">Behavior Driven Development</a> (BDD) similar to
-          great fameworks such as Cucumber, SpecFlow,
+        <p> It supports Behavior Driven Development (BDD) similar to
+          great frameworks such as Cucumber, SpecFlow,
           FitNesse, and NBehave. According to the
           excellent <a class="externalLink" href="http://blog.jonasbandi.net/2010/03/classifying-bdd-tools-unit-test-driven.html">classification
             of BDD tools</a>, it focuses on business readable input (and reaches business readable output as well).</p>
 		  <p> Concordion acceptance tests are so readable, they can double up as system documentation. They are written in
-          HTML, so can be easily hyperlinked into a navigable structure. And, since the tests run against the system,
+          HTML, so can be easily hyperlinked into a navigable structure. And, since the 
+		  automated acceptance tests run against the system,
           you can be confident the documentation is always up-to-date.</p>
           <br>
           <p><img alt="Executable Specification" src="image/HowItWorks.jpg"></p>
@@ -51,14 +52,16 @@
         <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
 		Documentation as Specification</h2>
 		  <p>Agile methods help to get the highest possible value from the time 
-		  invested. When investing a lot of effort into automated tests with 
+		  invested. When investing a lot of effort into 
+		  <a href="https://en.wikipedia.org/wiki/Acceptance_testing">automated 
+		  acceptance testing</a> with 
 		  techniques such as Test Driven Development (TDD) the idea arises to 
-		  use tests as documentation. But testing frameworks often prevent 
+		  use tests as documentation. But automated testing frameworks often prevent 
 		  non-developers from participation. Additionally, tests are often 
 		  strongly related to the technical aspects of the system and are 
 		  difficult to understand by other stakeholders.</p>
 		  <p>With the emergence of Behavior Driven Development (BDD) and 
-		  Specification by Example (SBE) we could use specifications as 
+		  <a href="http://specificationbyexample.com">Specification by Example</a> (SBE) we could use acceptance testing specifications as 
 		  documentation. But specifications are still describing what the system 
 		  should do from a perspective of construction. Additionally, 
 		  specifications often use a structured language as scenarios in the 
@@ -106,8 +109,7 @@
 		  documentation. They are in fact user documentation that double as 
 		  specification.</p>
 		  <p>For an example of such an documentation that is a specification as 
-		  well, please have a look on the <a href="GettingStarted.html">getting 
-		  started page</a>. It is composed of such active specifications.</p>
+		  well, please have a look at the <a href="GettingStarted.html">tutorial</a>. It is composed of such active specifications.</p>
   
         <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">Specification by Example</h2>
         <div class="memo">
@@ -143,7 +145,7 @@
         <div>
           <ul>
             <li>Jeffrey Cameron has written a blog on <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-1.html">living
-                in Concordion with .NET</a>. Please note that you can <a href="RunningTests.html">use NUnit to run
+                in Concordion with .NET</a>, which describes how to use the acceptance testing tool, Concordion.NET. Please note that you can <a href="RunningTests.html">use NUnit to run
                 Concordion.NET tests</a> (instead of Gallio). Thus, you can skip <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-5.html">part
                 5</a> of the blog that relates to Gallio. If you want to debug Concordion.NET 
 			tests, you can use the same techniques when <a class="externalLink" href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
