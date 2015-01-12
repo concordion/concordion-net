@@ -1,4 +1,7 @@
-﻿body {
+﻿.fyre-widget .fyre-logo-drop, .fyre-widget .fyre-logo-help, .fyre-widget .fyre-help {
+    display:none !important;
+}
+body {
   background-color: #a5a5a0;
   margin: 0px;
 }
