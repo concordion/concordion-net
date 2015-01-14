@@ -31,7 +31,7 @@
         <p> Full distribution including source code and all dependencies: </p>
         <ul>
           <li> <b>
-		  <a href="https://github.com/concordion/concordion-net/releases/latest">Concordion.NET-1.1.0.zip</a></b>
+		  <a href="https://github.com/concordion/concordion-net/releases/download/v1.1.0/Concordion.NET-1.1.0.zip" id="download-link">Concordion.NET-1.1.0.zip</a></b>
           </li>
         </ul>
         <h2>Nightly</h2>
@@ -113,6 +113,15 @@
 
       ga('create', 'UA-58172036-1', 'auto');
       ga('send', 'pageview');
+      var downloadLink = document.getElementById('download-link');
+      addListener(downloadLink, 'click', function() {
+        ga('send', 'event', 'download', 'click', 'navigation');
+      });
+      
+      function addListener(element, type, callback) {
+        if (element.addEventListener) element.addEventListener(type, callback);
+        else if (element.attachEvent) element.attachEvent('on' + type, callback);
+      }
     </script>
   </body>
 </html>
