@@ -115,7 +115,7 @@
       ga('send', 'pageview');
       var downloadLink = document.getElementById('download-link');
       addListener(downloadLink, 'click', function() {
-        ga('send', 'event', 'download', 'click', 'navigation');
+        ga('send', 'event', 'download', 'Concordion.NET', document.url);
       });
       
       function addListener(element, type, callback) {
