@@ -48,9 +48,15 @@
           look at some <a href="AdvancedFeatures.html">advanced features of
             Concordion.NET</a>. </p>
       </div>
-	  <div class="addthis_sharing_toolbox" style="padding-left: 100px; padding-top: 5px; padding-bottom: 50px; background-color: silver">
-        <h3>Share Now</h3>
+	  
+	  <div class="header">
+        <div class="addthis_sharing_toolbox" style="padding-top: 5px; padding-bottom: 20px">
+          <h3>Share Now</h3>
+        </div>
+        <div id="livefyre-comments"></div>
       </div>
+      <!-- footer -->
+	  
     </div>
     <!-- content -->
     <!-- page -->
@@ -83,6 +89,24 @@
 
       ga('create', 'UA-58172036-1', 'auto');
       ga('send', 'pageview');
+    </script>
+	
+	<script type="text/javascript" src="http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js"></script>
+    <script type="text/javascript">
+    (function () {
+      var articleId = fyre.conv.load.makeArticleId(null);
+      fyre.conv.load({}, [{
+        el: 'livefyre-comments',
+        network: "livefyre.com",
+        siteId: "369922",
+        articleId: articleId,
+        signed: false,
+        collectionMeta: {
+          articleId: articleId,
+          url: fyre.conv.load.makeCollectionUrl(),
+        }
+      }], function() {});
+    }());
     </script>
   </body>
 </html>

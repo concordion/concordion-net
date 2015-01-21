@@ -50,12 +50,20 @@
                 } 
             }</pre>
       </div>
-	  <div class="addthis_sharing_toolbox" style="padding-left: 100px; padding-top: 5px; padding-bottom: 50px; background-color: silver">
-        <h3>Share Now</h3>
+      <!-- content --> 
+	  
+	  <div class="header">
+        <div class="addthis_sharing_toolbox" style="padding-top: 5px; padding-bottom: 20px">
+          <h3>Share Now</h3>
+        </div>
+        <div id="livefyre-comments"></div>
       </div>
-      <!-- content --> </div>
+      <!-- footer -->
+	</div>
     <!-- page -->
+	
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-543bae9469f79b87" async></script>
+	
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -64,6 +72,24 @@
 
       ga('create', 'UA-58172036-1', 'auto');
       ga('send', 'pageview');
+    </script>
+	
+	<script type="text/javascript" src="http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js"></script>
+    <script type="text/javascript">
+    (function () {
+      var articleId = fyre.conv.load.makeArticleId(null);
+      fyre.conv.load({}, [{
+        el: 'livefyre-comments',
+        network: "livefyre.com",
+        siteId: "369922",
+        articleId: articleId,
+        signed: false,
+        collectionMeta: {
+          articleId: articleId,
+          url: fyre.conv.load.makeCollectionUrl(),
+        }
+      }], function() {});
+    }());
     </script>
   </body>
 </html>
