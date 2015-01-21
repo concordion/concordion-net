@@ -37,7 +37,7 @@ History prior to February 2013 is in the [Google Code repository](https://code.g
 
 ## License
 
-Copyright 2010-2014 Jeffrey Cameron
+Copyright 2010-2015 Jeffrey Cameron
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use these files except in compliance with the License.
