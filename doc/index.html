@@ -3,7 +3,7 @@
   <head>
     <meta content="text/html; charset=windows-1252" http-equiv="content-type">
 	<meta http-equiv="Content-Language" content="en-US">
-    <title>BDD & ATDD in C#|Concordion.NET</title>
+    <title>BDD and ATDD in .NET|Concordion.NET</title>
     <meta name="description" content="Enables BDD and ATDD for .NET and C# in plain English without the need to specify requirements in specially structured language.">
     <meta name="keywords" content="BDD, Behavior Driven Development, ATDD, Acceptance Test Driven Development, framework, .NET, C#">
     <link href="css/default.css" rel="stylesheet" type="text/css">
@@ -33,38 +33,37 @@
       <!-- menuBar  -->
       <div class="content">
         <h1> &nbsp;<a class="externalLink" href="http://assertselenium.com/2012/11/05/difference-between-tdd-bdd-atdd/">BDD &amp; ATDD</a> 
-		framework for .NET / C#.</h1>
+		framework for C# / .NET</h1>
 		  <p style="font-size: 10pt; font-style: italic">
 			*
-			There are also versions for <a href="http://concordion.org/">Java</a>, Python, Scala, and Ruby. [<a href="http://concordion.org/Ports.html">supported languages</a>]
+			There are also versions for <a href="http://concordion.org/">Java</a>, Python, Scala, and Ruby. [<a href="http://concordion.org/Ports.html">supported plattforms</a>]
 			<br />
 			</p>
-        <p> It supports Behavior Driven Development (BDD) similar to
+        <p> Concordion.NET supports Behavior Driven Development (BDD) similar to
           great frameworks such as Cucumber, SpecFlow,
           FitNesse, and NBehave. According to the
           excellent <a class="externalLink" href="http://blog.jonasbandi.net/2010/03/classifying-bdd-tools-unit-test-driven.html">classification
-            of BDD tools</a>, it focuses on business readable input (and reaches business readable output as well).</p>
-		  <p> Concordion acceptance tests are so readable, they can double up as system documentation. They are written in
-          HTML, so can be easily hyperlinked into a navigable structure. And, since the 
-		  automated acceptance tests run against the system,
+            of BDD tools</a>, this <em>BDD framwork</em> focuses on business readable input (and reaches business readable output as well).</p>
+		  <p> Concordion <em>acceptance tests</em> are so readable, they can double up as system documentation. They are written in
+          HTML, so can be easily hyperlinked into a navigable structure. With 
+		  these automated acceptance testing,
           you can be confident the documentation is always up-to-date.</p>
           <br>
           <p>
-		  <img alt="acceptance testing" src="image/HowItWorks.jpg" title="Acceptance Testing based on Specification by Documentation"></p>
+		  <img alt="acceptance testing" src="image/HowItWorks.jpg" title="Acceptance Testing"></p>
           
         <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
 		Documentation as Specification</h2>
 		  <p>Agile methods help to get the highest possible value from the time 
 		  invested. When investing a lot of effort into 
-		  <a href="https://en.wikipedia.org/wiki/Acceptance_testing">automated 
-		  acceptance testing</a> with 
+		  <a href="RunningTests.html">automated acceptance testing</a> with 
 		  techniques such as Test Driven Development (TDD) the idea arises to 
 		  use tests as documentation. But automated testing frameworks often prevent 
 		  non-developers from participation. Additionally, tests are often 
 		  strongly related to the technical aspects of the system and are 
 		  difficult to understand by other stakeholders.</p>
-		  <p>With the emergence of Behavior Driven Development (BDD) and 
-		  <a href="http://specificationbyexample.com">Specification by Example</a> (SBE) we could use acceptance testing specifications as 
+		  <p>With the emergence of <em>Behavior Driven Development</em> (BDD) and
+		  <em>Specification by Example</em> (SBE) we could use acceptance testing specifications as 
 		  documentation. But specifications are still describing what the system 
 		  should do from a perspective of construction. Additionally, 
 		  specifications often use a structured language as scenarios in the 
@@ -93,7 +92,7 @@
 		  mainly lists the outputs the system produces based on the inputs. This is mainly targeted on the development team and 
 		  not so much on the customer. An example of such a classical 
 		  specification could look like the following example:</p>
-		  <p><img alt="Classical Specification" src="image/ClassicalSpecification.jpg" /></p>
+		  <p><img alt="specification with examples" src="image/ClassicalSpecification.jpg" /></p>
 		  <p>In contrast 
 		  user related documentation describes system behavior from the customer 
 		  perspective. For example a product box summarizes the greatest 
@@ -128,7 +127,7 @@
             specifications with a <a href="http://concordion.org/dist/1.4.4/spec/concordion/Concordion.html">small set
               of commands</a> (e.g. "set", "execute", "assertEquals"). These allow checking the examples against the
             real-life system.</p>
-          <img alt="acceptance testing specification" src="image/AnatomyOfAnActiveSpec.jpg"> </div>
+          <img alt="specification by example" src="image/AnatomyOfAnActiveSpec.jpg" title="specification by example"> </div>
 
           <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
 		Behavior Driven Development with Active Specifications</h2>
