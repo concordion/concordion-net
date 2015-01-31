@@ -12,6 +12,7 @@ To get started, check out <http://www.concordion.org/dotnet/>
 ## Community
 
 - Ask questions at [Stack Overflow](https://stackoverflow.com/search?q=concordion).
+- Get in contact on [Twitter](https://twitter.com/concordion).
 - Read and subscribe to [the Concordion user group](https://groups.google.com/forum/#!forum/concordion).
 - Share your ideas on [the developer group](https://groups.google.com/forum/#!forum/concordion-dev).
 
