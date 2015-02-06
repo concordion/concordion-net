@@ -36,23 +36,25 @@
 		<a class="externalLink" href="http://assertselenium.com/2012/11/05/difference-between-tdd-bdd-atdd/">BDD 
 		&amp; Acceptance Testing Framework</a></h1>
 		  <p style="font-size: 10pt; font-style: italic">
-			* There are versions for <a href="http://concordion.org/Download.html">Java</a>, <a href="Download.html">.NET</a>, Python, 
-            Fantom, Scala, and Ruby. [<a href="http://concordion.org/Ports.html">supported platforms</a>]</p>
-          <p>Concordion.NET supports Behavior Driven Development (BDD) similar to
+			* There are versions for <a href="Download.html">.NET</a>, <a href="http://concordion.org/Download.html">Java</a>, 
+			<a href="http://concordion.org/Ports.html#python">Python</a>, 
+            <a href="https://rubygems.org/gems/concordion">Ruby</a>, 
+            and other [<a href="http://concordion.org/Ports.html">supported platforms</a>]
+          <p>Concordion.NET supports <em>Behavior Driven Development (BDD)</em> similar to
           great frameworks such as Cucumber, SpecFlow,
           FitNesse, and NBehave. According to the
           excellent <a class="externalLink" href="http://blog.jonasbandi.net/2010/03/classifying-bdd-tools-unit-test-driven.html">classification
-            of BDD tools</a>, this <em>BDD framwork</em> focuses on business readable input (and reaches business readable output as well).</p>
-		  <p> Concordion <em>acceptance tests</em> are so readable, they can double up as system documentation. They are written in
-          HTML, so can be easily hyperlinked into a navigable structure. With 
-		  these automated acceptance testing,
+            of BDD tools</a>, this <em>BDD framework</em> focuses on business readable input (and reaches business readable output as well).</p>
+		  <p> Concordion.NET <em>acceptance tests</em> are so readable, they can 
+		  double up as system documentation. They are written in HTML, so can be 
+		  easily hyperlinked into a navigable structure. With this automated acceptance testing,
           you can be confident the documentation is always up-to-date.</p>
           <br>
           <p>
-		  <img alt="acceptance testing" src="image/HowItWorks.jpg" title="Acceptance Testing"></p>
+		  <img alt="acceptance testing" src="image/HowItWorks.jpg"></p>
           
         <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
-		Documentation as Specification</h2>
+		Software Requirements Engineering based on Technical Documentation</h2>
 		  <p>Agile methods help to get the highest possible value from the time 
 		  invested. When investing a lot of effort into 
 		  <a href="RunningTests.html">automated acceptance testing</a> with 
@@ -84,14 +86,14 @@
 		  with the help of Concordion.NET enables to work outside in: first 
 		  describe the customer benefits, drive your tests with this 
 		  description, use the tests as basis for your implementation.</p>
-		  <h3>From Specification to Living Documentation</h3>
+		  <h3>Customer Needs to Living Documentation</h3>
 		  <p>Traditionally specifications often focus on the product and the 
 		  capabilities it should deliver. Thus, this type of documentation 
 		  describes what the system does instead of what the user gains. It 
 		  mainly lists the outputs the system produces based on the inputs. This is mainly targeted on the development team and 
 		  not so much on the customer. An example of such a classical 
 		  specification could look like the following example:</p>
-		  <p><img alt="specification with examples" src="image/ClassicalSpecification.jpg" /></p>
+		  <p><img alt="specification by examples" src="image/ClassicalSpecification.jpg" /></p>
 		  <p>In contrast 
 		  user related documentation describes system behavior from the customer 
 		  perspective. For example a product box summarizes the greatest 
@@ -105,16 +107,17 @@
 		  system should behave to how the user can get the benefit. An example 
 		  of such a specification by documentation could look like the following 
 		  example:</p>
-		  <p><img alt="Specification by Documentation" height="853" src="image/DocumentationSpecification.jpg" /></p>
+		  <p><img alt="Agile Requirements Engineering" src="image/DocumentationSpecification.jpg" /></p>
 		  <p>Such specifications aren't only able to double as system 
 		  documentation. They are in fact user documentation that double as 
 		  specification.</p>
 		  <p>For an example of such an documentation that is a specification as 
 		  well, please have a look at the <a href="GettingStarted.html">tutorial</a>. It is composed of such active specifications.</p>
   
-        <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">Specification by Example</h2>
+        <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
+		Agile Requirements Management with Specification by Example</h2>
         <div class="memo">
-          <p>As Concordion specifications are written in simple HTML, it provides a good basis for a <a class="externalLink" href="http://specificationbyexample.com/key_ideas.html">living
+          <p>As Concordion.NET specifications are written in simple HTML, it provides a good basis for a <a class="externalLink" href="http://specificationbyexample.com/key_ideas.html">living
               documentation system</a>. You can use a what-you-see-is-what-you-get (WYSIWYG) editor like BlueGriffon 
 		  or Microsoft Web Expression
               to describe your intended behavior of your software in simple HTML documents and instrument them to
@@ -126,10 +129,11 @@
             specifications with a <a href="http://concordion.org/dist/1.4.4/spec/concordion/Concordion.html">small set
               of commands</a> (e.g. "set", "execute", "assertEquals"). These allow checking the examples against the
             real-life system.</p>
-          <img alt="specification by example" src="image/AnatomyOfAnActiveSpec.jpg" title="specification by example"> </div>
+          <img alt="specification by example" src="image/AnatomyOfAnActiveSpec.jpg"> </div>
 
           <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
-		Behavior Driven Development with Active Specifications</h2>
+		Behavior Driven Development with 
+		  Executable Specifications</h2>
         <div>
           <ul class="keyBenefits">
             <li> Start using Concordion.NET, a flexible BDD tool. To setup your infrastructure, please <a href="Download.html">Download</a> the latest version of
@@ -142,7 +146,7 @@
         </div>
         
 		  <h2 style="margin-bottom: 0px; border-bottom : 1px dotted black; padding-bottom: 6px;">
-		Additional Information</h2>
+		  Automated Acceptance Testing</h2>
         <div>
           <ul>
             <li>Jeffrey Cameron has written a blog on <a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-1.html">living
