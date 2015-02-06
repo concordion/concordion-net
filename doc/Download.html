@@ -29,13 +29,20 @@
       <div class="content">
         <h1>Download</h1>
         <h2>Latest Release for C# / .NET</h2>
-        <p> Full distribution including source code and all dependencies: </p>
-        <ul>
-          <li> <b>
-		  <a href="https://github.com/concordion/concordion-net/releases/download/v1.1.0/Concordion.NET-1.1.0.zip" id="download-link">Concordion.NET-1.1.0.zip</a></b>
-          </li>
-        </ul>
-        <h2>Nightly</h2>
+        <p> Full distribution including 
+		specifications and all dependencies: </p>
+        <table style="margin-left: 20px; background-color:white; padding: 10px; border: 1px solid #d7d7d7; width: 390px;">
+          <tr>
+            <td>
+			<img src="image/download.gif" alt="Download Concordion.NET" height="50" width="50" /></td>
+            <td><b><a href="https://github.com/concordion/concordion-net/releases/download/v1.1.0/Concordion.NET-1.1.0.zip" id="download-link">Concordion.NET-1.1.0.zip</a></b></td>
+          </tr>
+          <tr>
+            <td>
+			<img src="image/NuGet_logo.png" alt="NuGet" height="49" width="50" /></td>
+            <td><b><a href="https://www.nuget.org/packages/Concordion.NET/" id="nuget-package">NuGet Package:</a> </b>PM&gt; Install-Package Concordion.NET</td>
+          </tr>
+        </table>
         <p><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, SansSerif; font-size: 13px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 18px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(252, 252, 250); display: inline !important; float: none;">For
             the bleeding edge, build from the <a href="https://github.com/concordion/concordion-net">Git
               repository</a>.</span></p>
@@ -127,8 +134,13 @@
       ga('send', 'pageview');
       var downloadLink = document.getElementById('download-link');
       addListener(downloadLink, 'click', function() {
-        ga('send', 'event', 'download', 'Concordion.NET', document.url);
+        ga('send', 'event', 'download', 'Concordion.NET', 'zip-file');
       });
+      var nugetLink = document.getElementById('nuget-package');
+      addListener(nugetLink, 'click', function() {
+        ga('send', 'event', 'download', 'Concordion.NET', 'nuget-package');
+      });
+
       
       function addListener(element, type, callback) {
         if (element.addEventListener) element.addEventListener(type, callback);
