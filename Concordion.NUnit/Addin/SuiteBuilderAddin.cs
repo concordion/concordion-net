@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Concordion.Integration;
 using NUnit.Core;
 using NUnit.Core.Extensibility;
 
@@ -13,15 +14,15 @@ namespace Concordion.NUnit.Addin
 
         public bool CanBuildFrom(Type type)
         {
-            return Reflect.HasAttribute(type, "Concordion.Integration.ConcordionTestAttribute", false);
+            return Reflect.HasAttribute(type, ConcordionTestAttribute.AttributeIdentifier, false);
         }
 
         public Test BuildFrom(Type type)
         {
-            var testSuite = new TestSuite(type.FullName);
-            testSuite.Add(new ConcordionTest(type));
-            NUnitFramework.ApplyCommonAttributes(type, testSuite);
-            return testSuite;
+            var testFixture = new ConcordionTestFixture(type);
+            testFixture.Add(new ConcordionTest(type));
+            NUnitFramework.ApplyCommonAttributes(type, testFixture);
+            return testFixture;
         }
 
         #endregion

@@ -1,0 +1,43 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>AssertEquals</title>
+<link media="all" rel="stylesheet" type="text/css" href="../../concordion.css"/>
+</head>
+
+<body>
+  <h3>ReSharper</h3>
+  <p>You can run Concordion.NET acceptance tests within Visual Studio with 
+  <a href="https://www.jetbrains.com/resharper/" class="externalLink">ReSharper</a>:</p>
+  <ol>
+	  <li>Install ReSharper</li>
+	  <li>If you have not already done
+	  <a href="https://github.com/concordion/concordion-net/releases/download/v1.1.0/Concordion.NET-1.1.0.zip">
+	  download Concordion.NET</a> or install the
+	  <a href="https://www.nuget.org/packages/Concordion.NET/" class="externalLink">NuGet package of 
+	  Concordion.NET</a></li>
+	  <li>Copy Concordion.NUnit.dll into the addin directory of your ReSharper 
+	  installation (&lt;resharper-installation-path&gt;\Bin\addins\)<ol>
+		  <li>Notice: If you aren't using the build-in NUnit version, but your 
+		  specified NUnit installation (ReSharper -&gt; Options ... -&gt; Tools -&gt; 
+		  Unit Testing -&gt; NUnit), you have to copy Concordion.NUnit.dll into the 
+		  used NUnit installation (&lt;nunit-installation-path&gt;\bin\addins\).</li>
+	  </ol>
+	  </li>
+	  <li>Run your Concordion.NET acceptance tests with ReSharper<ol>
+		  <li>To run a single test directly from the editor: Click on the 
+		  ReSharper testing icon next to the line of your fixture class 
+		  definition and select the Run or Debug option in the context menu.</li>
+		  <li>To run multiple tests: Right click on the element containing the 
+		  tests of interest in the Solution Explorer and select either the Run 
+		  Unit Tests or Debug Unit Tests option in the context menu.</li>
+	  </ol>
+	  </li>
+  </ol>
+  <p>When running the automated tests with ReSharper you can see the progress 
+  and results in the Unit Test Sessions window:</p>
+  <p>
+  <img alt="ReSharper Unit Test Session" src="../../image/ReSharperSessions.jpg"></p>
+</body>
+</html>
