@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Api\Resource_Fixture.cs" />
     <Compile Include="Integration\FileTarget_Fixture.cs" />
+    <Compile Include="Integration\Result\NUnitAddinTest.cs" />
     <Compile Include="Internal\DummyContainingTestInNameTest.cs" />
     <Compile Include="Internal\SpecificationLocatorTest.cs" />
     <Compile Include="Listener\DocumentStructureImproverTest.cs" />
@@ -98,6 +99,10 @@
     <ProjectReference Include="..\Concordion.NUnit\Concordion.NUnit.csproj">
       <Project>{FB522DBB-6F64-4834-9C87-029389AA0ABB}</Project>
       <Name>Concordion.NUnit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Concordion.Spec\Concordion.Spec.csproj">
+      <Project>{56f38030-7a94-4e5c-ae67-f5e8e94056d6}</Project>
+      <Name>Concordion.Spec</Name>
     </ProjectReference>
     <ProjectReference Include="..\Concordion\Concordion.csproj">
       <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
