@@ -29,5 +29,27 @@ namespace Concordion.Api
         /// </summary>
         /// <param name="result">The result.</param>
         void Record(Result result);
+
+        /// <summary>
+        /// Indicate a successfull assert.
+        /// </summary>
+        void Success();
+
+        /// <summary>
+        /// Indicate a failing assert.
+        /// </summary>
+        /// <param name="message">The message to display.</param>
+        /// <param name="stackTrace">Stack trace giving the location of the failure</param>
+        void Failure(string message, string stackTrace);
+
+        /// <summary>
+        /// Indicate an unhandled exception during test execution.
+        /// </summary>
+        /// <param name="exception">The occured exception.</param>
+        void Error(Exception exception);
+
+        void Ignore();
+
+        void AddResultDetails(List<ResultDetails> resultDetails);
     }
 }

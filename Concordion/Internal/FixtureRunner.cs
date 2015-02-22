@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Concordion.Api;
@@ -17,6 +18,8 @@ namespace Concordion.Internal
 
         private SpecificationConfig m_SpecificationConfig;
 
+        public string ResultPath { get; private set; }
+
         public IResultSummary Run(object fixture)
         {
             try
@@ -24,9 +27,9 @@ namespace Concordion.Internal
                 this.m_Fixture = fixture;
                 this.m_Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
                 this.m_SpecificationConfig = new SpecificationConfig().Load(fixture.GetType());
-                this.m_Target = new FileTarget(m_SpecificationConfig.BaseOutputDirectory);
+                this.m_Target = new FileTarget(this.m_SpecificationConfig.BaseOutputDirectory);
 
-                var fileExtensions = m_SpecificationConfig.SpecificationFileExtensions;
+                var fileExtensions = this.m_SpecificationConfig.SpecificationFileExtensions;
                 if (fileExtensions.Count > 1)
                 {
                     return RunAllSpecifications(fileExtensions);
@@ -44,7 +47,7 @@ namespace Concordion.Internal
             {
                 Console.WriteLine(e);
                 var exceptionResult = new SummarizingResultRecorder();
-                exceptionResult.Record(Result.Exception);
+                exceptionResult.Error(e);
                 return exceptionResult;
             }
         }
@@ -66,19 +69,21 @@ namespace Concordion.Internal
             }
             if (!anySpecExecuted)
             {
-                testSummary.Record(Result.Exception);
-                Console.WriteLine("no active specification found for fixture: {0}", m_Fixture.GetType().FullName);
+                testSummary.Error(new AssertionErrorException(string.Format(
+                    "no active specification found for fixture: {0}", this.m_Fixture.GetType().FullName)));
             }
             return testSummary;
         }
 
         private IResultSummary RunSingleSpecification(string fileExtension)
         {
+            var specificationLocator = new ClassNameBasedSpecificationLocator(fileExtension);
+            ResultPath = m_Target.ResolvedPathFor(specificationLocator.LocateSpecification(m_Fixture));
             var concordionExtender = new ConcordionBuilder();
             concordionExtender
                 .WithSource(m_Source)
                 .WithTarget(m_Target)
-                .WithSpecificationLocator(new ClassNameBasedSpecificationLocator(fileExtension));
+                .WithSpecificationLocator(specificationLocator);
             var extensionLoader = new ExtensionLoader(m_SpecificationConfig);
             extensionLoader.AddExtensions(m_Fixture, concordionExtender);
             var concordion = concordionExtender.Build();
@@ -91,15 +96,15 @@ namespace Concordion.Internal
 
             if (singleResult.HasExceptions)
             {
-                resultSummary.Record(Result.Exception);
+                resultSummary.AddResultDetails(singleResult.ErrorDetails);
             }
             else if (singleResult.HasFailures)
             {
-                resultSummary.Record(Result.Failure);
+                resultSummary.AddResultDetails(singleResult.FailureDetails);
             }
             else
             {
-                resultSummary.Record(Result.Success);
+                resultSummary.Success();
             }
         }
     }

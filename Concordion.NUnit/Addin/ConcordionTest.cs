@@ -39,14 +39,13 @@ namespace Concordion.NUnit.Addin
 
         public override TestResult Run(EventListener listener, ITestFilter filter)
         {
-            listener.TestStarted(TestName);
+            listener.TestStarted(this.TestName);
 
             Fixture = Reflect.Construct(m_FixtureType);
-
             RunFixtureSetUp();
-
-            var testResult = NUnitTestResult(new FixtureRunner().Run(Fixture));
-
+            var fixtureRunner = new FixtureRunner();
+            var concordionResult = fixtureRunner.Run(Fixture);
+            var testResult = NUnitTestResult(concordionResult, fixtureRunner.ResultPath);
             RunFixtureTearDown();
 
             listener.TestFinished(testResult);
@@ -85,21 +84,25 @@ namespace Concordion.NUnit.Addin
             }
         }
 
-        private TestResult NUnitTestResult(IResultSummary concordionResult)
+        private TestResult NUnitTestResult(IResultSummary concordionResult, string resultPath)
         {
             var testResult = new TestResult(this);
 
             if (concordionResult.HasExceptions)
             {
-                testResult.Error(new NUnitException("Exception in Concordion test: please see Concordion test reports"));
+                var errorDetails = concordionResult.ErrorDetails.First();
+                testResult.Error(errorDetails.Exception);
+                testResult.SetResult(testResult.ResultState, 
+                                     resultPath + Environment.NewLine + testResult.Message, 
+                                     testResult.StackTrace);
             }
             else if (concordionResult.HasFailures)
             {
-                testResult.Failure("Concordion Test Failures: " + concordionResult.FailureCount,
-                                   "for stack trace, please see Concordion test reports");
+                var failureDetails = concordionResult.FailureDetails.First();
+                testResult.Failure(resultPath + Environment.NewLine + failureDetails.Message, failureDetails.StackTrace);
             } else
             {
-                testResult.Success();
+                testResult.Success(resultPath);
             }
 
             return testResult;
