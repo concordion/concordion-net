@@ -84,7 +84,6 @@
   <ItemGroup>
     <Compile Include="Api\Resource_Fixture.cs" />
     <Compile Include="Integration\FileTarget_Fixture.cs" />
-    <Compile Include="Integration\Result\NUnitAddinTest.cs" />
     <Compile Include="Internal\DummyContainingTestInNameTest.cs" />
     <Compile Include="Internal\SpecificationLocatorTest.cs" />
     <Compile Include="Listener\DocumentStructureImproverTest.cs" />
