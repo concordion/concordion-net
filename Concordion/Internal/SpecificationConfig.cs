@@ -69,7 +69,7 @@ namespace Concordion.Internal
 
         public SpecificationConfig()
         {
-            this.BaseInputDirectory = Directory.GetCurrentDirectory();
+            this.BaseInputDirectory = null; //a value of null indicates that specifications are embedded in DLL file
             this.BaseOutputDirectory = Environment.GetEnvironmentVariable("TEMP");
             this.SpecificationFileExtensions = new List<string> {"html"};
             this.ConcordionExtensions = new Dictionary<string, string>();

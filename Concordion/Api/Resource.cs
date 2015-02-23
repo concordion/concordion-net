@@ -56,6 +56,20 @@ namespace Concordion.Api
             set;
         }
 
+        public string FixtureAssemblyName
+        {
+            get; 
+            private set;
+        }
+
+        public string ReducedPath
+        {
+            get
+            {
+                return Path.RemoveFirst(FixtureAssemblyName.Replace('.', PATH_SEPARATOR) + PATH_SEPARATOR);
+            }
+        }
+
         /// <summary>
         /// Gets or sets the parts of the Path
         /// </summary>
@@ -147,6 +161,12 @@ namespace Concordion.Api
             {
                 Name = Parts[Parts.Length - 1];
             }
+        }
+
+        public Resource(string path, string fixtureAssemblyName)
+            : this(path)
+        {
+            this.FixtureAssemblyName = fixtureAssemblyName;
         }
 
         #endregion

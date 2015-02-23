@@ -111,6 +111,7 @@
     <Compile Include="Concordion\Command\VerifyRows\TableBodySupportTest.cs" />
     <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
     <Compile Include="Concordion\ConcordionTest.cs" />
+    <Compile Include="Concordion\Configuration\BaseInputDirectoryTest.cs" />
     <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
     <Compile Include="Concordion\ExampleTest.cs" />
     <Compile Include="Concordion\Extension\AbstractExtensionTestCase.cs" />
@@ -431,6 +432,9 @@
     <EmbeddedResource Include="Concordion\Integration\NUnitRunner.html" />
     <Content Include="Concordion\Command\AssertEquals\contents.html" />
     <EmbeddedResource Include="Concordion\Command\EvaluatingCommands.html" />
+    <EmbeddedResource Include="Concordion\Configuration\BaseInputDirectory.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Concordion\Integration\ReSharper.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
