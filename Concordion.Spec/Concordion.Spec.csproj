@@ -149,6 +149,7 @@
     <Compile Include="Concordion\Extension\Resource\ResourceExtensionTest.cs" />
     <Compile Include="Concordion\Integration\IntegrationTest.cs" />
     <Compile Include="Concordion\Integration\ConstructorTest.cs" />
+    <Compile Include="Concordion\Integration\NUnitRunnerTest.cs" />
     <Compile Include="Concordion\Integration\SetupMethodTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
     <Compile Include="Concordion\Results\AssertEquals\Failure\EmptyFailureTest.cs" />
@@ -181,6 +182,10 @@
     <Compile Include="Support\TestRig.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Concordion.Runners\Concordion.Runners.csproj">
+      <Project>{c57b6220-6ce6-4165-9144-214be62ce074}</Project>
+      <Name>Concordion.Runners</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Concordion\Concordion.csproj">
       <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
       <Name>Concordion</Name>
@@ -420,6 +425,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Concordion\Command\AssertEquals\CaseSensitive.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Concordion\Integration\NUnitRunner.html" />
+    <Content Include="Concordion\Integration\ReSharper.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

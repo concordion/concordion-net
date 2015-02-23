@@ -15,13 +15,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using NUnit.Framework;
 
 namespace Concordion.Integration
 {
     [AttributeUsage(AttributeTargets.Class)]
-    public class ConcordionTestAttribute : Attribute
+    public class ConcordionTestAttribute : TestFixtureAttribute
     {
+        public const string AttributeIdentifier = "Concordion.Integration.ConcordionTestAttribute";
+
         public string Name
         {
             get;
