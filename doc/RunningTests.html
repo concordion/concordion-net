@@ -28,14 +28,21 @@
       <!-- menuBar  -->
       <div class="content">
         <h1>Run Concordion.NET Tests with NUnit</h1>
-        <p>Similar to the <a href="http://concordion.org/">Java version of Concordion</a>, Concordion.NET integrates with one of the
-          most popular testing frameworks. Concordion.NET provides an NUnit Addin that allows executing <a href="index.html">active
+        <p>Concordion.NET integrates with one of the
+          most popular testing frameworks. Concordion.NET provides an NUnit Addin 
+		that allows running
+		<a href="index.html">executable
             specifications</a> with any NUnit environment that supports NUnit Addins. 
 		We describe how to run Concordion.NET tests with </p>
 		  <ul>
 			  <li><a href="#stand-alone">stand alone</a> NUnit test 
 		runners, as well as </li>
-			  <li>NUnit test runners <a href="#visual-studio">within Visual Studio</a>.</li>
+			  <li>NUnit test runners <a href="#visual-studio">within Visual Studio</a>.<ul>
+				  <li><a href="#testdriven.net">TestDriven.NET</a></li>
+				  <li><a href="#test-adapter">NUnit Test Adapter</a></li>
+				  <li><a href="#resharper">ReSharper</a></li>
+			  </ul>
+			  </li>
 		  </ul>
 		  <h2>Prepare your Visual Studio project containing Concordion.NET tests</h2>
 		  <p>Similar to the kickstart project described in the
@@ -43,7 +50,9 @@
 		  setup your Spec project in Visual Studio as follows:</p>
         <ol>
           <li>If you have not already done, <a href="Download.html">download
-              Concordion.NET</a>.</li>
+              Concordion.NET</a> or install the
+	  <a href="https://www.nuget.org/packages/Concordion.NET/" class="externalLink">NuGet package of 
+	  Concordion.NET</a>.</li>
             <li>Make sure that the following DLLs are
 			<a class="externalLink" href="http://msdn.microsoft.com/en-us/library/wkze6zky%28VS.80%29.aspx">referenced
               in your project</a>. You find the Concordion.dll and the necessary OGNL.dll in the package you have
@@ -55,7 +64,7 @@
 				<li><span style="font-weight: bold;">nunit.framework.dll</span></li>
 				<li><span style="font-weight: bold;">OGNL.dll</span></li>
 			</ul>
-			<li>Add the attribute "[assembly: RequiredAddin("ConcordionNUnitAddin")]" to the AssemblyInfo.cs 
+			<li>Add the attribute [assembly: RequiredAddin("ConcordionNUnitAddin")] to the AssemblyInfo.cs 
 			of your project. This tells NUnit that the
 			<a class="externalLink" href="http://www.nunit.org/index.php?p=requiredAddin&amp;r=2.6.3">Concordion-NUnit-Addin
               is required</a> to run your Concordion.NET tests.</li>
@@ -78,7 +87,9 @@
         <ol>
           <li>First download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&amp;r=2.6.3">install NUnit</a>.</li>
           <li>If you have not already done, <a href="Download.html">download
-              Concordion.NET</a>.</li>
+              Concordion.NET</a> or install the
+	  <a href="https://www.nuget.org/packages/Concordion.NET/" class="externalLink">NuGet package of 
+	  Concordion.NET</a>.</li>
           <li>Coppy the Concordion.NUnit.dll into the addin directory of 
 		  your NUnit installation
             (&lt;NUnit-installation-path&gt;\bin\addins). <br>Please, make sure to use the latest version of this DLL, when
@@ -108,7 +119,9 @@
         <ol>
           <li>First download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&amp;r=2.6.3">install NUnit</a>.</li>
           <li>If you have not already done, <a href="Download.html">download
-              Concordion.NET</a>.</li>
+              Concordion.NET</a> or install the
+	  <a href="https://www.nuget.org/packages/Concordion.NET/" class="externalLink">NuGet package of 
+	  Concordion.NET</a>.</li>
           <li>Copy the Concordion.NUnit.dll into the addin directory of 
 		  your NUnit installation
             (&lt;NUnit-installation-path&gt;\bin\addins). <br>Please, make sure to use the latest version of this DLL, when
@@ -122,54 +135,45 @@
         <p>If you want to debug your Concordion.NET tests, you can do this in the same way as <a class="externalLink" href="http://erraticdev.blogspot.co.at/2012/01/running-or-debugging-nunit-tests-from.html">debugging
             NUnit tests</a></p>
 		  <h2 id="visual-studio">Using NUnit test runners integrated in Visual Studio</h2>
-		  <p>In general there are several ways to run automated tests within 
-		  Visual Studio (e.g. TestDriven.NET, ReSharper, Test Adapter, Gallio, 
-		  etc.). Please, find here a summary for Concordion.NET tests right in 
+		  <p>There are several ways to run Concordion.NET automated tests within 
+		  Visual Studio (e.g. TestDriven.NET, ReSharper, Test Adapter,  
+		  etc.). Please, find here a summary on how to run Concordion.NET tests right in 
 		  Visual Studio.</p>
-		  <h3>TestDriven.NET</h3>
+		  <h3 id="testdriven.net">TestDriven.NET</h3>
 		  <p>
 		  You can use <a class="externalLink" href="http://testdriven.net">TestDriven.NET</a> 
 		  to execute Concordion.NET tests within Visual Studio.</p>
 		  <ol>
 			  <li>Install TestDriven.NET</li>
 			  <li>If you have not already done, <a href="Download.html">download
-              Concordion.NET</a>.</li>
-			  <li>Copy Concordion.NUnit.dll to the addin directory of the latest 
+              Concordion.NET</a> or install the
+	  <a href="https://www.nuget.org/packages/Concordion.NET/" class="externalLink">NuGet package of 
+	  Concordion.NET</a>.</li>
+			  <li>Copy Concordion.NUnit.dll into the addin directory of the latest 
 			  NUnit version in the installation directory of TestDriven.NET (&lt;testdriven.net-installation-path&gt;\NUnit\2.6\addins)</li>
-			  <li>To run a test 
+			  <li>To run a test, 
 		  please use the &quot;Run Test(s)&quot; command of TestDriven.NET on your 
 		  Concordion.NET fixture class (<a href="http://testdriven.net/quickstart.aspx">http://testdriven.net/quickstart.aspx</a>).</li>
 		  </ol>
 		  <p>When you run Concordion.NET tests with TestDriven.NET in Visual 
 		  Studio, you should see an output similar to:</p>
-		  <pre class="console">------ Test started: Assembly: Kickstart.Spec.dll ------ <br>Processed specifications : C:\concordion-test\Kickstart\Spec\HelloWorld\HelloWorld.html<br>1 passed, 0 failed, 0 skipped, took 0,67 seconds (NUnit 2.6.2).
-		  </pre>
-		  <h3>ReSharper</h3>
-		  <p>Concordion.NET provides a
-		  <a class="externalLink" href="http://nunit.org/index.php?p=suiteBuilders&amp;r=2.6.3">
-		  SuiteBuilder Addin</a> for NUnit to run active specifications. When 
-		  NUnit discovers a class containing Concordion.NET fixture code 
-		  annotated with [ConcordionTest], the Concordion.NUnit addin loads the 
-		  related HTML specification document and creates a test instance that 
-		  is executed with the help of NUnit.</p>
-		  <p>Unfortunately, ReSharper uses not NUnit but its own mechanism to 
-		  find tests(<a href="http://confluence.jetbrains.com/display/NETCOM/4.09+Test+Framework+Support+(R8%2529">http://confluence.jetbrains.com/display/NETCOM/4.09+Test+Framework+Support+%28R8%29</a>). 
-		  Thus, it would be necessary to write a ReSharper plugin to recognize 
-		  classes annotated with [ConcordionTest] and use the ReSharper NUnit 
-		  support to execute them. NUnit 3.0 will probably comply with 
-		  interfaces consumed by ReSharper, which would make the implementation 
-		  of such a ReSharper plugin easier.</p>
-		  <h3>NUnit Test Adapter</h3>
-		  <p>Since Visual Studio 2012, Microsoft supports <a class="externalLink" href="http://blogs.msdn.com/b/visualstudioalm/archive/2012/03/08/what-s-new-in-visual-studio-11-beta-unit-testing.aspx">
+		  <pre class="console">------ Test started: Assembly: Kickstart.Spec.dll ------ <br>Processed specifications : C:\concordion-test\Kickstart\Spec\HelloWorld\HelloWorld.html<br>1 passed, 0 failed, 0 skipped, took 0,67 seconds (NUnit 2.6.2).</pre>
+		  <h3 id="test-adapter">NUnit Test Adapter</h3>
+		  <p>Since version 2012, Visual Studio supports <a class="externalLink" href="http://blogs.msdn.com/b/visualstudioalm/archive/2012/03/08/what-s-new-in-visual-studio-11-beta-unit-testing.aspx">
 		  3rd party test runners</a> to execute their tests right inside Visual 
 		  Studio. This would allow using the NUnit Test Adapter for Visual 
 		  Studio to run Concordion.NET tests.</p>
-		  <p>Please note that at the time of writing the <a class="externalLink" href="http://nunit.org/index.php?p=vsTestAdapter&amp;r=2.6.2">NUnit
-            Test Adapter for Visual Studio</a> needs an <a class="externalLink" href="https://github.com/nunit/nunit-vs-adapter/issues/9">update
-            to fully support addins</a>. Thus, we have to wait for the necessary 
-		  bug fix in NUnit to be able to run Concordion.NET tests with the NUnit 
-		  Test Adapter. Please, use one of the other methods described above to 
-		  run your Concordion.NET tests instead.</p>
+		  <p>Please note that at the time of writing an <a class="externalLink" href="https://github.com/nunit/nunit-vs-adapter/issues/9">issue of the NUnit Test 
+		  Adapter</a> prevents the execution of Concordion.NET tests based on the 
+		  NUnit addin. Until the issue is fixed by the NUnit team, you can use 
+		  Test Runner described below as a work around to run your Concoridon.NET tests with 
+		  the NUnit Test Adapter.</p>
+		  <p>When you want to use the Test Runner, make sure to remove the 
+		  [assembly: RequiredAddin("ConcordionNUnitAddin&quot;)] from the projects AssemblyInfo.cs. 
+		  Otherwise the issue in the NUnit Test Adapter prevents your 
+		  Concordion.NET tests being found by the NUnit Test Adapter.</p>
+		  <iframe src="Concordion/Integration/NUnitRunner.html" onload="setIframeHeight(this.id)" name="testrunner" id="testrunner" width="100%" height="600" border="0" frameborder="0"></iframe>
+		  <iframe src="Concordion/Integration/ReSharper.html" onload="setIframeHeight(this.id)" name="resharper" id="resharper" width="100%" height="800" border="0" frameborder="0"></iframe>
       </div>
       <!-- content --> 
 	  
