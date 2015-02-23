@@ -74,7 +74,7 @@ namespace Concordion.Internal.Commands
             }
         }
 
-        private void AnnounceFailure(Exception exception, Element element, string expression)
+        private void AnnounceError(Exception exception, Element element, string expression)
         {
             foreach (var listener in m_Listeners)
             {
@@ -127,23 +127,24 @@ namespace Concordion.Internal.Commands
 
                 if (result == Result.Success)
                 {
+                    resultRecorder.Success();
                     AnnounceSuccess(element);
                 }
                 else if (result == Result.Ignored)
                 {
+                    resultRecorder.Ignore();
                     AnnounceIgnored(element);
                 }
                 else
                 {
+                    resultRecorder.Failure(string.Format("test {0} failed", href), commandCall.Element.ToXml());
                     AnnounceFailure(element);
                 }
-
-                resultRecorder.Record(result);
             }
-            catch
+            catch (Exception e)
             {
-                AnnounceFailure(element);
-                resultRecorder.Record(Result.Failure);
+                resultRecorder.Error(e);
+                AnnounceError(e, element, expression);
             }
         }
 

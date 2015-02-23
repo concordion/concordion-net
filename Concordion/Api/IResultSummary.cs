@@ -71,5 +71,9 @@ namespace Concordion.Api
         /// <param name="writer">The writer.</param>
         /// <param name="fixture">The fixture.</param>
         void Print(TextWriter writer, object fixture);
+
+        List<ResultDetails> FailureDetails { get; }
+
+        List<ResultDetails> ErrorDetails { get; } 
     }
 }

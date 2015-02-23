@@ -24,9 +24,11 @@ namespace Concordion.Spec.Concordion.Command.AssertEquals
 
     public class Greeter
     {
+        public static string greeting = "Hello World!";
+
         public string GetMessage()
         {
-            return "Hello World!";
+            return greeting;
         }
     }
 }

@@ -24,13 +24,13 @@ namespace Concordion.Internal.Commands
     {
         protected override void ProcessTrueResult(CommandCall commandCall, IResultRecorder resultRecorder)
         {
-            resultRecorder.Record(Result.Success);
+            resultRecorder.Success();
             AnnounceSuccess(commandCall.Element);
         }
 
         protected override void ProcessFalseResult(CommandCall commandCall, IResultRecorder resultRecorder)
         {
-            resultRecorder.Record(Result.Failure);
+            resultRecorder.Failure("expected true but was false", commandCall.Element.ToXml());
             string expected = commandCall.Element.Text;
             AnnounceFailure(commandCall.Element, expected, "== false");
         }
