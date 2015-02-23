@@ -68,7 +68,7 @@ namespace Concordion.Internal.Commands
             }
             catch (Exception e)
             {
-                resultRecorder.Record(Result.Exception);
+                resultRecorder.Error(e);
                 AnnounceThrowableCaught(commandCall.Element, e, commandCall.Expression);
             }
         }
@@ -81,7 +81,7 @@ namespace Concordion.Internal.Commands
             }
             catch (Exception e)
             {
-                resultRecorder.Record(Result.Exception);
+                resultRecorder.Error(e);
                 AnnounceThrowableCaught(commandCall.Element, e, commandCall.Expression);
             }
         }
@@ -94,7 +94,7 @@ namespace Concordion.Internal.Commands
             }
             catch (Exception e)
             {
-                resultRecorder.Record(Result.Exception);
+                resultRecorder.Error(e);
                 AnnounceThrowableCaught(commandCall.Element, e, commandCall.Expression);
             }
         }

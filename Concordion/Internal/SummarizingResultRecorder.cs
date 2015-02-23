@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Concordion.Api;
 using System.IO;
 
@@ -25,7 +24,7 @@ namespace Concordion.Internal
     {
         #region Properties
 
-        private List<Result> RecordedResults
+        private List<ResultDetails> RecordedDetailedResults
         {
             get;
             set;
@@ -37,22 +36,12 @@ namespace Concordion.Internal
 
         public SummarizingResultRecorder()
         {
-            RecordedResults = new List<Result>();
+            RecordedDetailedResults = new List<ResultDetails>();
         }
 
         #endregion
 
         #region Methods
-
-        private long GetCount(Result result)
-        {
-            long count = 0;
-            foreach (Result candidate in RecordedResults)
-            {
-                if (candidate == result) count++;
-            }
-            return count;
-        }
 
         private IFixtureState DetermineFixtureState(object fixture)
         {
@@ -76,7 +65,32 @@ namespace Concordion.Internal
 
         public void Record(Result result)
         {
-            RecordedResults.Add(result);
+            RecordedDetailedResults.Add(new ResultDetails(result));
+        }
+
+        public void Success()
+        {
+            RecordedDetailedResults.Add(new ResultDetails(Result.Success));
+        }
+
+        public void Failure(string message, string stackTrace)
+        {
+            RecordedDetailedResults.Add(new ResultDetails(Result.Failure, message, stackTrace));
+        }
+
+        public void Error(Exception exception)
+        {
+            RecordedDetailedResults.Add(new ResultDetails(Result.Exception, exception));
+        }
+
+        public void Ignore()
+        {
+            RecordedDetailedResults.Add(new ResultDetails(Result.Ignored));
+        }
+
+        public void AddResultDetails(List<ResultDetails> resultDetails)
+        {
+            RecordedDetailedResults.AddRange(resultDetails);
         }
 
         #endregion
@@ -89,7 +103,7 @@ namespace Concordion.Internal
         /// <value>The success count.</value>
         public long SuccessCount
         {
-            get { return GetCount(Result.Success); }
+            get { return this.RecordedDetailedResults.LongCount(resultDetails => resultDetails.IsSuccess); }
         }
 
         /// <summary>
@@ -98,7 +112,7 @@ namespace Concordion.Internal
         /// <value>The failure count.</value>
         public long FailureCount
         {
-            get { return GetCount(Result.Failure); }
+            get { return this.RecordedDetailedResults.LongCount(resultDetails => resultDetails.IsFailure); }
         }
 
         /// <summary>
@@ -107,7 +121,7 @@ namespace Concordion.Internal
         /// <value>The exception count.</value>
         public long ExceptionCount
         {
-            get { return GetCount(Result.Exception); }
+            get { return this.RecordedDetailedResults.LongCount(resultDetails => resultDetails.IsError); }
         }
 
         /// <summary>
@@ -170,6 +184,22 @@ namespace Concordion.Internal
             }
             writer.WriteLine();
             writer.Flush();
+        }
+
+        public List<ResultDetails> FailureDetails
+        {
+            get
+            {
+                return this.RecordedDetailedResults.Where(resultDetails => resultDetails.IsFailure).ToList();
+            }
+        }
+
+        public List<ResultDetails> ErrorDetails
+        {
+            get
+            {
+                return this.RecordedDetailedResults.Where(resultDetails => resultDetails.IsError).ToList();
+            }
         }
 
         #endregion

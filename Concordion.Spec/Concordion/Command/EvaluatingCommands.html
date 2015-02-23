@@ -1,0 +1,61 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <h2>Evaluating Commands</h2>
+    
+    <p>
+		This specification uses commands that can be used to evaluate an 
+		expression.</p>
+	<h3>
+		assertequals</h3>
+	<p>
+		This line is marked green, if the method ForAssertEquals() returns the 
+		following string: <span concordion:assertequals="ForAssertEquals()">assertequals</span></p>
+	<h3>
+		asserttrue</h3>
+	<p>
+		This line is marked green, if the method ForAssertTrue() returns <span concordion:asserttrue="ForAssertTrue()">true</span>.</p>
+	<h3>
+		assertfalse</h3>
+	<p>
+		This line is marked green, if the method ForAssertFalse() returns <span concordion:assertfalse="ForAssertFalse()">false</span>.</p>
+	<h3>
+		run</h3>
+	<p>
+		This line is marked green, if the run command executes the <a concordion:run="concordion" href="AssertEquals\AssertEquals.html">AssertEquals</a> 
+		specification correctly.</p>
+	<h3>
+		verify rows</h3>
+	<p>
+		This test is marked green, if the method ForVerifyRows() returns the 
+		following results:</p>
+	<table concordion:verifyRows="#value : ForVerifyRows()">
+	  <thead>
+	    <tr>
+			<th concordion:assertEquals="#value">Expected Values</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+			<td>value1</td>
+		</tr>
+		<tr>
+			<td>value2</td>
+		</tr>
+      </tbody>
+	</table>
+	<h3>
+		exceptions</h3>
+	<p>
+		This line is marked green, if the method ForException() 
+		<span concordion:execute="ForException()">doesn't throws an exception</span>.</p>
+
+    
+
+</body>
+</html>

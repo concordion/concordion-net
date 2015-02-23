@@ -122,7 +122,7 @@ namespace Concordion.Internal.Commands
             
             for (; index < detailRows.Count; index++) {
                 Row detailRow = detailRows[index];
-                resultRecorder.Record(Result.Failure);
+                resultRecorder.Failure(string.Format("missing row {0}", detailRow), commandCall.Element.ToXml());
                 AnnounceMissingRow(detailRow.RowElement);
             }
         }

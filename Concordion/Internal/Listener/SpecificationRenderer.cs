@@ -60,7 +60,7 @@ namespace Concordion.Internal.Listener
                 var description = this.Target.ResolvedPathFor(processingEvent.Resource);
                 if (!string.IsNullOrEmpty(description))
                 {
-                    Console.WriteLine(description);
+                    Console.WriteLine("Processed: {0}", description);
                 }
             } 
             catch (Exception e) 

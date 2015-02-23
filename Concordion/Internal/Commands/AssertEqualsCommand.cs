@@ -88,12 +88,13 @@ namespace Concordion.Internal.Commands
 
             if (this.m_Comparer.Compare(actual, expected) == 0)
             {
-                resultRecorder.Record(Result.Success);
+                resultRecorder.Success();
                 AnnounceSuccess(element);
             }
             else
             {
-                resultRecorder.Record(Result.Failure);
+                resultRecorder.Failure(string.Format("expected {0} but was {1}", expected, actual), 
+                                       element.ToXml());
                 AnnounceFailure(element, expected, actual);
             }
         }

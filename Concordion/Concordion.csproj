@@ -130,6 +130,7 @@
     <Compile Include="Api\Listener\SurplusRowEvent.cs" />
     <Compile Include="Api\Resource.cs" />
     <Compile Include="Api\Result.cs" />
+    <Compile Include="Api\ResultDetails.cs" />
     <Compile Include="Api\RunnerResult.cs" />
     <Compile Include="Api\UnimplementedAttribute.cs" />
     <Compile Include="Concordion.cs" />
