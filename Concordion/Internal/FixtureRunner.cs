@@ -87,8 +87,21 @@ namespace Concordion.Internal
             }
             if (!anySpecExecuted)
             {
+                string specPath;
+                if (!string.IsNullOrEmpty(m_SpecificationConfig.BaseInputDirectory))
+                {
+                    specPath = string.Format("directory {0}",
+                        Path.GetFullPath(m_SpecificationConfig.BaseInputDirectory)); 
+                }
+                else
+                {
+                    specPath = string.Format("assembly {0}",
+                        m_Fixture.GetType().Assembly.GetName().Name);
+                }
                 testSummary.Error(new AssertionErrorException(string.Format(
-                    "no active specification found for fixture: {0}", this.m_Fixture.GetType().FullName)));
+                    "no active specification found for {0} in {1}", 
+                    this.m_Fixture.GetType().Name,
+                    specPath)));
             }
             return testSummary;
         }
