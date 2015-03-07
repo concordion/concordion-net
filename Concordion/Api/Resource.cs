@@ -98,7 +98,7 @@ namespace Concordion.Api
                 {
                     parentPath.Append(Parts[i] + PATH_SEPARATOR);
                 }
-                return new Resource(parentPath.ToString());
+                return new Resource(parentPath.ToString(), FixtureAssemblyName);
             }
         }
 
@@ -199,7 +199,7 @@ namespace Concordion.Api
 
             Check.IsFalse(subPath.Contains(RELATIVE_PATH_INDICATOR), String.Format("The {0} operator is currently only supported at the start of expressions", RELATIVE_PATH_INDICATOR));
 
-            return new Resource(p.Path + subPath);
+            return new Resource(p.Path + subPath, FixtureAssemblyName);
         }
 
         /// <summary>
