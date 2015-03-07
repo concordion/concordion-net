@@ -1,5 +1,5 @@
 ﻿* {
-  font-family: Arial;
+  font-family: Arial, Helvetica, SansSerif;
 }
 pre {
   padding: 6px 28px 6px 28px;
@@ -9,8 +9,9 @@ pre, pre *, code, code *, kbd {
   font-family: Courier New, Courier;
   font-size: 10pt;
 }
-h1, h1 * {
-  font-size: 24pt;	
+h1 {
+  margin-top: 16px;  
+  font-size: 24pt;
 }
 h2 {
   margin-top: 32px;
@@ -111,4 +112,9 @@ pre.console {
 
 .code .string {
   color: #2a00ff;
+}
+
+.externalLink {
+  background: url("image/ExternalLink.png") center right no-repeat;
+  padding-right: 12px;
 }
