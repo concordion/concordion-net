@@ -12,7 +12,7 @@ namespace Concordion.Internal
     {
         private object m_Fixture;
 
-        private EmbeddedResourceSource m_Source;
+        private ISource m_Source;
 
         private FileTarget m_Target;
 
@@ -20,13 +20,31 @@ namespace Concordion.Internal
 
         public string ResultPath { get; private set; }
 
+        public FixtureRunner() { }
+
+        public FixtureRunner(SpecificationConfig specificationConfig)
+            : this()
+        {
+            m_SpecificationConfig = specificationConfig;
+        }
+
         public IResultSummary Run(object fixture)
         {
             try
             {
                 this.m_Fixture = fixture;
-                this.m_Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
-                this.m_SpecificationConfig = new SpecificationConfig().Load(fixture.GetType());
+                if (m_SpecificationConfig == null)
+                {
+                    this.m_SpecificationConfig = new SpecificationConfig().Load(fixture.GetType());
+                }
+                if (!string.IsNullOrEmpty(m_SpecificationConfig.BaseInputDirectory))
+                {
+                    this.m_Source = new FileSource(m_SpecificationConfig.BaseInputDirectory);
+                }
+                else
+                {
+                    this.m_Source = new EmbeddedResourceSource(fixture.GetType().Assembly);
+                }
                 this.m_Target = new FileTarget(this.m_SpecificationConfig.BaseOutputDirectory);
 
                 var fileExtensions = this.m_SpecificationConfig.SpecificationFileExtensions;
@@ -69,8 +87,21 @@ namespace Concordion.Internal
             }
             if (!anySpecExecuted)
             {
+                string specPath;
+                if (!string.IsNullOrEmpty(m_SpecificationConfig.BaseInputDirectory))
+                {
+                    specPath = string.Format("directory {0}",
+                        Path.GetFullPath(m_SpecificationConfig.BaseInputDirectory)); 
+                }
+                else
+                {
+                    specPath = string.Format("assembly {0}",
+                        m_Fixture.GetType().Assembly.GetName().Name);
+                }
                 testSummary.Error(new AssertionErrorException(string.Format(
-                    "no active specification found for fixture: {0}", this.m_Fixture.GetType().FullName)));
+                    "no active specification found for {0} in {1}", 
+                    this.m_Fixture.GetType().Name,
+                    specPath)));
             }
             return testSummary;
         }

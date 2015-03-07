@@ -56,6 +56,20 @@ namespace Concordion.Api
             set;
         }
 
+        public string FixtureAssemblyName
+        {
+            get; 
+            private set;
+        }
+
+        public string ReducedPath
+        {
+            get
+            {
+                return Path.RemoveFirst(FixtureAssemblyName.Replace('.', PATH_SEPARATOR) + PATH_SEPARATOR);
+            }
+        }
+
         /// <summary>
         /// Gets or sets the parts of the Path
         /// </summary>
@@ -84,7 +98,7 @@ namespace Concordion.Api
                 {
                     parentPath.Append(Parts[i] + PATH_SEPARATOR);
                 }
-                return new Resource(parentPath.ToString());
+                return new Resource(parentPath.ToString(), FixtureAssemblyName);
             }
         }
 
@@ -149,6 +163,12 @@ namespace Concordion.Api
             }
         }
 
+        public Resource(string path, string fixtureAssemblyName)
+            : this(path)
+        {
+            this.FixtureAssemblyName = fixtureAssemblyName;
+        }
+
         #endregion
 
         #region Methods
@@ -179,7 +199,7 @@ namespace Concordion.Api
 
             Check.IsFalse(subPath.Contains(RELATIVE_PATH_INDICATOR), String.Format("The {0} operator is currently only supported at the start of expressions", RELATIVE_PATH_INDICATOR));
 
-            return new Resource(p.Path + subPath);
+            return new Resource(p.Path + subPath, FixtureAssemblyName);
         }
 
         /// <summary>

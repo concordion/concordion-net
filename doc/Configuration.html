@@ -28,16 +28,31 @@
       <!-- menuBar  -->
       <div class="content">
         <h1>Configuring Concordion.NET</h1>
-        <p>In contrast to the Java version of Concordion, where configuration is
-          done via system properties, Concordion.NET uses two types of
+        <p>Concordion.NET uses two types of
           configuration files to define basic parameters for the execution of
-          Concordion.NET fixtures.</p>
-        <ol>
-        </ol>
-        <h2>1. Concordion.config</h2>
-        <ol>
-        </ol>
-        This first configuration file contains setting for the test runners to
+          specification tests.</p>
+
+        <h2>1. Project specific configuration</h2>
+        <p>The first configuration file is specific for each project containing
+          Concordion.NET documents and fixtures. This configuration file has the
+          same file name as the DLL file, but the file extension ".dll" is
+          replaced by ".config". The &lt;spec&gt;.config file has to be located in the same
+          directory as your &lt;spec&gt;.dll to be loaded by Concordion.NET.</p>
+        
+        <iframe src="Concordion/Configuration/BaseInputDirectory.html" onload="setIframeHeight(this.id)" name="setup" id="setup" width="100%" height="400" border="0" frameborder="0"></iframe>
+        
+        <h3>BaseOutputDirectory</h3>
+        <p>The BaseOutputDirectory element tells Concordion.NET where to place
+          the resulting Concordion test reports. If this element is
+          not specified then Concordion.NET places the output in the directory
+          defined by the users TEMP environment variable. </p>
+        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Specification&gt;
+  &lt;BaseOutputDirectory path="C:\Dev\concordion-net\Results" /&gt;
+&lt;/Specification&gt;</pre>
+
+        <h2>2. Concordion.config</h2>
+        This second configuration file contains setting for the test runners to
         be used. The default test runner of Concordion.NET is the RunTestRunner.
         An example configuration is shown below. The
         config file has to be located in the same directory as the
@@ -65,23 +80,6 @@
  	 	PublicKeyToken=null" /&gt;
   &lt;/Runners&gt;
 &lt;/Concordion&gt;</pre>
-        <h2>2. Spec-Project specific configuration</h2>
-        <p>The second configuration file is specific for each project containing
-          Concordion.NET documents and fixtures. This configuration file has the
-          same file name as the DLL file, but the file extension ".dll" is
-          replaced by ".config". The &lt;spec&gt;.config file has to be located in the same
-          directory as your &lt;spec&gt;.dll to be loaded by Concordion.NET.</p>
-        <h3>BaseOutputDirectory</h3>
-        <p>The BaseOutputDirectory element tells Concordion.NET where to place
-          the resulting Concordion test reports. If this element is
-          not specified then Concordion.NET places the output in the directory
-          defined by the users TEMP environment variable. </p>
-        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
-&lt;Specification&gt;
-  &lt;BaseOutputDirectory path="C:\Dev\concordion-net\Results" /&gt;
-&lt;/Specification&gt;</pre>
-        <ul>
-        </ul>
       </div>
       <!-- content --> 
 	  
@@ -95,6 +93,25 @@
 	  
 	</div>
     <!-- page -->
+    
+    <script type="text/javascript">
+      function setIframeHeight(id) {
+        var ifrm = document.getElementById(id);
+        var doc = ifrm.contentDocument? ifrm.contentDocument: ifrm.contentWindow.document;
+        ifrm.style.visibility = 'hidden';
+        ifrm.style.height = "10px"; // reset to minimal height ...
+        // IE opt. for bing/msn needs a bit added or scrollbar appears
+        ifrm.style.height = getDocHeight( doc ) + 4 + "px";
+        ifrm.style.visibility = 'visible';
+	  }
+	  function getDocHeight(doc) {
+        doc = doc || document;
+        var body = doc.body, html = doc.documentElement;
+        var height = Math.max( body.scrollHeight, body.offsetHeight, 
+            html.clientHeight, html.scrollHeight, html.offsetHeight );
+        return height;
+	  }
+    </script>
 	
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-543bae9469f79b87" async></script>
 	

@@ -23,21 +23,40 @@ namespace Concordion.Internal
 
         public FileSource(string baseDirectory)
         {
-            this.BaseDirectory = System.IO.Path.GetFullPath(baseDirectory);
+            this.BaseDirectory = Path.GetFullPath(baseDirectory);
         }
 
         #endregion
 
         #region ISource Members
 
-        public System.IO.TextReader CreateReader(Resource resource)
+        public TextReader CreateReader(Resource resource)
         {
-            return new StreamReader(new FileStream(Path.Combine(BaseDirectory, resource.Path), FileMode.Open));
+            return new StreamReader(new FileStream(ExistingFilePath(resource), FileMode.Open));
         }
 
         public bool CanFind(Resource resource)
         {
-            return File.Exists(Path.Combine(BaseDirectory, resource.Path));
+            return ExistingFilePath(resource) != null;
+        }
+
+        #endregion
+
+        #region private methods
+
+        private string ExistingFilePath(Resource resource)
+        {
+            var filePath = Path.Combine(BaseDirectory, resource.Path);
+            if (File.Exists(filePath))
+            {
+                return filePath;
+            }
+            filePath = Path.Combine(BaseDirectory, resource.ReducedPath);
+            if (File.Exists(filePath))
+            {
+                return filePath;
+            }
+            return null;
         }
 
         #endregion

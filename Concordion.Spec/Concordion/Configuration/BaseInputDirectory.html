@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h3>BaseInputDirectory</h3>
+        <p>The BaseInputDirectory element tells Concordion.NET where to search 
+		for executable specifications. If this element is
+          not specified then Concordion.NET searches within the DLL file 
+		containing the fixture classes for related specification documents. </p>
+	<div concordion:execute="#isRun = DirectoryBasedExecuted(#directoryPath)">
+	<p>To <span concordion:assertTrue="#isRun">use the project directory of your Visual Studio project 
+	as your directory to search for specifications</span>, you can use the following configuration:</p>
+        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Specification&gt;
+  &lt;BaseInputDirectory path=&quot;<span concordion:set="#directoryPath">../..</span>" /&gt;
+&lt;/Specification&gt;</pre>
+    </div>
+    <div>
+	<p>To <span concordion:assertTrue="EmbeddedExecuted()">use embedded specifications from 
+	your DLL file</span>, you have to remove the configuration entry for 
+	BaseInputDirectory or set it to an empty string:</p>
+        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Specification&gt;
+  &lt;!-- &lt;BaseInputDirectory path=&quot;" /&gt; --&gt;
+&lt;/Specification&gt;</pre>
+    </div>
+</body>
+</html>
