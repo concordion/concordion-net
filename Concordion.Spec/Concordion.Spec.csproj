@@ -110,6 +110,7 @@
     <Compile Include="Concordion\Command\VerifyRows\Results\SurplusRowsTest.cs" />
     <Compile Include="Concordion\Command\VerifyRows\TableBodySupportTest.cs" />
     <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\VerifyRowsXHTMLNamespaceTest.cs" />
     <Compile Include="Concordion\ConcordionTest.cs" />
     <Compile Include="Concordion\Configuration\BaseInputDirectoryTest.cs" />
     <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
@@ -194,194 +195,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Concordion\Extension\Command\CustomCommand.html" />
-    <EmbeddedResource Include="Concordion\Extension\Configuration\ExtensionConfiguration.html" />
-    <EmbeddedResource Include="Concordion\Extension\Css\CssExtension.html" />
-    <EmbeddedResource Include="Concordion\Extension\Extension.html" />
-    <EmbeddedResource Include="Concordion\Extension\FileSuffix\FileSuffixExtensions.xhtml" />
-    <EmbeddedResource Include="Concordion\Extension\JavaScript\JavaScriptExtension.html" />
-    <EmbeddedResource Include="Concordion\Extension\Listener\ExecuteTableListener.html" />
-    <EmbeddedResource Include="Concordion\Extension\Listener\Listener.html" />
-    <EmbeddedResource Include="Concordion\Extension\Listener\VerifyRowsListener.html" />
-    <EmbeddedResource Include="Concordion\Extension\Resource\ResourceExtension.html" />
-    <EmbeddedResource Include="Concordion\Results\AssertFalse\Failure\OnFailure.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertFalse\Success\OnSuccess.html" />
-    <EmbeddedResource Include="Concordion\Attributes\Attributes.html" />
-    <EmbeddedResource Include="Concordion\Attributes\ConcordionTestAttribute.html" />
-    <EmbeddedResource Include="Concordion\Attributes\IgnoreAttribute.html" />
-    <EmbeddedResource Include="Concordion\Command\CaseInsensitiveCommands.html" />
-    <EmbeddedResource Include="Concordion\Integration\Constructor.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Integration\SetupMethod.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Examples\Demo.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Examples\PartialMatches.html" />
-    <EmbeddedResource Include="Examples\Spike.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Concordion.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Example.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Command.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\AssertEquals.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\Exceptions.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\NestedActions.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\NestedHtmlElements.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\SupportedElements.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\NonString\NonString.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\NonString\NullResult.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\NonString\VoidResult.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\Whitespace\LineContinuations.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\Whitespace\Normalization.html" />
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\Whitespace\Whitespace.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertFalse\AssertFalse.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertTrue\AssertTrue.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Echo\DisplayingNulls.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\Echo\Echo.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\Echo\EscapingHtmlCharacters.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Execute\AccessToLinkHref.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\Execute\Execute.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\Execute\ExecutingTables.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Run\Run.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Set\Set.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\VerifyRows\Results\MissingRows.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\VerifyRows\Results\SurplusRows.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\VerifyRows\TableBodySupport.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\VerifyRows\VerifyRows.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Results\Stylesheet\MissingHeadElement.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="concordion.css">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Command\Results\Stylesheet\Stylesheet.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Integration\Integration.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\Exception\Exception.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\Breadcrumbs\Breadcrumbs.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\Breadcrumbs\DeterminingBreadcrumbs.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\Breadcrumbs\Wording.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertTrue\Failure\Failure.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertTrue\Success\Success.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Success\EmptySuccess.html" />
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Success\HasAttributes.html" />
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Success\HasClassAttribute.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Success\Success.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Failure\Anchors.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Failure\EmptyFailure.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Failure\Failure.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\AssertEquals\Failure\NestedElements.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Concordion\Results\Results.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
@@ -403,39 +217,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\NonString\Boolean.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.xhtml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Configuration\SpecificationSuffixXhtml.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Concordion.Spec.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\Execute\ExecutingList.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Command\AssertEquals\CaseSensitive.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Concordion\Integration\NUnitRunner.html" />
-    <Content Include="Concordion\Command\AssertEquals\contents.html" />
-    <EmbeddedResource Include="Concordion\Command\EvaluatingCommands.html" />
     <EmbeddedResource Include="Concordion\Configuration\BaseInputDirectory.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Content Include="Concordion\Integration\ReSharper.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
