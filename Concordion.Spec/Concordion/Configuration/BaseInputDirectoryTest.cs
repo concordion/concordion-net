@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Concordion.Integration;
 using Concordion.Internal;
+using System.IO;
 
 namespace Concordion.Spec.Concordion.Configuration
 {
@@ -17,12 +18,30 @@ namespace Concordion.Spec.Concordion.Configuration
 
             m_InTestRun = true;
 
+            //work around for bug of NUnit GUI runner
+            baseInputDirectory = baseInputDirectory +
+                                 Path.DirectorySeparatorChar +
+                                 ".." +
+                                 Path.DirectorySeparatorChar +
+                                 this.GetType().Assembly.GetName().Name;
+
             var specificationConfig = new SpecificationConfig().Load(this.GetType());
             specificationConfig.BaseInputDirectory = baseInputDirectory;
             var fixtureRunner = new FixtureRunner(specificationConfig);
             var testResult = fixtureRunner.Run(this);
 
             m_InTestRun = false;
+
+            foreach (var failureDetail in testResult.FailureDetails) {
+                Console.WriteLine(failureDetail.Message);
+                Console.WriteLine(failureDetail.StackTrace);
+            }
+            foreach (var errorDetail in testResult.ErrorDetails)
+            {
+                Console.WriteLine(errorDetail.Message);
+                Console.WriteLine(errorDetail.StackTrace);
+                Console.WriteLine(errorDetail.Exception);
+            }
 
             return !testResult.HasFailures && !testResult.HasExceptions;
         }
