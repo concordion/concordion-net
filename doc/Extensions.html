@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Concordion - Extensions API</title>
+<link media="all" rel="stylesheet" type="text/css" href="css/default.css"/>
+<link media="print"  rel="stylesheet" type="text/css" href="css/print.css"/>
+<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+<style>
+#specFixtureSystem {
+  padding: 20px 20px 20px 64px;
+}
+.exampleTable table {
+  border-collapse: collapse;
+  empty-cells: show;
+  margin: 8px 0px 8px 0px;
+}
+.exampleTable th, .exampleTable td {
+  border: 1px solid #966;
+  padding: 3px;
+  background-color: #ffe4e4;
+}
+</style>
+</head>
+<body id="extensions">
+
+<div class="page">
+
+<div class="header">
+
+    <a href="http://www.opensource.org/">
+    <img class="open-source-logo" src="image/opensource-110x95.png"
+        alt="Open source (Apache 2.0 license)" />
+    </a>
+
+    <a href="/">
+    <img src="image/front-page-banner.png"
+        alt="Concordion is a simple, but powerful, agile acceptance testing tool for Java." />
+    </a>
+
+</div><!-- header -->
+
+      <div class="menuBar">
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="GettingStarted.html">Getting Started</a></li>
+          <li><a href="RunningTests.html">Running Tests</a></li>
+          <li class="selectedTab"><a href="Extensions.html">Extensions</a></li>
+          <li><a href="Configuration.html">Configuration</a></li>
+          <li><a href="Download.html">Download</a></li>
+        </ul>
+      </div><!-- menuBar  -->
+      
+<div class="content">
+
+<h1>Extensions</h1>
+	<p>You can add additional functionality to Concordion.NET with the help of 
+	extensions. For example additional commands, event listeners, or output 
+	modifiers can be introduced based on Concordion.NET extensions.</p>
+	<h2>Extensions API</h2>
+	<p>A dedicated section of the executable specifications describe the
+	<a href="Concordion/Extension/Extension.html">extensions API of 
+	Concordion.NET</a>. The 
+	<a href="https://github.com/concordion/concordion-net/tree/master/Concordion.Spec/Concordion/Extension" class="externalLink">
+	fixture classes demonstrate</a> how to use the extensions API.</p>
+
+<p>
+See also the source code of the <a href="http://concordion.org/Extensions.html">extensions 
+of the Java version of Concordion</a> for 
+examples what can be achived with the help of the extensions API.</p>
+
+<h2>Adding extensions to Concordion.NET</h2>
+<p>Extensions are added to Concordion.NET by:</p>
+<ul>
+  <li>Annotating the fixture class with <code>[Extensions]</code>.  This annotation is parameterised with a list of extension, and/or extension factory, classes to be installed.
+  For example:
+  <pre class="java">[Extensions(typeof(LoggingTooltipExtension.class), typeof(TimestampFormatterExtension.class))]
+public class MyTest {
+...</pre>
+  </li>
+  <li><b>Or</b> annotating public fields in the fixture class with <code>[Extension]</code>.  This allows the extensions to be configured per class instance. For example:
+  <pre class="java">...
+[Extension]
+public ConcordionExtension extension = new ScreenshotExtension().setScreenshotTaker(camera);
+...</pre>
+
+   </li>
+  <li><b>Or</b> by adding configuration entries <code>&lt;Extension&gt;</code> in the 
+  section <code>&lt;ConcordionExtensions&gt;</code> of the configuration file. For example:
+<pre class="console">&lt;ConcordionExtensions&gt;
+    &lt;Extension assembly=&quot;LoggingTooltipExtension" type=&quot;Concordion.Ext.LoggingTooltipExtension&quot; /&gt;
+&lt;/ConcordionExtensions&gt;
+</pre>
+  </li>
+</ul>
+<p>For further details see the 
+<a href="Concordion/Extension/Configuration/ExtensionConfiguration.html">extension configuration</a> specification.</p>
+
+<h2>Building your own extension</h2>
+
+<p>Extensions must implement the 
+<a href="https://github.com/concordion/concordion-net/blob/master/Concordion/Api/Extension/IConcordionExtension.cs">IConcordionExtension</a> interface,
+which allows extensions to hook into the Concordion.NET processing through the 
+<a href="https://github.com/concordion/concordion-net/blob/master/Concordion/Api/Extension/IConcordionExtender.cs">IConcordionExtender</a> interface.</p>
+
+<h3>Example: Adding custom CSS</h3>
+<p>Amongst other features, the <code>IConcordionExtender</code> interface provide a means for adding CSS, JavaScript or arbitrary resources to the Concordion.NET output folder.</p>
+<p>The following example extension copies <code>/my_concordion.css</code> from the classpath to the root folder of the Concordion.NET output, and links to it from the Concordion.NET output HTML.</p>
+<pre class="java">
+using Concordion.Api.Extension;
+
+namespace Com.Acme
+{
+    public class MyCssExtension : IConcordionExtension {
+        public void AddTo(IConcordionExtender concordionExtender) {
+            concordionExtender.WithLinkedCSS("/my_concordion.css",
+                new Resource("/my_concordion.css"));
+        }
+}
+}
+</pre>
+<p>Note: if you have already declared a link to the CSS file in your HTML, you should use <code>concordionExtender.WithResource()</code> rather than <code>concordionExtender.WithLinkedCSS()</code> to avoid a duplicate declaration.</p>
+<p>If you'd prefer to embed the CSS in the HTML, use <code>concordionExtender.WithEmbeddedCSS()</code>. Similar methods exist for including JavaScript in the output, or you can use 
+W<code>ithResource()</code> to copy images or other resources to the output.</p>
+
+</div> <!-- content -->
+
+</div> <!-- page -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58172036-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>
