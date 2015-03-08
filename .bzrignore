@@ -1,8 +1,0 @@
-bin
-obj
-*.user
-*.suo
-deploy
-staging
-Reports
-Concordion.sln.cache
