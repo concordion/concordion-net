@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>Extension Configuration</h1>
-    <p> Extensions can be added to Concordion-NET using an attribute in the fixture class and/or using the configuration
+    <p> Extensions can be added to Concordion.NET using an attribute in the fixture class and/or using the configuration
       file. </p>
     <h2>Attributes</h2>
     <h3>[Extension]</h3>
@@ -137,8 +137,8 @@ namespace Concordion.Spec.Concordion.Extension.Configuration
         <span concordion:assertEquals="#result4">FakeExtension2FromFactory, FakeExtension1</span>.</p>
     </div>
     <!-- ==================================================== -->
-    <h2>Concordion-NET Configuration File</h2>
-    <p>Alternatively, extensions can be specified by setting Concordion-NET configurations. This can be useful, if the
+    <h2>Concordion.NET Configuration File</h2>
+    <p>Alternatively, extensions can be specified by setting Concordion.NET configurations. This can be useful, if the
       extensions need to be configured independently from the fixtures.</p>
     <p>Set the configuration entry <code>&lt;Extension&gt; in the group &lt;ConcordionExtensions&gt; to reference</code>:</p>
     <ul>
@@ -151,7 +151,7 @@ namespace Concordion.Spec.Concordion.Extension.Configuration
     <h4>Examples</h4>
     <!-- ==================================================== -->
     <div class="example">
-      <h4>Example - Concordion-NET Configuration for Extensions</h4>
+      <h4>Example - Concordion.NET Configuration for Extensions</h4>
       <p>Given the following configuration content:</p>
       <pre class="java" concordion:execute="LoadConfiguration(#TEXT)">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;Specification&gt;
