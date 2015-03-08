@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using Concordion.Api;
 using Concordion.Internal;
-using Concordion.NUnit.Addin;
 using NUnit.Framework;
 
 namespace Concordion.Test.Internal
