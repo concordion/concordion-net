@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h3>File extensions for specification documents</h3>
+	<p>Per default Concordion.NET assumes that specification documents have the 
+	file extension &quot;.html&quot;. With the <code>SpecificationFileExtensions</code> 
+	you can define which file extensions you want to use for your specification 
+	documents. You can even use several in parallel. This can be useful, when 
+	you are in the transition from one type of files to another (e.g. from html 
+	to xhtml).</p>
+	<p>To specify that html as well as xhmtl files should be considered as 
+	Concordion.NET specifications, you need to add the following configuration 
+	settings to your configuration:</p>
+	<pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Specification&gt;
+  &lt;SpecificationFileExtensions&gt;
+    &lt;FileExtension name=&quot;html&quot; /&gt;
+    &lt;FileExtension name=&quot;xhtml&quot; /&gt;
+  &lt;/SpecificationFileExtensions&gt;
+&lt;/Specification&gt;</pre>
+</body>
+</html>

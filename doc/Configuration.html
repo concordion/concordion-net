@@ -31,27 +31,19 @@
         <h1>Configuring Concordion.NET</h1>
         <p>Concordion.NET uses two types of
           configuration files to define basic parameters for the execution of
-          specification tests.</p>
+          automated acceptance tests.</p>
 
         <h2>1. Project specific configuration</h2>
         <p>The first configuration file is specific for each project containing
-          Concordion.NET documents and fixtures. This configuration file has the
-          same file name as the DLL file, but the file extension ".dll" is
+          Concordion.NET specifications and/or fixtures. This configuration file has the
+          same name as the DLL file, but the file extension ".dll" is
           replaced by ".config". The &lt;spec&gt;.config file has to be located in the same
           directory as your &lt;spec&gt;.dll to be loaded by Concordion.NET.</p>
         
-        <iframe src="Concordion/Configuration/BaseInputDirectory.html" onload="setIframeHeight(this.id)" name="setup" id="setup" width="100%" height="400" border="0" frameborder="0"></iframe>
+        <iframe src="Concordion/Configuration/BaseInputDirectory.html" onload="setIframeHeight(this.id)" name="input-directory" id="input-directory" width="100%" height="450" border="0" frameborder="0"></iframe>
+        <iframe src="Concordion/Configuration/BaseOutputDirectory.html" onload="setIframeHeight(this.id)" name="output-directory" id="output-directory" width="100%" height="250" border="0" frameborder="0"></iframe>
+        <iframe src="Concordion/Configuration/SpecificationSuffix.html" onload="setIframeHeight(this.id)" name="suffix" id="suffix" width="100%" height="350" border="0" frameborder="0"></iframe>
         
-        <h3>BaseOutputDirectory</h3>
-        <p>The BaseOutputDirectory element tells Concordion.NET where to place
-          the resulting Concordion test reports. If this element is
-          not specified then Concordion.NET places the output in the directory
-          defined by the users TEMP environment variable. </p>
-        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
-&lt;Specification&gt;
-  &lt;BaseOutputDirectory path="C:\Dev\concordion-net\Results" /&gt;
-&lt;/Specification&gt;</pre>
-
         <h2>2. Concordion.config</h2>
         This second configuration file contains setting for the test runners to
         be used. The default test runner of Concordion.NET is the RunTestRunner.

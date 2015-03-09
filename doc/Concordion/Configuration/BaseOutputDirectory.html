@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:concordion="http://www.concordion.org/2007/concordion">
+<link href="../../concordion.css" rel="stylesheet" type="text/css" />
+<body>
+
+    <h3>BaseOutputDirectory</h3>
+        <p>The <code>BaseOutputDirectory</code> element tells Concordion.NET 
+		where to place the resulting Concordion test reports. If this element is 
+		not specified then Concordion.NET places the output in the directory 
+		defined by the users TEMP environment variable.</p>
+	<div concordion:execute="#isRun = DirectoryBasedExecuted(#directoryPath)">
+        <pre class="html">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;Specification&gt;
+  &lt;BaseOutputDirectory path=&quot;C:\Dev\concordion-net\Results&quot; /&gt;
+&lt;/Specification&gt;</pre>
+    </div>
+    </body>
+</html>
