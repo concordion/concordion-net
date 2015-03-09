@@ -36,7 +36,7 @@ Have a bug or a feature request? Please first search for existing and closed iss
 
 ## Project History
 
-History prior to February 2013 is in the [Google Code repository](https://code.google.com/p/concordion-net/).
+History prior to February 2013 can be found in the [Google Code repository](https://code.google.com/p/concordion-net/).
 
 ## License
 
