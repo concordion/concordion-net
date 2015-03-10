@@ -15,12 +15,13 @@
               Concordion.NET</a>.</li>
 	  <li>Install ReSharper</li>
 	  <li>Copy Concordion.NUnit.dll into the addin directory of your ReSharper 
-	  installation (&lt;resharper-installation-path&gt;\Bin\addins\)<ol>
-		  <li>Notice: If you aren't using the build-in NUnit version, but your 
+	  installation (&lt;resharper-installation-path&gt;\Bin\addins\)<ul>
+		  <li>Using specific NUnit installation: If you aren't using the build-in NUnit, but your 
 		  specified NUnit installation (ReSharper -&gt; Options ... -&gt; Tools -&gt; 
 		  Unit Testing -&gt; NUnit), you have to copy Concordion.NUnit.dll into the 
 		  used NUnit installation (&lt;nunit-installation-path&gt;\bin\addins\).</li>
-	  </ol>
+		  <li>Make sure that NUnit version 2.6.3 is used in any situation.</li>
+	  </ul>
 	  </li>
 	  <li>Run your Concordion.NET acceptance tests with ReSharper<ol>
 		  <li>To run a single test directly from the editor: Click on the 
