@@ -221,3 +221,15 @@ pre.html {
 pre.console {
     background-color: #f0f0f0;
 }
+
+.call-to-action {
+    font-size: 12pt;
+    line-height: 24pt;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15em;
+}
