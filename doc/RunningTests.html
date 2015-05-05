@@ -32,7 +32,7 @@
         <p>Concordion.NET integrates with one of the
           most popular automated testing frameworks. Concordion.NET provides an NUnit Addin 
 		that allows you to run <a href="index.html">acceptance tests</a> with any NUnit environment that supports NUnit Addins 
-		(NUnit version 2.6.3). 
+		(NUnit version 2.6.4). 
 		We describe how to run Concordion.NET tests with </p>
 		  <ul>
 			  <li><a href="#stand-alone">stand alone</a> NUnit test 
@@ -65,7 +65,7 @@
 			</ul>
 			<li>Add the attribute [assembly: RequiredAddin("ConcordionNUnitAddin")] to the AssemblyInfo.cs 
 			of your project. This tells NUnit that the
-			<a class="externalLink" href="http://www.nunit.org/index.php?p=requiredAddin&amp;r=2.6.3">Concordion-NUnit-Addin
+			<a class="externalLink" href="http://www.nunit.org/index.php?p=nunitAddins&r=2.6.4">Concordion-NUnit-Addin
               is required</a> to run your Concordion.NET tests.</li>
 			<li>Make sure that you use .NET framework 4.0 or higher as target framework version in your Spec project that
             contains your Concordion.NET fixture classes.</li>
@@ -82,14 +82,14 @@
               containing your automated acceptance tests</a>.</li>
         </ol>
 		  <h2 id="stand-alone">Using the standalone NUnit test runner</h2>
-		  <p><a class="externalLink" href="http://nunit.org/index.php?p=runningTests&amp;r=2.6.3">
+		  <p><a class="externalLink" href="http://nunit.org/index.php?p=runningTests&r=2.6.4">
 		  NUnit provides different runners</a>, which can be used to run your 
 		  Concordion.NET tests.</p>
 		  <h3>Run Concordion.NET tests with the NUnit GUI runner</h3>
         <ol>
           <li><a href="Download.html">Download
               Concordion.NET</a>.</li>
-          <li>Download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&amp;r=2.6.3">install NUnit version 2.6.3</a>.</li>
+          <li>Download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&r=2.6.4">install NUnit version 2.6.4</a>.</li>
 			<li>Copy the Concordion.NUnit.dll from the tools directory of your 
 			Concordion.NET package into the addin directory of 
 		  your NUnit installation
@@ -98,7 +98,7 @@
 			<li>Load your tests with the NUnit GUI runner.<br>Tip: You can open 
 			your Visual Studio solutions and/or projects in NUnit, when you 
 			activate the
-			<a class="externalLink" href="http://nunit.org/index.php?p=settingsDialog&amp;r=2.6.3">
+			<a class="externalLink" href="http://nunit.org/index.php?p=settingsDialog&r=2.6.4">
 			IDE Support Settings - Visual Studio</a>.</li>
           <li>Select the Concordion.NET test you want to run in the tree view 
 		  and press the Run button.</li>
@@ -112,7 +112,7 @@
           C:\Users\&lt;your-windows-user&gt;\AppData\Local\Temp).</p>
 		  <h3>Run Concordion.NET tests with the console runner</h3>
 		  <p>NUnit provides a
-		  <a class="externalLink" href="http://nunit.org/index.php?p=nunit-console&amp;r=2.6.3">
+		  <a class="externalLink" href="http://nunit.org/index.php?p=nunit-console&r=2.6.4">
 		  command line client</a> for test execution, which can be useful for 
 		  the automation of test execution and integration into other systems 
 		  (e.g. build systems). You can run your Concordion.NET tests with the 
@@ -120,14 +120,14 @@
         <ol>
           <li><a href="Download.html">Download
               Concordion.NET</a>.</li>
-			<li>Download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&amp;r=2.6.3">install NUnit version 2.6.3</a>.</li>
+			<li>Download and <a class="externalLink" href="http://www.nunit.org/index.php?p=installation&r=2.6.4">install NUnit version 2.6.4</a>.</li>
             <li>Copy the Concordion.NUnit.dll from the tools directory of your 
 			Concordion.NET package into the addin directory of 
 		  your NUnit installation
             (&lt;NUnit-installation-path&gt;\bin\addins). <br>Please, make sure to use the latest version of this DLL, when
             you update Concordion.NET.</li>
 			<li>In the command line window,
-			<a class="externalLink" href="http://nunit.org/index.php?p=nunit-console&amp;r=2.6.3">run 
+			<a class="externalLink" href="http://nunit.org/index.php?p=nunit-console&r=2.6.4">run 
 			the nunit-console application</a> and pass in the DLL containing your 
 			Concordion.NET specifications and tests.</li>
         </ol>
