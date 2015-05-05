@@ -13,11 +13,10 @@ namespace Concordion.Test.Integration
     public class FileTarget_Fixture
     {
         [Test]
-        [Ignore("needs to be evaluated based on Java version")]
         public void Test_Can_Get_File_Path_Successfully()
         {
-            var resource = new Mock<Resource>("\\blah\\blah.txt");
-            resource.Expect(x => x.Path).Returns("\\blah\\blah.txt");
+            var resource = new Mock<Resource>("blah\\blah.txt");
+            resource.Expect(x => x.Path).Returns("blah\\blah.txt");
 
             var target = new FileTarget(@"c:\temp");
 
