@@ -92,15 +92,7 @@ namespace Concordion.Internal
 
         public string GetTargetPath(Resource resource)
         {
-            string path = Path.Combine(BaseDirectory, resource.Path);
-            //use html as file extension - place original extenion name at the end of file name
-            if (!path.EndsWith(".html"))
-            {
-                path = path.Remove(path.LastIndexOf('.'), 1);
-                path = path + ".html";
-
-            }
-            return path;
+            return Path.Combine(this.BaseDirectory, resource.Path);
         }
 
         #endregion
