@@ -29,7 +29,10 @@ namespace Concordion.Spec.Concordion.Extension.Configuration
             var processingResult = testRig
                 .WithFixture(fixture)
                 .ProcessFragment("<p>anything..</p>");
-            return processingResult.GetRootElement().GetAttributeValue(FakeExtensionBase.FakeExtensionAttrName);
+            var extensionNamesString = processingResult.GetRootElement().GetAttributeValue(FakeExtensionBase.FakeExtensionAttrName);
+            var extensionNames = extensionNamesString.Split(',').Select(extensionName => extensionName.Trim()).ToList();
+            extensionNames.Sort();
+            return String.Join(", ", extensionNames.ToArray());
         }
 
         public void LoadConfiguration(string configContent)
