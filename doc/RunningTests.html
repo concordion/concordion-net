@@ -5,7 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
 	<meta http-equiv="Content-Language" content="en-US">
-    <title>Running Tests|Concordion.NET</title>
+    <title>Automated Acceptance Testing|Concordion.NET</title>
+	<meta name="description" content="Run automated Concordion.NET tests with NUnit.">
+    <meta name="keywords" content="automated testing, automated acceptance tests, .NET, C#">
     <link href="css/default.css" rel="stylesheet" type="text/css">
     <link href="image/favicon.ico" rel="icon" type="image/vnd.microsoft.icon">
   </head>
@@ -46,20 +48,19 @@
 			  </ul>
 			  </li>
 		  </ul>
-		  <h2>Prepare your Visual Studio project containing Concordion.NET tests</h2>
+		  <h2>Automated testing with Concordion.NET setup</h2>
 		  <p>Similar to the kickstart project described in the
 		  <a href="GettingStarted.html">Getting Started</a> section, you need to 
-		  setup your Spec project in Visual Studio as follows:</p>
+		  setup your Spec project for automated testing in Visual Studio as follows:</p>
         <ol>
           <li><a href="Download.html">Download
               Concordion.NET</a></li>
             <li>Make sure that the following DLLs are
-			<a class="externalLink" href="http://msdn.microsoft.com/en-us/library/wkze6zky%28VS.80%29.aspx">referenced
-              in your project</a>. You find the Concordion.dll and the necessary OGNL.dll in the 
-			lib directory of the package you have
-            downloaded in step 1. The nunit.framework.dll is part of the NUnit installation 
-			of your choice (see sections below) or use the
-			<a class="externalLink" href="https://www.nuget.org/packages/NUnit">NUnit nuget package</a>. </li>
+			referenced
+              in your project. You find the Concordion.dll and the necessary 
+			OGNL.dll in the lib directory of the package you have downloaded in 
+			step 1. The nunit.framework.dll is part of the NUnit installation of 
+			your choice (see sections below). </li>
             <ul>
 				<li><span style="font-weight: bold;">concordion.dll</span></li>
 				<li><span style="font-weight: bold;">nunit.framework.dll</span></li>
@@ -71,7 +72,7 @@
               is required</a> to run your Concordion.NET tests.</li>
 			<li>Make sure that you use .NET framework 4.0 or higher as target framework version in your Spec project that
             contains your Concordion.NET fixture classes.</li>
-			<li>Make sure that all your active specification documents have the property 
+			<li>Make sure that all your executable specification documents have the property 
 		  &quot;Build Action&quot; set to &quot;Embedded Resource&quot; in your Visual Studio 
 		  project.<ul>
 				<li>Or use the <a href="Configuration.html#input-directory">
@@ -79,11 +80,11 @@
 				your specification documents.</li>
 			</ul>
 			</li>
-			<li>Build your 
-			<a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-3.html">project
-              containing your automated acceptance tests</a>.</li>
+			<li>Build your project for
+			<a class="externalLink" href="http://living-in-concordion.blogspot.co.at/2009/05/your-first-concordionnet-project-part-3.html">automated acceptance testing</a>.</li>
         </ol>
-		  <h2 id="stand-alone">Using the standalone NUnit test runner</h2>
+		  <h2 id="stand-alone">Using the standalone NUnit test runner for 
+		  automated acceptance testing</h2>
 		  <p><a class="externalLink" href="http://nunit.org/index.php?p=runningTests&r=2.6.4">
 		  NUnit provides different runners</a>, which can be used to run your 
 		  Concordion.NET tests.</p>
