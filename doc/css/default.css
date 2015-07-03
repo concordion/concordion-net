@@ -90,6 +90,10 @@ a img {
   margin-top: 38px;
   float: right;
 }
+.language-translation {
+  margin-top: 100px;
+  float: right;
+}
 .keyPoint {
   font-size: 13pt;
   font-weight: bold;
