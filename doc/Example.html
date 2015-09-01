@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Concordion - Example</title>
+<link media="all" rel="stylesheet" type="text/css" href="css/default.css"/>
+<link media="print"  rel="stylesheet" type="text/css" href="css/print.css"/>
+<link rel="icon" type="image/vnd.microsoft.icon" href="favicon.ico" />
+<style>
+code a {
+  font-family: Courier New, Courier, Monospace;
+}
+h3 {
+  margin-top: 32px;
+}
+.section {
+  margin-top: 60px;
+  border-bottom: 1px dotted black;
+  padding-bottom: 8px;
+}
+.helpfulNote {
+  border: 1px solid gray;
+  padding: 8px;
+  margin-top: 30px;
+  background-color: #fffff0;
+  width: 600px;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+<div class="header">
+    <div id="google_translate_element" class="language-translation"></div>
+	<div class="logo"><a href="index.html"> <img src="image/front-page-banner.png" alt="Specification by Example" /> </a></div>
+</div><!-- header -->
+
+      <div class="menuBar">
+        <ul class="menu">
+          <li><a href="index.html">Home</a></li>
+		  <li class="selectedTab"><a href="Example.html">Example</a></li>
+          <li><a href="GettingStarted.html">Getting Started</a></li>
+          <li><a href="RunningTests.html">Running Tests</a></li>
+          <li><a href="Extensions.html">Extensions</a></li>
+          <li><a href="Configuration.html">Configuration</a></li>
+          <li><a href="Download.html">Download</a></li>
+        </ul>
+      </div> <!-- menuBar  -->
+
+<div class="content">
+
+
+<div class="memo">
+
+<h1>Example: Online Shopping Site</h1>
+<p class="subtext">
+Imagine that we are working on an online shopping site, like Amazon. We are
+already several iterations in, but there's still plenty of functionality we
+can add.
+</p>
+
+<h2>1. Choose a story to be implemented</h2>
+
+<p>
+    From the dozens of possible stories, the following card has
+    been chosen for implementation in this iteration:
+</p>
+
+<center>
+<img src="image/example/online-shop/StoryCard.png" alt="Story card"/>
+</center>
+
+
+<p>
+    On the back of the card are some rough jottings about the
+    scope:
+</p>
+
+<center>
+<img src="image/example/online-shop/RoughScope.png" alt="Story card - rough scope"/>
+</center>
+
+
+
+<h2>2. Write a story page</h2>
+
+<p>
+    The story page acts as a summary of the acceptance criteria as agreed
+    by the group. It is the output of a discussion about the story between
+    developers, testers and the story owner / business expert.
+</p>
+
+<p>
+    The page is divided into sections "Automated", "Manual" and "Out of Scope".
+    Ideally the acceptance tests will all be automated, but sometimes manual
+    tests are needed. For example, one of the manual tests is to
+    "check user-interface changes are consistent with rest of system"; this kind of test cannot be easily automated.
+</p>
+
+
+<center>
+<img src="image/example/online-shop/StoryPage.png" alt="Story page"/>
+</center>
+
+<h2>3. Write detailed acceptance criteria</h2>
+
+<p>
+    Again, these are written and agreed as a group <b>before</b> any
+    coding begins.
+</p>
+
+<p>
+    Each of the items under the "Automated" heading in the story page
+    is a link to an acceptance test.
+    These tests are under a different hierarchy to the stories and organised
+    in a way that results in easily navigable documentation. If you use the
+    right conventions, Concordion will automatically insert breadcrumbs for
+    you.
+</p>
+
+<p>
+    Each page consists of a concise heading, a description and one or more examples.
+    The breadcrumbs give you context, so you don't need to have long wordy
+    headings and descriptions.
+</p>
+
+<p>
+    You'll notice that this page is pretty simple to understand and maybe
+    looks overly simplistic. But it's not; rather than having complicated
+    tests that test many things, you can have simple tests that test one thing
+    at a time. Complex behaviours are defined one small strand at a time by
+    decomposing the behaviour. The "Further Details" section at the bottom
+    of the page lists a number of questions that you might ask about the
+    functionality. Each question links to another (equally simple) specification
+    and so on until you run out of questions.
+</p>
+
+
+<center>
+<img src="image/example/online-shop/AcceptanceTest.png" alt="Acceptance test"/>
+</center>
+
+<h2>4. Now everyone knows what "done" means for the story</h2>
+
+<p>
+    It takes some time to write the acceptance criteria; perhaps 2 or 3 hours for
+    a 5 pair-day story. But it pays dividends in terms of focus, test coverage,
+    and cutting scope creep. Plus, if you take care, you can build up some very
+    valuable documentation that does not go stale.
+</p>
+
+
+</div>
+
+</div> <!-- content -->
+
+</div> <!-- page -->
+
+<div class="copyright">
+ &nbsp; Copyright &copy; 2007-2013
+ <a href="http://www.davidpeterson.co.uk">David Peterson</a>. All rights reserved.
+</div> <!-- copyright -->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58172036-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-58172036-1'}, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
