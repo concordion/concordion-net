@@ -5,49 +5,34 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
 	<meta http-equiv="Content-Language" content="en-US" />
-    <title>Active Specifications|Concordion.NET</title>
-    <link media="all" rel="stylesheet" type="text/css" href="css/default.css" />
-    <link media="print" rel="stylesheet" type="text/css" href="css/print.css" />
+    <title>Configuration|Concordion.NET</title>
+    <link href="css/default.css" rel="stylesheet" type="text/css" />
     <link href="image/favicon.ico" rel="icon" type="image/vnd.microsoft.icon" />
   </head>
   <body>
     <div class="page">
-	  <div class="header">
+      <div class="header">
 	    <div id="google_translate_element" class="language-translation"></div>
 	    <div class="logo"><a href="index.html"> <img src="image/front-page-banner.png" alt="BDD in plain English" /> </a></div>
-      </div>
-      <!-- header -->
+      </div> <!-- header -->
+      
       <div class="menuBar">
         <ul class="menu">
           <li><a href="index.html">Home</a></li>
 		  <li><a href="Example.html">Example</a></li>
-          <li class="selectedTab"><a href="GettingStarted.html">Getting Started</a></li>
+          <li><a href="GettingStarted.html">Getting Started</a></li>
           <li><a href="RunningTests.html">Running Tests</a></li>
-		  <li><a href="Specification.html">Specification</a></li>
+		  <li class="selectedTab"><a href="Specification.html">Specification</a></li>
           <li><a href="Extensions.html">Extensions</a></li>
           <li><a href="Configuration.html">Configuration</a></li>
           <li><a href="Download.html">Download</a></li>
         </ul>
-      </div>
-      <!-- menuBar  -->
+      </div> <!-- menuBar  -->
+      
       <div class="content">
-        <h1>Getting Started</h1>
-        <p> This guide explains the basic mechanics of turning specifications
-          into <span style="font-style: italic;">active specifications</span>
-          using Concordion.NET. It should take you not more than 15-30 minutes
-          to complete, assuming you are already familiar with C# and XHTML. </p>
-
-        <iframe src="Concordion/Setup.html" onload="setIframeHeight(this.id)" name="setup" id="setup" width="100%" height="1400" border="0" frameborder="0"></iframe>
-        
-        <p>Let's start with a really simple example... </p>
-
-        <iframe src="Concordion/Command/AssertEquals/AssertEquals.html" onload="setIframeHeight(this.id)" name="assertequals" id="assertequals" width="100%" height="1700" border="0" frameborder="0"></iframe>
-
-        <p> You can find an <a href="http://concordion.org/Tutorial.html#set">extended version of this tutorial</a> on the web page of the Java version of
-          Concordion. You need to adapt to the syntax of the fixture classes to 
-		get the tests running. But the described
-          test classes and test methods can be easily translated to C#. </p>
+        <iframe src="Concordion/Concordion.html" onload="setIframeHeight(this.id)" name="input-directory" id="input-directory" width="100%" height="600" border="0" frameborder="0"></iframe>
       </div>
+      <!-- content --> 
 	  
 	  <div class="header">
         <div class="addthis_sharing_toolbox" style="padding-top: 5px; padding-bottom: 20px">
@@ -56,9 +41,9 @@
       </div>
       <!-- footer -->
 	  
-    </div>
-    <!-- content -->
+	</div>
     <!-- page -->
+    
     <script type="text/javascript">
       function setIframeHeight(id) {
         var ifrm = document.getElementById(id);
@@ -77,7 +62,7 @@
         return height;
 	  }
     </script>
-    
+	
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-543bae9469f79b87" async></script>
 	
     <script>
