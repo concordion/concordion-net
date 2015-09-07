@@ -96,6 +96,9 @@ a img {
 .logo {
   margin-bottom: 30px;
 }
+.addthis_horizontal_follow_toolbox {
+  margin-top: 30px;
+}
 .keyPoint {
   font-size: 13pt;
   font-weight: bold;
