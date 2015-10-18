@@ -13,9 +13,18 @@
   <body>
     <div class="page">
 	  <div class="header">
-	    <div class="language-translation">
-	      <div id="google_translate_element"></div>
-          <div>
+	    <div class="right-hand-side">
+		  <div class="translation-links">
+		    <a data-lang="Chinese (Simplified)"><img alt="Chinese" title="Chinese" src="image/flag/chinese.png"/></a>
+			<a data-lang="French"><img alt="French" title="French" src="image/flag/french.png"/></a>
+			<a data-lang="German"><img alt="German" title="German" src="image/flag/german.png"/></a>
+			<a data-lang="Polish"><img alt="Polish" title="Polish" src="image/flag/polish.png"/></a>
+			<a data-lang="Portuguese"><img alt="Portuguese" title="Portuguese" src="image/flag/portuguese.png"/></a>
+			<a data-lang="Russian"><img alt="Russian" title="Russian" src="image/flag/russian.png"/></a>
+			<a data-lang="Spanish"><img alt="Spanish" title="Spanish" src="image/flag/spanish.png"/></a>
+		  </div>
+	      <div id="google_translate_element" style="display:none;"></div>
+		  <div class="right-hand-side">
 		    <p>Stay in touch</p>
 			<a href="http://concordion.org/facebook.html"><img alt="Concordion on Facebook" src="image/social/facebook.png" /></a>
 			<a href="http://concordion.org/googleplus.html"><img alt="Concordion on Google+" src="image/social/google-plus.png" /></a>
@@ -93,10 +102,44 @@
 	
 	<script type="text/javascript">
       function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-58172036-1'}, 'google_translate_element');
+        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, gaTrack: true, gaId: 'UA-58172036-1'}, 'google_translate_element');
       }
     </script>
 	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script type="text/javascript">
+    function triggerHtmlEvent(element, eventName)
+    {
+        var event;
+        if(document.createEvent) {
+            event = document.createEvent('HTMLEvents');
+            event.initEvent(eventName, true, true);
+            element.dispatchEvent(event);
+        }
+        else {
+        event = document.createEventObject();
+            event.eventType = eventName;
+            element.fireEvent('on' + event.eventType, event);
+        }
+    }
+
+    <!-- Flag click handler -->
+    var jq = $.noConflict();
+    jq('.translation-links a').click(function(e)
+    {
+        e.preventDefault();
+        var lang = jq(this).data('lang');
+        jq('#google_translate_element select option').each(function(){
+        if(jq(this).text().indexOf(lang) > -1) {
+            jq(this).parent().val(jq(this).val());
+            var container = document.getElementById('google_translate_element');
+            var select = container.getElementsByTagName('select')[0];
+            triggerHtmlEvent(select, 'change');
+        }
+        });
+    });
+    </script>
 	
   </body>
 </html>

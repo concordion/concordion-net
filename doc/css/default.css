@@ -90,14 +90,11 @@ a img {
   margin-top: 38px;
   float: right;
 }
-.language-translation {
+.right-hand-side {
   float: right;
 }
 .logo {
   margin-bottom: 30px;
-}
-.addthis_horizontal_follow_toolbox {
-  margin-top: 30px;
 }
 .keyPoint {
   font-size: 13pt;
