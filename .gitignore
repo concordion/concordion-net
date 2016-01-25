@@ -5,3 +5,4 @@ obj
 *.VisualState.xml
 TestResult.xml
 _ReSharper.*
+packages
