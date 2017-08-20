@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{56F38030-7A94-4E5C-AE67-F5E8E94056D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Concordion.Spec</RootNamespace>
+    <AssemblyName>Concordion.Spec</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\tools\NUnit-2.6.4\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Concordion\Attributes\AttributesTest.cs" />
+    <Compile Include="Concordion\Attributes\ConcordionTestAttributeTest.cs" />
+    <Compile Include="Concordion\Attributes\IgnoreAttributeTest.cs" />
+    <Compile Include="Concordion\Attributes\ExampleIgnoreTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\AssertEqualsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\CaseSensitiveTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\ExceptionsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NonString\BooleanTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\Whitespace\LineContinuationsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NestedActionsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NestedHtmlElementsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NonString\NonStringTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NonString\NullResultTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\Whitespace\NormalizationTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\SupportedElementsTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\NonString\VoidResultTest.cs" />
+    <Compile Include="Concordion\Command\AssertEquals\Whitespace\WhitespaceTest.cs" />
+    <Compile Include="Concordion\Command\AssertFalse\AssertFalseTest.cs" />
+    <Compile Include="Concordion\Command\AssertTrue\AssertTrueTest.cs" />
+    <Compile Include="Concordion\Command\CaseInsensitiveCommandsTest.cs" />
+    <Compile Include="Concordion\Command\CommandTest.cs" />
+    <Compile Include="Concordion\Command\Echo\DisplayingNullsTest.cs" />
+    <Compile Include="Concordion\Command\Echo\EchoTest.cs" />
+    <Compile Include="Concordion\Command\Echo\EscapingHtmlCharactersTest.cs" />
+    <Compile Include="Concordion\Command\EvaluatingCommandsTest.cs" />
+    <Compile Include="Concordion\Command\Execute\AccessToLinkHrefTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecuteTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecutingListTest.cs" />
+    <Compile Include="Concordion\Command\Execute\ExecutingTablesTest.cs" />
+    <Compile Include="Concordion\Command\Results\Stylesheet\MissingHeadElementTest.cs" />
+    <Compile Include="Concordion\Command\Results\Stylesheet\StylesheetTest.cs" />
+    <Compile Include="Concordion\Command\Run\RunTest.cs" />
+    <Compile Include="Concordion\Command\Run\RunTestRunner.cs" />
+    <Compile Include="Concordion\Command\Set\SetTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\Results\MissingRowsTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\Results\SurplusRowsTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\TableBodySupportTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\VerifyRowsTest.cs" />
+    <Compile Include="Concordion\Command\VerifyRows\VerifyRowsXHTMLNamespaceTest.cs" />
+    <Compile Include="Concordion\ConcordionTest.cs" />
+    <Compile Include="Concordion\Configuration\BaseInputDirectoryTest.cs" />
+    <Compile Include="Concordion\Configuration\SpecificationSuffixXhtmlTest.cs" />
+    <Compile Include="Concordion\ExampleTest.cs" />
+    <Compile Include="Concordion\Extension\AbstractExtensionTestCase.cs" />
+    <Compile Include="Concordion\Extension\Command\CommandExtension.cs" />
+    <Compile Include="Concordion\Extension\Command\CustomCommandTest.cs" />
+    <Compile Include="Concordion\Extension\Command\LogCommand.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleDerivedFixtureWithClassAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureBaseWithClassAttribute.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureBaseWithFieldAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleDerivedFixtureWithFieldAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithCombinedConfiguration.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithClassAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithFieldAttributes.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExampleFixtureWithoutExtensions.cs" />
+    <Compile Include="Concordion\Extension\Configuration\ExtensionConfigurationTest.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension1.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension3.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension2.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtension2Factory.cs" />
+    <Compile Include="Concordion\Extension\Configuration\FakeExtensionBase.cs" />
+    <Compile Include="Concordion\Extension\Css\CssEmbeddedExtension.cs" />
+    <Compile Include="Concordion\Extension\Css\CssExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\Css\CssLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\ExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\FileSuffix\FileSuffixExtensionsTest.cs" />
+    <Compile Include="Concordion\Extension\FileSuffix\XhtmlExtension.cs" />
+    <Compile Include="Concordion\Extension\JavaScript\JavaScriptEmbeddedExtension.cs" />
+    <Compile Include="Concordion\Extension\JavaScript\JavaScriptExtensionTest.cs" />
+    <Compile Include="Concordion\Extension\JavaScript\JavaScriptLinkedExtension.cs" />
+    <Compile Include="Concordion\Extension\Listener\AssertLogger.cs" />
+    <Compile Include="Concordion\Extension\Listener\ExecuteLogger.cs" />
+    <Compile Include="Concordion\Extension\Listener\ExecuteTableListenerTest.cs" />
+    <Compile Include="Concordion\Extension\Listener\ListenerTest.cs" />
+    <Compile Include="Concordion\Extension\Listener\LoggingExtension.cs" />
+    <Compile Include="Concordion\Extension\Listener\VerifyRowsListenerTest.cs" />
+    <Compile Include="Concordion\Extension\Listener\VerifyRowsLogger.cs" />
+    <Compile Include="Concordion\Extension\Resource\DynamicResourceExtension.cs" />
+    <Compile Include="Concordion\Extension\Resource\ResourceExtension.cs" />
+    <Compile Include="Concordion\Extension\Resource\ResourceExtensionTest.cs" />
+    <Compile Include="Concordion\Integration\IntegrationTest.cs" />
+    <Compile Include="Concordion\Integration\ConstructorTest.cs" />
+    <Compile Include="Concordion\Integration\NUnitRunnerTest.cs" />
+    <Compile Include="Concordion\Integration\SetupMethodTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Failure\AnchorsTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Failure\EmptyFailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Failure\FailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Failure\NestedElementsTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Success\EmptySuccessTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Success\HasAttributesTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Success\HasClassAttributeTest.cs" />
+    <Compile Include="Concordion\Results\AssertEquals\Success\SuccessTest.cs" />
+    <Compile Include="Concordion\Results\AssertTrue\Failure\FailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertTrue\Success\SuccessTest.cs" />
+    <Compile Include="Concordion\Results\Breadcrumbs\AbstractBreadcrumbsTest.cs" />
+    <Compile Include="Concordion\Results\Breadcrumbs\BreadcrumbsTest.cs" />
+    <Compile Include="Concordion\Results\Breadcrumbs\DeterminingBreadcrumbsTest.cs" />
+    <Compile Include="Concordion\Results\Breadcrumbs\WordingTest.cs" />
+    <Compile Include="Concordion\Results\AssertFalse\Failure\OnFailureTest.cs" />
+    <Compile Include="Concordion\Results\AssertFalse\Success\OnSuccessTest.cs" />
+    <Compile Include="Concordion\Results\Exception\ExceptionTest.cs" />
+    <Compile Include="Concordion\Results\ResultsTest.cs" />
+    <Compile Include="Examples\DemoTest.cs" />
+    <Compile Include="Examples\PartialMatchesTest.cs" />
+    <Compile Include="Examples\SpikeTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Support\EventRecorder.cs" />
+    <Compile Include="Support\ProcessingResult.cs" />
+    <Compile Include="Support\StackTraceSettingException.cs" />
+    <Compile Include="Support\StubEvaluator.cs" />
+    <Compile Include="Support\StubSource.cs" />
+    <Compile Include="Support\StubTarget.cs" />
+    <Compile Include="Support\TestRig.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Concordion.Runners\Concordion.Runners.csproj">
+      <Project>{c57b6220-6ce6-4165-9144-214be62ce074}</Project>
+      <Name>Concordion.Runners</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Concordion\Concordion.csproj">
+      <Project>{F401D347-5762-49DA-B7DF-4C6C9E79E08A}</Project>
+      <Name>Concordion</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="concordion.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Concordion.Spec.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Concordion\Configuration\BaseInputDirectory.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
