@@ -29,15 +29,15 @@ namespace Concordion.Internal.Extension
             }
         }
 
-        private IEnumerable<IConcordionExtension> GetExtensionsFromConfiguration()
+        private IEnumerable<IConcordionExtension>GetExtensionsFromConfiguration()
         {
             if (Configuration == null) return Enumerable.Empty<IConcordionExtension>();
 
             var extensions = new List<IConcordionExtension>();
             foreach (var extension in Configuration.ConcordionExtensions)
             {
-                var extensionTypeName = extension.Key;
-                var extensionTypeFullyQualifiedName = extension.Value;
+                //var extensionTypeName = extension.Key;
+                var extensionTypeFullyQualifiedName = extension.Key;
                 //extensions.Add(CreateConcordionExtension(extensionTypeName, extensionAsseblyName));
 		// Need to use FullyQualifiedName
 		var extensionType = Type.GetType(extensionTypeFullyQualifiedName);

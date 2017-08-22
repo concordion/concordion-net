@@ -9,4 +9,10 @@
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
   </PropertyGroup>
 
+    <ItemGroup>
+    <EmbeddedResource Include="Concordion\Configuration\BaseInputDirectory.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

@@ -11,4 +11,30 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
         <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\visibility-toggler.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\visibility-toggler.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Concordion.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Remove="Resources\embedded.css" />
+  </ItemGroup>
+
+<ItemGroup>
+    <EmbeddedResource Include="Resources\embedded.css" />
+</ItemGroup>
 </Project>
