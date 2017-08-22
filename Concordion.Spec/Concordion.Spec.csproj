@@ -15,4 +15,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+      <ItemGroup>
+    <EmbeddedResource Include="Concordion.Spec.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
