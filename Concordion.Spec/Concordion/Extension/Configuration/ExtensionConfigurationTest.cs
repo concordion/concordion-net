@@ -43,7 +43,8 @@ namespace Concordion.Spec.Concordion.Extension.Configuration
         public string Process()
         {
             var exampleFixtureType = typeof(ExampleFixtureWithoutExtensions);
-            return Process(exampleFixtureType.Namespace, exampleFixtureType.Name);
+            return Process(exampleFixtureType.Namespace, exampleFixtureType.Name);	    
+
         }
     }
 }

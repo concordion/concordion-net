@@ -94,7 +94,7 @@ namespace Concordion.Internal.Listener
             {
                 this.CopyLogoToTarget();
                 TimeSpan span = new TimeSpan(DateTime.Now.Ticks).Subtract(new TimeSpan(this.start.Ticks));
-                this.AddFooterToDocument(processingEvent.RootElement, processingEvent.Resource, span.Ticks);
+		this.AddFooterToDocument(processingEvent.RootElement, processingEvent.Resource, span.Ticks);
             }
             catch (Exception e)
             {

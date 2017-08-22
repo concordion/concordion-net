@@ -155,8 +155,8 @@ namespace Concordion.Spec.Concordion.Extension.Configuration
       <pre class="java" concordion:execute="LoadConfiguration(#TEXT)">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;Specification&gt;
   &lt;ConcordionExtensions&gt;
-    &lt;Extension assembly="Concordion.Spec" type="Concordion.Spec.Concordion.Extension.Configuration.FakeExtension1" /&gt;
-    &lt;Extension assembly="Concordion.Spec" type="Concordion.Spec.Concordion.Extension.Configuration.FakeExtension2Factory" /&gt;
+    &lt;Extension assembly="Concordion.Spec" type="Concordion.Spec.Concordion.Extension.Configuration.FakeExtension1, Concordion.Spec, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /&gt;
+    &lt;Extension assembly="Concordion.Spec" type="Concordion.Spec.Concordion.Extension.Configuration.FakeExtension2Factory, Concordion.Spec, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /&gt;
   &lt;/ConcordionExtensions&gt;
 &lt;/Specification&gt;</pre>
       <p>Concordion fixtures will be <span concordion:execute="#result5 = Process()">runn</span> with both extensions 
@@ -190,7 +190,7 @@ namespace <span concordion:set="#namespace6">Concordion.Spec.Concordion.Extensio
       <pre class="java" concordion:execute="LoadConfiguration(#TEXT)">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;Specification&gt;
   &lt;ConcordionExtensions&gt;
-    &lt;Extension assembly="Concordion.Spec" type="Concordion.Spec.Concordion.Extension.Configuration.FakeExtension3" /&gt;
+    &lt;Extension assembly="Concordion.Spec" type="Concordion.Spec.Concordion.Extension.Configuration.FakeExtension3, Concordion.Spec" /&gt;
   &lt;/ConcordionExtensions&gt;
 &lt;/Specification&gt;</pre>
     <p concordion:execute="#result6 = Process(#namespace6, #fixture6)">will install the extensions <span concordion:assertEquals="#result6">FakeExtension1, FakeExtension2, FakeExtension3</span>.</p>
