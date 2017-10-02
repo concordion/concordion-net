@@ -46,9 +46,6 @@ namespace Concordion.Internal
 
         private string ExistingFilePath(Resource resource)
         {
-	    //Console.WriteLine("== EXISTING FILE PATH ==");
-	    //Console.WriteLine(BaseDirectory);
-	    //Console.WriteLine(resource.Path);
             var filePath = Path.Combine(BaseDirectory, resource.Path);
             if (File.Exists(filePath))
             {

@@ -36,19 +36,17 @@ namespace Concordion.Internal
 
         public Resource LocateSpecification(object fixture)
         {
-   	    //Console.WriteLine("== LOCATE SPECIFICATIONS ==");
+
             var fixtureName = fixture.GetType().ToString();
-	    //Console.WriteLine(fixtureName);
+
             fixtureName = fixtureName.Replace(".", "\\");
-	    //Console.WriteLine(fixtureName);
+
 
             //Add Test und Fixture -> Case Sensitive 
             fixtureName = Regex.Replace(fixtureName, "(Fixture|Test)$", "");
-	    //Console.WriteLine(fixtureName);
+
             //Suffix from Concordion.Specification.config
             var path = fixtureName + "." + m_SpecificationSuffix;
-	    //Console.WriteLine(path);
-	    //Console.WriteLine(fixture.GetType().Assembly.GetName().Name);
 	    return new Resource(path , fixture.GetType().Assembly.GetName().Name);
         }
 

@@ -12,13 +12,39 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+using NUnit.Engine;
 using NUnit.Engine.Extensibility;
 
 namespace Concordion.NUnit3
 {
-    [Extension]
-    public class ConcordionFrameworkDriver : IDriverFactory
+    public class ConcordionDriverFactory : IFrameworkDriver
     {
-        
+        public string Load(string testAssemblyPath, IDictionary<string, object> settings)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int CountTestCases(string filter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string Run(ITestEventListener listener, string filter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string Explore(string filter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void StopRun(bool force)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string ID { get; set; }
     }
 }

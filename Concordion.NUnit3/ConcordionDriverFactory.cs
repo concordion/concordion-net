@@ -12,12 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+using System.Reflection;
 using NUnit.Engine.Extensibility;
 
 namespace Concordion.NUnit3
 {
-    public class ConcordionDriverFactory : IFrameworkDriver
+    [Extension]
+    public class ConcordionFrameworkDriver : IDriverFactory
     {
-        
+        public bool IsSupportedTestFramework(AssemblyName reference)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IFrameworkDriver GetDriver(AppDomain domain, AssemblyName reference)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
