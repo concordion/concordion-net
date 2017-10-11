@@ -98,7 +98,15 @@ namespace Concordion {
         /// </summary>
         public static string EMBEDDED_STYLESHEET_RESOURCE {
             get {
-                return ResourceManager.GetString("EMBEDDED_STYLESHEET_RESOURCE", resourceCulture);
+		// HACK: Move this code outside (non string resources and .net core)
+		var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+		var logoStream = assembly.GetManifestResourceStream("Concordion.Resources.embedded.css");
+		String line;
+		using (System.IO.StreamReader reader = new System.IO.StreamReader(logoStream))
+		{
+		    line = reader.ReadToEnd();
+		}
+                return line;
             }
         }
         
@@ -113,8 +121,12 @@ namespace Concordion {
         
         public static System.Drawing.Bitmap SOURCE_LOGO_RESOURCE_PATH {
             get {
+		// HACK: Remove from here and put it outside.
                 object obj = ResourceManager.GetObject("SOURCE_LOGO_RESOURCE_PATH", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+		var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+		var logoStream = assembly.GetManifestResourceStream("Concordion.Resources.logo.png");
+		System.Drawing.Bitmap img = new System.Drawing.Bitmap(logoStream);
+                return ((System.Drawing.Bitmap)(img));
             }
         }
         
@@ -143,7 +155,16 @@ namespace Concordion {
         /// </summary>
         public static string TOGGLING_SCRIPT_RESOURCE {
             get {
-                return ResourceManager.GetString("TOGGLING_SCRIPT_RESOURCE", resourceCulture);
+		// HACK: Move this code outside (non string resources and .net core)
+		var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+		var visibilityTogglerJs = assembly.GetManifestResourceStream("Concordion.Resources.visibility-toggler.js");
+		String line;
+		using (System.IO.StreamReader reader = new System.IO.StreamReader(visibilityTogglerJs))
+		{
+		    line = reader.ReadToEnd();
+		}
+                return line;
+
             }
         }
     }

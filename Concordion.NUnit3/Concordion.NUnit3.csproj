@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Concordion\Concordion.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="NUnit.ConsoleRunner.Libs" Version="3.7.0" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+  </PropertyGroup>
+</Project>

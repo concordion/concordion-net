@@ -109,6 +109,7 @@ namespace Concordion.Internal
         private IResultSummary RunSingleSpecification(string fileExtension)
         {
             var specificationLocator = new ClassNameBasedSpecificationLocator(fileExtension);
+	    
             ResultPath = m_Target.ResolvedPathFor(specificationLocator.LocateSpecification(m_Fixture));
             var concordionExtender = new ConcordionBuilder();
             concordionExtender

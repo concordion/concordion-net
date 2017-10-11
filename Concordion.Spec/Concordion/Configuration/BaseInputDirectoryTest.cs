@@ -17,14 +17,14 @@ namespace Concordion.Spec.Concordion.Configuration
             if (m_InTestRun) return true;
 
             m_InTestRun = true;
-
-            //work around for bug of NUnit GUI runner
-            baseInputDirectory = baseInputDirectory +
+	    
+	    //work around for bug of NUnit GUI runner
+            /*baseInputDirectory = baseInputDirectory +
                                  Path.DirectorySeparatorChar +
                                  ".." +
                                  Path.DirectorySeparatorChar +
                                  this.GetType().Assembly.GetName().Name;
-
+				 */
             var specificationConfig = new SpecificationConfig().Load(this.GetType());
             specificationConfig.BaseInputDirectory = baseInputDirectory;
             var fixtureRunner = new FixtureRunner(specificationConfig);
@@ -32,10 +32,11 @@ namespace Concordion.Spec.Concordion.Configuration
 
             m_InTestRun = false;
 
-            foreach (var failureDetail in testResult.FailureDetails) {
+             foreach (var failureDetail in testResult.FailureDetails) {
                 Console.WriteLine(failureDetail.Message);
                 Console.WriteLine(failureDetail.StackTrace);
-            }
+             }
+	    
             foreach (var errorDetail in testResult.ErrorDetails)
             {
                 Console.WriteLine(errorDetail.Message);

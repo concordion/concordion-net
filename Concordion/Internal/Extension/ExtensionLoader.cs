@@ -29,16 +29,19 @@ namespace Concordion.Internal.Extension
             }
         }
 
-        private IEnumerable<IConcordionExtension> GetExtensionsFromConfiguration()
+        private IEnumerable<IConcordionExtension>GetExtensionsFromConfiguration()
         {
             if (Configuration == null) return Enumerable.Empty<IConcordionExtension>();
 
             var extensions = new List<IConcordionExtension>();
             foreach (var extension in Configuration.ConcordionExtensions)
             {
-                var extensionTypeName = extension.Key;
-                var extensionAsseblyName = extension.Value;
-                extensions.Add(CreateConcordionExtension(extensionTypeName, extensionAsseblyName));
+                //var extensionTypeName = extension.Key;
+                var extensionTypeFullyQualifiedName = extension.Key;
+                //extensions.Add(CreateConcordionExtension(extensionTypeName, extensionAsseblyName));
+		// Need to use FullyQualifiedName
+		var extensionType = Type.GetType(extensionTypeFullyQualifiedName);
+		extensions.Add(CreateConcordionExtension(extensionType));
             }
             return extensions;
         }
@@ -98,16 +101,17 @@ namespace Concordion.Internal.Extension
                 {
                     var extensionTypeName = extensionType.FullName;
                     var extensionAssemblyName = extensionType.Assembly.GetName().Name;
-                    extensions.Add(CreateConcordionExtension(extensionTypeName, extensionAssemblyName));
+                    //extensions.Add(CreateConcordionExtension(extensionTypeName, extensionAssemblyName));
+                    extensions.Add(CreateConcordionExtension(extensionType));
                 }
             }
             return extensions;
         }
 
-        private static IConcordionExtension CreateConcordionExtension(string typeName, string assemblyName)
+        private static IConcordionExtension CreateConcordionExtension(Type type)
         {
             IConcordionExtension extension;
-            var instance = Activator.CreateInstance(assemblyName, typeName).Unwrap();
+            var instance = Activator.CreateInstance(type);
             if (instance is IConcordionExtension)
             {
                 extension = instance as IConcordionExtension;
@@ -121,7 +125,7 @@ namespace Concordion.Internal.Extension
             {
                 throw new InvalidCastException(
                     string.Format("Extension {0} must implement {1} or {2}",
-                                  typeName, typeof(IConcordionExtension), typeof(IConcordionExtensionFactory)));
+                                  type.FullName, typeof(IConcordionExtension), typeof(IConcordionExtensionFactory)));
             }
             return extension;
         }
